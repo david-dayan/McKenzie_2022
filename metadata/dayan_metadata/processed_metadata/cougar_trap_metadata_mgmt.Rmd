@@ -1,0 +1,55 @@
+---
+title: "Cougar Trap Metadata Management"
+output:
+  html_document:
+    df_print: paged
+    code_folding: hide
+    toc: true
+    toc_float: true
+    toc_collapsed: false
+---
+
+```{r, message=FALSE, warning=FALSE}
+require(tidyverse)
+require(knitr)
+require(magrittr)
+```
+
+# Rationale
+
+Metadata from the Cougar Trap is formatted in a way that is very challenging to use. Previous years uploads to progeny got hung up on this and have the incorrect release site recorded for many fish. 
+
+While the exact approach taken varies across years, in almost all years fish entering the trap are released downstream first and only release above the dam if they are trapped at the dam a second time. This applies to HOR fish in some years, NOR in others and both in yet others. 
+
+Here we edit the metadata to reflect this.
+
+## Cougar Trap 2020
+
+Let's start with the 2020 dataset.
+
+```{r}
+cougar_20 <- readxl::read_xlsx("~/FRA/McKenzie_pedigree/mckenzie_2021/metadata/dayan_metadata/raw_metadata/cougar/Cougar Fishtrap 2020.xlsx", sheet = 3)
+
+# first replace blank dates - only listed the date once per day instead of per row...
+cougar_20 %<>%
+  fill(Date)
+
+# then split up floy tags and do a little cleanup
+cougar_20 %<>%
+  separate(`Floy #`, c("floy1", "floy2")) %>%
+  rename(sample_id= `Genetic #`, recapture = `New/RE` ,  mark = `Mark(NM or AD)`, release = `Release Location-FG/HR/TR` )
+
+#and use to fill in missing "genetic" numbers which we will use as the sample ids
+
+#create a dictionary of floy numbers
+c20_floys <- select(cougar_20, sample_id, floy1, floy2) %>%
+  drop_na(sample_id) %>% #drop any rows with no genetic #
+  filter(!if_all(c(floy1, floy2), is.na))#drop any rows with no floy tags
+
+cougar_20 %>%
+  mutate(sample_id = case_when(recapture == "RE" ~ ))
+
+
+cougar_20$sample_id <- if_else(cougar_20$recapture == "RE", ,)
+```
+

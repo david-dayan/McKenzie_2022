@@ -1,0 +1,92 @@
+---
+title: "Reruns"
+output:
+  html_document:
+    df_print: paged
+    code_folding: hide
+    toc: true
+    toc_float: true
+    toc_collapsed: false
+---
+
+```{r, message=FALSE, warning = FALSE}
+require(tidyverse)
+require(magrittr)
+require(knitr)
+```
+
+
+Get previous data
+```{r}
+mckr <- readxl::read_xlsx("~/FRA/McKenzie_pedigree/mckenzie_reintroduction/previous_run_info/10APR2016_Cougar_adult_master.xlsx", sheet = 1)
+
+```
+
+Is the dataset above the filtered or raw?
+```{r}
+mckr %>%
+  rowwise() %>%
+  mutate(zero_count = sum((cur_data() == "0"), na.rm = TRUE)) %>%
+  ungroup() %>%
+  summarise(mean_zero = mean(zero_count), max = max(zero_count))
+
+mckr %>%
+  rowwise() %>%
+  mutate(zero_count = sum((cur_data() == "0"), na.rm = TRUE)) %>%
+  ungroup() %>%
+  summarise(number_w_less_than_7_gts = sum(zero_count > 5))
+```
+
+
+# How many in plates 5-8 need reruns?
+
+```{r}
+dd %>%
+  filter(marker != "OtY3") %>%
+  ungroup() %>%
+  group_by(sample) %>%
+  summarise(na_count_greater_than_7 = sum(is.na(a1_did))) %>%
+  filter(na_count_greater_than_7 >= 4)
+  
+```
+
+About 1.1% of samples need re-runs for plates 5-8. These represent some of the oldest tissue samples and ones I did with the least experience working with the microsat protocol in the lab, so it's hard to imagine it gets much worse for than this (except for carcass samples). 
+
+So the total predictd number of individuals that need to be re-run is ~29. We can assume that more than this will actually need to be re-run because carcass samples are worse, and the sex marker isn't included in this count. 
+
+Nick's final dataset had 99% coverage at 10 or more loci. How does our dataset compare using this metric?
+
+
+```{r}
+dd %>%
+  ungroup() %>%
+  group_by(sample) %>%
+  summarise(na_count_greater_than_7 = sum(is.na(a1_did))) %>%
+  filter(na_count_greater_than_7 >= 2)
+
+
+  
+```
+
+Only 90% of our samples are successfully genotyped at at least 10 loci. 
+
+This is odd because DPJ told me he'd only do re-runs to reach the cutoff required for the analysis, not to attempt to complete the dataset. My guess is that this means he ran individuals that failed to reach >=7 markers, and this got the dataset up to that 99% at >= 10 marker level of completion.
+
+What about going by DPJ's more conservative scoring?
+
+```{r}
+dj %>%
+  filter(a1_dj == "0") %>%
+  count(sample) %>%
+  filter(n>3) %>%
+  nrow(.)/length(unique(dj$sample))
+```
+
+If we go by Dave's scoring, we need to do re-runs at ~2% of samples, or about 57 individuals.
+
+__Carcass Samples__
+
+Plates 5-8 don't have any carcass samples.
+
+
+

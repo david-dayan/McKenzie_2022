@@ -1,0 +1,99 @@
+Version	GM v 4.1
+Kit type:	MICROSATELLITE
+Chemistry Kit	MR_Chinook	none
+Panel	212	none
+212	blue	113.550309598	265.0	-	4	0.0	none	none		false	
+Panel	253	none
+253b	green	118.598971722	254.254366545	-	4	0.0	none	none		false	
+Panel	249	none
+249	red	152.738275919	315.241506466	-	4	0.0	none	none		false	
+Panel	P1_201_209	none
+201	blue	154.866017686	352.11334165	-	4	0.0	none	none		false	
+209	yellow	134.754075433	416.159428273	-	2	0.0	none	none		false	
+Panel	P4_211_409	none
+211	blue	180.0	315.0	-	4	0.0	none	none		false	
+409	green	106.668458109	272.301221067	-	2	0.0	none	none		false	
+Panel	OtY3	none
+OtY3	blue	290.0	750.0	-	3	0.0	none	none		false	
+Panel	Cougar_MP2	none
+211	blue	180.0	315.0	-	4	0.0	none	none		false	
+208	yellow	110.0	330.0	-	4	0.0	none	none		false	
+253b	green	115.0	275.0	-	4	0.0	none	none		false	
+249	red	150.0	325.0	-	4	0.0	none	none		false	
+Panel	409	none
+409	green	106.668458109	272.301221067	-	2	0.0	none	none		false	
+Panel	Cougar_MP1	none
+515	red	149.362301829	251.788395863	-	2	0.0	none	none		false	
+409	green	100.0	272.301221067	-	2	0.0	none	none		false	
+209	yellow	134.754075433	416.159428273	-	2	0.0	none	none		false	
+201	blue	154.866017686	352.11334165	-	4	0.0	none	none		false	
+Panel	409_515	none
+409	green	100.0	272.301221067	-	2	0.0	none	none		false	
+515	red	149.362301829	251.788395863	-	2	0.0	none	none		false	
+Panel	P6_212_515	none
+515	red	149.362301829	251.788395863	-	2	0.0	none	none		false	
+212	blue	113.550309598	261.881424149	-	4	0.0	none	none		false	
+Panel	311	none
+311	red	156.006156536	440.0	-	4	0.0	none	none		false	
+Panel	P3_311_215	none
+215	yellow	150.0	339.66035407	-	4	0.0	none	none		false	
+311	red	156.006156536	426.154783219	-	4	0.0	none	none		false	
+Panel	Cougar_MP3	none
+311	red	156.006156536	440.0	-	4	0.0	none	none		false	
+215	yellow	150.0	340.0	-	4	0.0	none	none		false	
+212	blue	113.550309598	265.0	-	4	0.0	none	none		false	
+Panel	211	none
+211	blue	188.120567376	309.906443338	-	4	0.0	none	none		false	
+Panel	211_208	none
+208	yellow	110.0	330.0	-	4	0.0	none	none		false	
+211	blue	180.0	315.0	-	4	0.0	none	none		false	
+Panel	515	none
+515	red	149.362301829	251.788395863	-	2	0.0	none	none		false	
+Panel	P5_208	none
+208	yellow	112.991268009	331.026654588	-	4	0.0	none	none		false	
+Panel	215	none
+215	Yellow	150.0	320.0	-	2	0.0	none	none		false	
+Panel	249_253b	none
+249	red	150.0	325.0	-	4	0.0	none	none		false	
+253b	green	115.0	275.0	-	4	0.0	none	none		false	
+Panel	Ogo2	none
+Ogo2	Green	175.0	350.0	-	2	0.0	none	none		false	
+Panel	Ssa408	none
+Ssa408	Yellow	150.0	350.0	-	2	0.0	none	none		false	
+Panel	Ogo4	none
+Ogo4	Yellow	100.0	250.0	-	2	0.0	none	none		false	
+Panel	OtsG474	none
+OtsG474	Green	100.0	300.0	-	2	0.0	none	none		false	
+Panel	NSant_P1	none
+215	Yellow	150.0	320.0	-	2	0.0	none	none		false	
+409	Green	100.0	300.0	-	4	0.0	none	none		false	
+515	Red	180.0	250.0	-	2	0.0	none	none		false	
+211	blue	180.0	315.0	-	4	0.0	none	none		false	
+Panel	NSant_P2	none
+Ogo2	Green	180.0	280.0	-	2	0.0	none	none		false	
+201	blue	154.866017686	352.11334165	-	4	0.0	none	none		false	
+249	red	150.0	325.0	-	4	0.0	none	none		false	
+Ssa408	Yellow	160.0	340.0	-	2	0.0	none	none		false	
+Panel	NSant_P3	none
+Ogo4	Yellow	100.0	250.0	-	2	0.0	none	none		false	
+212	blue	113.550309598	265.0	-	4	0.0	none	none		false	
+OtsG474	Green	150.0	260.0	-	2	0.0	none	none		false	
+311	red	156.006156536	440.0	-	4	0.0	none	none		false	
+Panel	NS_P2b	none
+Ogo2	Green	180.0	280.0	-	2	0.0	none	none		false	
+Ssa408	Yellow	160.0	340.0	-	2	0.0	none	none		false	
+Panel	NS_P3a	none
+Ogo4	Yellow	100.0	250.0	-	2	0.0	none	none		false	
+212	blue	113.550309598	265.0	-	4	0.0	none	none		false	
+OtsG474	Green	100.0	300.0	-	2	0.0	none	none		false	
+Panel	NS_P2a	none
+249	red	150.0	325.0	-	4	0.0	none	none		false	
+201	blue	154.866017686	352.11334165	-	4	0.0	none	none		false	
+Panel	NS_311	none
+311	red	156.006156536	440.0	-	4	0.0	none	none		false	
+Panel	NS_215	none
+215	Yellow	150.0	320.0	-	2	0.0	none	none		false	
+Panel	NS_P1a	none
+211	blue	180.0	315.0	-	4	0.0	none	none		false	
+409	Green	100.0	300.0	-	4	0.0	none	none		false	
+515	Red	180.0	250.0	-	2	0.0	none	none		false	

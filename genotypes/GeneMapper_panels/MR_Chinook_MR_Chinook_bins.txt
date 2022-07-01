@@ -1,0 +1,2245 @@
+Version	GM v 4.1
+Chemistry Kit	MR_Chinook
+BinSet Name	MR_Chinook
+Panel Name	212
+Marker Name	212
+220	221.05	2.11	0.98	dark gray
+224	224.66	1.21	1.0	dark gray
+130	129.24	1.24	1.36	dark gray
+134	133.59	1.56	1.06	dark gray
+138	137.78	1.48	0.69	dark gray
+140	139.61	0.93	1.01	dark gray
+142	142.29	1.39	1.28	dark gray
+146	146.15	1.14	1.51	dark gray
+152	151.57	1.7	1.31	dark gray
+156	155.65	1.54	0.69	dark gray
+160	159.94	1.45	0.5	dark gray
+164	164.12	1.41	0.94	dark gray
+168	168.21	1.76	0.66	dark gray
+172	172.33	1.54	0.4	dark gray
+176	176.34	1.4	0.4	dark gray
+180	180.56	1.72	0.4	dark gray
+184	183.75	0.94	1.39	dark gray
+200	199.67	0.9	1.58	dark gray
+204	203.61	0.4	1.89	dark gray
+208	208.67	0.82	0.95	dark gray
+212	212.45	0.79	1.24	dark gray
+242	241.02	0.4	0.76	dark gray
+246	245.22	0.4	0.63	dark gray
+217	216.84	0.4	0.4	dark gray	mutant
+196	196.24	0.75	0.75	dark gray
+192	192.01	1.0	1.0	dark gray
+126	125.24	1.0	1.0	dark gray
+Panel Name	253
+Marker Name	253b
+214	214.49	1.0	1.0	dark gray	mutant
+129	128.25	0.4	0.8	dark gray
+135	134.23	0.4	0.4	dark gray
+141	141.28	0.4	0.82	dark gray
+145	145.96	0.4	0.4	dark gray
+149	150.1	0.98	0.4	dark gray
+155	154.8	0.96	0.5	dark gray
+159	159.17	1.89	0.99	dark gray
+163	162.99	1.41	2.11	dark gray
+167	167.65	1.54	0.4	dark gray
+171	170.98	1.4	0.88	dark gray
+175	175.06	1.43	1.24	dark gray
+179	179.04	0.86	0.97	dark gray
+183	183.08	1.16	0.93	dark gray
+187	187.29	0.88	0.5	dark gray
+191	191.35	0.96	0.4	dark gray
+195	195.29	0.4	0.4	dark gray
+201	200.99	0.16	2.11	dark gray
+207	206.55	0.5	1.06	dark gray
+219	217.81	0.4	1.14	dark gray
+223	222.93	1.83	0.4	dark gray
+227	226.94	1.56	0.5	dark gray
+231	230.79	1.35	0.5	dark gray
+235	235.16	1.53	0.5	dark gray
+239	238.6	1.29	1.02	dark gray
+243	242.49	1.09	0.68	dark gray
+199	198.94	1.0	1.0	dark gray
+169	168.87	0.4	0.4	dark gray	mutant
+133	132.94	0.4	0.4	dark gray	mutant
+Panel Name	249
+Marker Name	249
+257	256.83	0.74	0.5	dark gray
+261	260.79	0.83	0.5	dark gray
+265	264.75	0.78	0.5	dark gray
+269	268.79	1.14	0.5	dark gray
+273	272.75	1.22	0.5	dark gray
+277	276.76	1.13	0.5	dark gray
+281	280.72	0.83	0.5	dark gray
+285	284.72	1.27	0.4	dark gray
+289	289.13	1.24	0.4	dark gray
+293	292.89	1.05	0.4	dark gray
+297	296.59	0.75	0.5	dark gray
+301	300.2	0.4	0.4	dark gray
+159	159.14	1.0	1.0	dark gray
+161	161.8	1.0	1.0	dark gray
+165	166.01	0.4	0.4	dark gray
+169	169.95	0.4	1.28	dark gray
+173	173.92	0.4	1.55	dark gray
+177	177.95	0.68	1.69	dark gray
+181	181.91	0.4	1.85	dark gray
+185	185.85	0.4	0.4	dark gray
+189	189.94	0.73	0.4	dark gray
+193	193.65	0.4	0.4	dark gray
+197	197.54	0.4	0.4	dark gray
+201	201.76	1.22	1.27	dark gray
+205	205.38	0.4	1.17	dark gray
+209	209.37	0.94	0.5	dark gray
+213	213.29	0.4	0.5	dark gray
+217	217.22	0.4	0.5	dark gray
+221	220.95	0.4	0.4	dark gray
+225	225.34	0.82	1.39	dark gray
+229	229.13	0.75	1.64	dark gray
+233	232.81	0.4	1.15	dark gray
+237	237.03	0.91	0.5	dark gray
+241	241.0	0.85	0.5	dark gray
+245	244.98	1.18	0.5	dark gray
+249	248.9	0.75	0.5	dark gray
+253	252.88	0.88	0.5	dark gray
+Panel Name	P1_201_209
+Marker Name	201
+280	279.87	1.0	1.0	dark gray	mutant
+162	162.46	1.0	1.0	dark gray
+166	166.41	1.45	1.13	dark gray
+170	170.51	1.38	0.8	dark gray
+174	173.9	0.91	1.04	dark gray
+178	178.37	1.36	1.0	dark gray
+182	182.22	1.45	1.09	dark gray
+186	186.23	1.63	0.9	dark gray
+190	190.3	1.77	0.7	dark gray
+194	193.99	1.52	1.01	dark gray
+198	197.76	1.17	1.16	dark gray
+202	201.86	1.5	0.95	dark gray
+210	209.73	1.65	0.67	dark gray
+214	213.62	1.67	1.01	dark gray
+218	217.44	1.46	0.81	dark gray
+222	221.47	1.86	1.18	dark gray
+226	225.45	1.56	0.65	dark gray
+230	229.75	1.95	0.4	dark gray
+234	232.88	1.59	1.18	dark gray
+238	237.25	2.06	0.93	dark gray
+206	205.47	1.0	1.0	dark gray
+288	288.3	1.1	0.65	dark gray
+296	296.34	0.95	0.5	dark gray
+337	336.89	0.75	0.4	dark gray	mutant
+312	312.29	1.0	1.0	dark gray	mutant
+284	283.84	0.8	0.8	dark gray	mutant
+252	252.46	0.75	0.75	dark gray
+276	276.15	0.75	0.75	dark gray	mutant
+308	308.4	0.75	0.75	dark gray	mutant
+300	300.19	0.75	0.75	dark gray
+260	260.49	0.75	0.75	dark gray
+292	292.24	0.75	0.75	dark gray
+Marker Name	209
+254	254.12	0.9	0.9	dark gray
+256	256.08	0.9	0.9	dark gray
+258	258.01	0.8	0.8	dark gray
+260	259.91	0.8	0.8	dark gray
+262	261.99	0.8	0.8	dark gray
+264	264.34	0.73	0.65	dark gray
+266	265.64	0.2	1.88	dark gray
+270	269.75	0.4	0.71	dark gray
+272	271.73	1.09	0.48	dark gray
+274	273.58	1.1	1.0	dark gray
+278	276.91	0.4	1.16	dark gray
+281	281.16	0.5	0.5	dark gray
+284	284.98	1.0	1.0	dark gray
+288	289.15	1.0	1.68	dark gray
+294	293.8	1.0	1.0	dark gray
+302	301.77	1.0	1.0	dark gray
+310	310.43	0.9	1.47	dark gray
+314	314.42	0.75	0.75	dark gray
+150	150.46	1.0	1.0	dark gray
+154	154.03	0.6	1.73	dark gray
+158	159.14	1.54	0.98	dark gray
+162	163.08	1.69	0.8	dark gray
+166	167.39	1.02	0.8	dark gray
+176	175.39	1.09	1.07	dark gray
+180	179.78	1.51	0.7	dark gray
+184	183.8	0.8	0.8	dark gray
+186	185.8	0.8	0.8	dark gray
+188	187.99	0.9	0.9	dark gray
+190	190.02	0.9	0.9	dark gray
+192	191.97	0.9	0.9	dark gray
+194	193.95	0.9	0.9	dark gray
+196	195.91	0.9	0.9	dark gray
+384	383.63	0.75	0.75	dark gray	mutant
+394	395.09	0.6	0.6	dark gray	mutant
+348	347.55	0.6	0.6	dark gray	mutant
+340	339.53	0.6	0.6	dark gray	mutant
+268	268.42	0.75	0.75	dark gray
+408	407.56	0.75	0.75	dark gray	mutant
+306	305.85	0.75	0.75	dark gray
+356	356.49	0.75	0.75	dark gray
+172	171.42	0.75	0.75	dark gray
+220	219.86	0.75	0.75	dark gray
+198	198.0	0.9	0.9	dark gray
+200	199.94	0.9	0.98	dark gray
+202	201.94	0.9	0.9	dark gray
+204	204.0	0.9	0.9	dark gray
+208	208.23	0.65	1.97	dark gray
+212	212.36	0.99	0.99	dark gray
+216	216.2	0.9	1.81	dark gray
+224	224.0	0.5	0.5	dark gray
+226	225.26	0.4	0.4	dark gray
+228	227.91	0.85	0.4	dark gray
+230	229.54	1.0	1.0	dark gray
+232	232.03	0.4	1.4	dark gray
+234	234.46	0.73	0.5	dark gray
+236	236.18	0.8	0.8	dark gray
+238	238.03	0.9	0.9	dark gray
+380	379.78	0.6	0.6	dark gray	mutant
+388	387.49	0.6	0.6	dark gray	mutant
+392	391.41	0.6	0.6	dark gray	mutant
+222	221.74	1.0	1.0	dark gray	mutant
+400	399.51	0.6	0.6	dark gray	mutant
+318	318.32	0.5	0.5	dark gray	mutant
+297	297.47	0.5	0.5	dark gray	mutant
+240	240.29	1.0	0.54	dark gray
+242	242.0	1.16	0.82	dark gray
+244	243.98	0.4	1.01	dark gray
+246	246.2	1.19	0.4	dark gray
+248	247.81	0.85	1.18	dark gray
+250	249.51	0.5	1.66	dark gray
+252	252.19	0.9	0.9	dark gray
+328	328.35	0.75	0.75	dark gray
+344	343.0	0.75	0.75	dark gray
+Panel Name	P4_211_409
+Marker Name	211
+298	297.51	1.0	1.0	dark gray	mutant
+200	199.69	1.51	0.5	dark gray
+220	218.76	1.2	0.97	dark gray
+224	222.89	1.52	0.4	dark gray
+226	226.49	0.62	0.66	dark gray
+234	233.8	0.59	1.5	dark gray
+238	237.77	0.4	1.68	dark gray
+242	241.76	0.64	1.56	dark gray
+246	246.14	1.1	1.08	dark gray
+250	249.86	1.1	1.19	dark gray
+254	253.35	0.4	1.66	dark gray
+258	257.78	0.77	1.34	dark gray
+262	262.2	1.69	0.75	dark gray
+266	266.01	1.26	0.75	dark gray
+270	269.26	0.79	1.61	dark gray
+274	274.26	1.58	0.4	dark gray
+278	277.55	0.9	1.56	dark gray
+282	281.82	1.26	0.78	dark gray
+286	286.05	1.9	0.4	dark gray
+290	289.95	1.47	0.4	dark gray
+294	293.69	0.4	0.85	dark gray
+230	230.96	0.5	0.5	dark gray
+306	306.07	0.4	0.4	dark gray	mutant
+312	312.23	0.4	0.4	dark gray	mutant
+192	192.02	0.75	0.75	dark gray
+Marker Name	409
+153	152.56	0.42	1.01	dark gray
+151	150.26	1.0	1.0	dark gray
+215	215.13	0.65	0.65	dark gray
+221	221.51	0.65	0.65	dark gray
+269	269.68	0.75	0.75	dark gray
+255	255.48	0.6	0.6	dark gray
+251	251.42	0.6	0.6	dark gray
+189	189.03	0.5	0.5	dark gray
+195	195.34	0.75	0.75	dark gray
+197	197.32	0.75	0.75	dark gray
+199	199.45	0.65	0.65	dark gray
+201	201.36	0.75	0.75	dark gray
+203	203.46	0.75	0.75	dark gray
+207	207.39	0.65	0.65	dark gray
+209	209.24	0.65	0.65	dark gray
+211	211.38	0.65	0.65	dark gray
+217	217.24	0.65	0.65	dark gray
+219	219.46	0.65	0.65	dark gray
+223	223.36	0.65	0.65	dark gray
+225	225.33	0.65	0.65	dark gray
+227	227.4	0.75	0.75	dark gray
+229	229.54	0.75	0.75	dark gray
+231	231.44	0.6	0.6	dark gray
+233	233.35	0.65	0.66	dark gray
+235	235.39	0.65	0.65	dark gray
+237	237.45	0.75	0.75	dark gray
+239	239.63	0.65	0.65	dark gray
+241	241.49	0.65	0.65	dark gray
+243	243.47	0.93	0.74	dark gray
+245	245.44	0.65	0.65	dark gray
+247	247.42	0.65	0.65	dark gray
+249	249.47	0.65	0.65	dark gray
+253	253.38	0.75	0.75	dark gray
+257	257.19	0.75	0.75	dark gray
+261	261.42	0.75	0.75	dark gray
+265	265.65	0.75	0.75	dark gray
+115	114.75	0.4	1.7	dark gray
+119	118.71	0.4	0.87	dark gray
+133	133.02	0.4	0.4	dark gray
+135	135.17	0.75	0.75	dark gray
+137	137.28	0.4	0.58	dark gray
+141	141.38	0.65	0.65	dark gray
+149	148.49	0.4	0.4	dark gray
+146	146.25	0.84	0.7	dark gray	mutant
+190	190.04	0.5	0.5	dark gray	mutant
+205	205.23	0.75	0.75	dark gray
+155	155.22	0.6	0.6	dark gray
+157	156.87	0.75	0.75	dark gray
+159	159.01	0.75	0.75	dark gray
+161	161.2	0.75	0.75	dark gray
+163	163.24	0.75	0.75	dark gray
+175	175.75	0.75	0.75	dark gray
+177	177.58	0.75	0.75	dark gray
+181	181.25	0.75	0.75	dark gray
+139	139.48	0.58	0.48	dark gray
+174	173.54	0.75	0.75	dark gray
+179	179.45	0.75	0.75	dark gray
+169	169.55	0.75	0.75	dark gray
+183	183.23	0.75	0.75	dark gray
+185	185.44	0.75	0.75	dark gray
+187	187.37	0.75	0.75	dark gray
+191	191.41	0.75	0.75	dark gray
+193	193.34	0.75	0.75	dark gray
+165	165.37	0.75	0.75	dark gray
+167	167.4	0.75	0.75	dark gray
+Panel Name	OtY3
+Marker Name	OtY3
+308	308.36	0.75	0.75	dark gray
+M	724.8	1.0	1.0	dark gray
+Panel Name	Cougar_MP2
+Marker Name	211
+298	297.13	1.0	1.0	dark gray	mutant
+200	199.69	1.51	0.5	dark gray
+220	218.76	1.2	0.97	dark gray
+224	222.89	1.52	0.4	dark gray
+226	226.49	0.62	0.66	dark gray
+234	233.8	0.59	1.5	dark gray
+238	237.77	0.4	1.68	dark gray
+242	241.76	0.64	1.56	dark gray
+246	246.14	1.1	1.08	dark gray
+250	249.86	1.1	1.19	dark gray
+254	253.35	0.4	1.66	dark gray
+258	257.78	0.77	1.34	dark gray
+262	262.2	1.69	0.75	dark gray
+266	266.01	1.26	0.75	dark gray
+270	269.26	0.79	1.61	dark gray
+274	274.26	1.58	0.4	dark gray
+278	277.55	0.9	1.56	dark gray
+282	281.82	1.26	0.78	dark gray
+286	286.05	1.9	0.4	dark gray
+290	289.95	1.47	0.4	dark gray
+294	293.11	1.0	1.0	dark gray
+230	230.96	0.5	0.5	dark gray
+306	305.11	1.0	1.0	dark gray	mutant
+312	313.09	1.0	1.0	dark gray	mutant
+192	192.04	0.75	0.75	dark gray
+212	211.5	0.75	0.75	dark gray
+216	215.35	0.75	0.75	dark gray
+310	309.28	1.0	1.0	dark gray
+204	203.03	1.0	1.0	dark gray
+Marker Name	208
+259	257.22	1.2	1.2	dark gray
+163	163.24	1.0	1.0	dark gray
+175	175.45	1.0	1.0	dark gray
+302	301.84	1.0	1.0	dark gray
+315	315.25	0.4	0.4	dark gray
+318	317.3	0.75	0.75	dark gray
+179	179.17	1.27	0.8	dark gray
+183	183.4	1.31	0.4	dark gray
+187	187.28	1.03	0.4	dark gray
+191	191.18	1.23	0.67	dark gray
+195	195.23	1.91	0.51	dark gray
+199	198.78	1.91	1.36	dark gray
+203	203.22	1.73	0.4	dark gray
+207	207.12	1.41	0.96	dark gray
+211	210.89	1.32	0.56	dark gray
+215	214.85	2.14	0.77	dark gray
+219	218.76	1.67	0.8	dark gray
+223	222.75	1.46	0.51	dark gray
+227	226.66	1.56	0.69	dark gray
+231	230.62	1.53	0.59	dark gray
+235	233.92	1.2	1.2	dark gray
+239	238.0	1.2	1.2	dark gray
+243	242.0	1.2	1.2	dark gray
+247	245.48	1.2	1.2	dark gray
+251	249.45	1.2	1.2	dark gray
+255	253.39	1.2	1.2	dark gray
+263	261.01	1.2	1.2	dark gray
+267	265.41	1.2	1.2	dark gray
+270	269.89	0.9	0.74	dark gray
+273	272.75	0.75	0.75	dark gray
+279	278.24	0.88	0.67	dark gray
+283	282.22	0.4	0.89	dark gray
+291	291.18	0.75	0.75	dark gray
+293	293.22	0.4	0.4	dark gray
+305	305.35	0.4	0.59	dark gray
+311	310.7	0.4	0.4	dark gray
+309	309.0	0.5	0.69	dark gray
+167	167.04	1.0	1.0	dark gray	mutant
+269	268.09	0.6	0.6	dark gray
+297	296.9	0.75	0.75	dark gray
+277	275.62	1.0	1.0	dark gray
+171	171.02	0.75	0.75	dark gray
+285	285.32	0.75	0.75	dark gray
+289	289.13	0.75	0.75	dark gray
+313	313.07	0.75	0.75	dark gray
+Marker Name	253b
+214	214.49	1.0	1.0	dark gray	mutant
+129	128.25	0.4	0.8	dark gray
+135	134.23	0.4	0.4	dark gray
+141	141.28	0.4	0.82	dark gray
+145	145.96	0.4	0.4	dark gray
+149	149.54	0.75	0.75	dark gray
+155	154.8	0.96	0.5	dark gray
+159	159.17	1.89	0.99	dark gray
+163	162.32	1.41	2.11	dark gray
+167	167.14	1.54	0.4	dark gray
+171	170.98	1.4	0.88	dark gray
+175	175.06	1.43	1.24	dark gray
+179	179.04	0.95	0.97	dark gray
+183	182.28	1.0	1.0	dark gray
+187	186.62	0.75	0.75	dark gray
+191	191.01	0.75	0.75	dark gray
+195	194.85	1.0	1.0	dark gray
+201	200.99	0.16	2.11	dark gray
+207	206.55	1.0	1.06	dark gray
+219	217.81	1.0	1.14	dark gray
+223	222.93	1.83	0.4	dark gray
+227	225.92	1.0	1.0	dark gray
+231	230.2	1.0	1.0	dark gray
+235	233.99	1.0	1.0	dark gray
+239	238.6	1.29	1.02	dark gray
+243	242.49	1.09	0.68	dark gray
+199	198.72	1.0	1.0	dark gray
+169	168.87	0.4	0.4	dark gray	mutant
+133	132.94	0.6	0.6	dark gray	mutant
+137	136.81	0.75	0.75	dark gray
+211	210.18	0.75	0.75	dark gray
+Marker Name	249
+261	260.79	0.83	0.5	dark gray
+265	264.75	0.78	0.5	dark gray
+269	268.79	1.14	0.5	dark gray
+273	272.75	1.22	0.5	dark gray
+277	276.76	1.13	0.5	dark gray
+281	280.72	0.83	0.5	dark gray
+285	284.72	1.27	0.4	dark gray
+289	289.13	1.24	0.4	dark gray
+293	292.89	1.05	0.4	dark gray
+297	296.59	0.75	0.5	dark gray
+301	300.2	0.4	0.4	dark gray
+159	159.14	1.0	1.0	dark gray
+161	161.8	1.0	1.0	dark gray
+165	166.01	0.4	0.4	dark gray
+169	169.95	0.6	1.28	dark gray
+173	173.92	0.4	1.55	dark gray
+177	177.95	0.68	1.69	dark gray
+181	181.91	0.6	1.85	dark gray
+185	185.85	0.6	0.6	dark gray
+189	189.94	0.73	0.4	dark gray
+193	193.65	0.4	0.4	dark gray
+197	197.54	0.4	0.4	dark gray
+201	201.76	1.22	1.27	dark gray
+205	205.38	0.6	1.17	dark gray
+209	209.37	0.94	0.5	dark gray
+213	213.29	0.6	0.6	dark gray
+217	217.22	0.6	0.6	dark gray
+221	220.95	0.6	0.6	dark gray
+225	225.34	0.82	1.39	dark gray
+229	229.13	0.75	1.64	dark gray
+233	232.81	0.4	1.15	dark gray
+237	237.03	0.91	0.5	dark gray
+241	241.0	0.85	0.5	dark gray
+245	244.98	1.18	0.5	dark gray
+249	248.9	0.75	0.5	dark gray
+253	252.88	0.88	0.5	dark gray
+257	256.83	0.74	0.5	dark gray
+Panel Name	409
+Marker Name	409
+190	190.48	0.4	0.4	dark gray	mutant
+205	205.44	0.5	0.5	dark gray	mutant
+155	154.99	0.4	0.4	dark gray
+157	157.18	0.4	0.4	dark gray
+159	159.16	0.4	0.94	dark gray
+161	161.15	0.4	0.5	dark gray
+163	163.12	0.4	0.4	dark gray
+165	165.28	0.4	0.4	dark gray
+167	167.4	0.4	0.4	dark gray
+173	173.33	0.4	0.57	dark gray
+175	175.3	0.4	0.64	dark gray
+177	177.41	0.4	0.58	dark gray
+181	181.5	0.4	0.4	dark gray
+139	139.55	0.58	0.48	dark gray
+153	152.56	0.42	1.01	dark gray
+151	150.26	1.0	1.0	dark gray
+215	215.5	0.56	0.41	dark gray
+221	221.66	0.5	0.5	dark gray
+269	269.68	0.5	0.5	dark gray
+255	255.64	0.5	0.5	dark gray
+251	251.57	0.5	0.5	dark gray
+169	169.25	0.5	0.5	dark gray
+183	184.45	1.07	0.4	dark gray
+185	185.53	0.4	0.4	dark gray
+187	187.56	0.4	0.4	dark gray
+189	189.49	0.4	0.4	dark gray
+191	191.67	0.66	0.4	dark gray
+193	193.5	0.4	0.58	dark gray
+195	195.6	0.4	0.4	dark gray
+197	197.49	0.4	0.5	dark gray
+199	199.56	0.4	0.4	dark gray
+201	201.48	0.4	0.4	dark gray
+203	203.52	0.4	0.5	dark gray
+207	207.39	0.4	0.4	dark gray
+209	209.44	0.4	0.4	dark gray
+211	211.38	0.4	0.4	dark gray
+217	217.32	0.4	0.4	dark gray
+219	219.48	0.4	0.4	dark gray
+223	223.36	0.4	0.4	dark gray
+225	225.33	0.4	0.4	dark gray
+227	227.4	0.4	0.83	dark gray
+229	229.54	0.4	0.5	dark gray
+231	231.44	0.4	0.4	dark gray
+233	233.35	0.4	0.66	dark gray
+235	235.49	0.4	0.5	dark gray
+237	237.43	0.4	0.4	dark gray
+239	239.63	0.4	0.4	dark gray
+241	241.59	0.4	0.4	dark gray
+243	243.47	0.93	0.74	dark gray
+245	245.66	0.4	0.4	dark gray
+247	247.54	0.4	0.4	dark gray
+249	249.67	0.4	0.53	dark gray
+253	253.7	0.4	0.4	dark gray
+257	257.59	0.4	0.4	dark gray
+261	261.42	0.4	0.4	dark gray
+265	265.65	0.4	0.4	dark gray
+115	114.75	0.4	1.7	dark gray
+119	118.71	0.4	0.87	dark gray
+133	133.02	0.4	0.4	dark gray
+135	135.17	0.4	0.4	dark gray
+137	137.28	0.4	0.58	dark gray
+141	141.8	0.4	0.4	dark gray
+149	148.49	0.4	0.4	dark gray
+146	146.25	0.84	0.7	dark gray	mutant
+Panel Name	Cougar_MP1
+Marker Name	515
+223	223.05	0.5	0.5	dark gray	mutant
+229	228.69	0.62	0.4	dark gray
+231	230.79	0.4	0.4	dark gray
+233	232.87	1.03	0.4	dark gray
+235	234.35	0.53	0.31	dark gray
+237	236.86	1.28	0.28	dark gray
+187	187.36	1.0	1.0	dark gray
+211	211.65	0.5	0.5	dark gray
+183	183.72	0.57	0.81	dark gray
+193	193.03	0.75	0.75	dark gray
+197	196.86	0.8	0.4	dark gray
+199	198.71	0.67	0.4	dark gray
+201	200.47	0.75	0.75	dark gray
+203	202.37	0.72	0.62	dark gray
+205	204.48	0.87	0.5	dark gray
+207	206.26	0.76	0.4	dark gray
+219	218.81	0.4	1.18	dark gray
+221	220.73	0.5	1.39	dark gray
+225	225.39	0.76	0.4	dark gray
+227	226.82	0.66	0.77	dark gray
+189	189.14	0.75	0.75	dark gray
+Marker Name	409
+153	152.56	0.42	1.01	dark gray
+151	150.26	1.0	1.0	dark gray
+215	215.13	0.65	0.65	dark gray
+221	221.51	0.65	0.65	dark gray
+269	269.68	0.75	0.75	dark gray
+255	255.48	0.6	0.6	dark gray
+251	251.42	0.6	0.6	dark gray
+189	189.17	0.75	0.75	dark gray
+195	195.34	0.75	0.75	dark gray
+197	197.32	0.75	0.75	dark gray
+199	199.45	0.65	0.65	dark gray
+201	201.36	0.75	0.75	dark gray
+203	203.46	0.75	0.75	dark gray
+207	207.39	0.65	0.65	dark gray
+209	209.24	0.65	0.65	dark gray
+211	211.38	0.65	0.65	dark gray
+217	217.24	0.65	0.65	dark gray
+219	219.23	0.65	0.65	dark gray
+223	223.36	0.65	0.65	dark gray
+225	225.33	0.65	0.65	dark gray
+227	227.4	0.75	0.75	dark gray
+229	229.54	0.75	0.75	dark gray
+231	231.44	0.6	0.6	dark gray
+233	233.35	0.65	0.66	dark gray
+235	235.39	0.65	0.65	dark gray
+237	237.45	0.75	0.75	dark gray
+239	239.63	0.65	0.65	dark gray
+241	241.49	0.65	0.65	dark gray
+243	243.47	0.93	0.74	dark gray
+245	245.44	0.65	0.65	dark gray
+247	247.42	0.65	0.65	dark gray
+249	249.47	0.65	0.65	dark gray
+253	253.38	0.65	0.65	dark gray
+257	257.19	0.6	0.6	dark gray
+261	261.42	0.75	0.75	dark gray
+265	265.65	0.75	0.75	dark gray
+115	114.75	0.4	1.7	dark gray
+119	118.71	0.4	0.87	dark gray
+133	133.02	0.75	0.75	dark gray
+135	135.17	0.75	0.75	dark gray
+137	137.28	0.4	0.58	dark gray
+141	141.38	0.65	0.65	dark gray
+149	148.49	0.4	0.4	dark gray
+146	146.25	0.84	0.7	dark gray	mutant
+205	205.23	0.75	0.75	dark gray
+155	154.87	0.6	0.6	dark gray
+157	156.87	0.75	0.75	dark gray
+159	159.01	0.75	0.75	dark gray
+161	161.2	0.75	0.75	dark gray
+163	163.24	0.75	0.75	dark gray
+175	175.75	0.75	0.75	dark gray
+177	177.58	0.75	0.75	dark gray
+181	181.25	0.75	0.75	dark gray
+139	139.48	0.75	0.75	dark gray
+174	173.54	0.75	0.75	dark gray
+179	179.45	0.75	0.75	dark gray
+169	169.55	0.75	0.75	dark gray
+183	183.23	0.75	0.75	dark gray
+185	185.44	0.75	0.75	dark gray
+187	187.37	0.75	0.75	dark gray
+191	191.19	0.75	0.75	dark gray
+193	193.34	0.75	0.75	dark gray
+165	165.37	0.75	0.75	dark gray
+167	167.4	0.75	0.75	dark gray
+171	171.35	0.75	0.75	dark gray
+131	130.97	0.75	0.75	dark gray
+Marker Name	209
+198	198.06	0.9	0.9	dark gray
+200	199.94	0.9	0.98	dark gray
+202	201.94	0.9	0.9	dark gray
+204	204.0	0.9	0.9	dark gray
+208	208.23	0.65	1.97	dark gray
+212	212.36	0.99	0.99	dark gray
+216	216.2	0.9	1.81	dark gray
+224	224.0	0.5	0.5	dark gray
+226	225.26	0.4	0.4	dark gray
+228	227.91	0.85	0.4	dark gray
+230	229.54	1.0	1.0	dark gray
+232	232.03	0.4	1.4	dark gray
+234	234.46	0.73	0.5	dark gray
+236	235.92	0.8	0.8	dark gray
+238	237.82	0.95	0.95	dark gray
+380	379.78	0.6	0.6	dark gray	mutant
+388	387.49	0.6	0.6	dark gray	mutant
+392	391.25	0.75	0.75	dark gray	mutant
+222	221.74	1.0	1.0	dark gray	mutant
+400	399.51	0.6	0.6	dark gray	mutant
+318	318.32	0.5	0.5	dark gray	mutant
+297	297.47	0.5	0.5	dark gray	mutant
+240	240.31	1.0	0.54	dark gray
+242	242.03	1.16	0.82	dark gray
+244	243.98	0.4	1.01	dark gray
+246	246.2	1.19	0.4	dark gray
+248	247.81	0.85	1.18	dark gray
+250	249.51	0.5	1.66	dark gray
+252	252.19	0.9	0.9	dark gray
+254	254.01	0.9	0.9	dark gray
+256	256.08	0.9	0.9	dark gray
+258	258.01	0.9	0.9	dark gray
+260	259.92	0.8	0.95	dark gray
+262	261.99	0.8	0.8	dark gray
+264	264.34	0.73	0.65	dark gray
+266	265.64	0.2	1.88	dark gray
+270	269.75	0.4	0.71	dark gray
+272	271.73	1.09	0.48	dark gray
+274	273.58	1.1	1.0	dark gray
+278	276.91	0.4	1.16	dark gray
+281	281.16	0.5	0.5	dark gray
+284	284.98	1.0	1.0	dark gray
+288	289.15	1.0	1.68	dark gray
+294	293.8	1.0	1.0	dark gray
+302	301.77	1.0	1.0	dark gray
+310	310.43	0.9	1.47	dark gray
+314	314.42	0.75	0.75	dark gray
+150	150.46	1.0	1.0	dark gray
+154	154.03	0.6	1.73	dark gray
+158	159.14	1.54	0.98	dark gray
+162	163.08	1.69	0.8	dark gray
+166	167.39	1.02	0.8	dark gray
+176	175.39	1.09	1.07	dark gray
+180	179.78	1.51	0.7	dark gray
+184	183.8	0.8	0.8	dark gray
+186	185.8	0.8	0.8	dark gray
+188	187.99	0.9	0.9	dark gray
+190	190.02	0.9	0.9	dark gray
+192	191.97	0.9	0.9	dark gray
+194	193.95	0.9	0.9	dark gray
+196	195.91	0.9	0.9	dark gray
+384	383.63	0.75	0.75	dark gray	mutant
+394	395.09	0.6	0.6	dark gray	mutant
+348	347.55	0.6	0.6	dark gray	mutant
+340	339.53	0.6	0.6	dark gray	mutant
+268	268.42	0.75	0.75	dark gray
+408	407.56	0.75	0.75	dark gray	mutant
+306	305.85	0.75	0.75	dark gray
+356	356.49	0.75	0.75	dark gray
+172	171.42	0.75	0.75	dark gray
+220	219.86	0.75	0.75	dark gray
+342	341.86	0.85	0.85	dark gray
+376	375.5	0.75	0.75	dark gray	mutant
+206	206.04	0.75	0.75	dark gray
+Marker Name	201
+280	279.87	1.0	1.0	dark gray	mutant
+162	162.46	1.0	1.0	dark gray
+166	166.41	1.45	1.13	dark gray
+170	170.51	1.38	0.8	dark gray
+174	173.9	0.91	1.04	dark gray
+178	178.37	1.36	1.0	dark gray
+182	182.22	1.45	1.09	dark gray
+186	186.23	1.63	0.9	dark gray
+190	190.3	1.77	0.7	dark gray
+194	193.99	1.52	1.01	dark gray
+198	197.76	1.17	1.16	dark gray
+202	201.86	1.5	0.95	dark gray
+210	209.73	1.65	0.67	dark gray
+214	213.62	1.67	1.01	dark gray
+218	217.44	1.46	0.81	dark gray
+222	221.47	1.86	1.18	dark gray
+226	225.45	1.56	0.65	dark gray
+230	229.75	1.95	0.4	dark gray
+234	232.88	1.59	1.18	dark gray
+238	237.25	2.06	0.93	dark gray
+206	205.47	1.0	1.0	dark gray
+288	288.3	1.1	0.65	dark gray
+296	296.34	0.95	0.5	dark gray
+337	336.89	0.75	0.4	dark gray	mutant
+312	312.29	1.0	1.0	dark gray	mutant
+284	283.84	0.8	0.8	dark gray	mutant
+252	252.46	0.75	0.75	dark gray
+276	276.15	0.75	0.75	dark gray	mutant
+308	308.4	0.75	0.75	dark gray	mutant
+300	300.19	0.75	0.75	dark gray
+268	268.48	0.75	0.75	dark gray
+244	244.76	0.85	0.85	dark gray	mutant
+316	316.19	0.85	0.85	dark gray	mutant
+Panel Name	409_515
+Marker Name	409
+153	152.56	0.42	1.01	dark gray
+151	150.26	1.0	1.0	dark gray
+215	215.13	0.65	0.65	dark gray
+221	221.51	0.65	0.65	dark gray
+269	269.68	0.75	0.75	dark gray
+255	255.48	0.6	0.6	dark gray
+251	251.42	0.6	0.6	dark gray
+189	189.17	0.75	0.75	dark gray
+195	195.34	0.75	0.75	dark gray
+197	197.32	0.75	0.75	dark gray
+199	199.45	0.65	0.65	dark gray
+201	201.36	0.75	0.75	dark gray
+203	203.46	0.75	0.75	dark gray
+207	207.39	0.65	0.65	dark gray
+209	209.24	0.65	0.65	dark gray
+211	211.38	0.65	0.65	dark gray
+217	217.24	0.65	0.65	dark gray
+219	219.46	0.65	0.65	dark gray
+223	223.36	0.65	0.65	dark gray
+225	225.33	0.65	0.65	dark gray
+227	227.4	0.75	0.75	dark gray
+229	229.54	0.75	0.75	dark gray
+231	231.44	0.6	0.6	dark gray
+233	233.35	0.65	0.66	dark gray
+235	235.39	0.65	0.65	dark gray
+237	237.45	0.75	0.75	dark gray
+239	239.63	0.65	0.65	dark gray
+241	241.49	0.65	0.65	dark gray
+243	243.47	0.93	0.74	dark gray
+245	245.44	0.65	0.65	dark gray
+247	247.42	0.65	0.65	dark gray
+249	249.47	0.65	0.65	dark gray
+253	253.38	0.65	0.65	dark gray
+257	257.19	0.6	0.6	dark gray
+261	261.42	0.75	0.75	dark gray
+265	265.65	0.75	0.75	dark gray
+115	114.75	0.4	1.7	dark gray
+119	118.71	0.4	0.87	dark gray
+133	133.02	0.75	0.75	dark gray
+135	135.17	0.75	0.75	dark gray
+137	137.28	0.4	0.58	dark gray
+141	141.38	0.65	0.65	dark gray
+149	148.49	0.4	0.4	dark gray
+146	146.25	0.84	0.7	dark gray	mutant
+205	205.23	0.75	0.75	dark gray
+155	154.87	0.6	0.6	dark gray
+157	156.87	0.75	0.75	dark gray
+159	159.01	0.75	0.75	dark gray
+161	161.2	0.75	0.75	dark gray
+163	163.24	0.75	0.75	dark gray
+175	175.75	0.75	0.75	dark gray
+177	177.58	0.75	0.75	dark gray
+181	181.25	0.75	0.75	dark gray
+139	139.48	0.75	0.75	dark gray
+174	173.54	0.75	0.75	dark gray
+179	179.45	0.75	0.75	dark gray
+169	169.55	0.75	0.75	dark gray
+183	183.23	0.75	0.75	dark gray
+185	185.44	0.75	0.75	dark gray
+187	187.37	0.75	0.75	dark gray
+191	191.19	0.75	0.75	dark gray
+193	193.34	0.75	0.75	dark gray
+165	165.37	0.75	0.75	dark gray
+167	167.4	0.75	0.75	dark gray
+171	171.35	0.75	0.75	dark gray
+131	130.97	0.75	0.75	dark gray
+111	110.77	1.0	1.0	dark gray
+Marker Name	515
+223	223.05	0.5	0.5	dark gray	mutant
+229	228.69	0.62	0.4	dark gray
+231	230.79	0.4	0.4	dark gray
+233	232.87	1.03	0.4	dark gray
+235	234.35	0.53	0.31	dark gray
+237	236.86	1.28	0.28	dark gray
+187	187.36	0.75	0.75	dark gray
+211	211.65	0.5	0.5	dark gray
+183	183.72	0.57	0.81	dark gray
+193	193.03	0.58	0.4	dark gray
+197	196.86	0.8	0.4	dark gray
+199	198.71	0.67	0.4	dark gray
+201	200.44	0.75	0.75	dark gray
+203	202.37	0.72	0.62	dark gray
+205	204.46	0.87	0.5	dark gray
+207	206.26	0.76	0.4	dark gray
+219	218.81	0.4	1.18	dark gray
+221	220.73	0.5	1.39	dark gray
+225	225.39	0.76	0.4	dark gray
+227	226.82	0.66	0.77	dark gray
+189	189.2	0.75	0.75	dark gray
+Panel Name	P6_212_515
+Marker Name	515
+223	223.05	0.5	0.5	dark gray	mutant
+229	228.69	0.62	0.4	dark gray
+231	230.79	0.4	0.4	dark gray
+233	232.87	1.03	0.4	dark gray
+235	234.35	0.53	0.31	dark gray
+237	236.86	1.28	0.28	dark gray
+187	187.36	1.0	1.0	dark gray
+211	211.65	0.5	0.5	dark gray
+183	183.72	0.57	0.81	dark gray
+193	192.93	0.75	0.75	dark gray
+197	196.86	0.8	0.4	dark gray
+199	198.71	0.67	0.4	dark gray
+201	200.47	0.65	0.5	dark gray
+203	202.37	0.72	0.62	dark gray
+205	204.48	0.87	0.5	dark gray
+207	206.26	0.76	0.4	dark gray
+219	218.81	0.4	1.18	dark gray
+221	220.73	0.5	1.39	dark gray
+225	225.39	0.76	0.4	dark gray
+227	226.82	0.66	0.77	dark gray
+Marker Name	212
+134	133.59	1.56	1.06	dark gray
+138	137.78	1.48	0.69	dark gray
+140	139.61	0.93	1.01	dark gray
+142	142.29	1.39	1.28	dark gray
+146	146.15	1.14	1.51	dark gray
+152	151.57	1.7	1.31	dark gray
+156	155.65	1.54	0.69	dark gray
+160	159.94	1.45	0.5	dark gray
+164	164.12	1.41	0.94	dark gray
+168	168.21	1.76	0.66	dark gray
+172	172.33	1.54	0.4	dark gray
+176	176.34	1.4	0.4	dark gray
+180	180.56	1.72	0.4	dark gray
+184	183.75	0.94	1.39	dark gray
+200	199.67	0.9	1.58	dark gray
+204	203.61	0.4	1.89	dark gray
+208	208.67	0.82	0.95	dark gray
+212	212.45	0.79	1.24	dark gray
+242	241.02	0.4	0.76	dark gray
+246	245.22	0.4	0.63	dark gray
+217	216.84	0.4	0.4	dark gray	mutant
+220	221.05	2.11	0.98	dark gray
+224	224.66	1.21	1.0	dark gray
+130	129.24	1.24	1.36	dark gray
+Panel Name	311
+Marker Name	311
+212	212.12	0.5	0.5	dark gray	mutant
+258	258.92	0.5	0.5	dark gray
+422	422.46	0.5	0.5	dark gray
+366	365.85	0.5	0.5	dark gray
+392	391.18	1.58	1.0	dark gray
+364	363.96	1.0	1.0	dark gray
+268	268.08	2.05	1.0	dark gray
+236	235.42	0.4	0.77	dark gray
+240	239.56	0.71	0.4	dark gray
+244	243.42	0.4	1.54	dark gray
+248	247.88	1.7	1.96	dark gray
+252	251.5	0.97	1.53	dark gray
+256	255.44	0.4	1.05	dark gray
+264	263.29	1.09	1.75	dark gray
+272	270.82	0.92	2.17	dark gray
+276	275.97	1.55	1.49	dark gray
+280	279.88	1.36	1.05	dark gray
+284	283.58	1.12	1.36	dark gray
+288	287.13	0.61	1.08	dark gray
+292	290.97	0.4	1.09	dark gray
+296	295.23	0.71	0.4	dark gray
+300	299.03	0.4	1.18	dark gray
+304	303.23	0.85	0.4	dark gray
+308	307.3	1.02	0.72	dark gray
+312	312.45	2.15	0.4	dark gray
+316	316.28	1.86	0.4	dark gray
+320	319.61	1.0	1.0	dark gray
+324	323.5	1.0	1.0	dark gray
+328	327.75	1.0	1.0	dark gray
+332	331.6	1.0	1.0	dark gray
+336	335.85	1.0	1.0	dark gray
+340	339.85	1.0	1.0	dark gray
+344	343.93	1.0	1.0	dark gray
+348	348.02	1.0	1.0	dark gray
+352	352.01	0.82	0.4	dark gray
+356	355.99	0.81	0.54	dark gray
+360	359.82	0.81	0.61	dark gray
+368	367.85	1.0	1.0	dark gray
+376	375.17	1.0	1.0	dark gray
+380	378.98	1.0	1.0	dark gray
+388	387.05	1.05	1.02	dark gray
+394	394.29	0.4	1.25	dark gray
+398	398.25	0.5	1.52	dark gray
+402	402.05	0.4	1.23	dark gray
+406	406.14	0.4	0.4	dark gray
+410	410.39	0.4	0.4	dark gray
+414	414.34	0.4	0.4	dark gray
+418	418.38	0.4	0.4	dark gray
+184	184.62	1.0	1.0	dark gray
+188	188.96	1.0	1.0	dark gray
+232	232.06	1.01	0.5	dark gray
+192	192.52	0.75	0.75	dark gray
+384	383.32	1.0	1.0	dark gray
+426	426.63	0.75	0.75	dark gray
+372	371.5	1.0	1.0	dark gray
+Panel Name	P3_311_215
+Marker Name	215
+321	321.22	0.5	0.5	dark gray	mutant
+313	312.99	0.5	0.5	dark gray	mutant
+317	317.1	0.5	0.5	dark gray	mutant
+195	194.67	0.4	0.4	dark gray
+207	206.39	1.48	0.58	dark gray
+211	210.33	0.4	0.4	dark gray
+219	218.04	0.4	0.63	dark gray
+223	221.97	0.89	0.71	dark gray
+227	227.87	2.07	0.4	dark gray
+229	229.01	0.4	1.49	dark gray
+235	235.67	1.25	0.49	dark gray
+239	239.01	0.85	1.12	dark gray
+243	243.47	1.2	0.56	dark gray
+247	247.06	0.74	0.95	dark gray
+251	251.45	0.98	0.88	dark gray
+255	255.62	0.93	0.6	dark gray
+257	257.36	0.73	0.79	dark gray
+261	261.13	0.4	1.47	dark gray
+265	265.07	1.06	0.91	dark gray
+269	269.0	0.9	0.9	dark gray
+271	271.0	0.9	0.9	dark gray
+273	273.02	0.4	0.55	dark gray
+275	274.95	0.4	0.4	dark gray
+277	277.34	1.35	0.5	dark gray
+281	280.9	1.25	0.45	dark gray
+285	285.17	1.3	0.4	dark gray
+291	290.79	1.08	0.4	dark gray
+263	263.22	0.5	0.5	dark gray
+183	183.01	1.0	1.0	dark gray
+295	294.41	1.0	1.0	dark gray
+241	241.46	1.0	0.53	dark gray
+245	245.18	1.0	1.0	dark gray
+215	214.02	1.0	1.0	dark gray
+287	287.16	0.92	1.99	dark gray
+191	190.84	1.0	1.0	dark gray
+171	171.12	1.0	1.0	dark gray
+233	233.2	0.44	1.0	dark gray
+237	237.08	0.54	0.93	dark gray
+249	249.14	1.0	1.27	dark gray
+253	253.49	1.0	1.0	dark gray
+259	259.43	1.0	1.0	dark gray
+231	231.45	0.66	1.0	dark gray
+203	202.87	0.4	0.4	dark gray	mutant
+179	179.1	0.75	0.75	dark gray
+199	198.75	0.75	0.75	dark gray
+Marker Name	311
+212	212.12	0.5	0.5	dark gray	mutant
+258	258.92	0.5	0.5	dark gray
+422	422.46	0.5	0.5	dark gray
+366	365.85	0.5	0.5	dark gray
+392	391.18	1.58	1.0	dark gray
+364	363.96	1.0	1.0	dark gray
+268	268.08	2.05	1.0	dark gray
+236	235.42	0.4	0.77	dark gray
+240	239.56	0.71	0.4	dark gray
+244	243.42	0.4	1.54	dark gray
+248	247.88	1.7	1.96	dark gray
+252	251.5	0.97	1.53	dark gray
+256	255.44	0.4	1.05	dark gray
+264	263.29	1.09	1.75	dark gray
+272	270.82	0.92	2.17	dark gray
+276	275.97	1.55	1.49	dark gray
+280	279.88	1.36	1.05	dark gray
+284	283.58	1.12	1.36	dark gray
+288	287.13	0.61	1.08	dark gray
+292	290.97	0.4	1.09	dark gray
+296	295.23	0.71	0.4	dark gray
+300	299.03	0.4	1.18	dark gray
+304	303.23	0.85	0.4	dark gray
+308	307.3	1.02	0.72	dark gray
+312	312.45	2.15	0.4	dark gray
+316	316.28	1.86	0.4	dark gray
+320	319.61	0.94	1.14	dark gray
+324	323.5	0.54	0.91	dark gray
+328	327.75	0.5	1.25	dark gray
+332	331.6	0.59	1.02	dark gray
+336	335.85	0.82	1.25	dark gray
+340	339.85	0.7	1.28	dark gray
+344	343.83	1.0	1.0	dark gray
+348	347.89	0.9	0.9	dark gray
+352	352.01	0.82	0.4	dark gray
+356	355.99	0.81	0.54	dark gray
+360	359.82	0.81	0.61	dark gray
+368	367.47	0.4	0.97	dark gray
+376	375.17	0.96	0.77	dark gray
+380	378.98	0.4	1.24	dark gray
+388	387.05	1.05	1.02	dark gray
+394	394.29	0.4	1.25	dark gray
+398	398.25	0.5	1.52	dark gray
+402	402.05	0.4	1.23	dark gray
+406	406.14	0.4	0.4	dark gray
+410	410.39	0.4	0.4	dark gray
+414	414.34	0.4	0.4	dark gray
+418	418.38	0.4	0.4	dark gray
+184	184.62	1.0	1.0	dark gray
+188	188.96	1.0	1.0	dark gray
+232	232.06	1.01	0.5	dark gray
+Panel Name	Cougar_MP3
+Marker Name	311
+212	212.12	0.5	0.5	dark gray	mutant
+258	258.92	0.5	0.5	dark gray
+422	422.46	0.7	0.7	dark gray
+366	365.85	0.5	0.5	dark gray
+392	391.18	1.58	1.0	dark gray
+364	363.96	1.0	1.0	dark gray
+268	268.08	2.05	1.0	dark gray
+236	235.42	0.4	0.77	dark gray
+240	239.56	0.71	0.4	dark gray
+244	243.42	0.4	1.54	dark gray
+248	247.88	1.7	1.96	dark gray
+252	251.5	0.97	1.53	dark gray
+256	255.44	0.85	0.85	dark gray
+264	263.29	1.09	1.75	dark gray
+272	270.82	0.92	2.17	dark gray
+276	275.97	1.55	1.49	dark gray
+280	279.88	1.36	1.05	dark gray
+284	283.58	1.12	1.36	dark gray
+288	287.13	0.61	1.08	dark gray
+292	290.97	0.4	1.09	dark gray
+296	295.23	0.71	0.4	dark gray
+300	299.03	0.4	1.18	dark gray
+304	303.23	0.85	0.4	dark gray
+308	307.3	1.02	0.72	dark gray
+312	312.45	2.15	0.4	dark gray
+316	316.28	1.86	0.4	dark gray
+320	319.61	1.0	1.0	dark gray
+324	323.5	1.0	1.0	dark gray
+328	327.75	1.0	1.0	dark gray
+332	331.6	1.0	1.0	dark gray
+336	335.85	1.0	1.0	dark gray
+340	339.85	1.0	1.0	dark gray
+344	343.93	1.0	1.0	dark gray
+348	348.02	1.0	1.0	dark gray
+352	352.01	0.82	0.4	dark gray
+356	355.99	0.81	0.54	dark gray
+360	359.82	0.81	0.61	dark gray
+368	367.85	1.0	1.0	dark gray
+376	375.17	1.0	1.0	dark gray
+380	378.98	1.0	1.0	dark gray
+388	387.05	1.05	1.02	dark gray
+394	394.29	0.4	1.25	dark gray
+398	398.25	0.5	1.52	dark gray
+402	402.05	0.4	1.23	dark gray
+406	406.14	0.7	0.7	dark gray
+410	410.39	0.4	0.4	dark gray
+414	414.34	0.7	0.7	dark gray
+418	418.38	0.7	0.7	dark gray
+184	184.62	1.0	1.0	dark gray
+188	188.96	1.0	1.0	dark gray
+232	232.06	1.01	0.5	dark gray
+192	192.52	0.75	0.75	dark gray
+384	383.32	1.0	1.0	dark gray
+426	426.63	0.75	0.75	dark gray
+372	371.5	1.0	1.0	dark gray
+416	416.58	0.75	0.75	dark gray	mutant
+Marker Name	215
+179	179.09	0.75	0.75	dark gray
+321	321.22	0.5	0.5	dark gray	mutant
+313	312.99	0.5	0.5	dark gray	mutant
+317	317.1	0.5	0.5	dark gray	mutant
+195	194.67	0.4	0.4	dark gray
+207	206.39	1.48	0.58	dark gray
+211	210.33	1.0	1.0	dark gray
+219	218.04	0.4	0.63	dark gray
+223	221.97	0.89	0.71	dark gray
+227	226.67	1.2	1.2	dark gray
+229	229.01	0.4	1.49	dark gray
+235	235.67	1.25	0.49	dark gray
+239	239.01	0.85	1.12	dark gray
+243	243.47	1.2	0.56	dark gray
+247	247.06	0.74	0.95	dark gray
+251	251.45	0.98	0.88	dark gray
+255	255.62	0.93	0.6	dark gray
+257	257.36	0.73	0.79	dark gray
+261	261.13	0.4	1.47	dark gray
+265	265.07	1.06	0.91	dark gray
+269	269.0	1.25	1.01	dark gray
+271	271.0	0.4	0.4	dark gray
+273	273.02	0.4	0.55	dark gray
+275	274.95	0.4	0.4	dark gray
+277	277.34	1.35	0.5	dark gray
+281	280.9	1.25	0.45	dark gray
+285	285.17	1.3	0.4	dark gray
+291	290.79	1.08	0.4	dark gray
+263	263.22	0.5	0.5	dark gray
+183	183.01	1.0	1.0	dark gray
+295	294.41	1.0	1.0	dark gray
+241	241.46	1.0	0.53	dark gray
+245	245.18	1.0	1.0	dark gray
+215	214.02	1.0	1.0	dark gray
+287	287.16	0.92	1.99	dark gray
+191	190.84	1.0	1.0	dark gray
+171	171.12	1.0	1.0	dark gray
+233	233.2	0.44	1.0	dark gray
+237	237.08	0.54	0.93	dark gray
+249	249.14	1.0	1.27	dark gray
+253	253.49	1.0	1.0	dark gray
+259	259.43	1.0	1.0	dark gray
+231	231.45	0.66	1.0	dark gray
+203	202.87	0.4	0.4	dark gray	mutant
+293	292.68	0.5	0.5	dark gray
+297	296.8	0.75	0.75	dark gray
+199	198.73	0.75	0.75	dark gray
+Marker Name	212
+220	221.05	2.11	0.98	dark gray
+224	224.66	1.21	1.0	dark gray
+130	129.24	1.24	1.36	dark gray
+134	133.59	1.56	1.06	dark gray
+138	137.78	1.48	0.69	dark gray
+140	139.61	0.93	1.01	dark gray
+142	142.29	1.39	1.28	dark gray
+146	146.15	1.14	1.51	dark gray
+152	151.57	1.7	1.31	dark gray
+156	155.65	1.54	0.69	dark gray
+160	159.94	1.45	0.5	dark gray
+164	164.12	1.41	0.94	dark gray
+168	168.21	1.76	0.66	dark gray
+172	172.33	1.54	0.4	dark gray
+176	176.34	1.4	0.4	dark gray
+180	180.56	1.72	0.4	dark gray
+184	183.75	0.94	1.39	dark gray
+200	199.67	0.9	1.58	dark gray
+204	203.61	0.4	1.89	dark gray
+208	208.67	0.82	0.95	dark gray
+212	212.45	0.79	1.24	dark gray
+242	241.02	0.4	0.76	dark gray
+246	245.22	0.4	0.63	dark gray
+217	216.84	0.4	0.4	dark gray	mutant
+196	196.24	0.75	0.75	dark gray
+192	192.01	1.0	1.0	dark gray
+126	125.24	1.0	1.0	dark gray
+188	188.41	1.0	1.0	dark gray
+Panel Name	211
+Marker Name	211
+200	199.69	1.51	0.5	dark gray
+220	218.76	1.2	0.97	dark gray
+224	222.89	1.52	0.4	dark gray
+226	226.49	0.62	0.66	dark gray
+234	233.8	0.59	1.5	dark gray
+238	237.77	0.4	1.68	dark gray
+242	241.76	0.64	1.56	dark gray
+246	246.14	1.1	1.08	dark gray
+250	249.86	1.1	1.19	dark gray
+254	253.35	0.4	1.66	dark gray
+258	257.78	0.77	1.34	dark gray
+262	262.2	1.69	0.75	dark gray
+266	266.01	1.26	0.75	dark gray
+270	269.26	0.79	1.61	dark gray
+274	274.26	1.58	0.4	dark gray
+278	277.55	0.9	1.56	dark gray
+282	281.82	1.26	0.78	dark gray
+286	286.05	1.9	0.4	dark gray
+290	289.95	1.47	0.4	dark gray
+294	293.69	0.4	0.4	dark gray
+230	230.96	0.5	0.5	dark gray
+298	297.51	1.0	1.0	dark gray	mutant
+Panel Name	211_208
+Marker Name	208
+259	257.22	1.2	1.2	dark gray
+163	163.24	1.0	1.0	dark gray
+175	175.45	1.0	1.0	dark gray
+302	301.84	1.0	1.0	dark gray
+315	315.25	0.4	0.4	dark gray
+318	317.3	0.75	0.75	dark gray
+179	179.17	1.27	0.8	dark gray
+183	183.4	1.31	0.4	dark gray
+187	187.28	1.03	0.4	dark gray
+191	191.18	1.23	0.67	dark gray
+195	195.23	1.91	0.51	dark gray
+199	198.78	1.91	1.36	dark gray
+203	203.22	1.73	0.4	dark gray
+207	207.12	1.41	0.96	dark gray
+211	210.89	1.32	0.56	dark gray
+215	214.85	2.14	0.77	dark gray
+219	218.76	1.67	0.8	dark gray
+223	222.75	1.46	0.51	dark gray
+227	226.66	1.56	0.69	dark gray
+231	230.62	1.53	0.59	dark gray
+235	233.92	1.2	1.2	dark gray
+239	238.0	1.2	1.2	dark gray
+243	242.0	1.2	1.2	dark gray
+247	245.48	1.2	1.2	dark gray
+251	249.45	1.2	1.2	dark gray
+255	253.39	1.2	1.2	dark gray
+263	261.01	1.2	1.2	dark gray
+267	265.41	1.2	1.2	dark gray
+270	269.89	0.9	0.74	dark gray
+273	272.75	0.75	0.75	dark gray
+279	278.24	0.88	0.67	dark gray
+283	282.22	0.4	0.89	dark gray
+291	291.18	0.75	0.75	dark gray
+293	293.22	0.4	0.4	dark gray
+305	305.35	0.4	0.59	dark gray
+311	310.7	0.4	0.4	dark gray
+309	309.0	0.5	0.69	dark gray
+167	167.04	1.0	1.0	dark gray	mutant
+269	268.09	0.6	0.6	dark gray
+297	296.9	0.75	0.75	dark gray
+277	275.62	1.0	1.0	dark gray
+171	171.02	0.75	0.75	dark gray
+285	285.32	0.75	0.75	dark gray
+289	289.13	0.75	0.75	dark gray
+Marker Name	211
+298	297.13	1.0	1.0	dark gray	mutant
+200	199.69	1.51	0.5	dark gray
+220	218.76	1.2	0.97	dark gray
+224	222.89	1.52	0.4	dark gray
+226	226.49	0.62	0.66	dark gray
+234	233.8	0.59	1.5	dark gray
+238	237.77	0.4	1.68	dark gray
+242	241.76	0.64	1.56	dark gray
+246	246.14	1.1	1.08	dark gray
+250	249.86	1.1	1.19	dark gray
+254	253.35	0.4	1.66	dark gray
+258	257.78	0.77	1.34	dark gray
+262	262.2	1.69	0.75	dark gray
+266	266.01	1.26	0.75	dark gray
+270	269.26	0.79	1.61	dark gray
+274	274.26	1.58	0.4	dark gray
+278	277.55	0.9	1.56	dark gray
+282	281.82	1.26	0.78	dark gray
+286	286.05	1.9	0.4	dark gray
+290	289.95	1.47	0.4	dark gray
+294	293.11	1.0	1.0	dark gray
+230	230.96	0.5	0.5	dark gray
+306	305.11	1.0	1.0	dark gray	mutant
+312	313.09	1.0	1.0	dark gray	mutant
+192	192.04	0.75	0.75	dark gray
+212	211.5	0.75	0.75	dark gray
+216	215.35	0.75	0.75	dark gray
+310	309.28	1.0	1.0	dark gray
+204	203.03	1.0	1.0	dark gray
+196	195.61	0.75	0.75	dark gray
+Panel Name	515
+Marker Name	515
+223	223.05	0.5	0.5	dark gray	mutant
+229	228.69	0.62	0.4	dark gray
+231	230.79	0.4	0.4	dark gray
+233	232.87	1.03	0.4	dark gray
+235	234.35	0.53	0.31	dark gray
+237	236.86	1.28	0.28	dark gray
+187	187.36	1.0	1.0	dark gray
+211	211.65	0.5	0.5	dark gray
+183	183.72	0.57	0.81	dark gray
+193	193.03	0.58	0.4	dark gray
+197	196.86	0.8	0.4	dark gray
+199	198.71	0.67	0.4	dark gray
+201	200.47	0.65	0.5	dark gray
+203	202.37	0.72	0.62	dark gray
+205	204.48	0.87	0.5	dark gray
+207	206.26	0.76	0.4	dark gray
+219	218.81	0.4	1.18	dark gray
+221	220.73	0.5	1.39	dark gray
+225	225.39	0.76	0.4	dark gray
+227	226.82	0.66	0.77	dark gray
+Panel Name	P5_208
+Marker Name	208
+259	258.14	1.6	1.0	dark gray
+163	163.24	1.0	1.0	dark gray
+175	175.45	1.0	1.0	dark gray
+302	301.84	1.0	1.0	dark gray
+315	315.25	0.4	0.4	dark gray
+318	317.76	0.4	0.4	dark gray
+179	179.17	1.27	0.8	dark gray
+183	183.4	1.31	0.4	dark gray
+187	187.28	1.03	0.4	dark gray
+191	191.18	1.23	0.67	dark gray
+195	195.23	1.91	0.51	dark gray
+199	198.78	1.91	1.36	dark gray
+203	203.22	1.73	0.4	dark gray
+207	207.12	1.41	0.96	dark gray
+211	210.89	1.32	0.56	dark gray
+215	214.85	2.14	0.77	dark gray
+219	218.76	1.67	0.8	dark gray
+223	222.75	1.46	0.51	dark gray
+227	226.66	1.56	0.69	dark gray
+231	230.62	1.53	0.59	dark gray
+235	234.68	2.29	0.5	dark gray
+239	238.76	1.33	0.5	dark gray
+243	242.49	1.45	0.67	dark gray
+247	246.52	1.18	0.5	dark gray
+251	250.97	2.0	0.4	dark gray
+255	253.63	1.28	1.5	dark gray
+263	262.99	2.53	0.5	dark gray
+267	266.57	2.23	0.4	dark gray
+270	269.89	0.9	0.74	dark gray
+273	272.75	0.5	0.5	dark gray
+279	278.24	0.88	0.67	dark gray
+283	282.22	0.4	0.89	dark gray
+291	290.12	0.4	0.87	dark gray
+293	293.22	0.4	0.4	dark gray
+305	305.35	0.4	0.59	dark gray
+311	310.7	0.4	0.4	dark gray
+309	309.0	0.5	0.69	dark gray
+167	167.04	1.0	1.0	dark gray	mutant
+313	313.58	0.75	0.75	dark gray
+Panel Name	215
+Marker Name	215
+218	218.31	0.85	0.85	dark gray
+260	259.74	0.75	0.75	dark gray	mutant
+288	288.8	0.85	0.85	dark gray
+202	202.27	0.85	0.85	dark gray
+172	171.52	0.85	0.85	dark gray
+182	183.31	0.85	0.85	dark gray
+206	206.74	0.85	0.85	dark gray
+210	210.54	0.85	0.85	dark gray
+214	214.78	0.85	0.85	dark gray
+222	222.44	0.85	0.85	dark gray
+226	226.38	0.85	0.85	dark gray
+230	230.31	0.85	0.85	dark gray
+234	234.34	0.85	0.85	dark gray
+236	236.26	0.85	0.85	dark gray	mutant
+238	238.18	0.85	0.85	dark gray
+240	240.19	0.85	0.85	dark gray	mutant
+242	242.21	0.85	0.85	dark gray
+244	244.13	0.85	0.85	dark gray	mutant
+246	246.04	0.85	0.85	dark gray
+248	248.0	0.85	0.85	dark gray	mutant
+250	250.05	0.85	0.85	dark gray
+252	251.99	0.85	0.85	dark gray	mutant
+254	254.01	0.85	0.85	dark gray
+256	256.03	0.85	0.85	dark gray	mutant
+258	257.94	0.85	0.85	dark gray
+262	261.57	0.85	0.85	dark gray
+266	265.71	0.85	0.85	dark gray
+270	269.54	0.85	0.85	dark gray
+274	273.5	0.85	0.85	dark gray
+278	277.21	0.85	0.85	dark gray
+282	281.24	0.85	0.85	dark gray
+286	285.18	0.85	0.85	dark gray
+292	292.43	0.85	0.85	dark gray
+264	263.49	0.85	0.85	dark gray	mutant
+178	178.88	0.85	0.85	dark gray
+Panel Name	249_253b
+Marker Name	249
+261	260.79	0.83	0.5	dark gray
+265	264.75	0.78	0.5	dark gray
+269	268.79	1.14	0.5	dark gray
+273	272.75	1.22	0.5	dark gray
+277	276.76	1.13	0.5	dark gray
+281	280.72	0.83	0.5	dark gray
+285	284.72	1.27	0.4	dark gray
+289	289.13	1.24	0.4	dark gray
+293	292.89	1.05	0.4	dark gray
+297	296.59	0.75	0.5	dark gray
+301	300.2	0.4	0.4	dark gray
+159	159.14	1.0	1.0	dark gray
+161	161.8	1.0	1.0	dark gray
+165	166.01	0.4	0.4	dark gray
+169	169.95	0.6	1.28	dark gray
+173	173.92	0.4	1.55	dark gray
+177	177.95	0.68	1.69	dark gray
+181	181.91	0.6	1.85	dark gray
+185	185.85	0.6	0.6	dark gray
+189	189.94	0.73	0.4	dark gray
+193	193.65	0.4	0.4	dark gray
+197	197.54	0.4	0.4	dark gray
+201	201.76	1.22	1.27	dark gray
+205	205.38	0.4	1.17	dark gray
+209	209.37	0.94	0.5	dark gray
+213	213.29	0.4	0.5	dark gray
+217	217.22	0.4	0.5	dark gray
+221	220.95	0.4	0.4	dark gray
+225	225.34	0.82	1.39	dark gray
+229	229.13	0.75	1.64	dark gray
+233	232.81	0.4	1.15	dark gray
+237	237.03	0.91	0.5	dark gray
+241	241.0	0.85	0.5	dark gray
+245	244.98	1.18	0.5	dark gray
+249	248.9	0.75	0.5	dark gray
+253	252.88	0.88	0.5	dark gray
+257	256.83	0.74	0.5	dark gray
+Marker Name	253b
+214	214.49	1.0	1.0	dark gray	mutant
+129	128.25	0.4	0.8	dark gray
+135	134.23	0.4	0.4	dark gray
+141	141.28	0.4	0.82	dark gray
+145	145.96	0.4	0.4	dark gray
+149	149.54	0.75	0.75	dark gray
+155	154.8	0.96	0.5	dark gray
+159	159.17	1.89	0.99	dark gray
+163	162.32	1.41	2.11	dark gray
+167	167.43	1.54	0.4	dark gray
+171	170.98	1.4	0.88	dark gray
+175	175.06	1.43	1.24	dark gray
+179	179.04	0.86	0.97	dark gray
+183	182.28	1.0	1.0	dark gray
+187	186.62	0.75	0.75	dark gray
+191	191.01	0.75	0.75	dark gray
+195	194.85	1.0	1.0	dark gray
+201	200.99	0.16	2.11	dark gray
+207	206.55	1.0	1.06	dark gray
+219	217.81	1.0	1.14	dark gray
+223	222.93	1.83	0.4	dark gray
+227	225.7	1.0	1.0	dark gray
+231	230.2	1.0	1.0	dark gray
+235	233.99	1.0	1.0	dark gray
+239	238.6	1.29	1.02	dark gray
+243	242.49	1.09	0.68	dark gray
+199	198.72	1.0	1.0	dark gray
+169	168.87	0.4	0.4	dark gray	mutant
+133	132.94	0.6	0.6	dark gray	mutant
+137	136.81	0.75	0.75	dark gray
+125	124.53	0.75	0.75	dark gray
+Panel Name	Ogo2
+Marker Name	Ogo2
+220	220.25	0.75	0.75	dark gray
+236	235.93	0.75	0.75	dark gray
+214	214.24	0.75	0.75	dark gray
+222	222.12	0.75	0.75	dark gray
+206	206.36	0.75	0.75	dark gray
+212	212.27	0.75	0.75	dark gray
+216	216.0	0.75	0.75	dark gray
+228	227.61	0.75	0.75	dark gray
+Panel Name	Ssa408
+Marker Name	Ssa408
+225	224.84	0.75	0.75	dark gray
+193	193.61	0.75	0.75	dark gray
+201	201.62	0.75	0.75	dark gray
+205	205.39	0.75	0.75	dark gray
+209	209.17	0.75	0.75	dark gray
+213	213.29	0.75	0.75	dark gray
+221	220.83	0.75	0.75	dark gray
+229	228.61	0.75	0.75	dark gray
+233	232.5	0.75	0.75	dark gray
+237	236.51	0.75	0.75	dark gray
+263	264.08	0.75	0.75	dark gray
+273	271.74	0.75	0.75	dark gray
+275	275.63	0.75	0.75	dark gray
+279	279.76	0.75	0.75	dark gray
+283	283.65	0.75	0.75	dark gray
+287	287.42	0.75	0.75	dark gray
+291	291.54	0.75	0.75	dark gray
+299	299.2	0.75	0.75	dark gray
+Panel Name	Ogo4
+Marker Name	Ogo4
+139	139.15	0.75	0.75	dark gray
+155	154.55	0.75	0.75	dark gray
+157	156.78	0.75	0.75	dark gray
+161	160.81	0.75	0.75	dark gray
+163	163.05	0.75	0.75	dark gray
+Panel Name	OtsG474
+Marker Name	OtsG474
+161	160.82	0.75	0.75	dark gray
+165	164.94	0.75	0.75	dark gray
+177	176.96	0.75	0.75	dark gray
+189	189.22	0.75	0.75	dark gray
+193	193.11	0.75	0.75	dark gray
+197	197.23	0.75	0.75	dark gray
+213	213.49	0.75	0.75	dark gray
+217	217.26	0.75	0.75	dark gray
+Panel Name	NSant_P1
+Marker Name	215
+218	218.31	0.85	0.85	dark gray
+260	259.74	0.75	0.75	dark gray	mutant
+288	288.8	0.85	0.85	dark gray
+202	202.27	0.85	0.85	dark gray
+172	171.52	0.85	0.85	dark gray
+182	183.31	0.85	0.85	dark gray
+206	206.74	0.85	0.85	dark gray
+210	210.54	0.85	0.85	dark gray
+214	214.78	0.85	0.85	dark gray
+222	222.44	0.85	0.85	dark gray
+226	226.38	0.85	0.85	dark gray
+230	230.21	0.95	0.95	dark gray
+234	234.34	0.85	0.85	dark gray
+236	236.26	0.85	0.85	dark gray	mutant
+238	238.18	0.85	0.85	dark gray
+240	240.19	0.85	0.85	dark gray	mutant
+242	242.11	0.85	0.85	dark gray
+244	244.08	0.85	0.85	dark gray	mutant
+246	246.04	0.85	0.85	dark gray
+248	248.0	0.85	0.85	dark gray	mutant
+250	249.97	0.9	0.9	dark gray
+252	251.99	0.85	0.85	dark gray	mutant
+254	254.01	0.9	0.9	dark gray
+256	256.03	0.85	0.85	dark gray	mutant
+258	257.94	0.85	0.85	dark gray
+262	261.57	0.85	0.85	dark gray
+266	265.71	1.0	1.0	dark gray
+270	269.54	0.85	0.85	dark gray
+274	273.5	0.85	0.85	dark gray
+278	277.21	0.85	0.85	dark gray
+282	281.24	0.85	0.85	dark gray
+286	285.18	0.85	0.85	dark gray
+292	292.43	0.85	0.85	dark gray
+264	263.49	0.85	0.85	dark gray	mutant
+178	178.88	0.85	0.85	dark gray
+Marker Name	409
+163	162.64	0.75	0.75	dark gray
+205	205.0	0.85	0.85	dark gray
+179	178.76	0.85	0.85	dark gray
+265	264.79	0.85	0.85	dark gray
+273	272.76	0.85	0.85	dark gray
+239	239.1	0.85	0.85	dark gray
+171	170.8	0.85	0.85	dark gray
+153	152.62	0.85	0.85	dark gray
+155	154.59	0.85	0.85	dark gray
+157	156.56	0.85	0.85	dark gray
+159	158.71	0.85	0.85	dark gray
+161	160.86	0.85	0.85	dark gray
+165	164.73	0.95	0.95	dark gray
+169	168.77	0.85	0.85	dark gray
+173	172.95	0.85	0.85	dark gray
+177	176.88	0.85	0.85	dark gray
+181	181.09	0.85	0.85	dark gray
+185	185.21	0.85	0.85	dark gray
+187	187.04	0.85	0.85	dark gray
+189	189.15	0.85	0.85	dark gray
+191	191.21	0.85	0.85	dark gray
+193	193.18	0.85	0.85	dark gray
+195	195.06	0.85	0.85	dark gray
+197	197.03	0.85	0.85	dark gray
+199	198.99	0.85	0.85	dark gray
+201	200.96	0.85	0.85	dark gray
+203	203.02	0.85	0.85	dark gray
+207	206.96	0.85	0.85	dark gray
+219	219.23	0.85	0.85	dark gray
+223	222.9	0.85	0.85	dark gray
+227	227.28	0.85	0.85	dark gray
+229	229.16	0.85	0.85	dark gray
+231	231.04	0.85	0.85	dark gray
+233	233.19	0.85	0.85	dark gray
+235	235.07	0.85	0.85	dark gray
+237	237.13	0.85	0.85	dark gray
+241	241.07	0.85	0.85	dark gray
+245	245.01	0.85	0.85	dark gray
+247	247.23	0.85	0.85	dark gray
+249	249.21	0.85	0.85	dark gray
+253	252.94	0.85	0.85	dark gray
+269	269.18	0.85	0.85	dark gray
+257	257.09	0.85	0.85	dark gray
+149	148.16	0.85	0.85	dark gray
+243	243.14	0.85	0.85	dark gray
+133	132.72	0.85	0.85	dark gray
+135	135.1	0.85	0.85	dark gray
+137	137.18	0.85	0.85	dark gray
+139	139.14	0.85	0.85	dark gray
+141	141.64	0.85	0.85	dark gray
+115	114.62	0.85	0.85	dark gray
+119	118.63	0.85	0.85	dark gray
+111	110.5	0.85	0.85	dark gray
+209	209.02	0.85	0.85	dark gray
+255	254.86	0.85	0.85	dark gray
+221	221.01	0.85	0.85	dark gray
+251	251.02	0.85	0.85	dark gray
+215	215.38	0.85	0.85	dark gray
+211	210.9	0.85	0.85	dark gray
+175	174.84	0.85	0.85	dark gray
+183	183.16	0.85	0.85	dark gray
+213	213.02	0.75	0.75	dark gray
+131	130.53	0.75	0.75	dark gray
+167	166.83	0.75	0.75	dark gray
+261	261.34	0.75	0.75	dark gray
+Marker Name	515
+183	182.98	0.85	0.85	dark gray
+229	228.15	0.85	0.85	dark gray
+211	211.49	0.85	0.85	dark gray
+187	186.78	0.85	0.85	dark gray
+189	188.86	0.85	0.85	dark gray
+231	230.0	0.85	0.85	dark gray
+241	241.41	0.85	0.85	dark gray
+193	192.44	0.85	0.85	dark gray
+197	196.15	0.85	0.85	dark gray
+199	198.05	0.85	0.85	dark gray
+201	200.09	0.85	0.85	dark gray
+203	201.86	0.85	0.85	dark gray
+205	203.75	0.85	0.85	dark gray
+207	205.7	0.85	0.85	dark gray
+219	218.77	0.85	0.85	dark gray
+221	220.64	0.85	0.85	dark gray
+227	226.25	0.85	0.85	dark gray
+233	231.86	0.85	0.85	dark gray
+237	235.7	0.85	0.85	dark gray
+Marker Name	211
+310	309.55	0.95	0.95	dark gray
+210	210.92	1.0	1.0	dark gray
+302	301.09	1.0	1.0	dark gray
+218	218.87	0.95	0.95	dark gray
+222	222.34	1.0	1.0	dark gray
+226	226.48	1.0	1.0	dark gray
+230	230.3	1.0	1.0	dark gray
+234	234.24	1.0	1.0	dark gray
+200	199.58	1.0	1.0	dark gray
+196	195.44	1.0	1.0	dark gray
+238	238.31	1.0	1.0	dark gray
+242	242.12	1.0	1.0	dark gray
+246	246.01	1.0	1.0	dark gray
+250	250.05	1.0	1.0	dark gray
+254	254.02	1.0	1.0	dark gray
+258	257.83	1.0	1.0	dark gray
+262	261.8	1.0	1.0	dark gray
+266	265.69	1.0	1.0	dark gray
+270	269.42	1.0	1.0	dark gray
+274	273.71	1.0	1.0	dark gray
+278	277.52	1.0	1.0	dark gray
+282	281.57	1.0	1.0	dark gray
+286	285.38	1.0	1.0	dark gray
+290	289.56	1.0	1.0	dark gray
+294	293.48	0.95	0.95	dark gray
+298	297.77	1.0	1.0	dark gray
+232	232.23	0.65	0.65	dark gray	mutant
+192	191.56	1.0	1.0	dark gray
+207	207.27	1.0	1.0	dark gray
+Panel Name	NSant_P2
+Marker Name	Ogo2
+210	210.09	0.85	0.85	dark gray
+218	217.9	0.85	0.85	dark gray
+224	223.85	0.85	0.85	dark gray
+238	237.5	0.85	0.85	dark gray
+240	239.52	0.85	0.85	dark gray
+226	225.87	0.85	0.85	dark gray
+220	219.98	0.75	0.75	dark gray
+236	235.41	0.75	0.75	dark gray
+214	214.01	0.75	0.75	dark gray
+222	221.98	0.75	0.75	dark gray
+206	206.36	0.75	0.75	dark gray
+212	211.97	0.75	0.75	dark gray
+216	216.0	0.75	0.75	dark gray
+228	227.61	0.75	0.75	dark gray
+230	230.71	0.85	0.85	dark gray
+Marker Name	201
+260	260.48	1.0	1.0	dark gray
+280	279.87	1.0	1.0	dark gray	mutant
+162	162.46	1.0	1.0	dark gray
+166	166.41	1.45	1.13	dark gray
+170	170.51	1.38	0.8	dark gray
+174	173.9	0.91	1.04	dark gray
+178	178.37	1.36	1.0	dark gray
+182	182.22	1.45	1.09	dark gray
+186	186.23	1.63	0.9	dark gray
+190	190.3	1.77	0.7	dark gray
+194	193.99	1.52	1.01	dark gray
+198	197.76	1.17	1.16	dark gray
+202	201.86	1.5	0.95	dark gray
+210	209.73	1.65	0.67	dark gray
+214	213.62	1.67	1.01	dark gray
+218	217.44	1.46	0.81	dark gray
+222	221.24	1.0	1.0	dark gray
+226	225.45	1.56	0.65	dark gray
+230	229.75	1.95	0.4	dark gray
+234	232.88	1.0	1.0	dark gray
+238	237.25	2.06	0.93	dark gray
+206	205.47	1.0	1.0	dark gray
+288	288.3	1.1	0.65	dark gray
+296	296.34	0.95	0.5	dark gray
+336	336.89	0.65	0.65	dark gray	mutant
+312	312.29	1.0	1.0	dark gray	mutant
+284	283.84	0.8	0.8	dark gray	mutant
+252	252.46	1.0	1.0	dark gray
+276	276.15	0.75	0.75	dark gray	mutant
+308	308.4	0.75	0.75	dark gray	mutant
+300	300.19	0.75	0.75	dark gray
+268	268.48	0.75	0.75	dark gray
+272	271.85	0.85	0.85	dark gray
+316	315.83	0.85	0.85	dark gray	mutant
+Marker Name	249
+317	316.45	0.85	0.85	dark gray
+313	312.41	0.85	0.85	dark gray
+261	260.48	0.65	0.65	dark gray
+265	264.75	0.65	0.65	dark gray
+269	268.38	0.65	0.65	dark gray
+273	272.44	0.65	0.65	dark gray
+277	276.55	0.65	0.65	dark gray
+281	280.41	0.65	0.65	dark gray
+285	284.41	0.65	0.65	dark gray
+289	288.51	0.65	0.65	dark gray
+293	292.37	0.65	0.65	dark gray
+297	295.86	0.65	0.65	dark gray
+301	300.2	0.65	0.65	dark gray
+159	159.14	0.65	0.65	dark gray
+161	161.8	0.65	0.65	dark gray
+165	166.01	0.65	0.65	dark gray
+169	169.95	0.65	0.65	dark gray
+173	173.92	0.65	0.65	dark gray
+177	177.95	0.65	0.65	dark gray
+181	181.91	0.65	0.65	dark gray
+185	185.85	0.65	0.65	dark gray
+189	189.94	0.65	0.65	dark gray
+193	193.65	0.65	0.65	dark gray
+197	197.54	0.65	0.65	dark gray
+201	201.76	0.65	0.65	dark gray
+205	205.38	0.65	0.65	dark gray
+209	209.27	0.65	0.65	dark gray
+213	213.29	0.65	0.65	dark gray
+217	216.91	0.65	0.65	dark gray
+221	220.95	0.65	0.65	dark gray
+225	225.03	0.65	0.65	dark gray
+229	228.92	0.65	0.65	dark gray
+233	232.81	0.65	0.65	dark gray
+237	236.82	0.65	0.65	dark gray
+241	240.9	0.65	0.65	dark gray
+245	244.98	0.85	0.85	dark gray
+249	248.69	0.65	0.65	dark gray
+253	252.57	0.65	0.65	dark gray
+257	256.42	0.65	0.65	dark gray
+Marker Name	Ssa408
+189	189.49	0.95	0.95	dark gray
+197	197.26	0.95	0.95	dark gray
+295	294.72	0.95	0.95	dark gray
+217	217.01	0.95	0.95	dark gray
+267	267.7	0.85	0.85	dark gray
+241	240.36	0.85	0.85	dark gray
+249	248.24	0.85	0.85	dark gray
+303	302.78	0.85	0.85	dark gray
+225	224.6	0.95	0.95	dark gray
+193	193.61	0.95	0.95	dark gray
+201	201.18	0.95	0.95	dark gray
+205	205.39	0.95	0.95	dark gray
+209	209.17	0.95	0.95	dark gray
+213	212.94	0.95	0.95	dark gray
+221	220.83	0.95	0.95	dark gray
+229	228.61	0.95	0.95	dark gray
+233	232.5	0.95	0.95	dark gray
+237	236.51	0.95	0.95	dark gray
+263	264.08	0.95	0.95	dark gray
+273	271.5	0.95	0.95	dark gray
+275	275.63	0.95	0.95	dark gray
+279	279.76	0.95	0.95	dark gray
+283	283.3	0.95	0.95	dark gray
+287	287.42	0.95	0.95	dark gray
+291	291.54	0.95	0.95	dark gray
+299	299.2	0.95	0.95	dark gray
+245	243.88	1.0	1.0	dark gray
+181	181.56	0.85	0.85	dark gray
+185	185.72	0.85	0.85	dark gray
+253	251.86	0.95	0.95	dark gray
+Panel Name	NSant_P3
+Marker Name	Ogo4
+166	167.16	0.85	0.85	dark gray
+164	165.1	0.85	0.85	dark gray
+142	142.98	0.85	0.85	dark gray
+134	134.05	0.75	0.75	dark gray
+138	138.52	0.75	0.75	dark gray
+154	154.37	0.75	0.75	dark gray
+156	156.51	0.75	0.75	dark gray
+160	160.72	0.75	0.75	dark gray
+162	162.69	0.75	0.75	dark gray
+116	115.61	0.85	0.85	dark gray
+130	130.55	0.85	0.85	dark gray
+152	151.86	0.85	0.85	dark gray
+158	158.48	0.85	0.85	dark gray
+Marker Name	212
+220	220.05	0.95	0.98	dark gray
+224	224.66	0.95	0.95	dark gray
+130	129.24	1.0	1.0	dark gray
+134	133.58	1.0	1.0	dark gray
+138	137.71	1.0	1.0	dark gray
+142	141.97	1.0	1.0	dark gray
+146	146.15	1.14	1.51	dark gray
+152	151.57	1.7	1.31	dark gray
+156	155.65	1.54	0.69	dark gray
+160	159.94	1.45	0.5	dark gray
+164	164.12	1.41	0.94	dark gray
+168	168.21	1.76	0.66	dark gray
+172	172.33	1.54	0.4	dark gray
+176	176.34	1.4	0.4	dark gray
+180	180.56	1.72	0.4	dark gray
+184	183.75	0.94	1.39	dark gray
+200	199.67	0.9	1.58	dark gray
+204	203.61	0.4	1.89	dark gray
+208	208.67	0.82	0.95	dark gray
+212	212.45	0.79	1.24	dark gray
+242	241.02	0.4	0.76	dark gray
+246	245.22	0.4	0.63	dark gray
+196	196.24	0.75	0.75	dark gray
+192	192.01	1.0	1.0	dark gray
+126	125.24	1.0	1.0	dark gray
+188	188.14	0.85	0.85	dark gray
+216	216.33	0.75	0.75	dark gray
+Marker Name	OtsG474
+185	184.5	0.85	0.85	dark gray
+165	164.94	0.75	0.75	dark gray
+177	176.96	0.75	0.75	dark gray
+161	160.82	0.75	0.75	dark gray
+193	193.11	0.75	0.75	dark gray
+197	197.23	0.75	0.75	dark gray
+213	213.49	0.75	0.75	dark gray
+217	217.26	0.75	0.75	dark gray
+173	172.84	0.85	0.85	dark gray
+221	220.8	0.85	0.85	dark gray
+189	189.22	0.75	0.75	dark gray
+181	180.97	0.85	0.85	dark gray
+201	201.12	0.85	0.85	dark gray
+Marker Name	311
+212	212.12	0.5	0.5	dark gray	mutant
+258	258.92	0.5	0.5	dark gray
+422	422.46	0.7	0.7	dark gray
+366	365.85	0.5	0.5	dark gray
+392	391.18	1.58	1.0	dark gray
+364	363.96	1.0	1.0	dark gray
+268	268.08	2.05	1.0	dark gray
+236	235.42	0.4	0.77	dark gray
+240	239.56	0.71	0.4	dark gray
+244	243.42	0.4	1.54	dark gray
+248	247.88	1.7	1.96	dark gray
+252	251.5	0.97	1.53	dark gray
+256	255.44	0.4	1.05	dark gray
+264	263.29	1.09	1.75	dark gray
+272	270.82	0.92	2.17	dark gray
+276	275.97	1.55	1.49	dark gray
+280	279.88	1.36	1.05	dark gray
+284	283.58	1.12	1.36	dark gray
+288	287.13	0.61	1.08	dark gray
+168	168.38	0.85	0.85	dark gray
+292	290.97	0.4	1.09	dark gray
+296	295.23	0.71	0.4	dark gray
+300	299.03	1.0	1.0	dark gray
+304	302.99	0.85	0.85	dark gray
+308	307.3	0.85	0.85	dark gray
+312	312.45	2.15	0.4	dark gray
+316	316.28	1.86	0.4	dark gray
+320	319.61	1.0	1.0	dark gray
+324	323.5	1.0	1.0	dark gray
+328	327.75	1.0	1.0	dark gray
+332	331.6	1.0	1.0	dark gray
+336	335.85	1.0	1.0	dark gray
+340	339.85	1.0	1.0	dark gray
+344	343.93	1.0	1.0	dark gray
+348	348.02	1.0	1.0	dark gray
+352	352.01	0.82	0.4	dark gray
+356	355.99	0.81	0.54	dark gray
+360	359.82	0.81	0.61	dark gray
+368	367.85	1.0	1.0	dark gray
+376	375.17	1.0	1.0	dark gray
+380	378.98	1.0	1.0	dark gray
+388	387.05	1.05	1.02	dark gray
+394	394.29	0.4	1.25	dark gray
+398	398.25	0.5	1.52	dark gray
+402	402.05	0.4	1.23	dark gray
+406	406.14	0.7	0.7	dark gray
+410	410.39	0.4	0.4	dark gray
+414	414.34	0.7	0.7	dark gray
+418	418.38	0.7	0.7	dark gray
+184	184.62	1.0	1.0	dark gray
+188	188.96	1.0	1.0	dark gray
+232	232.06	1.01	0.5	dark gray
+192	192.52	0.75	0.75	dark gray
+384	383.32	1.0	1.0	dark gray
+426	426.63	0.75	0.75	dark gray
+372	371.5	1.0	1.0	dark gray
+416	416.58	0.75	0.75	dark gray	mutant
+Panel Name	NS_P2b
+Marker Name	Ogo2
+210	210.09	0.85	0.85	dark gray
+218	217.9	0.85	0.85	dark gray
+224	223.85	0.85	0.85	dark gray
+238	237.5	0.85	0.85	dark gray
+240	239.52	0.85	0.85	dark gray
+226	225.87	0.85	0.85	dark gray
+220	219.98	0.75	0.75	dark gray
+236	235.41	0.75	0.75	dark gray
+214	214.01	0.75	0.75	dark gray
+222	221.98	0.75	0.75	dark gray
+206	206.36	0.75	0.75	dark gray
+212	211.97	0.75	0.75	dark gray
+216	216.0	0.75	0.75	dark gray
+228	227.61	0.75	0.75	dark gray
+230	230.71	0.85	0.85	dark gray
+Marker Name	Ssa408
+189	189.49	0.95	0.95	dark gray
+197	197.26	0.95	0.95	dark gray
+295	294.72	0.95	0.95	dark gray
+217	217.01	0.95	0.95	dark gray
+267	267.7	0.85	0.85	dark gray
+241	240.36	0.85	0.85	dark gray
+249	248.24	0.85	0.85	dark gray
+303	302.78	0.85	0.85	dark gray
+225	224.6	0.95	0.95	dark gray
+193	193.61	0.95	0.95	dark gray
+201	201.18	0.95	0.95	dark gray
+205	205.39	0.95	0.95	dark gray
+209	209.17	0.95	0.95	dark gray
+213	212.94	0.95	0.95	dark gray
+221	220.83	0.95	0.95	dark gray
+229	228.61	0.95	0.95	dark gray
+233	232.5	0.95	0.95	dark gray
+237	236.51	0.95	0.95	dark gray
+263	264.08	0.95	0.95	dark gray
+273	271.5	0.95	0.95	dark gray
+275	275.63	0.95	0.95	dark gray
+279	279.76	0.95	0.95	dark gray
+283	283.3	0.95	0.95	dark gray
+287	287.42	0.95	0.95	dark gray
+291	291.54	0.95	0.95	dark gray
+299	299.2	0.95	0.95	dark gray
+245	243.88	1.0	1.0	dark gray
+181	181.56	0.85	0.85	dark gray
+185	185.72	0.85	0.85	dark gray
+253	251.86	0.95	0.95	dark gray
+Panel Name	NS_P3a
+Marker Name	Ogo4
+166	167.16	0.85	0.85	dark gray
+164	165.1	0.85	0.85	dark gray
+142	142.98	0.85	0.85	dark gray
+134	134.23	1.0	1.0	dark gray
+138	138.52	1.0	1.0	dark gray
+154	154.37	0.75	0.75	dark gray
+156	156.51	0.75	0.75	dark gray
+160	160.72	0.75	0.75	dark gray
+162	162.69	0.75	0.75	dark gray
+116	115.61	0.85	0.85	dark gray
+130	130.55	0.85	0.85	dark gray
+152	151.86	0.85	0.85	dark gray
+158	158.48	0.85	0.85	dark gray
+Marker Name	212
+220	220.05	0.95	0.98	dark gray
+224	224.66	0.95	0.95	dark gray
+130	129.24	1.0	1.0	dark gray
+134	133.58	1.0	1.0	dark gray
+138	137.71	1.0	1.0	dark gray
+142	141.97	1.0	1.0	dark gray
+146	146.15	1.14	1.51	dark gray
+152	151.57	1.7	1.31	dark gray
+156	155.65	1.54	0.69	dark gray
+160	159.94	1.45	0.5	dark gray
+164	164.12	1.41	0.94	dark gray
+168	168.21	1.76	0.66	dark gray
+172	172.33	1.54	0.4	dark gray
+176	176.34	1.4	0.4	dark gray
+180	180.56	1.72	0.4	dark gray
+184	183.75	0.94	1.39	dark gray
+200	199.67	0.9	1.58	dark gray
+204	203.61	0.4	1.89	dark gray
+208	208.67	0.82	0.95	dark gray
+212	212.45	0.79	1.24	dark gray
+242	241.02	0.4	0.76	dark gray
+246	245.22	0.4	0.63	dark gray
+196	196.24	0.75	0.75	dark gray
+192	192.01	1.0	1.0	dark gray
+126	125.24	1.0	1.0	dark gray
+188	188.14	0.85	0.85	dark gray
+Marker Name	OtsG474
+185	184.5	0.85	0.85	dark gray
+165	164.94	0.75	0.75	dark gray
+177	176.96	0.75	0.75	dark gray
+161	160.82	0.75	0.75	dark gray
+193	193.11	0.75	0.75	dark gray
+197	197.23	0.75	0.75	dark gray
+213	213.49	0.75	0.75	dark gray
+217	217.26	0.75	0.75	dark gray
+173	172.84	0.85	0.85	dark gray
+221	220.8	0.85	0.85	dark gray
+189	189.22	0.75	0.75	dark gray
+181	180.97	0.85	0.85	dark gray
+201	201.12	0.85	0.85	dark gray
+Panel Name	NS_P2a
+Marker Name	249
+317	316.45	0.85	0.85	dark gray
+313	312.41	0.85	0.85	dark gray
+261	260.48	0.65	0.65	dark gray
+265	264.75	0.65	0.65	dark gray
+269	268.38	0.65	0.65	dark gray
+273	272.44	0.65	0.65	dark gray
+277	276.55	0.65	0.65	dark gray
+281	280.41	0.65	0.65	dark gray
+285	284.41	0.65	0.65	dark gray
+289	288.51	0.65	0.65	dark gray
+293	292.37	0.65	0.65	dark gray
+297	295.86	0.65	0.65	dark gray
+301	300.2	0.65	0.65	dark gray
+159	159.14	0.65	0.65	dark gray
+161	161.8	0.65	0.65	dark gray
+165	166.01	0.65	0.65	dark gray
+169	169.95	0.65	0.65	dark gray
+173	173.92	0.65	0.65	dark gray
+177	177.95	0.65	0.65	dark gray
+181	181.91	0.65	0.65	dark gray
+185	185.85	0.65	0.65	dark gray
+189	189.94	0.65	0.65	dark gray
+193	193.65	0.65	0.65	dark gray
+197	197.54	0.65	0.65	dark gray
+201	201.76	0.65	0.65	dark gray
+205	205.38	0.65	0.65	dark gray
+209	209.27	0.65	0.65	dark gray
+213	213.29	0.65	0.65	dark gray
+217	216.91	0.65	0.65	dark gray
+221	220.95	0.65	0.65	dark gray
+225	225.03	0.65	0.65	dark gray
+229	228.92	0.65	0.65	dark gray
+233	232.81	0.65	0.65	dark gray
+237	236.82	0.65	0.65	dark gray
+241	240.9	0.65	0.65	dark gray
+245	244.98	0.85	0.85	dark gray
+249	248.69	0.65	0.65	dark gray
+253	252.57	0.65	0.65	dark gray
+257	256.42	0.65	0.65	dark gray
+Marker Name	201
+260	260.48	1.0	1.0	dark gray
+280	279.87	1.0	1.0	dark gray	mutant
+162	162.46	1.0	1.0	dark gray
+166	166.41	1.45	1.13	dark gray
+170	170.51	1.38	0.8	dark gray
+174	173.9	0.91	1.04	dark gray
+178	178.37	1.36	1.0	dark gray
+182	182.22	1.45	1.09	dark gray
+186	186.23	1.63	0.9	dark gray
+190	190.3	1.77	0.7	dark gray
+194	193.99	1.52	1.01	dark gray
+198	197.76	1.17	1.16	dark gray
+202	201.86	1.5	0.95	dark gray
+210	209.73	1.65	0.67	dark gray
+214	213.62	1.67	1.01	dark gray
+218	217.44	1.46	0.81	dark gray
+222	221.24	1.0	1.0	dark gray
+226	225.45	1.56	0.65	dark gray
+230	229.75	1.95	0.4	dark gray
+234	232.88	1.0	1.0	dark gray
+238	237.25	2.06	0.93	dark gray
+206	205.47	1.0	1.0	dark gray
+288	288.3	1.1	0.65	dark gray
+296	296.34	0.95	0.5	dark gray
+336	336.89	0.65	0.65	dark gray	mutant
+312	312.29	1.0	1.0	dark gray	mutant
+284	283.84	0.8	0.8	dark gray	mutant
+252	252.46	1.0	1.0	dark gray
+276	276.15	0.75	0.75	dark gray	mutant
+308	308.4	0.75	0.75	dark gray	mutant
+300	300.19	0.75	0.75	dark gray
+268	268.48	0.75	0.75	dark gray
+272	271.85	0.85	0.85	dark gray
+316	315.83	0.85	0.85	dark gray	mutant
+Panel Name	NS_311
+Marker Name	311
+212	212.12	0.5	0.5	dark gray	mutant
+258	258.92	0.5	0.5	dark gray
+422	422.46	0.7	0.7	dark gray
+366	365.85	0.5	0.5	dark gray
+392	391.18	1.58	1.0	dark gray
+364	363.96	1.0	1.0	dark gray
+268	268.08	2.05	1.0	dark gray
+236	235.42	0.4	0.77	dark gray
+240	239.56	0.71	0.4	dark gray
+244	243.42	0.4	1.54	dark gray
+248	247.88	1.7	1.96	dark gray
+252	251.5	0.97	1.53	dark gray
+256	255.44	0.4	1.05	dark gray
+264	263.29	1.09	1.75	dark gray
+272	270.82	0.92	2.17	dark gray
+276	275.97	1.55	1.49	dark gray
+280	279.88	1.36	1.05	dark gray
+284	283.58	1.12	1.36	dark gray
+288	287.13	0.61	1.08	dark gray
+168	168.38	0.85	0.85	dark gray
+292	290.97	0.4	1.09	dark gray
+296	295.23	0.71	0.4	dark gray
+300	299.03	1.0	1.0	dark gray
+304	302.99	0.85	0.85	dark gray
+308	307.3	0.85	0.85	dark gray
+312	312.45	2.15	0.4	dark gray
+316	316.28	1.86	0.4	dark gray
+320	319.61	1.0	1.0	dark gray
+324	323.5	1.0	1.0	dark gray
+328	327.75	1.0	1.0	dark gray
+332	331.6	1.0	1.0	dark gray
+336	335.85	1.0	1.0	dark gray
+340	339.85	1.0	1.0	dark gray
+344	343.93	1.0	1.0	dark gray
+348	348.02	1.0	1.0	dark gray
+352	352.01	0.82	0.4	dark gray
+356	355.99	0.81	0.54	dark gray
+360	359.82	0.81	0.61	dark gray
+368	367.85	1.0	1.0	dark gray
+376	375.17	1.0	1.0	dark gray
+380	378.98	1.0	1.0	dark gray
+388	387.05	1.05	1.02	dark gray
+394	394.29	0.4	1.25	dark gray
+398	398.25	0.5	1.52	dark gray
+402	402.05	0.4	1.23	dark gray
+406	406.14	0.7	0.7	dark gray
+410	410.39	0.4	0.4	dark gray
+414	414.34	0.7	0.7	dark gray
+418	418.38	0.7	0.7	dark gray
+184	184.62	1.0	1.0	dark gray
+188	188.96	1.0	1.0	dark gray
+232	232.06	1.01	0.5	dark gray
+192	192.52	0.75	0.75	dark gray
+384	383.32	1.0	1.0	dark gray
+426	426.63	0.75	0.75	dark gray
+372	371.5	1.0	1.0	dark gray
+416	416.58	0.75	0.75	dark gray	mutant
+Panel Name	NS_215
+Marker Name	215
+218	218.31	0.85	0.85	dark gray
+260	259.74	0.75	0.75	dark gray	mutant
+288	288.8	0.85	0.85	dark gray
+202	202.27	0.85	0.85	dark gray
+172	171.52	0.85	0.85	dark gray
+182	183.31	0.85	0.85	dark gray
+206	206.74	0.85	0.85	dark gray
+210	210.54	0.85	0.85	dark gray
+214	214.78	0.85	0.85	dark gray
+222	222.44	0.85	0.85	dark gray
+226	226.38	0.85	0.85	dark gray
+230	230.31	0.85	0.85	dark gray
+234	234.34	0.85	0.85	dark gray
+236	236.26	0.85	0.85	dark gray	mutant
+238	238.18	0.85	0.85	dark gray
+240	240.19	0.85	0.85	dark gray	mutant
+242	242.21	0.85	0.85	dark gray
+244	244.08	0.85	0.85	dark gray	mutant
+246	246.04	0.85	0.85	dark gray
+248	248.0	0.85	0.85	dark gray	mutant
+250	249.97	0.9	0.9	dark gray
+252	251.99	0.85	0.85	dark gray	mutant
+254	254.01	0.9	0.9	dark gray
+256	256.03	0.85	0.85	dark gray	mutant
+258	257.94	0.85	0.85	dark gray
+262	261.57	0.85	0.85	dark gray
+266	265.71	0.9	0.9	dark gray
+270	269.54	0.85	0.85	dark gray
+274	273.5	0.85	0.85	dark gray
+278	277.21	0.85	0.85	dark gray
+282	281.24	0.85	0.85	dark gray
+286	285.18	0.85	0.85	dark gray
+292	292.43	0.85	0.85	dark gray
+264	263.49	0.85	0.85	dark gray	mutant
+178	178.88	0.85	0.85	dark gray
+Panel Name	NS_P1a
+Marker Name	211
+310	309.55	0.95	0.95	dark gray
+210	210.92	1.0	1.0	dark gray
+302	301.09	1.0	1.0	dark gray
+218	218.87	0.95	0.95	dark gray
+222	222.34	1.0	1.0	dark gray
+226	226.48	1.0	1.0	dark gray
+230	230.3	1.0	1.0	dark gray
+234	234.24	1.0	1.0	dark gray
+200	199.58	1.0	1.0	dark gray
+196	195.44	1.0	1.0	dark gray
+238	238.31	1.0	1.0	dark gray
+242	242.12	1.0	1.0	dark gray
+246	246.01	1.0	1.0	dark gray
+250	250.05	1.0	1.0	dark gray
+254	254.02	1.0	1.0	dark gray
+258	257.83	1.0	1.0	dark gray
+262	261.8	1.0	1.0	dark gray
+266	265.69	1.0	1.0	dark gray
+270	269.42	1.0	1.0	dark gray
+274	273.71	1.0	1.0	dark gray
+278	277.52	1.0	1.0	dark gray
+282	281.57	1.0	1.0	dark gray
+286	285.38	1.0	1.0	dark gray
+290	289.56	1.0	1.0	dark gray
+294	293.48	0.95	0.95	dark gray
+298	297.77	1.0	1.0	dark gray
+232	232.23	0.65	0.65	dark gray	mutant
+Marker Name	409
+163	162.64	0.75	0.75	dark gray
+205	205.0	0.85	0.85	dark gray
+179	178.76	0.85	0.85	dark gray
+265	264.79	0.85	0.85	dark gray
+273	272.76	0.85	0.85	dark gray
+239	239.1	0.85	0.85	dark gray
+171	170.8	0.85	0.85	dark gray
+153	152.62	0.85	0.85	dark gray
+155	154.59	0.85	0.85	dark gray
+157	156.56	0.85	0.85	dark gray
+159	158.71	0.85	0.85	dark gray
+161	160.86	0.85	0.85	dark gray
+165	164.73	0.95	0.95	dark gray
+169	168.65	0.85	0.85	dark gray
+173	172.95	0.85	0.85	dark gray
+177	176.88	0.85	0.85	dark gray
+181	181.09	0.85	0.85	dark gray
+185	185.21	0.85	0.85	dark gray
+187	187.09	0.85	0.85	dark gray
+189	189.15	0.85	0.85	dark gray
+191	191.21	0.85	0.85	dark gray
+193	193.18	0.85	0.85	dark gray
+195	195.06	0.85	0.85	dark gray
+197	197.03	0.85	0.85	dark gray
+199	198.99	0.85	0.85	dark gray
+201	200.96	0.85	0.85	dark gray
+203	203.02	0.85	0.85	dark gray
+207	206.96	0.85	0.85	dark gray
+219	219.23	0.85	0.85	dark gray
+223	222.9	0.85	0.85	dark gray
+227	227.28	0.85	0.85	dark gray
+229	229.16	0.85	0.85	dark gray
+231	231.04	0.85	0.85	dark gray
+233	233.19	0.85	0.85	dark gray
+235	235.07	0.85	0.85	dark gray
+237	237.13	0.85	0.85	dark gray
+241	241.07	0.85	0.85	dark gray
+245	245.01	0.85	0.85	dark gray
+247	246.99	0.85	0.85	dark gray
+249	249.21	0.85	0.85	dark gray
+253	252.94	0.85	0.85	dark gray
+269	269.18	0.85	0.85	dark gray
+257	257.09	0.85	0.85	dark gray
+149	148.16	0.85	0.85	dark gray
+243	243.14	0.85	0.85	dark gray
+133	132.72	0.85	0.85	dark gray
+135	135.1	0.85	0.85	dark gray
+137	137.18	0.85	0.85	dark gray
+139	139.14	0.85	0.85	dark gray
+141	141.64	0.85	0.85	dark gray
+115	114.62	0.85	0.85	dark gray
+119	118.63	0.85	0.85	dark gray
+111	110.5	0.85	0.85	dark gray
+209	209.02	0.85	0.85	dark gray
+255	254.86	0.85	0.85	dark gray
+221	221.01	0.85	0.85	dark gray
+251	251.02	0.85	0.85	dark gray
+215	215.38	0.85	0.85	dark gray
+211	210.9	0.85	0.85	dark gray
+175	174.84	0.85	0.85	dark gray
+183	183.16	0.85	0.85	dark gray
+Marker Name	515
+183	182.98	0.85	0.85	dark gray
+229	228.15	0.85	0.85	dark gray
+211	211.49	0.85	0.85	dark gray
+187	186.78	0.85	0.85	dark gray
+189	188.86	0.85	0.85	dark gray
+231	230.0	0.85	0.85	dark gray
+241	241.41	0.85	0.85	dark gray
+193	192.44	0.85	0.85	dark gray
+197	196.15	0.85	0.85	dark gray
+199	198.05	0.85	0.85	dark gray
+201	200.09	0.85	0.85	dark gray
+203	201.86	0.85	0.85	dark gray
+205	203.75	0.85	0.85	dark gray
+207	205.7	0.85	0.85	dark gray
+219	218.77	0.85	0.85	dark gray
+221	220.64	0.85	0.85	dark gray
+227	226.25	0.85	0.85	dark gray
+233	231.86	0.85	0.85	dark gray
+237	235.7	0.85	0.85	dark gray

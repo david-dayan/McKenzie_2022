@@ -1,0 +1,231 @@
+---
+title: "McKenzie Genotype Comparison"
+output:
+  html_document:
+    df_print: paged
+    code_folding: hide
+    toc: true
+    toc_float: true
+    toc_collapsed: false
+---
+
+```{r, message=FALSE, warning = FALSE}
+require(tidyverse)
+require(magrittr)
+require(knitr)
+```
+
+
+# Rationale
+
+Here we compare microsatellite genotype scoring between David Dayan and Dave Jacobsen. Genotypes are scored from the same ABI output files, using the same genemapper alleles/bins. The only difference is who is doing the scoring.
+
+# Data Prep
+
+Let's get the data into R and into a format that allows for comparison.
+
+## Import
+
+First, let's get DPJ's genotypes in.
+
+```{r, message=FALSE, warning = FALSE}
+dj_1 <- readxl::read_xlsx("DavidD_Comp_Pt5-8_Panels1-3.xlsx", sheet =1)
+dj_2 <- readxl::read_xlsx("DavidD_Comp_Pt5-8_Panels1-3.xlsx", sheet =2)
+dj_3 <- readxl::read_xlsx("DavidD_Comp_Pt5-8_Panels1-3.xlsx", sheet =3)
+```
+
+Now DID's
+
+```{r, message=FALSE, warning=FALSE}
+dd <- read_tsv("MCKR_Plate_5-8 Genotypes Table.txt", guess_max = 5000)
+```
+
+## Clean Up
+
+Now le't start making these tables tidy.
+
+Let's have one row for each genotype in one big dataframe.
+
+Start by cleaning up DID
+
+```{r}
+dd %<>%
+  select(sample = `Sample Name`, panel = Panel, marker = Marker, a1_did = `Allele 1`, a2_did = `Allele 2`)
+
+# also made te mistake of leaving an uncalled allele in there a lot, e.g. meant to call as a homozygote, but there's a ? allele still included.
+# let's convert these two homozygotes
+
+dd %<>%
+  mutate(a1_did = case_when(a1_did == "?" & a2_did != "?" ~ a2_did,
+                            TRUE ~ a1_did)) %>%
+  mutate(a2_did = case_when(a2_did == "?" & a1_did != "?" ~ a1_did,
+                            TRUE ~ a2_did))
+
+```
+
+Now DPJ
+```{r}
+# first get rid of unused columns, then pivot longer
+dj_1 %<>%
+  select(-c(`Sample File`, Lane, Well)) 
+
+#theres multiple things we have to resolve here
+# first colnames can't be redundant, and we want each genoype to appear on its own row, not each allele. so here's a strategy to successfully make this dataset long:
+
+# 1 combine columns that start the same
+# pivot longer 
+# split GT column
+
+dj_1 %<>%
+  unite("201", "201...6", "201...7") %>%
+  unite("209", "209...8", "209...9") %>%
+  unite("409", "409...10", "409...11") %>%
+  unite("515", "515...12", "515...13") %>%
+  pivot_longer(cols = -c(`Sample Name`, Panel), names_to = "marker", values_to = "gt") %>%
+  separate(gt, into = c("a1_dj", "a2_dj"))
+
+dj_2 %<>%
+  select(-c(`Sample File`, Lane, Well)) %>% 
+  unite("211", "211...6", "211...7") %>%
+  unite("253b", "253b...8", "253b...9") %>%
+  unite("208", "208...10", "208...11") %>%
+  unite("249", "249...12", "249...13") %>%
+  pivot_longer(cols = -c(`Sample Name`, Panel), names_to = "marker", values_to = "gt") %>%
+  separate(gt, into = c("a1_dj", "a2_dj"))
+
+dj_3 %<>%
+  select(-c(`Sample File`, Lane, Well)) %>% 
+  unite("212", "212...6", "212...7") %>%
+  unite("215", "215...8", "215...9") %>%
+  unite("311", "311...10", "311...11") %>%
+  pivot_longer(cols = -c(`Sample Name`, Panel), names_to = "marker", values_to = "gt") %>%
+  separate(gt, into = c("a1_dj", "a2_dj"))
+
+dj <- bind_rows(dj_1, dj_2, dj_3)
+
+
+```
+
+## Combine
+
+First why do the number of genotypes vary between DD and DJ
+
+```{r}
+miss_inds <- dd$sample[(!(dd$sample %in% dj_3$`Sample Name`))] %>% unique()
+
+#None of DPJ's datasets include controls, and dataset 3 skips 5 individuals. Let's remove these from DD
+
+dd %<>%
+  filter(!(sample %in% miss_inds))
+```
+
+None of DPJ's datasets include controls, and dataset 3 skips 5 individuals from panel 3. Let's only compare scored individuals and remove these.
+
+Now let's combine.
+
+```{r}
+# fix names 
+
+dj %<>%
+  rename(sample = `Sample Name`, panel = Panel)
+
+df <- left_join(dd, select(dj, -panel), by = c("sample" = "sample", "marker" = "marker"))
+```
+
+# Compare
+
+__diploid comparisons__   
+Comparisons can be a little complicated. For example, if DD scored an individual as alleles a and b, but DJ scored as a and c, should we call this a disagreement? 
+Similarly we can just compare DD allele 1 to DJ allele 1 because they are presented in order by genemapper. For example, consider a marker with alleles 1, 2, 3 and 4. If DD scored the individual as 1/3 and DJ scored as 3/4, scoring allele by allele would miss that there is partial agreement. 
+
+Instead we need to sum the number of alleles in common for each genotype. If both alleles agree this is scored as 100% agreement. If only one, then 50%.
+
+__missing__  
+If one scorer calls an individual as missing and the other calls a genotype we count this as a disagreement, but not this will not have as strong effect on parentage assignment. 
+
+```{r}
+df %<>%
+  filter(marker != "OtY3") %>%
+  replace_na(list(a1_did = 0, a2_did = 0)) %>%
+  rowwise() %>%
+  mutate(agree_count = sum(c(a1_did, a2_did) %in% c(a1_dj, a2_dj))) %>%
+  ungroup()
+```
+
+## Results
+
+__Overall Comparison__
+```{r}
+sum(df$agree_count)/(2*nrow(df))
+```
+
+Overall agreement rate is 96%
+
+__Per Marker__
+```{r}
+kable(df %>%
+  group_by(marker) %>%
+  summarise(aggreement = sum(agree_count)/(2*n())), digits = 3)
+
+```
+
+Three markers seem to cause most of the problems: 311 (~15% disagreement), 215 (~10% disagreement), and 212 (6% disagreement). All other markers at least 98% agreement.
+
+__Uncalled__  
+Is this due to true disagreements or one of either DD/DJ being more conservative.
+
+```{r}
+df %<>%
+  rowwise() %>%
+  mutate(did_uncalled = sum("0" %in% c(a1_did, a2_did))) %>%
+  mutate(dj_uncalled = sum("0" %in% c(a1_dj, a2_dj))) %>%
+  mutate(uncall_agree = did_uncalled == dj_uncalled)
+
+```
+
+Who is more conservative?
+```{r}
+kable(df %>%
+        ungroup() %>%
+        group_by(marker) %>%
+        summarise(uncalled_rate_did = mean(did_uncalled),uncalled_rate_dj = mean(dj_uncalled) ), digits = 3)
+```
+
+Let's make this easier to understand: what proportion of disagreements is due to one of calling a genotype when the other doesn't?
+
+```{r}
+kable(df %>%
+  group_by(marker) %>%
+  summarise(disagreement = 1-sum(agree_count)/(2*n()), dis_due_to_uncalled = 1-sum(uncall_agree)/n()) %>%
+  mutate(prop_dis_due_to_uncalled = dis_due_to_uncalled/disagreement), digits = 3)
+```
+
+
+Dave is more conservative, but only at the troubling markers (215, 212 and 311)
+
+# Conclusion
+
+```{r, include = FALSE}
+df %>%
+  ungroup() %>%
+  filter(!(marker %in% c("212", "215", "311"))) %>%
+  summarise(mean_agree = mean(agree_count)/2)
+
+
+df %>%
+  ungroup() %>%
+  filter(!(marker %in% c("212", "215", "311"))) %>%
+  summarise(mean_agreebc_unc = sum(uncall_agree))
+
+```
+
+
+For 8 of the 11 markers in the panel, genotypes scored by DID and DPJ demonstrate few differences (99.0% agreement), with almost all disagreements stemming from one scorer calling genotypes, when the other did not (e.g. score as missing genotype). There was not a systematic bias towards either DID or DPJ calling individuals or not calling individuals at these 8 markers.
+
+For the remaining three markers (311, 215 and 212), disagreements were frequent:  
+311 (~15% disagreement)  
+215 (~10% disagreement)  
+212 (~6% disagreement)  
+
+Nearly all of the disagreement at these markers was due to DPJ not calling a genotype when DID did score a genotype. 
+
