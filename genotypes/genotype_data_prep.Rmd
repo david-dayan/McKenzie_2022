@@ -1,0 +1,557 @@
+---
+title: "Genotype Data Prep"
+output:
+  html_document:
+    df_print: paged
+    code_folding: hide
+    toc: true
+    toc_float: true
+    toc_collapsed: false
+---
+
+```{r, message=FALSE, warning=FALSE}
+require(tidyverse)
+require(magrittr)
+```
+
+# Readme
+
+This is an R notebook. To view a rendered, interactive log of all work done open the .html version in a browser. To run or edit code yourself clone the parent github repository that contains this notebook, and open the R project in R studio. All data is available and paths should work correctly.
+
+A lot of the work in this notebook is writing new files to disk. These code chunks have their eval flag set to false, to not overwrite files when rendering the notebook. All code chunks with an eval=FALSE flag need to be manually run in the console to write files.
+
+# Summary
+
+This notebook achieves several data prep goals for the McKenzie Genetic Pedigree Project:  
+
+(1) Convert raw genemapper output from 2022 and data from previous reports into two cleaned up and consolidated datasets, long and wide, that can be used to prepare data for Cervus and Colony runs, plan re-runs and serve as a long term store of data with good documentation.  
+(2) Plan which genotypes need re-runs.  
+(3) Prepare input datasets for Cervus and Colony.  
+
+# Dataset Definitions
+ 
+__gt_0.1__: no re-runs, no metadata, no previous data, just first round genotyping from 2022, used to plan re-runs. wide format  
+__gt_l_0.1__: no re-runs, no metadata, no previous data, just first round genotyping from 2022, used to plan re-runs. long format  
+
+# Data Import 
+
+### Plates 17-20 Error
+
+__Summary__  
+The sample sheet uploaded to the ABI for the runs covering plates 17-20 was corrupted (see big mistake log, in many places in this repository). In short, panels 2 and 3 for plates 17-20 were output by the ABI as if they were the samples from plates 1-4. We can use a key from the 384 well id and sample names to correct this error. 
+
+ALL datasets with the error are labeled "error." Corrected datasets are not labeled.
+
+__Correction__  
+
+We correct the error by renaming sample names in the genemapper output and saving to a new file (MCKR_Plate_17-20 Genotypes Table.txt). 
+```{r, eval = FALSE}
+gm_raw_17_20_error <- read_tsv("./genotype_data/genemapper_output/MCKR_Plate_17-20_error Genotypes Table.txt", col_types = cols(.default = "c"))
+
+abi_input_error <- read_tsv("../lab_work/genotyping/ABI_input_sheets/input_sheets/012822_did_R2.txt", skip = 4)
+
+abi_input_error %<>%
+  select(Well, error_name = `Sample Name`)
+
+key <- read_tsv("./genotype_data/genemapper_output/plates_17_20_correction_key.txt")
+
+key %<>%
+    filter(!(correct_name %in% c("positive", "negative"))) %>%
+    left_join(abi_input_error)
+  
+
+gm_raw_17_20 <- gm_raw_17_20_error %>%
+  left_join(key, by = c(`Sample Name` = "error_name")) %>%
+  mutate(`Sample Name` = case_when(is.na(correct_name) ~ `Sample Name`,
+                                   TRUE ~ correct_name)) %>%
+  select(-c(correct_name, Well))
+
+
+# let's do some checks
+# each sample should have 12 rows now, except controls which occur multiple times
+gm_raw_17_20 %>%
+  group_by(`Sample Name`) %>%
+  summarise(n = n()) %>%
+  distinct(n, .keep_all = TRUE)
+
+# YES checks out.
+
+# There should also be 376 individuals + 2 controls
+gm_raw_17_20 %>%
+  distinct(`Sample Name`) %>%
+  nrow()
+
+# okay looks good, let's save this file
+write_tsv(gm_raw_17_20, "./genotype_data/genemapper_output/MCKR_Plate_17-20 Genotypes Table.txt")
+
+```
+
+
+# Re-Run Planning
+
+## gt_0.1 dataset
+Let's import the first round of raw data from genemapper, clean up and consolidate into a single dataset (gt_0.1)
+
+```{r, message=FALSE, warning=FALSE}
+#import all raw data
+gm_a <- read_tsv("genotype_data/genemapper_output/MCKR_Plate_1-4 Genotypes Table.txt", col_types = cols(.default = "c"))
+
+gm_b <- read_tsv("genotype_data/genemapper_output/MCKR_Plate_5-8 Genotypes Table.txt", col_types = cols(.default = "c"))
+
+gm_c <- read_tsv("genotype_data/genemapper_output/MCKR_Plate_9-12 Genotypes Table.txt", col_types = cols(.default = "c"))
+
+gm_d <- read_tsv("genotype_data/genemapper_output/MCKR_Plate_13-16 Genotypes Table.txt", col_types = cols(.default = "c"))
+
+gm_e <- read_tsv("genotype_data/genemapper_output/MCKR_Plate_17-20 Genotypes Table.txt", col_types = cols(.default = "c"))
+
+gm_f <- read_tsv("genotype_data/genemapper_output/MCKR_Plate_21-24 Genotypes Table.txt", col_types = cols(.default = "c"))
+
+gm_g <- read_tsv("genotype_data/genemapper_output/MCKR_Plate_25-28 Genotypes Table.txt", col_types = cols(.default = "c"))
+
+# consolidate
+gm_all <- bind_rows(gm_a, gm_b, gm_c, gm_d, gm_e, gm_f, gm_g)
+
+
+# remove controls, blanks, etc 
+gm_all %<>%
+  filter(str_starts(`Sample Name`, "Ots"))
+```
+
+Let's see how many scoring errors I left in the dataset. I'll check for more than two alleles, and unbinned alleles.
+
+```{r}
+# how many scoring errors did I miss (e.g. more than two alleles, unbinned alleles, etc),
+
+gm_all %>%
+  summarise(more_than_two_allele = sum(ADO == "true"), 
+            unbinned_allele1 = sum(`Allele 1` == "?", na.rm = TRUE),
+            unbinned_allele2 = sum(`Allele 2` == "?", na.rm = TRUE))
+
+
+```
+
+Out of 30960 individual genotype calls, I left 3 errors in the dataset, spread across 3 different genotypes (sometimes multiple errors occur at the same genotype). I don't think a 1 in 10k error rate is worth going back and fixing, but we should set these to NA.
+
+```{r}
+#clean up allele display overflow gts, set to NA
+gm_all %<>%
+  mutate(`Allele 1` = case_when(ADO == "true" ~ NA_character_,
+                                TRUE ~ `Allele 1`),
+         `Allele 2` = case_when(ADO == "true" ~ NA_character_,
+                                TRUE ~ `Allele 2`),)
+
+# remove all the individual objects
+rm(gm_a)
+rm(gm_b)
+rm(gm_c)
+rm(gm_d)
+rm(gm_e)
+rm(gm_f)
+rm(gm_g)
+
+```
+
+Now let's prep the gt_0.1 objects
+
+```{r}
+# sorta long (each allele is its own column for each marker/individual)
+gt_l_0.1 <- gm_all %>%
+  select(sample = `Sample Name`, marker = Marker, panel = Panel, a1 = `Allele 1`, a2 = `Allele 2`)
+
+# super long (for conversion only, totally long - each allele/marker/individual is its own row)
+gt_0.1_sl <- gm_all %>%
+  select(sample = `Sample Name`, marker = Marker, panel = Panel, a1 = `Allele 1`, a2 = `Allele 2`) %>%
+  pivot_longer(cols = c(a1, a2), values_to = "allele")
+
+#now convert to wide format (each marker gets two columns, format for colony and cervus)
+gt_0.1 <- gt_0.1_sl %>%
+  pivot_wider(id_cols = c(sample), names_from = c(marker, name), names_prefix = "Ot",  values_from = allele)
+  
+
+```
+
+Nice this looks good. Now let's save the wide format dataset to work with later. 
+```{r, eval = FALSE}
+write_tsv(gt_0.1, "genotype_data/gt_0.1.txt")
+```
+
+## Missingness
+
+Now we'll look at missingness and make decisions on re-runs.
+
+### Missingness Rate
+
+Only individuals with genotypes at >=7 loci were included in the parentage analysis in previous reports, a threshold that was determined based on the non-exclusion probabilities observed across loci for assigning parentage to an individual parent or parent pair.
+
+As a bare minimum, we should try to get every individual over this barrier, and DPJ suggested this is the re-run genotyping approach used to arrive at the final dataset (re-run individuals with <=7 scored genotypes, once).
+
+How many individuals need re-runs using this cutoff, what about stricter cutoffs
+
+```{r}
+missing_count <- gt_l_0.1 %>%
+  filter(marker != 	"OtY3") %>%
+  group_by(sample) %>%
+  summarise(missing_gt = sum(is.na(a1)))
+
+missing_count %>%
+  summarise(n_at_least_7_loci = sum((11-missing_gt) <= 7),
+            n_at_least_8_loci = sum((11-missing_gt) <= 8),
+            n_at_least_9_loci = sum((11-missing_gt) <= 9))
+```
+
+Currently (no re-runs completed yet) 140 (~5%) of individuals would be filtered out of the final dataset. 
+In previous reports, most missing data came from carcass samples. 6,079 of 6,119 reintroduced salmon were genotyped at at least 10 of 11 loci. Let's filter out our carcass samples and see how we are doing.
+
+```{r}
+missing_count_no_carcass <- gt_l_0.1 %>%
+  filter(marker != 	"OtY3") %>%
+  filter(str_detect(sample, "OtsAC")) %>%
+  group_by(sample) %>%
+  summarise(missing_gt = sum(is.na(a1)))
+
+missing_count_no_carcass %>%
+  summarise(n_at_least_7_loci = sum((11-missing_gt) <= 7),
+            n_at_least_8_loci = sum((11-missing_gt) <= 8),
+            n_at_least_9_loci = sum((11-missing_gt) <= 9))
+```
+
+Let's also look at the 116 carcass samples alone
+```{r}
+missing_count_carcass <- gt_l_0.1 %>%
+  filter(marker != 	"OtY3") %>%
+  filter(str_detect(sample, "OtsCC")) %>%
+  group_by(sample) %>%
+  summarise(missing_gt = sum(is.na(a1)))
+
+missing_count_carcass %>%
+  summarise(n_at_least_7_loci = sum((11-missing_gt) <= 7),
+            n_at_least_8_loci = sum((11-missing_gt) <= 8),
+            n_at_least_9_loci = sum((11-missing_gt) <= 9))
+```
+
+This dataset, even ignoring carcass samples, is not nearly as complete as the prior. While the 116 carcass samples are way overrepresented among poorly genotyped samples (represent about 1/3 of failed samples despite only representing about 5% of all samples), the non-carcass samples perform substantially worse than in the final dataset from the previous report. 
+
+Will re-runs solve this problem? If most of the missing data comes from fish that failed at all or nearly all markers, it suggests something went wrong with the DNA extraction, not amplification. Re-runs starting from tissue could transition most of these samples with fewer than 10 scored gts to at least 10. Let's check:
+
+First for non-carcass
+```{r}
+ggplot(data = missing_count_no_carcass)+geom_histogram(aes(x = missing_gt), bins =12)+theme_classic()
+```
+
+No, most individuals that would be excluded (greater than 3 missing genotypes), only failed at a few markers, not all. DNA quantiy/quantity was suficent for at least some of the markers and was likely not the problem. Let's also check how many completely failed (missing at at least 9 of 11 markers)
+
+```{r}
+sum(missing_count_no_carcass$missing_gt>=9)
+```
+
+Only 14 of the 2464 non-carcass samples failed to genotype at 9 or more (of 11) markers, suggesting there was at least some DNA of sufficient quantity/quantity to amplify.
+
+Then for carcass:
+
+```{r}
+ggplot(data = missing_count_carcass)+geom_histogram(aes(x = missing_gt), bins =12)+theme_classic()
+sum(missing_count_carcass$missing_gt>=9)
+```
+
+This suggests we would rarely benefit from extracting new DNA and that re-running an individual at all markers would produce mostly redudant information. Let's look a little more closely before committing to this.
+
+If genotyping failure is not due to DNA quality it must stem from amplification or quantification. Are markers in the same sub-panel (amplified together) for an individual more likely to fail together than markers across panels in the same individual?
+
+```{r}
+# definitely a smarter way to do this, but lets just make 4 comparisons and average them all out
+
+gt_0.1 %>%
+  group_by(sample) %>%
+  summarise(fail_within_253_249 = sum(is.na(Ot253b_a1) & is.na(Ot249_a1)),
+            fail_without_253_311 = sum(is.na(Ot253b_a1) & is.na(Ot311_a1)),
+            fail_within_201_209 =  sum(is.na(Ot201_a1) & is.na(Ot209_a1)),
+            fail_without_201_212 =  sum(is.na(Ot201_a1) & is.na(Ot212_a1)),
+            fail_within_208_211 = sum(is.na(Ot208_a1) & is.na(Ot211_a1)),
+            fail_without_208_515 = sum(is.na(Ot208_a1) & is.na(Ot515_a1))) %>%
+  summarise(fail_together_rate = (sum(fail_within_253_249)+sum(fail_within_201_209)+ sum(fail_within_208_211))/(2580*3), fail_apart_rate = (sum(fail_without_253_311)+sum(fail_without_201_212)+sum(fail_without_208_515))/(2580*3))
+```
+
+About twice as likely to fail together at the level of amplification as across panels. However with a 7% overall failure rate, if things were completely random outside of panels, we'd expect the fail apart rate to be around 0.5 percent. It's 1.8% so we can expect bad DNA contributes at least in part to failed samples.
+
+Does DNA quality/quantity matter? We can use peak height as rough proxy for DNA quality/quantity. Does peak height at non-fail markers predict the number of failed markers?
+
+```{r}
+peak_height_data <- gm_all %>%
+  filter(Marker != "OtY3") %>%
+  group_by(`Sample Name`) %>%
+  mutate(`Height 1` = as.numeric(`Height 1`)) %>%
+  summarise(mean_height = mean(`Height 1`, na.rm = TRUE)) %>%
+  rename(sample = `Sample Name`) %>%
+  left_join(missing_count) %>%
+  mutate(carcass = case_when(str_detect(sample, "OtsCC") ~ "carcass",
+                             TRUE ~ "non_carcass"))
+
+
+summary(glm(missing_gt ~ mean_height, data = peak_height_data, family = "poisson"))
+
+ggplot(data = peak_height_data)+geom_smooth(aes(mean_height, missing_gt, color = carcass))+geom_point(aes(mean_height, missing_gt, color = carcass), alpha = 0.6)+theme_bw()+scale_colour_viridis_d(begin = 0.05, end = 0.8)
+
+```
+
+Wow, what a strong pattern. A clear inflection point of mean height around 3500, where it is likely that missing genotypes will increase. In contrast to the previous finding this suggests that DNA quality/quantity does drive missing data rates. 
+
+How many individuals are below this cutoff?
+
+```{r, message=FALSE}
+gm_all %>%
+  filter(Marker != "OtY3") %>%
+  group_by(`Sample Name`) %>%
+  mutate(`Height 1` = as.numeric(`Height 1`)) %>%
+  summarise(mean_height = mean(`Height 1`, na.rm = TRUE)) %>%
+  rename(sample = `Sample Name`) %>%
+  left_join(missing_count) %>%
+  filter(mean_height < 3000 ) %>%
+  mutate(carcass = case_when(str_detect(sample, "OtsCC") ~ "carcass",
+                             TRUE ~ "non_carcass")) %>%
+  count(carcass)
+
+#what about below the cutoff AND have below the cutoff for inclusion (missing >4 loci)
+gm_all %>%
+  filter(Marker != "OtY3") %>%
+  group_by(`Sample Name`) %>%
+  mutate(`Height 1` = as.numeric(`Height 1`)) %>%
+  summarise(mean_height = mean(`Height 1`, na.rm = TRUE)) %>%
+  rename(sample = `Sample Name`) %>%
+  left_join(missing_count) %>%
+  filter(mean_height < 3000 & missing_gt > 4 ) %>%
+  mutate(carcass = case_when(str_detect(sample, "OtsCC") ~ "carcass",
+                             TRUE ~ "non_carcass")) %>%
+  count(carcass)
+
+
+#what about below the cutoff AND are near the cutoff for inclusion (missing >3 loci)
+gm_all %>%
+  filter(Marker != "OtY3") %>%
+  group_by(`Sample Name`) %>%
+  mutate(`Height 1` = as.numeric(`Height 1`)) %>%
+  summarise(mean_height = mean(`Height 1`, na.rm = TRUE)) %>%
+  rename(sample = `Sample Name`) %>%
+  left_join(missing_count) %>%
+  filter(mean_height < 3000 & missing_gt > 3 ) %>%
+  mutate(carcass = case_when(str_detect(sample, "OtsCC") ~ "carcass",
+                             TRUE ~ "non_carcass")) %>%
+  count(carcass)
+```
+
+
+This calls into question the best approach for re-runs. It suggests that there are some individuals that fail at some markers because of DNA quality.
+
+
+### Conclusions
+
+Some notes from above:  
+
+Only 
+
+(1) __DNA quality likely drives missingness__ While very few samples have such poor DNA quality/quantity that they fail at nearly all markers, there's a clear realtionship between peak height (a proxy for DNA quality/quantity) at markers that did not fail, and number of markers that did fail, with mean peak height of around 3000 as the inflection point. This suggests tht for many re-run samples, using the DNA on hand may not improve genotypes.  
+
+(2) __Few individuals failed at all/most markers__ Most failed genotypes occured in indivudals that other wise genotyped well. This suggests that there was at least some DNA that could be successfully amplified and quantified and that running failed individuals (7 or fewer scored gentoyes) would mostly be wasteful/redundant. 
+
+(3) __Within Panel correlation__  Markers within a panel were more likely to fail together than markers across panels, suggesting that amplification was often the problem.
+
+There's mixed evidence that re-extraction is worth it. Let's be conservative and try to extract DNA again.
+
+Only 140 individuals failed to the point of NEEDING to be re-run to avoid filtering (>=4 missing loci /  7 successfully genotyped loci). So, at a minimum, we need to conduct re-runs at 2 96-well plates. Reducing our threshold for re-runs to >=3 missing loci is very close to two plates worth of individuals (198). If we focus on these individuals, the observation that running the same individuals across all panels would mostly be wasteful does not apply. Among these 198 individuals with 8 or fewer succesfully genotyped loci, most are missing at least a single genotype from each of the three panels.
+
+140	198	552	
+89	143	491	
+
+## Plan
+
+__Plan Summary__  
+
+Taken together, this suggests that the most efficeint use of time/resources for re-runs will involve re-extractions for some individuals, using previously extracted DNA for others, and taking a panel by panel approach, instead of running failed individuals at all markers.
+
+__Re-Extractions__  
+
+About 90 individuals have 7 or fewer successfully scored gentoypes and have a mean peak height at the remaining markers below the inflection point at ~3000 units. Let's round this up to a full plate of extractions (94 samples).
+
+```{r}
+re_ext_inds <- gm_all %>%
+  filter(Marker != "OtY3") %>%
+  group_by(`Sample Name`) %>%
+  mutate(`Height 1` = as.numeric(`Height 1`)) %>%
+  summarise(mean_height = mean(`Height 1`, na.rm = TRUE)) %>%
+  rename(sample = `Sample Name`) %>%
+  left_join(missing_count) %>%
+  filter(mean_height < 2310 & missing_gt > 3 ) %>% #adjusted these number until hit 94 samples
+  mutate(carcass = case_when(str_detect(sample, "OtsCC") ~ "carcass",
+                             TRUE ~ "non_carcass")) %>%
+  pull(sample)
+```
+
+__Panel by Panel__
+
+Should we do the worst single plate (94 individuals), or the worst 4x plate (376) per panel? Let's see what each would accomplish/require.
+
+```{r}
+missing_count_panel <- gt_l_0.1 %>%
+  group_by(sample, panel) %>%
+  summarise(missing_gt = sum(is.na(a1), na.rm = TRUE))
+
+# exact number of individuals with x missing, per panel
+missing_count_panel %>%
+  ungroup() %>%
+  group_by( panel) %>%
+  summarise(miss_4_per_panel =  sum(missing_gt==4),
+            miss_3_per_panel =  sum(missing_gt==3),
+            miss_2_per_panel =  sum(missing_gt==2),
+            miss_1_per_panel=  sum(missing_gt==1))
+  
+# number of missing individuals with x or more missing loci, per panel
+missing_count_panel %>%
+  ungroup() %>%
+  group_by(panel) %>%
+  summarise(miss_al4_per_panel =  sum(missing_gt>=4),
+            miss_al3_per_panel =  sum(missing_gt>=3),
+            miss_al2_per_panel =  sum(missing_gt>=2),
+            miss_al1_per_panel=  sum(missing_gt>=1))
+  #slice_max(order_by = missing_gt, n =376) %>%
+  #count(panel)
+
+```
+
+If we do 376 per panel we can cover almost every missing locus in one set of re-runs if we use 384 plates. There are fewer than 376 individuals with any missing genotypes in panel 3 and the sex marker, and just over 376 in panels 1 and 2.
+
+This seems like overkill. Let's tolerate 2 missing loci overall (at any panel). This leaves only 552 individuals total that need re-runs. What does this look like per panel?
+
+```{r}
+missing_at_least_2_overall <- missing_count %>%
+  filter(missing_gt >=2) %>%
+  pull(sample)
+
+missing_count_panel_filtered <- gt_l_0.1 %>%
+  filter(sample %in% missing_at_least_2_overall) %>%
+  group_by(sample, panel) %>%
+  summarise(missing_gt = sum(is.na(a1), na.rm = TRUE))
+
+missing_count_panel_filtered %>%
+  ungroup() %>%
+  group_by(panel) %>%
+  summarise(miss_al4_per_panel =  sum(missing_gt>=4),
+            miss_al3_per_panel =  sum(missing_gt>=3),
+            miss_al2_per_panel =  sum(missing_gt>=2),
+            miss_al1_per_panel=  sum(missing_gt>=1))
+```
+
+ Let's also examine tolerating 3 missing loci overall (at any panel, at least 8 markers). This leaves only 198 individuals total that need re-runs. What does this look like per panel?
+
+```{r}
+missing_at_least_3_overall <- missing_count %>%
+  filter(missing_gt >=3) %>%
+  pull(sample)
+
+missing_count_panel_filtered3 <- gt_l_0.1 %>%
+  filter(sample %in% missing_at_least_3_overall) %>%
+  group_by(sample, panel) %>%
+  summarise(missing_gt = sum(is.na(a1), na.rm = TRUE))
+
+missing_count_panel_filtered3 %>%
+  ungroup() %>%
+  group_by(panel) %>%
+  summarise(miss_al4_per_panel =  sum(missing_gt>=4),
+            miss_al3_per_panel =  sum(missing_gt>=3),
+            miss_al2_per_panel =  sum(missing_gt>=2),
+            miss_al1_per_panel=  sum(missing_gt>=1))
+```
+
+
+So, if we exclude individuals with 8/9 successfully scored loci from re-runs we substantially reduce the number of re-run work we need to do.
+
+Require 9 scored loci:
+~ 4 96-well plates panel 1
+~ 3 96-well plates panel 2
+~ 2 96-well plates panel 3
+
+Require 8 scored loci:
+~ 2 at each, almost all overlap, suggesting that we could substantially speed up work by using the same plate layout across all panels. If we took this approach, of the 2043 non-sex marker missing genotypes, we would regenotype 1067. This also would "waste" that many resources. Of the 594 panel re-runs from the 198 individuals with 3 or more missing genotypes total, only 114 have no missing data. If we choose to run 96 samples per plate (no negative controls) and use 2 plates, then we are 6 samples short. Let's be sure to pick these 6 that have 8, not 7 total loci genotyped.
+
+
+
+
+
+__Current plan (lab work perspective)__
+
+cherry pick tubes and set up plate layout for 96*2 samples
+Extract DNA
+amplify at panels 1, 2, and 3 
+coload 
+ABI run - (6 96-well abi runs)
+
+Pull ALL individuals with failed sex genotypes, re-extract those that aren't in the panel-1-3 re-runs and regenotype
+
+__Current plan (all work perspective)__
+
+find overlap of failed sex marker inds, and failed panels 1-3 inds
+to save work, make sure the plate layouts overlap for these individuals ()
+
+```{r}
+failed_sex_marker_inds <- gt_l_0.1 %>%
+  filter(marker == "OtY3", is.na(a1)) %>%
+  pull(sample)
+
+sum(failed_sex_marker_inds %in% missing_at_least_3_overall)
+```
+
+__Sample Lists__
+
+Let's put together the sample lists for re-runs
+
+```{r}
+# first eliminate 6 individuals from the missing_at_least 3 overall, but make sure they are ones with 8, not 7 genotypes
+rr_inds <- missing_count %>%
+  slice_max(order_by = missing_gt, n = 192, with_ties = FALSE) %>%
+  pull(sample)
+
+rerun <- as.data.frame(c(rr_inds, failed_sex_marker_inds))
+colnames(rerun) <- "sample"
+
+rerun %<>%
+  distinct(sample) %>%
+  left_join(missing_count) %>%
+  mutate(missing_sex_marker = case_when(sample %in% failed_sex_marker_inds ~ TRUE,
+                                        TRUE ~ FALSE)) %>%
+  arrange(desc(missing_sex_marker), sample)
+
+  
+```
+
+Now let's get the container information and add to this to make plating easier.
+
+```{r, message=FALSE, warning=FALSE}
+prog <- readxl::read_xlsx("../metadata/dayan_metadata/processed_metadata/Dayan_Oct2021_progeny_export.xlsx", sheet = 1, guess_max = 10000 )  
+
+prog %<>%
+  select(sample = `Sample Name`, `Container Name`)
+
+rerun %<>%
+  left_join(prog )
+
+rerun %<>%
+  mutate(plate_group = case_when(sample %in% rr_inds ~ "plate29_30",
+                           TRUE ~ "plate_31"))
+
+# some of these are listed as batch samples in the version of the metadata available here. will manually edit them in the output spreadsheet
+
+#write_tsv(rerun, "../lab_work/genotyping/re_run_planning/two_plate_rerun_list.txt")
+```
+
+
+# Re-Run Incorporation
+
+In this section we will update the gt_0.1 dataset to include info from re-runs.
+
+For now we will skip this to prepare Cervus and Colony input files without re-runs to use to draft and debug our parentage and analysis R notebooks.
+
+```{r}
+# add step to convert straight from gt_0.1 to mckr_gts to skip this for now
+# eventually remove this and actually add re-runs
+```
+
+
+# Prep input dataset
