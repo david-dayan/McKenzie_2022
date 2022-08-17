@@ -1,0 +1,143 @@
+---
+title: "McKenzie Metadata Management"
+output:
+  html_document:
+    df_print: paged
+    code_folding: hide
+    toc: true
+    toc_float: true
+    toc_collapsed: false
+---
+
+```{r, message=FALSE, warning=FALSE}
+require(tidyverse)
+require(knitr)
+require(magrittr)
+require(lubridate)
+require(knitr)
+```
+
+# Rationale
+
+Releases of Chinook salmon on the McKenzie River are from two sources: hatchery outplants and the Cougar Trap. Hatchery outplants are fish that volitionally enter hatcheries and are trucked to release sites above the dam. Cougar trap fish include both NOR and HOR individuals that enter the trap at the base of the Cougar Dam and are either released downstream, into the tailrace or above the dam. Cougar trap metadata is already organized in the notebook in this directory ("cougar_trap_metadata_mgmt.Rmd") and saved to file ("cougar_consolidated_metadata.xslx.). 
+
+There are also two additional groups of samples: precocial males (of unknown provenance), and individuals sampled in spawning ground surveys. 
+
+In this notebook we import and clean up metadata from the hatchery outplants, spawning ground surveys and precocial males, and then combine with metadata from the Cougar Trap into into a single, consolidated dataframe and file to be used for future analyses.
+
+We also compare the metadata to summary outputs from previous reports to ensure it's accuracy and create a log of all unresolved questions and issues.
+
+# Import Datasets
+
+First let's import data. 
+
+```{r, cache = TRUE, message=FALSE, warning=FALSE}
+# previous data
+
+# there are several hundred files called "cougar_adult_master", this is the latest and most accurate version according to Nick (email correspondence Nov 9 2021)
+sard_2016 <- readxl::read_xlsx("../../prev_metadata/10APR2016_Cougar_adult_master.xlsx" , sheet = 1, guess_max = 6593) 
+
+# there are also some data from Vickie zeller here:
+# South Fork McKenzie_Cougar Dam_Master_2007-2017_Data.xlsx
+# we hold off on these for now since they are split across >20 tabs and I think all the most useful information has already been extracted for the Cougar dataset
+
+# Sandra Progeny - Sandra Bohns progeny query Sept 2020
+bohn_2020 <- readxl::read_xlsx("../../prev_metadata/Ots McKenzie Basin progeny export 2020-09-23.xlsx" , sheet = 1, guess_max = 1000) 
+
+# dayan progeny
+progeny_2021 <- readxl::read_xlsx("../../dayan_metadata/processed_metadata/Dayan_Oct2021_progeny_export.xlsx" , sheet = 1, guess_max = 6593) 
+
+# cougar consolidated
+cougar <- readxl::read_xlsx("cougar_consolidated_metadata.xlsx", sheet = 1, guess_max = 2500)
+
+```
+
+# Hatchery Outplants
+## 2007 - 2013: Sard
+
+From 2007 to 2013, we should go with Nick's data for hatchery outplants.
+
+```{r}
+# let's revise sard's data to match the final format
+sard_revised_outplants <- sard_2016 %>%
+  rename(OldLabCode = Sample.Name) %>% #rename to match progeny field for merging
+  filter(out.strat == "hatch")# we're only interested in the metadata from the hatchery outplants for now
+  
+# there are some fields in the progeny outplut not in the sard  
+
+# let's collect the SFGL ids from Sandras data
+
+#sard_revised_outplants$OldLabCode[!(sard_revised_outplants$OldLabCode %in% bohn_2020$OldLabCode)]
+
+# 2 fish don't match, let's fix this prior to merging
+ids_a <- bohn_2020 %>%
+  select(sample_id = `Individual name`, OldLabCode, date = DateSampled) %>%
+  mutate(OldLabCode = case_when(sample_id == "OtsAC13SFMK_4932a" ~ "MRA13_4932.a",
+                               sample_id == "OtsAC13SFMK_4932b" ~ "MRA13_4932.b",
+                               TRUE ~ OldLabCode
+                                 )) # Progeny data entry error (MRA13_4932.a instead of MRA13_4932a )
+
+sard_revised_outplants %<>%
+  left_join(ids_a)
+
+# now let's clean up and make consistent with the cougar dataset
+sard_revised_outplants %<>%
+  select(sample_id, origin = type, geno_sex = sex.gt, pheno_sex = sex.pheno, rkm, date, year, length) %>%
+  mutate(origin = case_when(origin == "H" ~ "HOR",
+                            TRUE ~ origin),
+         geno_sex = case_when(geno_sex == "0" ~ NA_character_,
+                              geno_sex == "RR" ~ NA_character_,
+                              TRUE ~ geno_sex),
+         pheno_sex = case_when(pheno_sex == "UK" ~ NA_character_,
+                               TRUE ~ pheno_sex),
+         date = ymd(date),
+         release = case_when(rkm == 13 ~ "Slide Creek",
+                             rkm == 17.2 ~ "Hard Rock",
+                             rkm == 18.5 ~ "Bridge 1980",
+                             rkm == 29.7 ~ "Homestead",
+                             rkm == 36.4 ~ "Frissel Bridge")) # these are inferred from the Zeller metadata file
+```
+
+## 2014 - 2017: 
+
+Can we use the Bohn progeny query for these? Or do we need to look elsewhere?
+
+Let's go year by year.
+
+__2014__
+Tissue audit (see file sample_summary.docx in this repository) suggests there are 683 hatchery outplants from 2014, but only 491 are possible parents, as 192 were actually release above the Trailbridge dam, not the Cougar Dam.
+```{r}
+bohn_2020 %>%
+  filter(str_starts(`Individual name`, "OtsAC14MCKR")) %>% 
+  count(ReleaseLocation)
+```
+
+The Bohn dataset is missing the release location, so we need to look elsewhere.
+
+```{r}
+progeny_2021 %>%
+  filter(str_starts(`Individual name`, "OtsAC14MCKR"), Marks == "Clipped") %>% 
+  count(RiverLocation) # whoever entered data used the RiverLocation field, not ReleaseLocation
+
+# YES this works
+```
+
+The 2016 technical report states there are 689 total hatchery origin outplants, including Cougar Trap samples. Does this add up?
+
+```{r}
+cougar %>%
+  filter(year == 2014, origin == "NOR") %>%
+  nrow()
+```
+
+
+__2015__  
+Tissue audit (see file sample_summary.docx in this repository) suggests there are 600 hatchery outplants in 2015.
+
+```{r}
+bohn_2020 %>%
+  filter(str_starts(`Individual name`, "OtsAC15MCKR"),) %>% 
+  count(ReleaseLocation)
+```
+
+

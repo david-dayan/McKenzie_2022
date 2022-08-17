@@ -469,7 +469,7 @@ Require 9 scored loci:
 ~ 2 96-well plates panel 3
 
 Require 8 scored loci:
-~ 2 at each, almost all overlap, suggesting that we could substantially speed up work by using the same plate layout across all panels. If we took this approach, of the 2043 non-sex marker missing genotypes, we would regenotype 1067. This also would "waste" that many resources. Of the 594 panel re-runs from the 198 individuals with 3 or more missing genotypes total, only 114 have no missing data. If we choose to run 96 samples per plate (no negative controls) and use 2 plates, then we are 6 samples short. Let's be sure to pick these 6 that have 8, not 7 total loci genotyped.
+~ 2 at each, almost all overlap, suggesting that we could substantially speed up work by using the same plate layout across all panels. If we took this approach, of the 2043 non-sex marker missing genotypes, we would regenotype 1067. This also wouldnt "waste" that many resources. Of the 594 panel re-runs from the 198 individuals with 3 or more missing genotypes total, only 114 have no missing data. If we choose to run 96 samples per plate (no negative controls) and use 2 plates, then we are 6 samples short. Let's be sure to pick these 6 that have 8, not 7 total loci genotyped.
 
 
 

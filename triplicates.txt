@@ -1,0 +1,10 @@
+sample_id	date	origin	release	length	rkm	pheno_sex	geno_sex	recapture	floy1	floy2	Comments	comments	year
+OtsAC15SFMK_0133	2015-07-01T00:00:00Z	NOR	Forest Glen	71	"NA"	M	M	NEW	278	279	"NA"	"NA"	2015
+OtsAC15SFMK_0133	2015-08-17T00:00:00Z	NOR	Hard Rock	71	17.2	M	M	RE	278	279	Tag numbers did not get recorded immediately- best guess	"NA"	2015
+OtsAC15SFMK_0133	2015-09-02T00:00:00Z	NOR	Hard Rock	71	17.2	M	M	RE	278	279	Fish held overnight in post-sort raceways- driver not available-transported on 9/3	"NA"	2015
+OtsAC15SFMK_0171	2015-07-01T00:00:00Z	NOR	Forest Glen	72	"NA"	M	M	NEW	278	279	"NA"	"NA"	2015
+OtsAC15SFMK_0171	2015-08-17T00:00:00Z	NOR	Hard Rock	72	17.2	M	M	RE	278	279	Tag numbers did not get recorded immediately- best guess	"NA"	2015
+OtsAC15SFMK_0171	2015-09-02T00:00:00Z	NOR	Hard Rock	72	17.2	M	M	RE	278	279	Fish held overnight in post-sort raceways- driver not available-transported on 9/3	"NA"	2015
+OtsAC16SFMK_1002	2016-05-10T00:00:00Z	NOR	Forest Glen	810	"NA"	F	F	NEW	1009	1010	"NA"	"NA"	2016
+OtsAC16SFMK_1002	2016-06-27T00:00:00Z	NOR	Hard Rock	810	17.2	F	F	RE	1009	1010	"NA"	"NA"	2016
+OtsAC16SFMK_1002	2016-08-15T00:00:00Z	NOR	Hard Rock	810	17.2	F	F	RE	1009	1010	"NA"	"NA"	2016

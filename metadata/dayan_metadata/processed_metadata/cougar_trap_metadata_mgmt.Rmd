@@ -13,6 +13,8 @@ output:
 require(tidyverse)
 require(knitr)
 require(magrittr)
+require(lubridate)
+require(knitr)
 ```
 
 # Rationale
@@ -23,12 +25,20 @@ While the exact approach taken varies across years, in almost all years fish ent
 
 Here we edit the metadata to reflect this.
 
-## Cougar Trap 2020
+Some variable definitions here:  
+
+Geno_Sex: sex inferred from the OtY3 marker  
+Pheno_Sex: sex inferred in the field by gross assessment  
+Sex: the consolidated sex information used in the final dataset, defers to genotypic sex, if genotypic sex is unavailable, then use phenotypic sex  
+Release: Release site for the given row. Note that recycled fish appear more than once in the dataset.  
+Recapture: using foy tag information, is the first time (new) that the individual was seen at the trap, or a recapture (re) 
+
+## 2020
 
 Let's start with the 2020 dataset.
 
 ```{r}
-cougar_20 <- readxl::read_xlsx("~/FRA/McKenzie_pedigree/mckenzie_2021/metadata/dayan_metadata/raw_metadata/cougar/Cougar Fishtrap 2020.xlsx", sheet = 3)
+cougar_20 <- readxl::read_xlsx("~/FRA/McKenzie_pedigree/mckenzie_2022/metadata/dayan_metadata/raw_metadata/cougar/Cougar Fishtrap 2020_revised.xlsx", sheet = 3)
 
 # first replace blank dates - only listed the date once per day instead of per row...
 cougar_20 %<>%
@@ -44,12 +54,572 @@ cougar_20 %<>%
 #create a dictionary of floy numbers
 c20_floys <- select(cougar_20, sample_id, floy1, floy2) %>%
   drop_na(sample_id) %>% #drop any rows with no genetic #
-  filter(!if_all(c(floy1, floy2), is.na))#drop any rows with no floy tags
+  filter(!if_all(c(floy1, floy2), is.na)) %>% #drop any rows with no floy tags
+  rename(idx = sample_id)
 
-cougar_20 %>%
-  mutate(sample_id = case_when(recapture == "RE" ~ ))
+cougar_20 %<>% #if either floy tag with known sample number is found on a fish, rename it with the appropriate sample ID
+  left_join(select(c20_floys, floy1, idx), by = c("floy1" = "floy1"), na_matches = "never") %>%
+  mutate(sample_id = coalesce(sample_id, idx)) %>%
+  select(-idx) %>%
+  
+  left_join(select(c20_floys, floy2, idx), by = c("floy2" = "floy2"), na_matches = "never") %>%
+  mutate(sample_id = coalesce(sample_id, idx)) %>%
+  select(-idx) %>%
+  
+  left_join(select(c20_floys, floy2, idx), by = c("floy1" = "floy2"), na_matches = "never") %>%
+  mutate(sample_id = coalesce(sample_id, idx)) %>%
+  select(-idx) %>%
+  
+  left_join(select(c20_floys, floy1, idx), by = c("floy2" = "floy1"), na_matches = "never") %>%
+  mutate(sample_id = coalesce(sample_id, idx)) %>% 
+  select(-c(idx, "...2", "Scale #")) %>%
+  mutate(sample_id = paste("OtsAC20SFMK", sample_id, sep = "_")) %>% # convert to SFGL sampleid
+  mutate(sample_id = case_when(sample_id == "OtsAC20SFMK_NA" ~ NA_character_,
+                               TRUE ~ sample_id)) #inds with metaata but no fin clip set to NA
 
+# reformat
+## let's standardize column names and order
+cougar_20 %<>%
+  select(sample_id, date = Date, pheno_sex = Sex, origin = mark, release, recapture, length = Length, floy1, floy2, comment = Comments)
+  
 
-cougar_20$sample_id <- if_else(cougar_20$recapture == "RE", ,)
 ```
 
+## 2010
+
+Same process for 2010 data. 
+
+2010 Cougar trap data comes from Nick's metadata, not direct from USACE, so the formatting is different. Also This is before the "recycling" or LSDR program. 
+
+```{r, message= FALSE, warning = FALSE}
+cougar_10 <- readxl::read_xlsx("~/FRA/McKenzie_pedigree/mckenzie_2022/metadata/prev_metadata/South Fork McKenzie_Cougar Dam_Master_2007-2017_Data.xlsx", sheet = 8)
+
+c10_b <- readxl::read_xlsx("~/FRA/McKenzie_pedigree/mckenzie_2022/metadata/prev_metadata/10APR2016_Cougar_adult_master.xlsx", sheet = 1)
+c10_b %<>%
+  filter(out.strat == "trap", year == 2010) %>% 
+  select(sex.pheno, sex.gt, "Sample.Name")
+
+# a lot of columns and rows we are not interested in 
+# let's only get the metadata (no genotypes), and ignore the hatchery outplants (only trap and haul fish)
+
+cougar_10 %<>%
+  filter(type == "TH") %>% 
+  select(sample_id = "Progeny name",date, origin = mark, release = loc, length, comment = notes, rkm, sard_id = "Sample Name") %>%
+  mutate(origin = case_when(origin == "n" ~ "NOR",
+                            origin == "y" ~ "HOR")) %>% #standardize mark
+  left_join(c10_b, by = c("sard_id" = "Sample.Name")) %>% #get sex info
+  select(-sard_id) %>%
+  rename(pheno_sex = sex.pheno, geno_sex = sex.gt)
+
+rm(c10_b)
+```
+
+
+## 2011
+
+Same situation in 2011 as 2010: before the LSDR and USACE metadata is not individual level. Use Nicks's data
+
+```{r}
+cougar_11 <- readxl::read_xlsx("~/FRA/McKenzie_pedigree/mckenzie_2022/metadata/prev_metadata/South Fork McKenzie_Cougar Dam_Master_2007-2017_Data.xlsx", sheet = 10)
+
+
+c10_b <- readxl::read_xlsx("~/FRA/McKenzie_pedigree/mckenzie_2022/metadata/prev_metadata/10APR2016_Cougar_adult_master.xlsx", sheet = 1)
+c10_b %<>%
+  filter(out.strat == "trap", year == 2011) %>% 
+  select(sex.pheno, sex.gt, "Sample.Name")
+
+
+# a lot of columns and rows we are not interested in 
+# let's only get the metadata (no genotypes), and ignore the hatchery outplants (only trap and haul fish)
+
+cougar_11 %<>%
+  filter(Type == "TH") %>% 
+  select(sample_id = "Progeny name",date, origin = mark, release = loc, length, comment = notes, rkm = "rkm...36", Sample.Name = `Sample Name...3`) %>% 
+  left_join(c10_b) %>%
+  select(-Sample.Name) %>%
+  rename(pheno_sex = sex.pheno, geno_sex = sex.gt)
+
+```
+
+## 2012
+
+Same situation in 2011 and 2012: before the LSDR and USACE metadata is not individual level. Use Nicks's data.
+
+A note here, the metadata formatting is different. Some HOR fish are labeled as "H" under "type," even though they are clearly trap and haul fish from Nick's sample naming convention (A vs TH). Confirmed sample numbers using the "sample_summary" document and the 2016 manuscript
+
+
+```{r}
+cougar_12 <- readxl::read_xlsx("~/FRA/McKenzie_pedigree/mckenzie_2022/metadata/prev_metadata/South Fork McKenzie_Cougar Dam_Master_2007-2017_Data.xlsx", sheet = 11)
+
+c10_b <- readxl::read_xlsx("~/FRA/McKenzie_pedigree/mckenzie_2022/metadata/prev_metadata/10APR2016_Cougar_adult_master.xlsx", sheet = 1)
+c10_b %<>%
+  filter(out.strat == "trap", year == 2012) %>% 
+  select(sex.pheno, sex.gt, "Sample.Name")
+
+# a lot of columns and rows we are not interested in 
+# let's only get the metadata (no genotypes), and ignore the hatchery outplants (only trap and haul fish)
+
+cougar_12 %<>%
+  filter(str_detect(`Sample Name`, "12TH")) %>%
+  select(sample_id = "Progeny Name",date,  origin = mark, release = loc, length, comment = notes, rkm = "rkm...35", Sample.Name = "Sample Name") %>% 
+  left_join(c10_b) %>%
+  select(-Sample.Name) %>%
+  rename(pheno_sex = sex.pheno, geno_sex = sex.gt)
+
+
+
+
+```
+
+## 2013
+
+2013 is the first year of the LSDR. For now we'll take the same "long" data format approach and include each observation of a fish on it's own row (e.g. some fish will be included twice). 
+
+From the start of trap operation until September 1st, any fish captured by the trap was outplanted above the dam. So importing the data (from Nick's dataset) will be straightforward for these
+
+For the LSDR period (after September 1st), no current dataset is organized to facilitate the data structure I'd like to have so I did some manual work in a text editor with some regex. The resulting table (2013_floy_tag_ids.xlsx) unites the SFGL sample names, Bank Labs sample names, USACE metadata and SFGL sample names.
+
+After September 1st, NOR: Any NOR salmon captured at the trap was recycled downstream at Forest Glen. If it was sampled a second time, it was reintroduced above the dam. 
+
+After September 1st, HOR: The HOR samples are more complicated. From September 1st to 12th, 7 HOR salmon were floy tagged and presumably released at Forest Glen (inferred from summary tab of the USACE metadata, and that Sard's metadata has no release site for these fish listed (same as NORs that never returned after LSDR)). After September 12th, 15 HOR salmon have the comment (no-floy AD Hauled up to Hard Rock).
+
+There is some confusion here because the 2014 technical reports and the manuscript list 22 HOR individuals released above the dam, not 15 (table 1 2014 report, table 1 Sard et al 2016). Clearly Nick realized this because not all of the LSDRs returned to be released above the dam later. Only 172 NORs of the 223 that were captured at the trap were released above the dam. I'm concluding that this is just minor oversight in the table captions. In any case it didn't matter much in previous reports because 2013 was not used as a parent year for adult - adult pedigrees. 
+
+However for the adult - juvenile pedigress used in the reports ALL fish were included as potential parents in 2013, including those that definitely were not released above the dam, such as NOR LSDR fish that never returned (e.g. OtsAC13SFMK_4173)
+
+Fortunately this doesn't cause a major issue for us going forward because 2013 is not presented as a parent year in previous reports, so we don't have to revise previously published values such as CRR.
+
+```{r}
+c13_floys_ids <- readxl::read_xlsx("../raw_metadata/cougar/2013_floy_tag_ids.xlsx", sheet = 1)
+c13_floy_meta <- readxl::read_xlsx("../raw_metadata/cougar/Cougar Fishtrap 2013_revised.xlsx", sheet = 2)
+cougar_13 <- readxl::read_xlsx("~/FRA/McKenzie_pedigree/mckenzie_2022/metadata/prev_metadata/South Fork McKenzie_Cougar Dam_Master_2007-2017_Data.xlsx", sheet = 14)
+
+c13_floy_meta %<>%
+  left_join(select(c13_floys_ids, floy1, sfgl_id, banks_id), by = c("floy1" = "floy1"), na_matches = "never") %>%
+  left_join(select(c13_floys_ids, -floy1), by = c("floy1" = "floy2"), na_matches = "never") %>% # note in the code above, there was no need to go through the the complete set of combinations of floy vs id, all matches were made just with these two merges             
+  mutate(sfgl_id = coalesce(sfgl_id.x, sfgl_id.y)) %>%
+  mutate(banks_id = coalesce(banks_id.x, banks_id.y)) %>% 
+  select(-c(ends_with(".x"), ends_with(".y")))
+
+#note that this dataframe (c13_floy meta) includes some rows that individuals in the final dataset, but have no ids, we get their metadata from the Sard metadata, separately
+
+# now lets unite all of this into the same format used so far
+# note that this is the first year that we have phenotypic sex, in all years prior it is not clear if "sex" refers to genotypic sex, phenotypic sex or the consolidated inferred sex (only use pheno sex if geno sex unavailable). 
+
+cougar_13 %<>%
+  select(sample_id = "Progeny Name", date, geno_sex = "Genotypic Sex", pheno_sex = "Phenotypic Sex", origin = "Marked W\\H", release = Site, length, comments = Note, rkm) %>%
+  left_join(c13_floy_meta, by = c("sample_id" = "sfgl_id")) %>% # add floy info
+  rename(recapture = "New/RE") %>%
+  mutate(release = case_when(recapture == "New" & origin == "W" ~ "forest_glen",
+                             recapture == "New" & origin == "AD" & is.na(release) ~ "forest_glen",
+                             TRUE ~ release)) %>% # fix release site for LSDRs to forest Glen, this is inferred from comments and communications from Chad Helms, see also discussion above
+  mutate(date = case_when(is.na(Date) ~ date,
+                          TRUE ~ Date)) # also fix the date column so that the date of the release is correct
+  
+# clean up
+
+cougar_13 %<>%
+  select(-c(Date, "2", "Sex", "Mark(NM or AD)", "Floy #", "banks_id" ))
+  
+rm(c13_floy_meta)
+rm(c13_floys_ids)
+```
+
+## 2014
+
+Like 2013, 2014 also recycled NORs after September 1st, and also recycled HORs in the first few weeks after September 1st, but then transititoned to outplanting ALL HOR above the dam without recycling. 
+
+Metadata for 2014 is organized slightly differently from 2013, so we can't apply the same code. Let's get to work.
+
+```{r}
+c14_floys <- readxl::read_xlsx("../raw_metadata/cougar/Cougar Fishtrap 2014.xlsx", sheet = 2)
+
+c14_floys %<>%
+  separate("Floy #", into = c("floy1", "floy2"), sep = ", ") %>%
+  fill(Date) %>%
+  select(-c("...2", "Sex", "...9"), date_floy = Date) %>%
+  rename(release = "FG/HR")
+
+cougar_14 <- readxl::read_xlsx("~/FRA/McKenzie_pedigree/mckenzie_2022/metadata/prev_metadata/South Fork McKenzie_Cougar Dam_Master_2007-2017_Data.xlsx", sheet = 16)
+
+
+cougar_14 %<>%
+  select(sample_id = "Progeny name", date = Date, geno_sex = "Genotypic Sex", pheno_sex = "Phenotypic Sex", origin = "AdClip", release = OutplantLoc, length = FL, floy1 = FloyNum, comments = OtherCom) %>%
+  mutate(floy1 = as.character(floy1),
+         floy2 = str_extract(comments, "[:digit:]{3}")) %>%
+  left_join(select(c14_floys, -floy2), by = c("floy1" = "floy1"), na_matches = "never") %>%
+  # all fish match on first floy, don't need anything fancy here
+  mutate(date = case_when(is.na(date_floy) ~ date,
+                          TRUE ~ date_floy),
+         release = case_when(is.na(release.y) ~ release.x,
+                          TRUE ~ release.y))# now update the release and date for LSDRs
+
+
+# clean up
+cougar_14 %<>%
+  select(-c(release.x, release.y, date_floy, Comments, "Mark(NM or AD)")) %>%
+  rename( recapture = "New/RE")
+```
+
+## 2015
+
+2015 used a different approach. HOR are mostly transported above the dam (Hard Rock) on first capture. Some are released into the tailrace, but there is no individual level metadata on these fish and they are not included in the dataset. ALL NOR are recycled first to Forest Glen or into the tailrace, then to Hard Rock.
+
+Metadata is also organized differently from all other years. Only floy1 is available in the Sard metadata, but some recaptured fish only have a single floy tag from floy2. So some extra work is required to relate the sample IDs to the floy numbers.
+```{r}
+cougar_15 <- readxl::read_xlsx("~/FRA/McKenzie_pedigree/mckenzie_2022/metadata/prev_metadata/South Fork McKenzie_Cougar Dam_Master_2007-2017_Data.xlsx", sheet = 18)
+
+c15_floys <- readxl::read_xlsx("../raw_metadata/cougar/Cougar Fishtrap 2015_revised.xlsx", sheet = 2)
+# revised to add inferred floy1 from floy2 to fish missing floy1, did this manually because there were so few
+
+c15_floys %<>%
+  fill(Date) %>%
+  select(-c("...2", "Sex", "Floy #"), date_floy = Date) %>% 
+  rename(release_floy = "Release Location-FG/HR", recapture = "New/RE") %>%
+  mutate(floy1 = as.numeric(floy1),
+         floy2 = as.numeric(floy2), # fix the digit padding for floy numbers
+         date_floy = (mdy(date_floy))) 
+
+
+cougar_15 %<>%
+  select(sample_id = "Progeny name", date = Date, geno_sex = "Genotypic Sex", pheno_sex = "Phenotypic Sex", origin = "AdClip", release = OutplantLoc, length = FL, floy1 = FloyNum) %>%
+  mutate(floy1 = as.numeric(floy1),
+         date = ymd(date)) %>% 
+  left_join(c15_floys, by = c("floy1" = "floy1"), na_matches = "never") %>%  
+  # all fish match on first floy, don't need anything fancy here
+  mutate(date = case_when(is.na(date_floy) ~ date,
+                          TRUE ~ date_floy),
+         release = case_when(is.na(release_floy) ~ release,
+                          TRUE ~ release_floy))# now update the release and date for LSDRs
+
+
+# clean up
+cougar_15 %<>%
+  select(-c(release_floy, date_floy, "Mark(NM or AD)")) 
+```
+
+## 2016
+
+2016 was the first simple year. All HORs outplanted. All NORs recycled. Only thing that is complicated is that the downstream release site transitioned from Forest Glen to the tailrace on Septmeber 14th.
+
+The challenge this year is that the progeny metadata has no floy number, so there's no easy way to link the USACE metadata (and therefore the complete recycling/outplant info for some fish). Fortunately, whoever did data entry went in order. If the recaptures are filtered out of the floy dataset, the date, origin and sex match nearly perfectly across the SFGL and USACE (floy) dataset. There were a small number of discrepancies that were easily resolved (e.g. trap mortality given a fin clip and therefore a row in the genetic/SFGL metadata spreadsheet, but not given a floy tag). All decisions are recorded in the "meta_link" tab of the revised 2016 USACE metadata ("cougar fishtrap 2016_revised.xlsx").
+
+
+```{r}
+# is the enough information in common between the metadata to uniquely identify every individual
+
+c16_floys <- readxl::read_xlsx("../raw_metadata/cougar/Cougar Fishtrap 2016_revised.xlsx", sheet = 2)
+c_16_ids <-  readxl::read_xlsx("../raw_metadata/cougar/Cougar Fishtrap 2016_revised.xlsx", sheet = 3)
+
+c_16_ids %<>%
+  select(`Floy #`, sample_id = "Progeny name")
+
+c16_floys %<>%
+  fill(Date) %>%
+  left_join(c_16_ids, na_matches = "never") %>% # nice this gives an sfgl id to all rows in the floy dataset, except the 2 rows (from the same fish) with no fin clip taken
+  select(sample_id, date = Date, release = `Release Location-FG/HR`, origin = `Mark(NM or AD)`, `Floy #`, recapture = "New/RE") # get rid of some of these columns and pull instead from the sfgl metadata (e.g. we want geno and pheno sex from the sfgl metadata)
+
+cougar_16 <- readxl::read_xlsx("~/FRA/McKenzie_pedigree/mckenzie_2022/metadata/prev_metadata/South Fork McKenzie_Cougar Dam_Master_2007-2017_Data.xlsx", sheet = 20)
+
+cougar_16 %<>%
+  select(sample_id = `Progeny name`, geno_sex = `Genotypic Sex`, pheno_sex = `Phenotypic Sex`, length = `Length (cm)`, comments = Notes) %>%
+  left_join(c16_floys, by = c("sample_id" = "sample_id"), na_matches = "never") %>% 
+  separate(`Floy #`, into = c("floy1", "floy2"), sep = ", ")
+
+```
+
+## 2017
+
+2017 release strategy mostly straightforward and similar to 2015 and 2016.  
+
+All NORs are recycled downstream on first capture. Early in the season they are released at Forest Glen, later into the tailrace, but there is no clear cut off date for the transition.
+
+Only 6 HORs arrived at the trap. The first 5 are outplanted at Hard Rock. The final HOR is released into the tailrace.
+
+Metadata is different yet again. This time a "genetic" number is provided in the USACE metadata. This number is used as a suffix for the SFGL id and can link the datasets.
+
+```{r}
+c17_floys <- readxl::read_xlsx("../raw_metadata/cougar/Cougar Fishtrap 2017_revised.xlsx", sheet = 2)
+
+c17_floys %<>% 
+  mutate(suffix = str_pad(`Genetic #`,4, pad = "0"),
+          sample_id = paste("OtsAC17SFMK", suffix, sep = "_")) %>% 
+  separate(`Floy #`, into = c("floy1", "floy2", sep = ", ")) %>%
+  mutate(floy1 = str_pad(floy1, 4, pad = "0")) # USACE did not use consitent convention (same floy might be recorded as 0032, 32 or 032)
+
+  
+c17_ids <- c17_floys %>% 
+  select(sample_id, floy1) %>%
+  filter(!is.na(floy1), sample_id != "OtsAC17SFMK_NA")
+  
+
+
+cougar_17 <-  readxl::read_xlsx("~/FRA/McKenzie_pedigree/mckenzie_2022/metadata/prev_metadata/South Fork McKenzie_Cougar Dam_Master_2007-2017_Data.xlsx", sheet = 21)
+
+cougar_17 %<>%
+  select(sample_id = `Progeny name`, geno_sex = `Genotypic Sex`, pheno_sex = `Phenotypic Sex`, length = `Length (cm)`) %>%
+  left_join(c17_ids) %>% # this only works right because there is only one NA, be careful if the underlying data changes
+  left_join(select(c17_floys, date = Date, recapture = "New/RE", origin = "Mark(NM or AD)", floy1, release = "Release Location-FG/HR/TR"), by = c("floy1" = "floy1") )
+```
+
+## 2018
+
+2018 saw no HORs at the trap. All NORs are recycled UNTIL 8/28, when the Terwilliger fire prevented trap and haul operations. Fish were released back unto the tailrace.
+
+There's almost no additional SFGL metadata to pull in. The only info is the progeny entry which has the incorrect final release site, all other fields have no additional data. However, there is one fish in the SFGL dataset that is missing from the USACE data, a trap mortality. added this fish to the revised USACE dataset and noted in revision log.
+
+```{r}
+c18_floys <- readxl::read_xlsx("../raw_metadata/cougar/Cougar Fishtrap 2018_revised.xlsx", sheet = 2)
+
+c18_floys %<>% 
+  fill(Date) %>%
+  mutate(suffix = str_pad(`Genetic #`,4, pad = "0"),
+          sample_id = paste("OtsAC18SFMK", suffix, sep = "_")) %>% 
+  separate(`Floy #`, into = c("floy1", "floy2", sep = ", ")) %>%
+  mutate(floy1 = str_pad(floy1, 4, pad = "0")) # USACE did not use consistent convention (same floy might be recorded as 0032, 32 or 032)
+
+  
+c18_ids <- c18_floys %>% 
+  select(sample_id, floy1) %>%
+  filter(sample_id != "OtsAC18SFMK_NA")
+  
+cougar_18 <- c18_floys %>%
+  select(-sample_id) %>%
+  left_join(c18_ids) %>% 
+  select(sample_id, date = Date, pheno_sex = Sex, recapture = "New/RE", origin = "Mark(NM or AD)" , length = Length, floy1, floy2, release = "Release Location-FG/HR/TR") 
+```
+
+## 2019
+
+
+2019 release strategy mostly straightforward and similar to 2015 2016 and 2017.  
+
+All NORs are recycled downstream on first capture. Early in the season they are released at Forest Glen, later into the tailrace, but there is no clear cut off date for the transition.
+
+Only 11 HORs arrived at the trap. 8 are outplanted at Hard Rock, others are released into the tailrace without a floy tag or sent to the hatchery as broodstock.
+
+3 NOR individuals were floy tagged, recaptured and released above the dam, but we wont be able to evaluate them as parents because (1) the floy tag is recorded as a recapture, but never was never seen before in the data (731/732), (2) a fin clip was simply not taken, and (3) the floy tag was not possible (floy tag read 1034/1035, but 1033/1034 and 1035/1036 were the combos used before).
+
+2019 metadata situation is the same as 2020. 
+
+```{r}
+c19_floys <- readxl::read_xlsx("../raw_metadata/cougar/Cougar Fishtrap 2019_revised.xlsx", sheet = 2)
+
+c19_floys %<>% 
+  fill(Date) %>%
+  mutate(suffix = str_pad(`Genetic #`,4, pad = "0"),
+          sample_id = paste("OtsAC19SFMK", suffix, sep = "_")) %>% 
+  separate(`Floy #`, into = c("floy1", "floy2", sep = ", ")) %>%
+  mutate(floy1 = str_pad(floy1, 4, pad = "0")) # USACE did not use consistent convention (same floy might be recorded as 0032, 32 or 032)
+
+  
+c19_ids <- c19_floys %>% 
+  select(sample_id, floy1) %>%
+  filter(sample_id != "OtsAC19SFMK_NA")
+  
+cougar_19 <- c19_floys %>%
+  left_join(c19_ids, by = c("floy1" ="floy1"), na_matches = "never") %>% 
+  mutate(sample_id = case_when(sample_id.x == "OtsAC19SFMK_NA" ~ sample_id.y,
+                               TRUE ~ sample_id.x)) %>%
+  select(sample_id, date = Date, pheno_sex = Sex, recapture = "New/RE", origin = "Mark(NM or AD)" , length = Length, floy1, floy2, release = "Release Location-FG/HR/TR") 
+```
+
+## Consolidate Datasets
+
+Here we combine into a single dataset
+
+```{r}
+# variables not always stored int he same class, let's bring a few troublemakers into line
+
+cougar_13 %<>%
+  mutate(floy1 = as.character(floy1),
+         floy2 = as.character(floy2))
+
+cougar_15 %<>%
+  mutate(floy1 = as.character(floy1),
+         floy2 = as.character(floy2))
+
+cougar_19 %<>%
+  mutate(length = as.numeric(length))
+
+cougar_20 %<>%
+  mutate(date = mdy(date))
+  
+
+cougar_meta <- bind_rows(cougar_10, cougar_11, cougar_12, cougar_13, cougar_14, cougar_15, cougar_16, cougar_17, cougar_18, cougar_19, cougar_20)
+```
+
+Now let's get everything into a consistent format. e.g. Origin == NOR or HOR and get rid of "unclipped, NM etc)
+
+```{r}
+cougar_meta %<>%
+  mutate(geno_sex = case_when(geno_sex == "F" ~ "F",
+                              geno_sex == "M" ~ "M",
+                              geno_sex == "0" ~ NA_character_,
+                              geno_sex == "RR" ~ NA_character_,
+                              TRUE ~ geno_sex)) %>% 
+  mutate(pheno_sex = case_when(pheno_sex == "F" ~ "F",
+                              pheno_sex == "M" ~ "M",
+                              pheno_sex == "U" ~ NA_character_,
+                              pheno_sex == "UK" ~ NA_character_,
+                              pheno_sex == "J-M" ~ "J",
+                              pheno_sex == "MJ-J" ~ "J",
+                              TRUE~ pheno_sex)) %>% 
+  mutate(origin = case_when(origin == "HOR" ~ "HOR",
+                            origin == "NOR" ~ "NOR",
+                            origin == "AD" ~ "HOR",
+                            origin == "clipped" ~ "HOR",
+                            origin == "Clipped" ~ "HOR",
+                            origin == "y" ~ "HOR",
+                            origin == "Y" ~ "HOR",
+                            origin == "n" ~ "NOR",
+                            origin == "N" ~ "NOR",
+                            origin == "NM" ~ "NOR",
+                            origin == "Unclipped" ~ "NOR",
+                            origin == "W" ~ "NOR",
+                            TRUE ~ origin)) %>% 
+  mutate(release = case_when(release == "FG" ~ "Forest Glen",
+                             release == "forest_glen" ~ "Forest Glen",
+                             release == "Hard Rock" ~ "Hard Rock",
+                             release == "Hard Rock Campground" ~ "Hard Rock",
+                             release == "Hard Rock CG" ~ "Hard Rock",
+                             release == "HR" ~ "Hard Rock",
+                             release == "RES" ~ "Reservoir",
+                             release == "TR" ~ "Tailrace",
+                             TRUE ~ release)) %>% 
+  mutate(rkm = case_when(release == "Forest Glen" ~ NA_real_,
+                         release == "Hard Rock" ~ 17.2,
+                         release == "Homestead" ~ 29.7,
+                         release == "Reservoir" ~ 0,
+                         release == "Slide Creek" ~ 13.0,
+                          TRUE ~ rkm)) %>%
+  mutate(year = year(date)) %>%
+  mutate(recapture = case_when(recapture == "MORT" ~ "RE",
+                               recapture == "Re-MORT" ~ "RE",
+                               recapture == "Re-Mort" ~ "RE",
+                               recapture == "New" ~ "NEW",
+                               is.na(recapture) & year %in% c(2010, 2011, 2012) ~ "NEW",
+                               is.na(recapture) & year == 2013 ~ "NEW", #checked all NAs are new in 2013
+                               is.na(recapture) & year == 2014 ~ "NEW", #checked all NAs are new in 2014
+                               is.na(recapture) & year == 2015 & release == "HR" ~ "NEW", #a few true NAs in here, only the set of nas releases at HR need revision
+                               TRUE ~ recapture)) %>%  # no remaining NAs need correction
+  mutate(year = case_when(is.na(year) ~ as.numeric(paste0("20",str_extract(sample_id, "(\\d\\d)"))),
+                          TRUE ~ year)) # woops sometimes we know the year but not the date
+  
+```
+
+## QC Check 
+
+While much of this work is already done earlier, there are a couple lingering QC issues detailed here.
+
+Here we compare the consolidated dataset to summary tables from Sard et al 2016 and the daily summaries from the annual USACE metadata, and fix or describe any remaining discrepancies.
+
+```{r}
+cougar_meta %>%
+  distinct(sample_id, .keep_all = TRUE) %>%
+  count(year, origin)
+```
+
+```{r}
+cougar_meta %>%
+  distinct(sample_id, .keep_all = TRUE) %>%
+  count(year, origin, release)
+```
+
+__2010__  
+_Sard_  
+There is a single NOR fish (MR10TH_118) that was missing from some of the input metadata/genetic data files, but used in the final dataset for the 2016 manuscript. I manually added this fish to the file at ~/FRA/McKenzie_pedigree/mckenzie_2022/metadata/prev_metadata/South Fork McKenzie_Cougar Dam_Master_2007-2017_Data.xlsx.
+
+_USACE_  
+One extra HOR in our dataset compared to the USACE summary. Deferred to Sard 2016 dataset.
+
+__2011__  
+_Sard_  
+One fish missing from 2011 NORs. I can't expalin or find it. All files I have whether compiled by Vickie or Nick, including the raw input files used for the 2016 ms and the many versions of the "adult_master" file have 386 total Cougar Trap samples in 2011. I don't think it's a filtering issue either because the 386 includes fish with <7 genotyped loci.
+
+_USACE_  
+Two missing HOR in our dataset compared to the USACE summary. Assumed no fin clip was taken and deferred to Sard 2016 dataset.
+
+
+__2012__  
+_Sard_  
+One fish (MR12TH_140/OtsAC12SFMK_8640) had no origin information, but in some files wsa labeled as NOR. NEVER considered an HOR. Revising to NOR solves the discrepancy between our data and the Sard ms summary table. Note that this doesn't seem right to me, it had no floy tag (e.g. recapture == NEW), so if it was an NOR why did it get released over the dam? Chose to defer to Sard decision for consistency with previous manuscripts.
+
+```{r}
+cougar_meta %<>%
+  mutate(origin = case_when(sample_id == "OtsAC12SFMK_8640" ~ "NOR",
+                            TRUE ~ origin))
+```
+
+_USACE_  
+USACE summary lists 18 HOR and 504 NORs. Most parsimonious explanation for the difference is that no fin clips were taken from a small number of fish (1 HOR and 3 NOR).  
+
+__2013__  
+_Sard_  
+2013 Trap and Haul HORs - It seems like in the first year the LSDR was implemented, a few HORs (7) that arrived after the cutoff date (September 1st) were floy tagged and released downstream at Forest Glen. After September 12th, all 15 HORs were new arrivals (no floy tags), and released above the dam at Hard Rock.   
+
+So, none of the 7 floy-tagged, recycled HORs ever came back and weren't outplanted above the dam. This seems to be reflected in Nick's metadata too: 7 HOR individuals from the trap have no release site listed. Yet all tables in reports and manuscripts describe 22, not 15 HOR trap individuals released above the Dam.   
+
+I concluded that this was a minor oversight and include 15, not 22 HOR potential parents from the trap.
+
+_USACE_  
+Perfect match for HORs. NORs state a total of 225 (including jacks) returned to trap. Our data says 223. Can't seem to figure this one out. Decided to defer to Sard data for consistency.  Most parsimonious explanation for the difference is that no fin clips were taken from a small number of fish (3 NOR).
+
+
+__2014__
+_SFGL_  
+We're out of the Sard 2016 metadata and into the the Vickie/Sandra datasets. There was an issue with sample 120 that we still haven't fixed, let's take care of it now. A fish with only genetic data was entered as number 0, it should be 120.
+
+
+```{r}
+cougar_meta %<>%
+  mutate(sample_id = case_when(sample_id == "OtsAC14SFMK_0" ~ "OtsAC14SFMK_0120",
+                               TRUE ~ sample_id))
+```
+
+_USACE_  
+Perfect match after removing duplicate row.
+
+
+```{r}
+#remove (1) duplicate row
+cougar_meta %<>% distinct()
+```
+
+
+__2015__
+_SFGL_
+There looks to be an data entry error in the SFGL metadata used for 2015 (Vickie's "South Fork McKenzie_Cougar Dam_Master_2007-2017_Data.xlsx"). Individual OtsACSFMK_0171 is recorded with floy tag number 278. Three pieces of information suggest this is a data entry error:  
+(1) convention breaks: all other rows in this file exclude recaptures (there's no corresponding fin clip - so why would there be new tube???), yet this is a repeat floy tag released upstream at hard rock. also there are no NOR hard rock releases recorded in this version of the metadata, hence all the work above.  
+(2) adult survived passage duplicate: if this floy tag number is correct, that would mean a fish survived passage 2 times through the dam, or that a duplicate floy tag was used, and that two fish survived passage throught the dam. 
+(3) Sard metadata: another file shows that the old hmsc_id for this fish MRA15_0171, has a totally different floy number.
+
+I corrected the final output dataset manually (cougar_consolidated_metadata.xlslx) for this one using the sard metadata for fish MRA15_0171
+
+# Output
+
+Saved metadat to file "cougar_consolidated_metadata.xslx"
+
+```{r}
+
+```
+
+
+# Outstanding Issues / Questions
+
+
+
+# Release Strategy Summary
+
+Let's summarise the release strategy
+
+```{r}
+kable(cougar_meta %>%
+        count(year, origin, recapture, release))
+
+```
+
+2010: All NOR sampled at Cougar reintroduced above dam
+2011: All NOR sampled at Cougar reintroduced above dam
+2012: All NOR sampled at Cougar reintroduced above dam
+2013: All NOR sampled at Cougar before September 1st reintroduced above dam, after September 1st LSDR. HOR also LSDR from September 1st to September 12th (n = 7). Thereafter all above (n = 15)
