@@ -52,7 +52,18 @@ cougar <- readxl::read_xlsx("cougar_consolidated_metadata.xlsx", sheet = 1, gues
 
 ```
 
+# Release Sites
+
+rkm == 13 ~ "Slide Creek"
+rkm == 17.2 ~ "Hard Rock"
+rkm == 18.5 ~ "Bridge 1980"
+rkm == 29.7 ~ "Homestead" / Bridge 430
+rkm == 36.4 ~ "Frissel Bridge"
+
 # Hatchery Outplants
+
+Hatchery outplants in this document refers to individuals that were hauled from the hatchery (Leaburg of McKenzie) and outplanted above Cougar Dam onthe South Fork McKenzie. They do not include HOR individuals transported from the Cougar trap, and they do not include individuals from the hatchery outplanted in other locations in the McKenzie basin such as above Trailbridge dam
+
 ## 2007 - 2013: Sard
 
 From 2007 to 2013, we should go with Nick's data for hatchery outplants.
@@ -98,14 +109,15 @@ sard_revised_outplants %<>%
                              rkm == 36.4 ~ "Frissel Bridge")) # these are inferred from the Zeller metadata file
 ```
 
-## 2014 - 2017: 
+## 2014 - 2015: 
 
+2014 - 2015 is where things get messy.
 Can we use the Bohn progeny query for these? Or do we need to look elsewhere?
 
 Let's go year by year.
 
 __2014__
-Tissue audit (see file sample_summary.docx in this repository) suggests there are 683 hatchery outplants from 2014, but only 491 are possible parents, as 192 were actually release above the Trailbridge dam, not the Cougar Dam.
+Tissue audit (see file sample_summary.docx in this repository) suggests there are 561 hatchery outplants from 2014, but only 491 are possible parents, as 70 were actually release above the Trailbridge dam, not the Cougar Dam.
 ```{r}
 bohn_2020 %>%
   filter(str_starts(`Individual name`, "OtsAC14MCKR")) %>% 
@@ -119,25 +131,267 @@ progeny_2021 %>%
   filter(str_starts(`Individual name`, "OtsAC14MCKR"), Marks == "Clipped") %>% 
   count(RiverLocation) # whoever entered data used the RiverLocation field, not ReleaseLocation
 
-# YES this works
+# YES this works, use this one
 ```
 
 The 2016 technical report states there are 689 total hatchery origin outplants, including Cougar Trap samples. Does this add up?
 
 ```{r}
 cougar %>%
-  filter(year == 2014, origin == "NOR") %>%
+  filter(year == 2014, origin == "HOR") %>%
   nrow()
 ```
 
+No. I've dedicated many hours trying to solve this discrepancy at many points in the past year. 
+
 
 __2015__  
-Tissue audit (see file sample_summary.docx in this repository) suggests there are 600 hatchery outplants in 2015.
+Tissue audit (see file sample_summary.docx in this repository) suggests there are 600 hatchery outplants in 2015 (600 hatch outplants + 19 Cougar Trap HOR outplants). This agrees with everything else we have (Vickie raw files, progeny exports, 2016 tech report) except the value Sandra wrote in the proposal (669). Never explained where the extra 50 individuals come from. Especially confusing is that in all other cases Sandra lumped trailbridge releases with cougar releases, so why arent the additional 100 trailbridge outplants included? Like the 2014 issue above spent many hours trying to resolve this one.
 
 ```{r}
-bohn_2020 %>%
-  filter(str_starts(`Individual name`, "OtsAC15MCKR"),) %>% 
-  count(ReleaseLocation)
+
+progeny_2021%>%
+  filter(str_starts(`Individual name`, "OtsAC15MCKR")) %>% 
+  count(RiverLocation)
+
+# yes filtering the 2021 progeny export for hard rock and 430 bridge will get us all we need
 ```
 
+## 2016 and 2017
+2016 was batch sampled so there is no individual level information in progeny. Instead there are 5 batch jars of fin clips from outplants above Cougar, separated by date of release and sometimes by sex. Manually created a spreadsheet of the available information for individual fin clips with applicable metadata and used that for 2016 and 2017.
+
+```{r}
+batch_hatch <- readxl::read_xlsx("Mckenzie_Batch_Sampling.xlsx", sheet = 2)
+```
+
+## Combine and QC
+
+Now let's put these together and reformat to match the Cougar dataset
+
+__2007 - 2013__
+Still a few small schanges to make
+
+```{r}
+sard_revised_outplants %<>%
+  mutate(length = as.numeric(length))
+```
+
+
+__2014__
+2014 data is still incomplete, a little more work below
+```{r}
+hatch_out_2014 <- progeny_2021 %>%
+  filter(str_starts(`Individual name`, "OtsAC14MCKR"), Marks == "Clipped", RiverLocation %in% c("Hardrock Campground", "430 Bridge", "Frissel Crossing"))  %>%
+  select(sample_id = `Sample Name`, pheno_sex = Gender, length = LengthFork1, release = RiverLocation) 
+
+# agh my progeny export grabbed SampleDate and ReleaseDate, but someone uploaded the date to the field DateSampled! progeny truly a nightmare...luckily the Sandra export got DateSampled (Even though it missed the release location field...), together we have everything
+
+hatch_out_2014 %<>%
+  left_join(select(bohn_2020, "Individual name", DateSampled), by = c("sample_id" = "Individual name")) %>%
+  mutate(origin = "HOR") %>% 
+  mutate(release = case_when(release == "Hardrock Campground" ~ "Hard Rock",
+                             release == "Frissel Crossing" ~ "Frissel Bridge",
+                             release == "430 Bridge" ~ "Homestead",
+                             TRUE ~ release),
+         date = lubridate::as_date(DateSampled),
+         year = lubridate::year(date)) %>%
+  select(-DateSampled)
+
+```
+
+__2015__
+2015 missing the same info as 2014, but 2015 requires a slightly different appraoch from 2014
+
+```{r}
+hatch_out_2015 <- progeny_2021 %>%
+  filter(str_starts(`Individual name`, "OtsAC15MCKR"), Marks == "Clipped", RiverLocation %in% c("Hard Rock", "430 Bridge"))  %>%
+  select(sample_id = `Sample Name`, pheno_sex = Gender, length = LengthFork1, release = RiverLocation) 
+
+# agh my progeny export grabbed SampleDate and ReleaseDate, but someone uploaded the date to the field DateSampled! progeny truly a nightmare...luckily the Sandra export got DateSampled (Even though it missed the release location field...), together we have everything
+
+hatch_out_2015 %<>%
+  left_join(select(bohn_2020, "Individual name", DateSampled), by = c("sample_id" = "Individual name")) %>%
+  mutate(origin = "HOR") %>% 
+  mutate(release = case_when(release == "430 Bridge" ~ "Homestead",
+                             TRUE ~ release),
+         date = lubridate::as_date(DateSampled),
+         year = lubridate::year(date)) %>%
+  select(-DateSampled)
+
+```
+
+__2016 and 2017__
+
+```{r}
+batch_hatch %<>%
+  mutate(date = lubridate::as_date(date),
+         origin = "HOR",
+         year = lubridate::year(date))
+```
+
+__Combine__
+
+
+```{r}
+hatch_outplants <- bind_rows(sard_revised_outplants, hatch_out_2014, hatch_out_2015, batch_hatch)
+```
+
+Yay, almost complete.
+
+We still need to add the genotypic sex to individuals freshly genotyped.
+
+# Spawning Ground Surveys
+
+Next let's get the SGS metadata. SGS are mostly used to add potential NOR offspring to the dataset that aren't sampled at the trap, but in a few years SGS were conducted above the dam and need to be included as potential parents.
+
+Also note that there are many more SGS samples than we include as potential offspring. We only include SGS from the confluence of the mainstem to the base of Cougar Dam
+
+SGS are conducted from 2011-2019
+
+## 2011 - 2015
+
+For 2011 to 2015, we can rely on Nicks data. Here from a different source.
+
+```{r}
+sard_sgs_raw <- read_tsv("../../prev_metadata/04JAN2016_below_dam_Cougar_adult_master.txt")
+reaches <- read_tsv("../raw_metadata/spawning_ground_surveys/survey_reaches.txt")
+
+sard_sgs <- sard_sgs_raw %>%
+  left_join(reaches, by = c("loc" = "reach")) %>% 
+  filter(section %in% c("SFMK_above", "SFMK_below")) %>%
+  select(hmsc_id = "Sample Name", geno_sex =sex.gt, pheno_sex = sex.pheno, sgs_reach = loc, date = jul_date, year, sgs_above_below = section) %>%
+  mutate(origin = "NOR") %>% 
+  left_join(select(progeny_2021, sample_id = "Individual name", OldLabCode ), by = c("hmsc_id" = "OldLabCode"))
+
+#clean up
+
+sard_sgs %<>%
+  mutate(sample_id = case_when(is.na(sample_id) ~ hmsc_id,
+                               TRUE ~ sample_id),
+         geno_sex = case_when(geno_sex== "UK" ~ NA_character_,
+                              TRUE ~ geno_sex),
+         pheno_sex = case_when(pheno_sex == "Female" ~ "F",
+                               pheno_sex == "Male" ~ "M",
+                               TRUE ~ pheno_sex),
+         date = lubridate::mdy(date))
+  
+```
+
+2011-2013 do not have SFGL ids and are not in progeny, we will use the original hmsc id as the sample name for these, 2014-2015 will use the SFGL ids
+
+## 2016 - 2019
+
+The progeny fields for 2016-2019 are a total mess. Let's start from the raw metadata, because this is one of the few places where we have it.
+
+__2016__
+```{r}
+sgs_2016 <- read_tsv("../raw_metadata/spawning_ground_surveys/McKenzie_2016_CarcassSurvey.txt")
+
+reaches <- read_tsv("../raw_metadata/spawning_ground_surveys/survey_reaches.txt")
+sgs_2016 %<>%
+  left_join(reaches, by = c("Section" = "reach")) %>%
+  filter(section != "mainstem") %>%
+  select(sample_id = "SFGL ID", sgs_reach = Section, section, date = Date, origin = Adipose, pheno_sex = Sex)
+
+sgs_2016 %<>%
+  mutate(date = mdy(date),
+         year = 2016)
+
+
+```
+
+__2017__
+```{r}
+sgs_2017 <- read_tsv("../raw_metadata/spawning_ground_surveys/Upper Willamette SGS samples_2017.txt")
+
+sgs_2017 %<>%
+  filter(`Stream Name` == "South Fork McKenzie") %>%  # all are from below dam this year
+  select(sample_id = `Individual Name`, date = DateSampled, origin = Marked, pheno_sex = Gender, sgs_reach = IndividualSampleLocation) %>%
+  mutate(section = "SFMK_below")
+
+sgs_2017 %<>%
+  mutate(date = mdy(date),
+         year = 2017)
+```
+
+__2018__
+
+```{r}
+sgs_2018 <- readxl::read_xlsx("../raw_metadata/spawning_ground_surveys/SGS_2018_combined.xlsx", sheet =1 )
+
+
+sgs_2018 %<>%
+  filter(Stream == "South Fork McKenzie") %>%
+  select(sample_id = `Individual Name`, date = DateSampled, origin = Clipped, pheno_sex = Gender, sgs_reach = IndividualSampleLocation) %>%
+  mutate(section = "SFMK_below")
+  
+
+sgs_2018 %<>%
+  mutate(date = ymd(date),
+         year = 2018)
+```
+
+__2019__
+```{r}
+sgs_2019 <- read_tsv("../raw_metadata/spawning_ground_surveys/DRAFT NAI-EAS 2019 Carcass Survey Data 04_NOV_19.xlsx - 2019 Survey Data.tsv")
+
+sgs_2019 %>%
+  filter(River == "McKenzie") %>%
+  count(Reach)# check mckenzie for sfmk, NO SFMK under McKenzie!
+
+sgs_2019 %<>%
+  filter(River == "South Fork McKenzie") %>%
+    select(sample_id = SFGL_ID, date = `Survey Date`, origin = `Clipped (Y/N)`, pheno_sex = `Sex (M/F)`, sgs_reach = Reach) %>%
+  mutate(section = "SFMK_below") 
+
+sgs_2019 %<>%
+  mutate(date = mdy(date),
+         year = 2019)
+```
+
+## Combine
+```{r}
+sard_sgs %<>%
+  rename(section = sgs_above_below)
+  
+sgs_meta <- bind_rows(sard_sgs, sgs_2016, sgs_2017, sgs_2018, sgs_2019)
+```
+
+
+# Precocial Males
+
+also add the precocial males
+
+# Combine
+```{r}
+cougar %<>%
+  mutate(date = ymd_hms(date),
+         date = ymd(date),
+         length = as.numeric(length))
+metadata <- bind_rows(cougar, hatch_outplants, sgs_meta)
+```
+
+
+
+# Final Check
+
+```{r}
+dayan_genotyped <- readxl::read_xlsx("../../../lab_work/genotyping/to_genotype.xlsx", sheet = 2)
+
+prog_micro <- read_tsv("../../../genotypes/genotype_data/old_genotypes/Progeny_microsats.txt")
+
+genotyped <- c(dayan_genotyped$Sample, prog_micro$`Progeny name`, sard_sgs_raw$`Sample Name`)
+
+missing_from_genos <- metadata %>%
+  filter(!(sample_id %in% genotyped))
+```
+
+Most missing are from a change in naming convention: there are 120 2018 cougar trap samples named OtsAC18MCKR_ that should be named OtsAC18SFMK_. These are already genotyped.
+
+All others make sense (e.g. 2019 HORs outplanted from Cougar trap - 2019 is not a parent year, so these aren't included ) except the following:
+
+OtsAC10SFMK_1118 -   
+4 2016 carcass samples: OtsCC16MCKR_1100, OtsCC16MCKR_1161, OtsCC16MCKR_1162, OtsCC16MCKR_1243 -  These got skipped when I didn't understand how to parse the different "bridge to mouth" carcass samples. They should be included. At this point (when this notbeook is being written) first round genotyping is complete and re-runs are plated, but not extracted, amplified or genotyped.
+
+Fortunately there are several spots on the re-run plates where all the tissue was used in the first round genotyping, so no re-runs are possible. I manually edited the final plating files to add these samples to the re-runs.
 
