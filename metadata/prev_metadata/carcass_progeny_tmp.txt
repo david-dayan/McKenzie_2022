@@ -1,0 +1,814 @@
+Pedigree name	Individual name	Gender	DateSampled	FieldID1	IndividualSampleLocation	LengthFork1	LengthTotal	Run	Age	Clipped	Marks	WILDorHAT?	ReleaseDate	ReleaseLocation	OldLabCode	SampleID	Stream	VialNumber	CommentsGeneral	CommentsGeneral2	CommentsGeneral4
+OtsCC16MCKR	OtsCC16MCKR_1001	F	9/22/16			89				Unclipped							Cougar Reservoir to Bridge	1001			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1002	M	9/22/16			73				Unclipped							Bridge to Mouth	1002			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1003	F	9/28/16			81				Unknown							Cougar Reservoir to Bridge	1003	Damaged Adipose/Partial Clip	Only 1 Otolith Taken	Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1004	M	9/29/16			80				Unclipped							Cougar Reservoir to Bridge	1004			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1005	F	9/29/16			83				Unclipped							Cougar Reservoir to Bridge	1005			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1006	M	9/29/16			83				Unclipped							Cougar Reservoir to Bridge	1006		"Broken  otoliths 
+
+Blue floy tag number 5419372131150"	Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1007	F	9/29/16			84				Unclipped							Bridge to Mouth	1007			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1008	F	9/29/16			83				Unclipped							Bridge to Mouth	1008			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1009	F	9/29/16			84				Unclipped							Bridge to Mouth	1009			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1010	M	9/29/16			81				Unclipped							Bridge to Mouth	1010	DNA taken but no otoliths	Could not find otoliths	Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1011	F	9/22/16			88				Unclipped							Cougar Reservoir to Bridge	1011			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1012	F	10/6/16			84				Unclipped							Cougar Reservoir to Bridge	1012	1 otolith taken.		Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1013	F	10/6/16			76				Unclipped							Cougar Reservoir to Bridge	1013			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1015	F	10/6/16			94				Unclipped							Cougar Reservoir to Bridge	1015			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1016	F	10/6/16			78				Unclipped							Bridge to Mouth	1016			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1021	M	9/29/16			102				Unclipped							Cougar Reservoir to Bridge	1021			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1022	F	9/29/16			86				Unclipped							Bridge to Mouth	1022			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1023	F	9/29/16			82				Unclipped							Cougar Reservoir to Bridge	1023			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1024	M	9/29/16			89				Unclipped							Cougar Reservoir to Bridge	1024	No otoliths	No otiliths	Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1025	F	9/29/16			86				Unclipped							Bridge to Mouth	1025			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1026	F	10/11/16			65				Unclipped							NFD 1980 Bridge to Cougar Reservoir	1026			
+OtsCC16MCKR	OtsCC16MCKR_1037	F	10/12/16			69				Unclipped							Cougar Reservoir to Bridge	1037			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1041	M	10/12/16			82				Unclipped							Bridge to Mouth	1041	Scale card missing #15556		Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1044	F	10/11/16			81				Unclipped							Dutch Oven Campground to Rebel Creek	1044			
+OtsCC16MCKR	OtsCC16MCKR_1045	F	10/5/16			79				Unclipped							Dutch Oven Campground to Rebel Creek	1045			
+OtsCC16MCKR	OtsCC16MCKR_1047	F	10/10/16			86				Unclipped							Elk Creek to Frissel Campground	1047		maybe misclip	
+OtsCC16MCKR	OtsCC16MCKR_1048	M	9/29/16			84				Unclipped							Cougar Reservoir to Bridge	1048			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1049	F	9/29/16			75				Unclipped							Cougar Reservoir to Bridge	1049			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1051	M	7/26/16			60				Unclipped							Leaburg Dam to Leaburg Landing	1051			Downstream of Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1052	F	8/16/16			85				Unclipped							Leaburg Dam to Leaburg Landing	1052	Only 1 Otolith Taken		Downstream of Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1053	M	8/16/16			87				Unclipped							Leaburg Dam to Leaburg Landing	1053			Downstream of Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1054	F	9/20/16			79				Unclipped							Spawning Channel	1054			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1055	M	8/29/16			93				Unclipped							Leaburg Dam to Leaburg Landing	1055			Downstream of Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1056	F	9/21/16			94				Unclipped							Forest Glen to Rosboro Bridge	1056			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1057	M	9/21/16			81				Unclipped							Forest Glen to Rosboro Bridge	1057			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1058	M	9/21/16			64				Unclipped							Forest Glen to Rosboro Bridge	1058			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1059	F	9/21/16			87				Unclipped							Forest Glen to Rosboro Bridge	1059			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1061	M	9/21/16			89				Unclipped							Rosboro Bridge to Ben & Kay	1061			
+OtsCC16MCKR	OtsCC16MCKR_1062	M	9/21/16			94				Unclipped							Rosboro Bridge to Ben & Kay	1062			
+OtsCC16MCKR	OtsCC16MCKR_1063	M	9/28/16			72				Unclipped							McKenzie Hatchery to McKenzie Confluence	1063		Cogswell	Downstream of Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1064	M	9/28/16			69				Unclipped							McKenzie Hatchery to McKenzie Confluence	1064		Cogswell	Downstream of Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1065	M	9/28/16			75				Unclipped							Leaburg Dam to Leaburg Landing	1065			Downstream of Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1066	F	9/14/16			73				Unclipped							Forest Glen to Rosboro Bridge	1066			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1067	M	9/19/16			88				Unclipped							Split Pt to Hwy 126 Bridge	1067			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1068	F	9/28/16			86				Unclipped							Leaburg Dam to Leaburg Landing	1068		otolith#1068	Downstream of Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1069	M	9/28/16			89				Unclipped							Leaburg Dam to Leaburg Landing	1069			Downstream of Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1070	M	9/28/16			89				Unclipped							Leaburg Dam to Leaburg Landing	1070			Downstream of Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1071	M	9/14/16			75				Unclipped							McKenzie Hatchery to McKenzie Confluence	1071		Cogswell Cr. Sample	Downstream of Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1072	F	10/5/16			79				Unclipped							McKenzie Bridge to Hamlin	1072			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1073	F	10/5/16			82				Unclipped							McKenzie Bridge to Hamlin	1073			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1074	M	10/5/16			72				Unclipped							McKenzie Bridge to Hamlin	1074			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1075	M	10/5/16			77				Unclipped							McKenzie Bridge to Hamlin	1075			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1076	F	10/5/16			79				Unclipped							McKenzie Bridge to Hamlin	1076		no otoliths, dna only	Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1077	F	9/14/16			90				Unclipped							McKenzie Bridge to Hamlin	1077			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1078	F	10/5/16			76				Unclipped							McKenzie Bridge to Hamlin	1078			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1079	M	10/5/16			60				Unclipped							McKenzie Bridge to Hamlin	1079			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1080	F	10/5/16			70				Unclipped							McKenzie Bridge to Hamlin	1080			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1081	M	9/21/16			43				Unclipped							McKenzie Hatchery to McKenzie Confluence	1081		Cogswell	Downstream of Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1082	F	9/21/16			77				Unclipped							Leaburg Dam to Leaburg Landing	1082			Downstream of Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1083	F	9/21/16			92				Unclipped							Leaburg Dam to Leaburg Landing	1083			Downstream of Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1084	F	10/5/16			82				Unclipped							McKenzie Bridge to Hamlin	1084			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1085	F	9/28/16			76				Unclipped							South Fork McKenzie to Forest Glen	1085			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1086	M	9/28/16			79				Unclipped							South Fork McKenzie to Forest Glen	1086			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1087	M	9/28/16			95				Unclipped							South Fork McKenzie to Forest Glen	1087			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1088	F	9/28/16			89				Unclipped							South Fork McKenzie to Forest Glen	1088			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1089	F	9/28/16			78				Unclipped							South Fork McKenzie to Forest Glen	1089			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1090	F	10/5/16			81				Unclipped							McKenzie Bridge to Hamlin	1090			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1091	M	9/28/16			88				Unclipped							Forest Glen to Rosboro Bridge	1091			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1092	M	10/5/16			84				Unclipped							McKenzie Bridge to Hamlin	1092			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1093	F	10/5/16			77				Unclipped							McKenzie Bridge to Hamlin	1093			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1094	F	10/5/16			85				Unclipped							McKenzie Bridge to Hamlin	1094			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1095	F	10/5/16			73				Unclipped							McKenzie Bridge to Hamlin	1095			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1096	F	10/11/16			81				Unclipped							Avenue Creek to Bridge	1096			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1097	F	10/11/16			79				Unclipped							Avenue Creek to Bridge	1097			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1098	F	10/11/16			68				Unclipped							Avenue Creek to Bridge	1098	Only 1 Otolith Taken		Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1099	M	10/11/16			94				Unclipped							Avenue Creek to Bridge	1099			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1100	F	9/29/16			73				Unclipped							Bridge to Mouth	1100			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1101	F	9/21/16			73				Unclipped							Forest Glen to Rosboro Bridge	1101			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1102	M	9/28/16			79				Unclipped							Braids to Avenue Creek	1102			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1103	F	9/28/16			79				Unclipped							Braids to Avenue Creek	1103			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1104	F	9/28/16			78				Unclipped							Braids to Avenue Creek	1104			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1105	M	9/28/16			88				Unclipped							Braids to Avenue Creek	1105			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1106	F	9/28/16			78				Unclipped							Avenue Creek to Bridge	1106			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1107	F	9/28/16			64				Unclipped							Avenue Creek to Bridge	1107			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1108	F	9/28/16			71				Unclipped							Avenue Creek to Bridge	1108			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1109	F	9/28/16			76				Unclipped							Avenue Creek to Bridge	1109			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1110	F	9/28/16			73				Unclipped							Avenue Creek to Bridge	1110			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1111	F	9/21/16			81				Unclipped							McKenzie Bridge to Hamlin	1111		Scales taken outside of key area	Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1112	M	9/21/16			94				Unclipped							Hamlin to South Fork McKenzie	1112		Manually entered, not in database	Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1113	F	9/28/16			75				Unclipped							Avenue Creek to Bridge	1113			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1114	F	9/28/16			74				Unclipped							Avenue Creek to Bridge	1114			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1115	F	9/28/16			78				Unclipped							Avenue Creek to Bridge	1115			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1116	F	9/28/16			75				Unclipped							Avenue Creek to Bridge	1116			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1117	F	9/28/16			71				Unclipped							Avenue Creek to Bridge	1117			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1118	F	9/28/16			75				Unclipped							Avenue Creek to Bridge	1118			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1119	M	9/28/16			79				Unclipped							Avenue Creek to Bridge	1119			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1120	F	9/28/16			76				Unclipped							Avenue Creek to Bridge	1120			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1121	F	9/28/16			82				Unclipped							Avenue Creek to Bridge	1121			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1122	M	9/28/16			84				Unclipped							Avenue Creek to Bridge	1122			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1123	F	9/28/16			77				Unclipped							Avenue Creek to Bridge	1123			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1124	M	9/28/16			73				Unclipped							Avenue Creek to Bridge	1124			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1125	M	9/28/16			81				Unclipped							Avenue Creek to Bridge	1125			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1126	F	9/28/16			80				Unclipped							Avenue Creek to Bridge	1126			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1127	F	9/28/16			74				Unclipped							Avenue Creek to Bridge	1127			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1128	F	9/28/16			82				Unclipped							Avenue Creek to Bridge	1128			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1129	M	9/28/16			91				Unclipped							Avenue Creek to Bridge	1129			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1130	F	9/28/16			82				Unclipped							Avenue Creek to Bridge	1130			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1131	M	9/21/16			93				Unclipped							Olallie Campground to Belknap	1131	Damaged Adipose/Partial Clip		Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1132	M	9/21/16			95				Unclipped							Olallie Campground to Belknap	1132			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1133	M	9/21/16			93				Unclipped							Belknap to Paradise	1133			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1134	M	9/21/16			92				Unclipped							Paradise to McKenzie Trail	1134			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1135	F	9/28/16			72				Unclipped							Avenue Creek to Bridge	1135			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1136	M	9/28/16			88				Unclipped							Avenue Creek to Bridge	1136			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1137	M	9/28/16			94				Unclipped							Avenue Creek to Bridge	1137			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1138	F	10/11/16			76				Unclipped							Braids to Avenue Creek	1138			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1139	F	10/11/16			78				Unclipped							Road Access to Braids	1139			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1140	F	10/11/16			78				Unclipped							Road Access to Braids	1140			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1141	F	9/22/16			81				Unclipped							Road Access to Braids	1141			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1142	F	9/22/16			83				Unclipped							Road Access to Braids	1142			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1143	F	9/22/16			91				Unclipped							Braids to Avenue Creek	1143			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1144	F	9/22/16			75				Unclipped							Braids to Avenue Creek	1144			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1145	F	9/22/16			86				Unclipped							Avenue Creek to Bridge	1145			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1146	F	9/22/16			81				Unclipped							Avenue Creek to Bridge	1146			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1147	F	9/22/16			78				Unclipped							Avenue Creek to Bridge	1147			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1148	F	9/22/16			77				Unclipped							Avenue Creek to Bridge	1148			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1149	M	9/22/16			64				Unclipped							Avenue Creek to Bridge	1149			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1150	F	9/22/16			78				Unclipped							Avenue Creek to Bridge	1150			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1151	F	9/28/16			78				Unclipped							Olallie Campground to Belknap	1151			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1152	M	9/28/16			89				Unclipped							Olallie Campground to Belknap	1152			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1153	F	9/28/16			73				Unclipped							Belknap to Paradise	1153			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1154	F	9/28/16			79				Unclipped							Belknap to Paradise	1154			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1155	F	9/28/16			81				Unclipped							Paradise to McKenzie Trail	1155			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1156	F	9/28/16			81				Unclipped							Paradise to McKenzie Trail	1156			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1157	F	9/28/16			81				Unclipped							Paradise to McKenzie Trail	1157			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1158	F	9/28/16			77				Unclipped							Paradise to McKenzie Trail	1158			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1159	M	9/28/16			81				Unclipped							Paradise to McKenzie Trail	1159			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1160	M	9/28/16			98				Unclipped							Paradise to McKenzie Trail	1160			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1161	F	9/29/16			81				Unclipped							Bridge to Mouth	1161			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1162	M	9/29/16			79				Unclipped							Bridge to Mouth	1162			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1164	F	10/5/16			85				Unclipped							Paradise to McKenzie Trail	1164			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1165	F	10/5/16			79				Unclipped							Paradise to McKenzie Trail	1165			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1166	F	10/5/16			86				Unclipped							Paradise to McKenzie Trail	1166			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1167	F	10/5/16			85				Unclipped							Paradise to McKenzie Trail	1167			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1168	F	10/11/16			77				Unclipped							Braids to Avenue Creek	1168			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1169	F	10/11/16			83				Unclipped							Avenue Creek to Bridge	1169			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1170	M	10/11/16			90				Unclipped							Braids to Avenue Creek	1170			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1171	M	9/28/16			97				Unclipped							McKenzie Bridge to Hamlin	1171			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1172	M	9/28/16			78				Unclipped							McKenzie Bridge to Hamlin	1172			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1173	F	9/28/16			79				Unclipped							McKenzie Bridge to Hamlin	1173			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1174	M	9/28/16			86				Unclipped							South Fork McKenzie to Forest Glen	1174			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1175	M	9/28/16			91				Unclipped							South Fork McKenzie to Forest Glen	1175			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1176	M	9/28/16			94				Unclipped							South Fork McKenzie to Forest Glen	1176			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1177	M	9/28/16			86				Unclipped							South Fork McKenzie to Forest Glen	1177			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1178	M	9/28/16			92				Unclipped							South Fork McKenzie to Forest Glen	1178			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1179	F	10/11/16			86				Unclipped							Avenue Creek to Bridge	1179			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1180	F	10/11/16			85				Unclipped							Avenue Creek to Bridge	1180			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1181	M	9/27/16			88				Unclipped							Forest Glen to Rosboro Bridge	1181			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1182	F	9/27/16			87				Unclipped							Forest Glen to Rosboro Bridge	1182			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1183	M	9/28/16			89				Unclipped							Forest Glen to Rosboro Bridge	1183			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1184	M	9/28/16			73				Unclipped							Forest Glen to Rosboro Bridge	1184			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1185	M	9/28/16			80				Unclipped							Forest Glen to Rosboro Bridge	1185			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1186	M	9/28/16			87				Unclipped							Forest Glen to Rosboro Bridge	1186			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1187	F	10/11/16			84				Unclipped							Braids to Avenue Creek	1187			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1188	M	10/11/16			83				Unclipped							Avenue Creek to Bridge	1188			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1189	F	10/11/16			74				Unclipped							Avenue Creek to Bridge	1189			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1190	F	10/11/16			79				Unclipped							Avenue Creek to Bridge	1190			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1191	F	10/11/16			76				Unclipped							Avenue Creek to Bridge	1191			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1192	F	10/11/16			81				Unclipped							Avenue Creek to Bridge	1192			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1193	F	10/11/16			78				Unclipped							Avenue Creek to Bridge	1193			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1194	F	10/11/16			76				Unclipped							Avenue Creek to Bridge	1194			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1195	F	10/11/16			81				Unclipped							Avenue Creek to Bridge	1195			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1196	F	10/11/16			80				Unclipped							Avenue Creek to Bridge	1196			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1197	F	10/11/16			78				Unclipped							Avenue Creek to Bridge	1197			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1198	F	10/11/16			82				Unclipped							Avenue Creek to Bridge	1198			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1199	F	10/11/16			83				Unclipped							Avenue Creek to Bridge	1199			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1200	F	10/11/16			81				Unclipped							Avenue Creek to Bridge	1200			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1202	F	10/12/16			82				Unclipped							McKenzie Bridge to Hamlin	1202			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1203	F	10/12/16			83				Unclipped							McKenzie Bridge to Hamlin	1203			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1204	M	10/12/16			66				Unclipped							McKenzie Bridge to Hamlin	1204			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1205	M	10/12/16			74				Unclipped							McKenzie Bridge to Hamlin	1205			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1206	F	10/12/16			88				Unclipped							McKenzie Bridge to Hamlin	1206			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1211	F	10/5/16			86				Unclipped							Olallie Campground to Belknap	1211			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1212	F	10/5/16			77				Unclipped							Olallie Campground to Belknap	1212			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1213	F	10/5/16			78				Unclipped							Olallie Campground to Belknap	1213			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1214	F	10/5/16			84				Unclipped							Olallie Campground to Belknap	1214			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1215	F	10/5/16			81				Unclipped							Olallie Campground to Belknap	1215			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1216	M	10/12/16			72				Unclipped							Rosboro Bridge to Ben & Kay	1216			
+OtsCC16MCKR	OtsCC16MCKR_1217	F	10/5/16			74				Unclipped							Forest Glen to Rosboro Bridge	1217			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1218	M	10/5/16			76				Unclipped							Forest Glen to Rosboro Bridge	1218			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1219	M	10/5/16			75				Unclipped							Rosboro Bridge to Ben & Kay	1219			
+OtsCC16MCKR	OtsCC16MCKR_1220	F	10/5/16			81				Unclipped							Forest Glen to Rosboro Bridge	1220			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1221	M	10/5/16			85				Unclipped							Forest Glen to Rosboro Bridge	1221			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1222	M	10/5/16			102				Unclipped							Forest Glen to Rosboro Bridge	1222			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1231	F	10/10/16			62				Unclipped							Spawning Channel	1231			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1232	F	10/10/16			71				Unclipped							Spawning Channel	1232			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1233	F	10/10/16			77				Unclipped							Spawning Channel	1233			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1234	F	10/10/16			83				Unclipped							Forest Glen to Rosboro Bridge	1234			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1235	F	10/10/16			77				Unclipped							Forest Glen to Rosboro Bridge	1235			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1236	F	10/5/16			81				Unclipped							Olallie Campground to Belknap	1236			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1237	F	10/5/16			71				Unclipped							Belknap to Paradise	1237			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1238	F	10/5/16			81				Unclipped							Belknap to Paradise	1238			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1239	F	10/5/16			78				Unclipped							Paradise to McKenzie Trail	1239			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1240	F	10/5/16			82				Unclipped							Paradise to McKenzie Trail	1240			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1241	M	10/10/16			84				Unclipped							Forest Glen to Rosboro Bridge	1241			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1243	F	10/11/16			72				Unclipped							Bridge to Mouth	1243		Damage to back near dorsal fin	Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1251	M	10/5/16			84				Unclipped							McKenzie Bridge to Hamlin	1251			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1258	M	10/11/16			86				Unclipped							Avenue Creek to Bridge	1258			Upstream of South Fork McKenzie River
+OtsCC16MCKR	OtsCC16MCKR_1302	M	10/6/16			92				Unclipped							Bridge to Mouth	1302			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1303	F	10/12/16			78				Unclipped							Bridge to Mouth	1303			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1314	F	10/6/16			88				Unclipped							Cougar Reservoir to Bridge	1314			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1322	F	10/6/16			84				Clipped							Cougar Reservoir to Bridge	1322			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1324	F	10/6/16			88				Unclipped							Cougar Reservoir to Bridge	1324			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1328	U																1328			
+OtsCC16MCKR	OtsCC16MCKR_1329	F	10/12/16			77				Unclipped							Cougar Reservoir to Bridge	1329		Vial missing #1329	Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1330	U																1330			
+OtsCC16MCKR	OtsCC16MCKR_1332	M	10/6/16			95				Unclipped							Bridge to Mouth	1332			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1335	M	10/6/16			96				Unclipped							Cougar Reservoir to Bridge	1335			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1337	M	10/12/16			86				Unclipped							Cougar Reservoir to Bridge	1337			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1338	U																1338			
+OtsCC16MCKR	OtsCC16MCKR_1339	U																1339			
+OtsCC16MCKR	OtsCC16MCKR_1343	F	10/12/16			73				Unclipped							Cougar Reservoir to Bridge	1343			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1345	M	10/6/16			81				Unclipped							Cougar Reservoir to Bridge	1345			Cougar Dam to Leaburg Dam
+OtsCC16MCKR	OtsCC16MCKR_1346	F	9/29/16			76				Unclipped							Cougar Reservoir to Bridge	1346			Cougar Dam to Leaburg Dam
+OtsCC19MCKR	OtsCC19MCKR_1852	M	7/4/19	1852		74				Y							McKenzie		19P_7900	Raft	
+OtsCC19SFMK	OtsCC19SFMK_1381	F	9/25/19	1381		74				N							South Fork McKenzie		Phase 2 to Phase 1	IK	
+OtsCC19MCKR	OtsCC19MCKR_1360	F	8/1/19	1360		75				Y							McKenzie		EGGS REMOVED	Raft	
+OtsCC19MCKR	OtsCC19MCKR_2128	F	8/5/19	2128		86				Y							McKenzie		USACE Floy Tag #0840, scavenged	Raft	
+OtsCC19MCKR	OtsCC19MCKR_1359	F	8/15/19	1359		78				Y							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_1330	F	9/12/19	1330		85				N							McKenzie		Picture number 384-4114 Camera 0171, estimated start time and water temp	Raft	
+OtsCC19MCKR	OtsCC19MCKR_0472	F	9/14/19	472		78				N							Horse Creek			Walk	
+OtsCC19MCKR	OtsCC19MCKR_1239	M	9/16/19	1239		90				N							McKenzie		only one otolith - other one broke, CWT  19P_7703	Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1240	F	9/16/19	1240		74				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1238	F	9/16/19	1238		77				Y							McKenzie		adclip partial regrowth	Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1236	F	9/16/19	1236		83				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1237	M	9/16/19	1237		92				N							McKenzie		only 3 scales - plated up	Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1231	F	9/16/19	1231		68				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1232	F	9/16/19	1232		78				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1233	M	9/16/19	1233		92				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1234	M	9/16/19	1234		80				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1235	F	9/16/19	1235		82				N							McKenzie		Potential adclip regrowth	Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1390	F	9/16/19	1390		80				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_2123	F	9/16/19	2123		83				N							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_0003	M	9/18/19	3		91				N							McKenzie		ODFW surveying our reach in front of crew	Raft	
+OtsCC19MCKR	OtsCC19MCKR_1321	M	9/20/19	1321		90				N							Horse Creek		DNA from pectoral fin	IK	
+OtsCC19MCKR	OtsCC19MCKR_1322	F	9/20/19	1322		78				N							Horse Creek			IK	
+OtsCC19MCKR	OtsCC19MCKR_1323	F	9/20/19	1323		75				N							Horse Creek			IK	
+OtsCC19MCKR	OtsCC19MCKR_1324	F	9/20/19	1324		75				N							Horse Creek			IK	
+OtsCC19MCKR	OtsCC19MCKR_1325	F	9/20/19	1325		77				UNKNOWN							Horse Creek			IK	
+OtsCC19MCKR	OtsCC19MCKR_1541	F	9/20/19	1541		83				N							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_1542	F	9/20/19	1542		78				Y							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_1543	F	9/20/19	1543		63				Y							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_0007	F	9/20/19	7		84				N							McKenzie		Floy tag 1052 and 1053 DNA from adipose- (USACE FLOY - mrm 31 OCT 19)	Raft	
+OtsCC19MCKR	OtsCC19MCKR_2148	F	9/20/19	2148		73				Y							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_2149	F	9/20/19	2149		86				N							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_2150	M	9/20/19	2150		100				N							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_0005	M	9/20/19	5		76				Y							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_1147	F	9/26/19	1147		75				N							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_1143	M	9/26/19	1143		97				N							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_1148	F	9/26/19	1148		78				Y							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_1146	F	9/28/19	1146		62				N							Horse Creek		pictures 1666 and 1665 camera 0172, scavenged	Ik	
+OtsCC19MCKR	OtsCC19MCKR_1150	M	9/28/19	1150		73				N							Horse Creek		pictures 1666 and 1665 camera 0172	Ik	
+OtsCC19MCKR	OtsCC19MCKR_1149	M	9/28/19	1149		66				N							Horse Creek			Ik	
+OtsCC19MCKR	OtsCC19MCKR_1145	F	9/28/19	1145		82				N							Horse Creek			Ik	
+OtsCC19MCKR	OtsCC19MCKR_1144	F	9/28/19	1144		81				N							Horse Creek			Ik	
+OtsCC19MCKR	OtsCC19MCKR_1571	F	9/28/19	1571		84				N							Horse Creek			Ik	
+OtsCC19MCKR	OtsCC19MCKR_1142	M	9/28/19	1142		84				N							Horse Creek			Ik	
+OtsCC19MCKR	OtsCC19MCKR_1141	M	9/28/19	1141		72				N							Horse Creek		dna from flesh - scavenged, no scales	Ik	
+OtsCC19MCKR	OtsCC19MCKR_1810	F	9/30/19	1810		80				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1544	M	9/30/19	1544		77				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1545	F	9/30/19	1545		68				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1483	F	9/30/19	1483		77				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1724	F	9/30/19	1724		72				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1689	F	9/30/19	1689		70				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1572	F	9/30/19	1572		75				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1573	F	9/30/19	1573		70				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1574	M	9/30/19	1574		75				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1575	F	9/30/19	1575		74				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1576	F	9/30/19	1576		86				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1577	M	9/30/19	1577		81				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1578	M	9/30/19	1578		90				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1579	F	9/30/19	1579		76				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1580	F	9/30/19	1580		72				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1806	F	9/30/19	1806		76				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1807	M	9/30/19	1807		82				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1808	M	9/30/19	1808		87				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1809	F	9/30/19	1809		72				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1801	F	9/30/19	1801		83				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1802	F	9/30/19	1802		90				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1803	F	9/30/19	1803		77				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1804	F	9/30/19	1804		83				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1805	M	9/30/19	1805		86				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1546	F	9/30/19	1546		66				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1548	F	9/30/19	1548		68				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1549	F	9/30/19	1549		77				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1702	F	9/30/19	1702		82				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1703	F	9/30/19	1703		73				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1704	M	9/30/19	1704		94				N							McKenzie		NO SCALES	Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1705	F	9/30/19	1705		79				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1706	F	9/30/19	1706		86				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1707	F	9/30/19	1707		84				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1708	F	9/30/19	1708		70				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1709	F	9/30/19	1709		75				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1681	F	9/30/19	1681		74				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1682	M	9/30/19	1682		78				Y							McKenzie		ONLY TWO SCALES	Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1683	M	9/30/19	1683		79				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1684	F	9/30/19	1684		73				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1685	F	9/30/19	1685		86				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1686	M	9/30/19	1686		89				Y							McKenzie		NO SCALES	Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1687	M	9/30/19	1687		80				N							McKenzie		1 SCALE	Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1688	F	9/30/19	1688		82				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1690	F	9/30/19	1690		89				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_0474	F	9/30/19	474		80				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1550	M	9/30/19	1550		79				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1481	F	9/30/19	1481		78				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1482	F	9/30/19	1482		80				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1484	M	9/30/19	1484		88				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1485	M	9/30/19	1485		79				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1721	F	9/30/19	1721		74				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1722	F	9/30/19	1722		68				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1723	F	9/30/19	1723		80				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1725	F	9/30/19	1725		80				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1726	F	9/30/19	1726		78				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1727	F	9/30/19	1727		82				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1728	F	9/30/19	1728		71				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1729	F	9/30/19	1729		79				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1730	F	9/30/19	1730		82				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1371	M	9/30/19	1371		74				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1372	F	9/30/19	1372		78				N							McKenzie		one otolith	Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1373	M	9/30/19	1373		70				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1374	M	9/30/19	1374		69				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1375	F	9/30/19	1375		60				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1376	F	9/30/19	1376		76				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1377	M	9/30/19	1377		99				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1378	F	9/30/19	1378		78				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1379	F	9/30/19	1379		84				N							McKenzie		couldnâ€™t recover otoliths- (changed OTOLITH Y to N MRM31oct19)	Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1380	M	9/30/19	1380		87				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1421	F	9/30/19	1421		81				N							McKenzie		only one otolith	Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1422	M	9/30/19	1422		80				N							McKenzie		only one otolith	Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1423	F	9/30/19	1423		80				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1424	F	9/30/19	1424		85				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1425	F	9/30/19	1425		87				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1426	F	9/30/19	1426		93				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1427	F	9/30/19	1427		82				N							McKenzie		only one otolith	Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1428	M	9/30/19	1428		83				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1429	M	9/30/19	1429		90				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1121	F	9/30/19	1121		83				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1122	F	9/30/19	1122		80				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1123	F	9/30/19	1123		81				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1124	F	9/30/19	1124		85				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1125	M	9/30/19	1125		90				N							McKenzie		NO SCALES	Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1126	F	9/30/19	1126		79				N							McKenzie		only 3 scales	Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1127	M	9/30/19	1127		82				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1128	F	9/30/19	1128		80				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1129	M	9/30/19	1129		87				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1130	M	9/30/19	1130		94				N							McKenzie		only 3 scales	Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1486	M	9/30/19	1486		101				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_2001	M	9/30/19	2001		70				Y							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_2002	M	9/30/19	2002		92				N							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_2003	F	9/30/19	2003		74				Y							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_2004	M	9/30/19	2004		63				Y							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_2005	F	9/30/19	2005		82				Y							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_2025	F	9/30/19	2025		87				Y							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_2026	F	9/30/19	2026		82				Y							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_2027	M	9/30/19	2027		86				Y							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_2028	F	9/30/19	2028		81				Y							McKenzie		Misclipped adipose fin	Raft	
+OtsCC19MCKR	OtsCC19MCKR_2024	F	9/30/19	2024		85				Y							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_2159	M	9/30/19	2159		67				Y							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_2029	F	9/30/19	2029		76				Y							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_2032	F	9/30/19	2032		77				Y							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_2033	M	9/30/19	2033		87				N							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_2034	F	9/30/19	2034		76				Y							McKenzie		Misclipped adipose fin	Raft	
+OtsCC19MCKR	OtsCC19MCKR_2035	F	9/30/19	2035		78				Y							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_2036	F	9/30/19	2036		89				Y							McKenzie		Misclipped adipose fin	Raft	
+OtsCC19MCKR	OtsCC19MCKR_2037	M	9/30/19	2037		94				N							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_2030	F	9/30/19	2030		69				Y							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_2031	F	9/30/19	2031		79				Y							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_1984	F	9/30/19	1984		77				Y							McKenzie		CWT 19P_7903	Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1989	M	9/30/19	1989		72				Y							McKenzie		CWT 19P_7904	Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1301	F	9/30/19	1301		75				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1302	M	9/30/19	1302		87				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1303	M	9/30/19	1303		88				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1304	M	9/30/19	1304		97				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1305	M	9/30/19	1305		79				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1306	M	9/30/19	1306		69				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1995	F	9/30/19	1995		75				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1983	M	9/30/19	1983		81				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1982	F	9/30/19	1982		77				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1985	F	9/30/19	1985		89				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1993	M	9/30/19	1993		89				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1487	F	10/1/19	1487		75				N							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_1715	M	10/1/19	1715		84				N							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_1716	M	10/1/19	1716		96				N							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_1717	F	10/1/19	1717		82				N							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_1718	M	10/1/19	1718		102				N							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_1719	F	10/1/19	1719		79				Y							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_1488	F	10/1/19	1488		77				N							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_1720	U	10/1/19	1720		72				Y							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_1489	M	10/1/19	1489		75				N							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_1468	M	10/1/19	1468		78				N							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_1469	F	10/1/19	1469		79				N							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_1470	M	10/1/19	1470		72				Y							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_1351	M	10/1/19	1351		84				N							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_1467	M	10/1/19	1467		80				Y							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_0477	F	10/1/19	477		79				N							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_0478	F	10/1/19	478		82				N							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_0479	F	10/1/19	479		78				N							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_0480	M	10/1/19	480		84				N							McKenzie		HEAD SEPARATED ESTMATED FORK LENGTH	Raft	
+OtsCC19MCKR	OtsCC19MCKR_1326	M	10/1/19	1326		87				N							McKenzie		BROKEN OTOLITH	Raft	
+OtsCC19MCKR	OtsCC19MCKR_1327	F	10/1/19	1327		74				N							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_1328	F	10/1/19	1328		82				N							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_1329	F	10/1/19	1329		77				N							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_1710	F	10/1/19	1710		74				N							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_0476	F	10/1/19	476		87				N							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_1370	F	10/1/19	1370		82				N							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_1461	F	10/1/19	1461		81				N							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_1462	M	10/1/19	1462		75				N							McKenzie		DNA FROM PECTORAL FIN	Raft	
+OtsCC19MCKR	OtsCC19MCKR_1463	M	10/1/19	1463		83				N							McKenzie		BROKEN OTOLITHS	Raft	
+OtsCC19MCKR	OtsCC19MCKR_1465	M	10/1/19	1465		77				N							McKenzie		DNA FROM PECTORAL FIN	Raft	
+OtsCC19MCKR	OtsCC19MCKR_1466	F	10/1/19	1466		85				N							McKenzie			Raft	
+OtsCC19SFMK	OtsCC19SFMK_1930	M	10/2/19	1930		74				Y							South Fork McKenzie		Phase 1 to Mouth	Walk	
+OtsCC19SFMK	OtsCC19SFMK_1929	F	10/2/19	1929		78				N							South Fork McKenzie		Phase 1 to Mouth	Walk	
+OtsCC19SFMK	OtsCC19SFMK_1928	F	10/2/19	1928		70				N							South Fork McKenzie		Phase 1 to Mouth	Walk	
+OtsCC19SFMK	OtsCC19SFMK_1927	F	10/2/19	1927		82				N							South Fork McKenzie		Phase 1 to Mouth	Walk	
+OtsCC19SFMK	OtsCC19SFMK_1926	F	10/2/19	1926		71				Y							South Fork McKenzie		Phase 1 to Mouth	Walk	
+OtsCC19SFMK	OtsCC19SFMK_1925	F	10/2/19	1925		82				N							South Fork McKenzie		Phase 1 to Mouth	Walk	
+OtsCC19SFMK	OtsCC19SFMK_1924	M	10/2/19	1924		84				N							South Fork McKenzie		Phase 1 to Mouth	Walk	
+OtsCC19SFMK	OtsCC19SFMK_1923	F	10/2/19	1923		75				Y							South Fork McKenzie		DNA FROM PECTORAL- Phase 1 to Mouth	Walk	
+OtsCC19MCKR	OtsCC19MCKR_1369	F	10/3/19	1369		71				N							Horse Creek			IK	
+OtsCC19MCKR	OtsCC19MCKR_0473	F	10/3/19	473		87				N							Horse Creek			IK	
+OtsCC19MCKR	OtsCC19MCKR_0475	F	10/3/19	475		75				N							Horse Creek			IK	
+OtsCC19MCKR	OtsCC19MCKR_1365	M	10/3/19	1365		83				N							Horse Creek			IK	
+OtsCC19MCKR	OtsCC19MCKR_1366	F	10/3/19	1366		78				N							Horse Creek			IK	
+OtsCC19MCKR	OtsCC19MCKR_1367	F	10/3/19	1367		79				N							Horse Creek			IK	
+OtsCC19MCKR	OtsCC19MCKR_1368	M	10/3/19	1368		77				N							Horse Creek		only one otolith	IK	
+OtsCC19MCKR	OtsCC19MCKR_1361	F	10/3/19	1361		70				N							Horse Creek		Dna taken from pectoral	IK	
+OtsCC19MCKR	OtsCC19MCKR_1362	M	10/3/19	1362		77				N							Horse Creek			IK	
+OtsCC19MCKR	OtsCC19MCKR_1363	F	10/3/19	1363		80				N							Horse Creek			IK	
+OtsCC19MCKR	OtsCC19MCKR_1364	F	10/3/19	1364		79				N							Horse Creek			IK	
+OtsCC19SFMK	OtsCC19SFMK_2171	F	10/9/19	2171		80				N							South Fork McKenzie		Pic 1733 Camera 0170	IK	
+OtsCC19SFMK	OtsCC19SFMK_2172	F	10/9/19	2172		85				N							South Fork McKenzie			IK	
+OtsCC19SFMK	OtsCC19SFMK_2173	M	10/9/19	2173		86				Y							South Fork McKenzie		Blue floy tag 6525	IK	
+OtsCC19SFMK	OtsCC19SFMK_2174	U	10/9/19	2174		72				N							South Fork McKenzie		No Head, scavenged	IK	
+OtsCC19SFMK	OtsCC19SFMK_2175	F	10/9/19	2175		80				N							South Fork McKenzie			IK	
+OtsCC19SFMK	OtsCC19SFMK_2177	F	10/9/19	2177		74				Y							South Fork McKenzie			IK	
+OtsCC19SFMK	OtsCC19SFMK_2178	F	10/9/19	2178		78				N							South Fork McKenzie			IK	
+OtsCC19SFMK	OtsCC19SFMK_2180	F	10/9/19	2180		84				N							South Fork McKenzie			IK	
+OtsCC19SFMK	OtsCC19SFMK_1629	F	10/9/19	1629		87				N							South Fork McKenzie		Blue floy tag 1019	IK	
+OtsCC19SFMK	OtsCC19SFMK_1630	M	10/9/19	1630		86				N							South Fork McKenzie			IK	
+OtsCC19SFMK	OtsCC19SFMK_1628	M	10/9/19	1628		92				N							South Fork McKenzie		Blue Floy tag 1020	IK	
+OtsCC19SFMK	OtsCC19SFMK_2176	F	10/9/19	2176		69				Y							South Fork McKenzie			IK	
+OtsCC19SFMK	OtsCC19SFMK_1625	F	10/9/19	1625		82				Y							South Fork McKenzie		Phase 2 to Phase 1	IK	
+OtsCC19SFMK	OtsCC19SFMK_1626	F	10/9/19	1626		76				Y							South Fork McKenzie		Phase 2 to Phase 1	IK	
+OtsCC19SFMK	OtsCC19SFMK_1627	M	10/9/19	1627		91				N							South Fork McKenzie		BLUE floy tag 0525- Phase 2 to Phase 1	IK	
+OtsCC19MCKR	OtsCC19MCKR_2189	M	10/10/19	2189		72				Y							McKenzie		DNA FROM PECTORAL CAMERA 0166 PIC 1469	Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_2164	M	10/10/19	2164		73				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_2188	F	10/10/19	2188		70				Y							McKenzie		photos 4322-23	Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1942	F	10/10/19	1942		81				N							McKenzie		Photos 384-4288 through 91	Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1943	F	10/10/19	1943		79				N							McKenzie		photos 4292-4300	Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1944	M	10/10/19	1944		77				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1945	F	10/10/19	1945		78				Y							McKenzie		Black eggs photos 4301-4303	Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1946	F	10/10/19	1946		81				N							McKenzie		photos 4304-4307	Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1947	F	10/10/19	1947		86				N							McKenzie		photos 4308-4310	Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1948	F	10/10/19	1948		74				N							McKenzie		photo 4312	Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_2350	F	10/12/19	2350		81				N							Horse Creek			IK	
+OtsCC19MCKR	OtsCC19MCKR_2181	F	10/12/19	2181		81				N							Horse Creek			IK	
+OtsCC19MCKR	OtsCC19MCKR_2182	F	10/12/19	2182		80				N							Horse Creek			IK	
+OtsCC19MCKR	OtsCC19MCKR_2183	F	10/12/19	2183		80				N							Horse Creek		blue floy tag 0512	IK	
+OtsCC19MCKR	OtsCC19MCKR_2184	F	10/12/19	2184		71				N							Horse Creek			IK	
+OtsCC19MCKR	OtsCC19MCKR_2185	F	10/12/19	2185		80				N							Horse Creek			IK	
+OtsCC19MCKR	OtsCC19MCKR_2186	M	10/12/19	2186		90				N							Horse Creek			IK	
+OtsCC19MCKR	OtsCC19MCKR_2187	M	10/12/19	2187		80				N							Horse Creek			IK	
+OtsCC19MCKR	OtsCC19MCKR_2347	F	10/12/19	2347		69				N							Horse Creek			IK	
+OtsCC19MCKR	OtsCC19MCKR_2348	M	10/12/19	2348		73				N							Horse Creek			IK	
+OtsCC19MCKR	OtsCC19MCKR_2349	M	10/12/19	2349		87				N							Horse Creek			IK	
+OtsCC19MCKR	OtsCC19MCKR_1834	M	10/13/19	1834		77				Y							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_1160	F	10/14/19	1160		78				Y							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_1159	F	10/14/19	1159		83				N							McKenzie		ONE OTOLITH	Raft	
+OtsCC19MCKR	OtsCC19MCKR_1990	F	10/14/19	1990		69				Y							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_1981	F	10/14/19	1981		79				Y							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_1996	M	10/14/19	1996		86				N							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_1443	F	10/14/19	1443		70				Y							McKenzie		DNA FROM PECTORAL-WORKED FISH UP AT 1600 FOR UPSTREAM CREW	Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_2068	F	10/14/19	2068		81				N							McKenzie		camera 170, photos 4154-4155	Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1931	M	10/14/19	1931		85				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1932	F	10/14/19	1932		93				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1933	F	10/14/19	1933		71				N							McKenzie		Only 1 otolith	Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1934	F	10/14/19	1934		77				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1935	F	10/14/19	1935		78				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1936	M	10/14/19	1936		90				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_2361	M	10/14/19	2361		85				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_2362	F	10/14/19	2362		83				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_2363	F	10/14/19	2363		87				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_2364	M	10/14/19	2364		83				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_2365	F	10/14/19	2365		68				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_2366	M	10/14/19	2366		77				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_2367	M	10/14/19	2367		93				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_2368	F	10/14/19	2368		79				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_2369	F	10/14/19	2369		88				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_2370	F	10/14/19	2370		69				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_2311	F	10/14/19	2311		67				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_2313	M	10/14/19	2313		88				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1444	F	10/14/19	1444		75				Y							McKenzie		DNA FROM PECTORAL- WORKED FISH UP AT 1600 FOR UPSTREAM CREW	Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1447	M	10/14/19	1447		85				Y							McKenzie		DNA FROM PECTORAL - WORKED FISH UP AT 1600 FOR UPSTREAM CREW	Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1446	M	10/14/19	1446		82				Y							McKenzie		WORKED FISH UP AT 1600 FOR UPSTREAM CREW	Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1449	M	10/14/19	1449		70				N							McKenzie		ONLY 2 SCALES-WORKED FISH UP AT 1600 FOR UPSTREAM CREW	Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1732	M	10/14/19	1732		63				N							McKenzie		WORKED FISH UP AT 1600 FOR UPSTREAM CREW	Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1445	M	10/14/19	1445		91				N							McKenzie		ONE Otolith- BROKEN-WORKED FISH UP AT 1600 FOR UPSTREAM CREW	Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1448	F	10/14/19	1448		81				Y							McKenzie		WORKED FISH UP AT 1600 FOR UPSTREAM CREW	Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1589	M	10/14/19	1589		83				Y							McKenzie		WORKED FISH UP AT 1600 FOR UPSTREAM CREW	Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_2312	M	10/14/19	2312		103				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_2314	M	10/14/19	2314		86				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_2315	F	10/14/19	2315		81				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_2316	F	10/14/19	2316		80				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_2317	M	10/14/19	2317		82				N							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_2318	M	10/14/19	2318		69				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_2320	F	10/14/19	2320		76				Y							McKenzie			Raft & IK	
+OtsCC19MCKR	OtsCC19MCKR_1441	F	10/14/19	1441		77				Y							McKenzie		DNA FROM PECTORAL	Raft	
+OtsCC19MCKR	OtsCC19MCKR_1442	M	10/14/19	1442		77				Y							McKenzie		DNA FROM PECTORAL	Raft	
+OtsCC19MCKR	OtsCC19MCKR_1452	F	10/15/19	1452		89				N							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_1453	F	10/15/19	1453		74				N							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_1454	M	10/15/19	1454		82				N							McKenzie			Raft	
+OtsCC19MCKR	OtsCC19MCKR_1455	M	10/15/19	1455		80				N							McKenzie		DNA FROM PECTORAL-TOO DECAYED FOR OTOLITHS OR SCALES	Raft	
+OtsCC19MCKR	OtsCC19MCKR_1581	M	10/15/19	1581		96				N							McKenzie		Fish worked up at end of reach	Raft	
+OtsCC19MCKR	OtsCC19MCKR_1582	M	10/15/19	1582		84				N							McKenzie		Fish worked up at end of reach	Raft	
+OtsCC19MCKR	OtsCC19MCKR_1583	M	10/15/19	1583		78				Y							McKenzie		Fish worked up at end of reach	Raft	
+OtsCC19MCKR	OtsCC19MCKR_1226	F	10/16/19	1226		83				Y							McKenzie		Scavenged	Walk	
+OtsCC19MCKR	OtsCC19MCKR_1227	F	10/16/19	1227		69				Y							McKenzie			Walk	
+OtsCC19MCKR	OtsCC19MCKR_1228	M	10/16/19	1228		89				N							McKenzie		DECOMPOSED	Walk	
+OtsCC19MCKR	OtsCC19MCKR_1229	F	10/16/19	1229		84				UNKNOWN							McKenzie		Scavenged	Walk	
+OtsCC19MCKR	OtsCC19MCKR_1230	F	10/16/19	1230		78				Y							McKenzie			Walk	
+OtsCC19MCKR	OtsCC19MCKR_2071	F	10/16/19	2071		98				N							McKenzie			Walk	
+OtsCC19MCKR	OtsCC19MCKR_2072	F	10/16/19	2072		80				N							McKenzie			Walk	
+OtsCC19MCKR	OtsCC19MCKR_2073	F	10/16/19	2073		69				Y							McKenzie			Walk	
+OtsCC19MCKR	OtsCC19MCKR_2074	F	10/16/19	2074		88				UNKNOWN							McKenzie		1 OTOLITH	Walk	
+OtsCC19MCKR	OtsCC19MCKR_2075	F	10/16/19	2075		78				N							McKenzie			Walk	
+OtsCC19MCKR	OtsCC19MCKR_2076	M	10/16/19	2076		80				Y							McKenzie		Scavenged	Walk	
+OtsCC19MCKR	OtsCC19MCKR_2077	U	10/16/19	2077		89				N							McKenzie		Scavenged	Walk	
+OtsCC19MCKR	OtsCC19MCKR_2078	F	10/16/19	2078		89				UNKNOWN							McKenzie		Scavenged	Walk	
+OtsCC19MCKR	OtsCC19MCKR_2079	F	10/16/19	2079		79				Y							McKenzie		Scavenged-NO ADIPOSE	Walk	
+OtsCC19SFMK	OtsCC19SFMK_2080	F	10/16/19	2080		75				N							South Fork McKenzie		Phase 1 to Mouth	Walk	
+OtsCC19SFMK	OtsCC19SFMK_2046	F	10/16/19	2046		81				Y							South Fork McKenzie		Phase 1 to Mouth	Walk	
+OtsCC19SFMK	OtsCC19SFMK_2045	M	10/16/19	2045		90				N							South Fork McKenzie		Phase 1 to Mouth	Walk	
+OtsCC19MCKR	OtsCC19MCKR_0471	M	9/14/19														Horse Creek		No Head, scavenged	Walk	
+OtsCC17MCKR	OtsCC17MCKR_0221	M	7/25/17	221	Leaburg Dam to Leaburg Landing	760		Spring	Carcass								McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0222	F	7/25/17	222	Leaburg Landing to Deerhorn	790		Spring	Carcass								McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0223	F	9/6/17	223	Leaburg Dam to Leaburg Landing	850		Spring	Carcass								McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0224	M	9/11/17	224	Leaburg Landing to Deerhorn	700		Spring	Carcass								McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0225	F	9/25/17	225	Cougar Dam to Bridge	820		Spring	Carcass								South Fork McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0226	M	8/14/17	226	Leaburg Dam to Leaburg Landing	890		Spring	Carcass								McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0228	M	9/25/17	228	Cougar Dam to Bridge	850		Spring	Carcass								South Fork McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0229	F	9/25/17	229	Cougar Dam to Bridge	810		Spring	Carcass								South Fork McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0230	M	9/25/17	230	Cougar Dam to Bridge	850		Spring	Carcass								South Fork McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0231	F	7/31/17	231	Deerhorn to Hendricks	790		Spring	Carcass								McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0232	F	8/28/17	232	Deerhorn to Hendricks	770		Spring	Carcass								McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0233	M	9/25/17	233	Bridge to Mouth	980		Spring	Carcass								South Fork McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0234	M	9/25/17	234	Bridge to Mouth	540		Spring	Carcass								South Fork McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0235	M	9/25/17	235	Bridge to Mouth	990		Spring	Carcass								South Fork McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0236	M	10/12/17	236	Cougar Dam to Bridge	600		Spring	Carcass								South Fork McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0237	F	9/19/17	237	Forest Glen to Rosboro Bridge			Spring	Carcass								McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0241	M	9/25/17	241	Cougar Dam to Bridge	820		Spring	Carcass								South Fork McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0242	F	10/12/17	242	Cougar Dam to Bridge	710		Spring	Carcass								South Fork McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0245	M	10/3/17	245	Trail Bridge to Separation Creek	810		Spring	Carcass								Horse Creek				
+OtsCC17MCKR	OtsCC17MCKR_0246	F	10/3/17	246	Trail Bridge to Separation Creek	830		Spring	Carcass								Horse Creek				
+OtsCC17MCKR	OtsCC17MCKR_0251	F	8/22/17	251	Leaburg Landing to Deerhorn	710		Spring	Carcass								McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0252	M	8/22/17	252	Deerhorn to Hendricks	620		Spring	Carcass								McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0253	F	9/14/17	253	Rosboro Bridge to Ben & Kay	730		Spring	Carcass								McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0259	F	10/17/17	259	Highway  to fork	770		Spring	Carcass								Gate Creek				
+OtsCC17MCKR	OtsCC17MCKR_0261	M	9/19/17	261	Forest Glen to Rosboro Bridge			Spring	Carcass								McKenzie		No head		
+OtsCC17MCKR	OtsCC17MCKR_0262	F	9/26/17	262	Bridge to Mouth	820		Spring	Carcass								Horse Creek				
+OtsCC17MCKR	OtsCC17MCKR_0263	M	9/26/17	263	Bridge to Mouth	720		Spring	Carcass								Horse Creek				
+OtsCC17MCKR	OtsCC17MCKR_0264	M	9/26/17	264	Bridge to Mouth	1030		Spring	Carcass								Horse Creek				
+OtsCC17MCKR	OtsCC17MCKR_0265	M	9/26/17	265	Bridge to Mouth	840		Spring	Carcass								Horse Creek				
+OtsCC17MCKR	OtsCC17MCKR_0271	F	9/26/17	271	Braids to Avenue Creek	770		Spring	Carcass								Horse Creek				
+OtsCC17MCKR	OtsCC17MCKR_0272	F	9/26/17	272	Avenue Creek to Bridge	800		Spring	Carcass								Horse Creek				
+OtsCC17MCKR	OtsCC17MCKR_0273	M	9/26/17	273	Avenue Creek to Bridge	830		Spring	Carcass								Horse Creek				
+OtsCC17MCKR	OtsCC17MCKR_0274	F	9/26/17	274	Avenue Creek to Bridge	760		Spring	Carcass								Horse Creek				
+OtsCC17MCKR	OtsCC17MCKR_0275	F	9/26/17	275	Avenue Creek to Bridge	770		Spring	Carcass								Horse Creek				
+OtsCC17MCKR	OtsCC17MCKR_0276	F	9/26/17	276	Avenue Creek to Bridge	810		Spring	Carcass								Horse Creek				
+OtsCC17MCKR	OtsCC17MCKR_0277	M	9/26/17	277	Avenue Creek to Bridge	1040		Spring	Carcass								Horse Creek				
+OtsCC17MCKR	OtsCC17MCKR_0278	M	9/26/17	278	Avenue Creek to Bridge	990		Spring	Carcass								Horse Creek				
+OtsCC17MCKR	OtsCC17MCKR_0279	F	9/26/17	279	Avenue Creek to Bridge	840		Spring	Carcass								Horse Creek				
+OtsCC17MCKR	OtsCC17MCKR_0280	M	9/26/17	280	Avenue Creek to Bridge	1000		Spring	Carcass								Horse Creek				
+OtsCC17MCKR	OtsCC17MCKR_0281	F	10/1/17	281	Spawning Channel	860		Spring	Carcass								McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0284	F	10/1/17	284	Spawning Channel	870		Spring	Carcass								McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0290	F	10/3/17	290	Avenue Creek to Bridge	690		Spring	Carcass								Horse Creek				
+OtsCC17MCKR	OtsCC17MCKR_0291	F	10/3/17	291	Avenue Creek to Bridge	790		Spring	Carcass								Horse Creek				
+OtsCC17MCKR	OtsCC17MCKR_0292	M	10/3/17	292	Avenue Creek to Bridge	730		Spring	Carcass								Horse Creek				
+OtsCC17MCKR	OtsCC17MCKR_0293	F	10/3/17	293	Avenue Creek to Bridge	720		Spring	Carcass								Horse Creek				
+OtsCC17MCKR	OtsCC17MCKR_0294	F	10/3/17	294	Avenue Creek to Bridge	830		Spring	Carcass								Horse Creek				
+OtsCC17MCKR	OtsCC17MCKR_0311	F	9/19/17	311	Olallie Campground to Belknap	840		Spring	Carcass								McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0312	M	9/19/17	312	Paradise to McKenzie Trail	680		Spring	Carcass								McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0323	F	10/9/17	323	McKenzie Bridge to Hamlin	710		Spring	Carcass								McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0324	F	10/9/17	324	McKenzie Bridge to Hamlin	750		Spring	Carcass								McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0326	F	10/11/17	326	Forest Glen to Rosboro Bridge	740		Spring	Carcass								McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0327	F	10/11/17	327	Forest Glen to Rosboro Bridge	780		Spring	Carcass								McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0328	M	10/11/17	328	Forest Glen to Rosboro Bridge	850		Spring	Carcass								McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0329	F	10/11/17	329	Forest Glen to Rosboro Bridge	760		Spring	Carcass								McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0330	M	9/27/17	330	Forest Glen to Rosboro Bridge	800		Spring	Carcass								McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0331	F	9/27/17	331	Forest Glen to Rosboro Bridge	840		Spring	Carcass								McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0332	F	9/27/17	332	Forest Glen to Rosboro Bridge	760		Spring	Carcass								McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0333	M	10/11/17	333	Forest Glen to Rosboro Bridge	740		Spring	Carcass								McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0334	M	9/27/17	334	Rosboro Bridge to Ben & Kay	730		Spring	Carcass								McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0336	F	10/3/17	336	Trail Bridge to Separation Creek	760		Spring	Carcass								Horse Creek				
+OtsCC17MCKR	OtsCC17MCKR_0337	F	10/3/17	337	Pothole Creek to Trail Bridge	840		Spring	Carcass								Horse Creek				
+OtsCC17MCKR	OtsCC17MCKR_0338	M	10/11/17	338	Forest Glen to Rosboro Bridge	750		Spring	Carcass								McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0339	M	10/11/17	339	Forest Glen to Rosboro Bridge	710		Spring	Carcass								McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0340	M	10/11/17	340	Rosboro Bridge to Ben & Kay	800		Spring	Carcass								McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0343	F	10/12/17	343	Cougar Dam to Bridge	790		Spring	Carcass								South Fork McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0344	F	10/12/17	344	Cougar Dam to Bridge	830		Spring	Carcass								South Fork McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0345	F	10/12/17	345	Cougar Dam to Bridge	710		Spring	Carcass								South Fork McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0346	F	10/12/17	346	Bridge to Mouth	910		Spring	Carcass								South Fork McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0347	F	10/12/17	347	Bridge to Mouth	880		Spring	Carcass								South Fork McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0351	M	10/12/17	351	Cougar Dam to Bridge	750		Spring	Carcass								South Fork McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0352	M	10/12/17	352	Cougar Dam to Bridge	730		Spring	Carcass								South Fork McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0353	M	10/12/17	353	Cougar Dam to Bridge	800		Spring	Carcass								South Fork McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0354	F	9/27/17	354	McKenzie Bridge to Hamlin	820		Spring	Carcass								McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0355	F	9/27/17	355	McKenzie Bridge to Hamlin	760		Spring	Carcass								McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0356	M	9/27/17	356	South Fork McKenzie to Forest Glen	920		Spring	Carcass								McKenzie		Usace floytag		
+OtsCC17MCKR	OtsCC17MCKR_0361	F	10/9/17	361	Braids to Avenue Creek	670		Spring	Carcass								Horse Creek				
+OtsCC17MCKR	OtsCC17MCKR_0362	F	10/9/17	362	Avenue Creek to Bridge	770		Spring	Carcass								Horse Creek				
+OtsCC17MCKR	OtsCC17MCKR_0363	F	10/9/17	363	Avenue Creek to Bridge	760		Spring	Carcass								Horse Creek				
+OtsCC17MCKR	OtsCC17MCKR_0364	M	10/9/17	364	Avenue Creek to Bridge	870		Spring	Carcass								Horse Creek				
+OtsCC17MCKR	OtsCC17MCKR_0365	F	10/9/17	365	Avenue Creek to Bridge	740		Spring	Carcass								Horse Creek				
+OtsCC17MCKR	OtsCC17MCKR_0366	F	10/9/17	366	Avenue Creek to Bridge	740		Spring	Carcass								Horse Creek				
+OtsCC17MCKR	OtsCC17MCKR_0367	F	10/9/17	367	Avenue Creek to Bridge	750		Spring	Carcass								Horse Creek				
+OtsCC17MCKR	OtsCC17MCKR_0368	F	10/9/17	368	Avenue Creek to Bridge	750		Spring	Carcass								Horse Creek				
+OtsCC17MCKR	OtsCC17MCKR_0369	M	10/9/17	369	Avenue Creek to Bridge	650		Spring	Carcass								Horse Creek				
+OtsCC17MCKR	OtsCC17MCKR_0370	F	10/9/17	370	Avenue Creek to Bridge	870		Spring	Carcass								Horse Creek				
+OtsCC17MCKR	OtsCC17MCKR_0371	F	10/9/17	371	Avenue Creek to Bridge	790		Spring	Carcass								Horse Creek				
+OtsCC17MCKR	OtsCC17MCKR_0372	F	10/9/17	372	Avenue Creek to Bridge	680		Spring	Carcass								Horse Creek				
+OtsCC17MCKR	OtsCC17MCKR_0373	F	10/9/17	373	Avenue Creek to Bridge	830		Spring	Carcass								Horse Creek				
+OtsCC17MCKR	OtsCC17MCKR_0374	F	10/9/17	374	Avenue Creek to Bridge	740		Spring	Carcass								Horse Creek				
+OtsCC17MCKR	OtsCC17MCKR_0375	F	10/9/17	375	Avenue Creek to Bridge	660		Spring	Carcass								Horse Creek				
+OtsCC17MCKR	OtsCC17MCKR_0376	M	10/9/17	376	Avenue Creek to Bridge	850		Spring	Carcass								Horse Creek				
+OtsCC17MCKR	OtsCC17MCKR_0377	F	10/9/17	377	Avenue Creek to Bridge	810		Spring	Carcass								Horse Creek				
+OtsCC17MCKR	OtsCC17MCKR_0378	F	10/9/17	378	Avenue Creek to Bridge	760		Spring	Carcass								Horse Creek				
+OtsCC17MCKR	OtsCC17MCKR_0379	F	10/9/17	379	Avenue Creek to Bridge	780		Spring	Carcass								Horse Creek				
+OtsCC17MCKR	OtsCC17MCKR_0380	F	10/9/17	380	Avenue Creek to Bridge	830		Spring	Carcass								Horse Creek				
+OtsCC17MCKR	OtsCC17MCKR_0381	M	10/9/17	381	McKenzie Bridge to Hamlin	730		Spring	Carcass								McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0382	F	10/9/17	382	McKenzie Bridge to Hamlin	830		Spring	Carcass								McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0383	F	10/9/17	383	McKenzie Bridge to Hamlin	810		Spring	Carcass								McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0384	F	10/9/17	384	Forest Glen to Rosboro Bridge	710		Spring	Carcass								McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0401	M	10/3/17	401	McKenzie Bridge to Hamlin	810		Spring	Carcass								McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0402	M	10/3/17	402	McKenzie Bridge to Hamlin	640		Spring	Carcass								McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0403	F	10/3/17	403	McKenzie Bridge to Hamlin	780		Spring	Carcass								McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0404	F	10/3/17	404	McKenzie Bridge to Hamlin	720		Spring	Carcass								McKenzie				
+OtsCC17MCKR	OtsCC17MCKR_0405	F	10/3/17	405	McKenzie Bridge to Hamlin	850		Spring	Carcass								McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4001	F	9/24/18	4001	Olallie Campground to Belknap	630		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4003	M	9/24/18	4003	Olallie Campground to Belknap	600		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4006	F	10/10/18	4006	McKenzie Bridge to Hamlin	580		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4007	F	10/2/18	4007	Spawning Channel	670		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4009	M	10/2/18	4009	Spawning Channel	605		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4017	F	10/11/18	4017	Cougar Dam to Bridge	710		Spring			Unclipped						South Fork McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4021	M	9/27/18	4021	Trail Bridge to Separation Creek	660		Spring			Unclipped						Horse Creek				
+OtsCC18MCKR	OtsCC18MCKR_4022	F	10/2/18	4022	Spawning Channel	640		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4023	F	10/2/18	4023	Spawning Channel	575		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4025	M	9/26/18	4025	Helfrich to Leaburg Lake	515		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4026	F	10/2/18	4026	Spawning Channel	730		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4027	M	9/26/18	4027	Helfrich to Leaburg Lake	680		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4028	M	10/2/18	4028	Bridge to Mouth	660		Spring			Unclipped						South Fork McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4029	F	10/2/18	4029	Spawning Channel	690		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4030	F	9/27/18	4030	Trail Bridge to Separation Creek	670		Spring			Unclipped						Horse Creek				
+OtsCC18MCKR	OtsCC18MCKR_4034	F	9/24/18	4034	South Fork McKenzie to Forest Glen	660		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4035	M	9/24/18	4035	South Fork McKenzie to Forest Glen	645		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4036	M	9/24/18	4036	South Fork McKenzie to Forest Glen	550		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4037	M	9/24/18	4037	McKenzie Bridge to Hamlin	550		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4038	M	9/24/18	4038	McKenzie Bridge to Hamlin	615		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4039	M	9/24/18	4039	McKenzie Bridge to Hamlin	760		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4041	M	10/8/18	4041	Forest Glen to Rosboro Bridge	710		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4042	M	10/8/18	4042	Forest Glen to Rosboro Bridge	610		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4043	M	10/8/18	4043	Forest Glen to Rosboro Bridge	675		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4044	F	10/8/18	4044	Forest Glen to Rosboro Bridge	775		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4046	F	10/8/18	4046	Forest Glen to Rosboro Bridge	690		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4047	M	10/8/18	4047	Forest Glen to Rosboro Bridge	625		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4048	M	10/2/18	4048	Bridge to Mouth	525		Spring			Unclipped						South Fork McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4049	M	10/2/18	4049	Bridge to Mouth	655		Spring			Unclipped						South Fork McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4050	M	10/2/18	4050	Cougar Dam to Bridge	660		Spring			Unclipped						South Fork McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4051	F	10/8/18	4051	Rosboro Bridge to Ben & Kay	645		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4053	M	10/8/18	4053	Forest Glen to Rosboro Bridge	570		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4054	M	10/8/18	4054	Forest Glen to Rosboro Bridge	535		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4056	M	10/2/18	4056	Cougar Dam to Bridge	675		Spring			Unclipped						South Fork McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4057	M	10/2/18	4057	Spawning Channel	655		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4059	F	10/8/18	4059	Avenue Creek to Bridge	710		Spring			Unclipped						Horse Creek				
+OtsCC18MCKR	OtsCC18MCKR_4060	M	10/2/18	4060	Cougar Dam to Bridge	560		Spring			Unclipped						South Fork McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4062	F	10/4/18	4062	Road Access to Braids	640		Spring			Unclipped						Horse Creek				
+OtsCC18MCKR	OtsCC18MCKR_4063	F	10/8/18	4063	Avenue Creek to Bridge	700		Spring			Unclipped						Horse Creek				
+OtsCC18MCKR	OtsCC18MCKR_4064	F	10/8/18	4064	Avenue Creek to Bridge	720		Spring			Unclipped						Horse Creek				
+OtsCC18MCKR	OtsCC18MCKR_4065	M	10/2/18	4065	Bridge to Mouth	610		Spring			Unclipped						South Fork McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4066	F	10/8/18	4066	Avenue Creek to Bridge	630		Spring			Unclipped						Horse Creek				
+OtsCC18MCKR	OtsCC18MCKR_4068	M	10/8/18	4068	Avenue Creek to Bridge	730		Spring			Unclipped						Horse Creek				
+OtsCC18MCKR	OtsCC18MCKR_4071	F	10/2/18	4071	Spawning Channel	640		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4073	F	10/11/18	4073	Cougar Dam to Bridge	700		Spring			Unclipped						South Fork McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4074	F	10/8/18	4074	Avenue Creek to Bridge	730		Spring			Unclipped						Horse Creek				
+OtsCC18MCKR	OtsCC18MCKR_4076	F	10/8/18	4076	Avenue Creek to Bridge	700		Spring			Unclipped						Horse Creek		Decayed		
+OtsCC18MCKR	OtsCC18MCKR_4077	F	10/11/18	4077	Cougar Dam to Bridge	720		Spring			Unclipped						South Fork McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4079	F	10/11/18	4079	Bridge to Mouth	710		Spring			Unclipped						South Fork McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4080	F	10/8/18	4080	Avenue Creek to Bridge	770		Spring			Unclipped						Horse Creek		No Scales Taken		
+OtsCC18MCKR	OtsCC18MCKR_4081	F	10/10/18	4081	McKenzie Bridge to Hamlin	640		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4082	F	10/8/18	4082	Avenue Creek to Bridge	710		Spring			Unclipped						Horse Creek		Only 1 Otolith Taken		
+OtsCC18MCKR	OtsCC18MCKR_4084	M	10/8/18	4084	Forest Glen to Rosboro Bridge	625		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4085	M	10/8/18	4085	Forest Glen to Rosboro Bridge	775		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4086	F	10/10/18	4086	McKenzie Bridge to Hamlin	560		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4087	F	10/8/18	4087	Forest Glen to Rosboro Bridge	660		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4088	F	10/8/18	4088	Forest Glen to Rosboro Bridge	630		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4089	M	10/8/18	4089	Forest Glen to Rosboro Bridge	630		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4090	M	10/8/18	4090	Forest Glen to Rosboro Bridge	650		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4092	F	10/11/18	4092	Bridge to Mouth	720		Spring			Unclipped						South Fork McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4094	F	10/11/18	4094	Bridge to Mouth	650		Spring			Unclipped						South Fork McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4095	F	10/8/18	4095	Forest Glen to Rosboro Bridge	635		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4096	F	10/8/18	4096	Forest Glen to Rosboro Bridge	725		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4097	F	10/8/18	4097	Forest Glen to Rosboro Bridge	560		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4098	F	10/8/18	4098	Forest Glen to Rosboro Bridge	530		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4099	F	10/8/18	4099	Forest Glen to Rosboro Bridge	725		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4100	F	10/8/18	4100	Forest Glen to Rosboro Bridge	570		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4101	F	10/3/18	4101	Cascade to Campground	605		Spring			Unclipped						Lost Creek				
+OtsCC18MCKR	OtsCC18MCKR_4102	M	9/24/18	4102	South Fork McKenzie to Forest Glen	800		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4103	M	9/24/18	4103	McKenzie Bridge to Hamlin	660		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4104	F	9/27/18	4104	Bridge to Mouth	750		Spring			Unclipped						Horse Creek				
+OtsCC18MCKR	OtsCC18MCKR_4105	M	9/27/18	4105	Bridge to Mouth	750		Spring			Unclipped						Horse Creek				
+OtsCC18MCKR	OtsCC18MCKR_4106	M	9/25/18	4106	Forest Glen to Rosboro Bridge	570		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4107	M	9/25/18	4107	Forest Glen to Rosboro Bridge	620		Spring			Unclipped						McKenzie		Scales Not from Preferred Area		
+OtsCC18MCKR	OtsCC18MCKR_4108	M	9/25/18	4108	Forest Glen to Rosboro Bridge	570		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4109	M	9/25/18	4109	Forest Glen to Rosboro Bridge	600		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4110	M	9/25/18	4110	Forest Glen to Rosboro Bridge	540		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4111	F	10/1/18	4111	McKenzie Bridge to Hamlin	630		Spring			Unclipped						McKenzie		Oto 4111		
+OtsCC18MCKR	OtsCC18MCKR_4112	M	10/1/18	4112	McKenzie Bridge to Hamlin	680		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4113	F	10/1/18	4113	McKenzie Bridge to Hamlin	730		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4114	M	10/2/18	4114	Forest Glen to Rosboro Bridge	530		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4115	M	10/2/18	4115	Rosboro Bridge to Ben & Kay	650		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4116	M	9/25/18	4116	Forest Glen to Rosboro Bridge	500		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4117	M	9/25/18	4117	Forest Glen to Rosboro Bridge	600		Spring			Unclipped						McKenzie		Only 1 Otolith Taken		
+OtsCC18MCKR	OtsCC18MCKR_4118	M	9/25/18	4118	Forest Glen to Rosboro Bridge	650		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4119	F	9/25/18	4119	Forest Glen to Rosboro Bridge	570		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4120	F	9/26/18	4120	Pothole Creek to Trail Bridge	690		Spring			Unclipped						Horse Creek				
+OtsCC18MCKR	OtsCC18MCKR_4121	F	9/25/18	4121	Rosboro Bridge to Ben & Kay	530		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4122	M	9/27/18	4122	Braids to Avenue Creek	840		Spring			Unclipped						Horse Creek				
+OtsCC18MCKR	OtsCC18MCKR_4123	M	9/27/18	4123	Avenue Creek to Bridge	575		Spring			Unclipped						Horse Creek		Only 1 Otolith Taken		
+OtsCC18MCKR	OtsCC18MCKR_4125	M	9/27/18	4125	Avenue Creek to Bridge	700		Spring			Unclipped						Horse Creek				
+OtsCC18MCKR	OtsCC18MCKR_4126	M	10/2/18	4126	Cougar Dam to Bridge	715		Spring			Unclipped						South Fork McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4127	M	10/2/18	4127	Bridge to Mouth	505		Spring			Unclipped						South Fork McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4129	F	10/8/18	4129	Forest Glen to Rosboro Bridge	745		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4130	M	10/8/18	4130	Forest Glen to Rosboro Bridge	605		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4131	M	10/1/18	4131	McKenzie Bridge to Hamlin	565		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4132	F	10/1/18	4132	McKenzie Trail to McKenzie Bridge	615		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4133	F	10/1/18	4133	McKenzie Trail to McKenzie Bridge	690		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4134	M	10/1/18	4134	McKenzie Bridge to Hamlin	505		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4135	M	10/1/18	4135	McKenzie Bridge to Hamlin	730		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4136	M	10/2/18	4136	Forest Glen to Rosboro Bridge	650		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4137	M	10/2/18	4137	Forest Glen to Rosboro Bridge	770		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4139	F	10/1/18	4139	McKenzie Bridge to Hamlin	570		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4141	M	10/1/18	4141	Paradise to McKenzie Trail	575		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4144	F	10/1/18	4144	Olallie Campground to Belknap	610		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4145	F	10/1/18	4145	Olallie Campground to Belknap	720		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4146	F	10/1/18	4146	Olallie Campground to Belknap	630		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4148	F	10/1/18	4148	Olallie Campground to Belknap	690		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4149	F	10/1/18	4149	Olallie Campground to Belknap	700		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4150	M	10/1/18	4150	Olallie Campground to Belknap	720		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4151	F	10/1/18	4151	Belknap to Paradise	715		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4152	F	10/1/18	4152	Paradise to McKenzie Trail	720		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4153	M	10/2/18	4153	Rosboro Bridge to Ben & Kay	530		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4154	M	10/1/18	4154	McKenzie Bridge to Hamlin	635		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4155	M	10/1/18	4155	McKenzie Bridge to Hamlin	760		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4156	M	10/1/18	4156	South Fork McKenzie to Forest Glen	690		Spring			Unclipped						McKenzie		Only 1 Otolith Taken		
+OtsCC18MCKR	OtsCC18MCKR_4157	F	10/1/18	4157	McKenzie Bridge to Hamlin	690		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4158	M	10/1/18	4158	McKenzie Bridge to Hamlin	610		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4159	M	10/1/18	4159	McKenzie Bridge to Hamlin	655		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4160	M	10/1/18	4160	South Fork McKenzie to Forest Glen	630		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4161	M	10/2/18	4161	Forest Glen to Rosboro Bridge	730		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4162	M	10/2/18	4162	Forest Glen to Rosboro Bridge	635		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4163	F	10/2/18	4163	Forest Glen to Rosboro Bridge	585		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4164	F	10/2/18	4164	Forest Glen to Rosboro Bridge	690		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4165	F	10/2/18	4165	Forest Glen to Rosboro Bridge	670		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4166	M	10/2/18	4166	Forest Glen to Rosboro Bridge	690		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4167	M	10/2/18	4167	Forest Glen to Rosboro Bridge	595		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4168	M	10/2/18	4168	Forest Glen to Rosboro Bridge	735		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4169	F	10/2/18	4169	Forest Glen to Rosboro Bridge	575		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4170	M	10/2/18	4170	Forest Glen to Rosboro Bridge	565		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4171	M	10/2/18	4171	Forest Glen to Rosboro Bridge	710		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4172	M	10/2/18	4172	Forest Glen to Rosboro Bridge	560		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4173	F	10/2/18	4173	Forest Glen to Rosboro Bridge	705		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4174	F	10/2/18	4174	Forest Glen to Rosboro Bridge	750		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4175	M	10/2/18	4175	Forest Glen to Rosboro Bridge	590		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4176	F	10/2/18	4176	Forest Glen to Rosboro Bridge	810		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4177	F	10/2/18	4177	Forest Glen to Rosboro Bridge	675		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4178	M	10/2/18	4178	Forest Glen to Rosboro Bridge	610		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4179	F	10/2/18	4179	Forest Glen to Rosboro Bridge	715		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4180	F	10/2/18	4180	Forest Glen to Rosboro Bridge	695		Spring			Unclipped						McKenzie		Only 1 Otolith Taken		
+OtsCC18MCKR	OtsCC18MCKR_4181	M	10/2/18	4181	Forest Glen to Rosboro Bridge	780		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4182	F	10/2/18	4182	Forest Glen to Rosboro Bridge	690		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4183	M	10/2/18	4183	Forest Glen to Rosboro Bridge	660		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4184	M	10/2/18	4184	Forest Glen to Rosboro Bridge	670		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4185	M	10/2/18	4185	Forest Glen to Rosboro Bridge	685		Spring			Unclipped						McKenzie		Damaged Adipose/Partial Clip		
+OtsCC18MCKR	OtsCC18MCKR_4186	M	10/2/18	4186	Forest Glen to Rosboro Bridge	525		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4187	M	10/2/18	4187	Forest Glen to Rosboro Bridge	615		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4188	M	10/2/18	4188	Forest Glen to Rosboro Bridge	690		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4189	M	10/2/18	4189	Rosboro Bridge to Ben & Kay	525		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4190	M	10/2/18	4190	Rosboro Bridge to Ben & Kay	595		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4191	M	10/2/18	4191	Rosboro Bridge to Ben & Kay	515		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4192	M	10/2/18	4192	Rosboro Bridge to Ben & Kay	580		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4193	M	10/2/18	4193	Rosboro Bridge to Ben & Kay	520		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4194	M	10/2/18	4194	Rosboro Bridge to Ben & Kay	615		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4195	M	10/2/18	4195	Rosboro Bridge to Ben & Kay	670		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4196	F	10/2/18	4196	Rosboro Bridge to Ben & Kay	660		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4197	M	10/2/18	4197	Rosboro Bridge to Ben & Kay	665		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4198	F	10/2/18	4198	Rosboro Bridge to Ben & Kay	650		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4199	M	10/2/18	4199	Rosboro Bridge to Ben & Kay	670		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4200	M	10/2/18	4200	Rosboro Bridge to Ben & Kay	630		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4201	M	10/8/18	4201	Forest Glen to Rosboro Bridge	740		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4202	M	10/8/18	4202	Forest Glen to Rosboro Bridge	745		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4203	M	10/8/18	4203	Forest Glen to Rosboro Bridge	685		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4204	M	10/8/18	4204	Forest Glen to Rosboro Bridge	560		Spring			Unclipped						McKenzie				
+OtsCC18MCKR	OtsCC18MCKR_4205	M	10/8/18	4205	Forest Glen to Rosboro Bridge	565		Spring			Unclipped						McKenzie				

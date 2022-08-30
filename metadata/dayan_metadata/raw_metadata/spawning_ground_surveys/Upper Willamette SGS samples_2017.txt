@@ -1,0 +1,223 @@
+Pedigree Name	Individual Name	MotherID	FatherID	SubBasin	Stream Name	IndividualSampleLocation	DateSampled	Marked	Gender	FL	ForkLength	Age	Eggs	FieldID1	DNA	ScaleNo	CommentsGeneral	Run	SpeciesID
+OtsCC17MCKR	OtsCC17MCKR_0222			McKenzie	McKenzie	Leaburg Landing to Deerhorn	7/25/2017	Unclipped	Female	79	790	Carcass	75 - 100%	222	Y	18388		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0223			McKenzie	McKenzie	Leaburg Dam to Leaburg Landing	9/6/2017	Unclipped	Female	85	850	Carcass	75 - 100%	223	Y	12588		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0224			McKenzie	McKenzie	Leaburg Landing to Deerhorn	9/11/2017	Unclipped	Male	70	700	Carcass		224	Y	19750		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0225			McKenzie	South Fork McKenzie	Cougar Dam to Bridge	9/25/2017	Unclipped	Female	82	820	Carcass	0 - 25%	225	Y	19849		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0226			McKenzie	McKenzie	Leaburg Dam to Leaburg Landing	8/14/2017	Unclipped	Male	89	890	Carcass		226	Y	17030		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0228			McKenzie	South Fork McKenzie	Cougar Dam to Bridge	9/25/2017	Unclipped	Male	85	850	Carcass		228	Y	19850		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0229			McKenzie	South Fork McKenzie	Cougar Dam to Bridge	9/25/2017	Unclipped	Female	81	810	Carcass	0 - 25%	229	Y	19851		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0230			McKenzie	South Fork McKenzie	Cougar Dam to Bridge	9/25/2017	Unclipped	Male	85	850	Carcass		230	Y	19865		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0231			McKenzie	McKenzie	Deerhorn to Hendricks	7/31/2017	Unclipped	Female	79	790	Carcass	75 - 100%	231	Y	18335		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0232			McKenzie	McKenzie	Deerhorn to Hendricks	8/28/2017	Unclipped	Female	77	770	Carcass	75 - 100%	232	Y	18221		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0233			McKenzie	South Fork McKenzie	Bridge to Mouth	9/25/2017	Unclipped	Male	98	980	Carcass		233	Y	19866		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0234			McKenzie	South Fork McKenzie	Bridge to Mouth	9/25/2017	Unclipped	Male	54	540	Carcass		234	Y	19858		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0235			McKenzie	South Fork McKenzie	Bridge to Mouth	9/25/2017	Unclipped	Male	99	990	Carcass		235	Y	19859		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0236			McKenzie	South Fork McKenzie	Cougar Dam to Bridge	10/12/2017	Unclipped	Male	60	600	Carcass		236	Y	19327		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0237			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	9/19/2017	Unclipped	Female			Carcass	0 - 25%	237	Y	17009		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0221			McKenzie	McKenzie	Leaburg Dam to Leaburg Landing	7/25/2017	Unclipped	Male	76	760	Carcass		221	Y	18387		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0241			McKenzie	South Fork McKenzie	Cougar Dam to Bridge	9/25/2017	Unclipped	Male	82	820	Carcass		241	Y	19867		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0242			McKenzie	South Fork McKenzie	Cougar Dam to Bridge	10/12/2017	Unclipped	Female	71	710	Carcass	0 - 25%	242	Y	19310		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0245			McKenzie	Horse Creek	Trail Bridge to Separation Creek	10/3/2017	Unclipped	Male	81	810	Carcass		245	Y	18310		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0246			McKenzie	Horse Creek	Trail Bridge to Separation Creek	10/3/2017	Unclipped	Female	83	830	Carcass	0 - 25%	246	Y	18323		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0251			McKenzie	McKenzie	Leaburg Landing to Deerhorn	8/22/2017	Unclipped	Female	71	710	Carcass	75 - 100%	251	Y	18391		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0252			McKenzie	McKenzie	Deerhorn to Hendricks	8/22/2017	Unclipped	Male	62	620	Carcass		252	Y	12587		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0253			McKenzie	McKenzie	Rosboro Bridge to Ben & Kay	9/14/2017	Unclipped	Female	73	730	Carcass	0 - 25%	253	Y	18295		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0259			McKenzie	Gate Creek	Highway  to fork	10/17/2017	Unclipped	Female	77	770	Carcass	0 - 25%	259	Y	17430		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0261			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	9/19/2017	Unclipped	Male			Carcass		261	Y	18071	No head	Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0262			McKenzie	Horse Creek	Bridge to Mouth	9/26/2017	Unclipped	Female	82	820	Carcass	0 - 25%	262	Y	16513		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0263			McKenzie	Horse Creek	Bridge to Mouth	9/26/2017	Unclipped	Male	72	720	Carcass		263	Y	19890		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0264			McKenzie	Horse Creek	Bridge to Mouth	9/26/2017	Unclipped	Male	103	1030	Carcass		264	Y	19891		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0265			McKenzie	Horse Creek	Bridge to Mouth	9/26/2017	Unclipped	Male	84	840	Carcass		265	Y	19892		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0271			McKenzie	Horse Creek	Braids to Avenue Creek	9/26/2017	Unclipped	Female	77	770	Carcass	0 - 25%	271	Y	19408		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0272			McKenzie	Horse Creek	Avenue Creek to Bridge	9/26/2017	Unclipped	Female	80	800	Carcass	0 - 25%	272	Y	19410		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0273			McKenzie	Horse Creek	Avenue Creek to Bridge	9/26/2017	Unclipped	Male	83	830	Carcass		273	Y	19413		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0274			McKenzie	Horse Creek	Avenue Creek to Bridge	9/26/2017	Unclipped	Female	76	760	Carcass	0 - 25%	274	Y	12498		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0275			McKenzie	Horse Creek	Avenue Creek to Bridge	9/26/2017	Unclipped	Female	77	770	Carcass	0 - 25%	275	Y	12499		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0276			McKenzie	Horse Creek	Avenue Creek to Bridge	9/26/2017	Unclipped	Female	81	810	Carcass	0 - 25%	276	Y	12500		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0277			McKenzie	Horse Creek	Avenue Creek to Bridge	9/26/2017	Unclipped	Male	104	1040	Carcass		277	Y	12586		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0278			McKenzie	Horse Creek	Avenue Creek to Bridge	9/26/2017	Unclipped	Male	99	990	Carcass		278	Y	19764		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0279			McKenzie	Horse Creek	Avenue Creek to Bridge	9/26/2017	Unclipped	Female	84	840	Carcass	0 - 25%	279	Y	19765		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0280			McKenzie	Horse Creek	Avenue Creek to Bridge	9/26/2017	Unclipped	Male	100	1000	Carcass		280	Y	19766		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0281			McKenzie	McKenzie	Spawning Channel	10/1/2017	Unclipped	Female	86	860	Carcass	0 - 25%	281	Y	19770		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0284			McKenzie	McKenzie	Spawning Channel	10/1/2017	Unclipped	Female	87	870	Carcass	75 - 100%	284	Y	19771		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0290			McKenzie	Horse Creek	Avenue Creek to Bridge	10/3/2017	Unclipped	Female	69	690	Carcass	0 - 25%	290	Y	18415		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0291			McKenzie	Horse Creek	Avenue Creek to Bridge	10/3/2017	Unclipped	Female	79	790	Carcass	0 - 25%	291	Y	19860		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0292			McKenzie	Horse Creek	Avenue Creek to Bridge	10/3/2017	Unclipped	Male	73	730	Carcass		292	Y	18420		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0293			McKenzie	Horse Creek	Avenue Creek to Bridge	10/3/2017	Unclipped	Female	72	720	Carcass	0 - 25%	293	Y	1695		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0294			McKenzie	Horse Creek	Avenue Creek to Bridge	10/3/2017	Unclipped	Female	83	830	Carcass	0 - 25%	294	Y	19749		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0311			McKenzie	McKenzie	Olallie Campground to Belknap	9/19/2017	Unclipped	Female	84	840	Carcass	0 - 25%	311	Y	19884		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0312			McKenzie	McKenzie	Paradise to McKenzie Trail	9/19/2017	Unclipped	Male	68	680	Carcass		312	Y	19885		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0323			McKenzie	McKenzie	McKenzie Bridge to Hamlin	10/9/2017	Unclipped	Female	71	710	Carcass	0 - 25%	323	Y	14051		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0324			McKenzie	McKenzie	McKenzie Bridge to Hamlin	10/9/2017	Unclipped	Female	75	750	Carcass	0 - 25%	324	Y	14052		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0326			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/11/2017	Unclipped	Female	74	740	Carcass	0 - 25%	326	Y	19868		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0327			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/11/2017	Unclipped	Female	78	780	Carcass	0 - 25%	327	Y	18463		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0328			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/11/2017	Unclipped	Male	85	850	Carcass		328	Y	19907		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0329			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/11/2017	Unclipped	Female	76	760	Carcass	0 - 25%	329	Y	19877		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0330			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	9/27/2017	Unclipped	Male	80	800	Carcass		330	Y	17439		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0331			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	9/27/2017	Unclipped	Female	84	840	Carcass	0 - 25%	331	Y	17436		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0332			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	9/27/2017	Unclipped	Female	76	760	Carcass	0 - 25%	332	Y	17437		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0333			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/11/2017	Unclipped	Male	74	740	Carcass		333	Y	19409		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0334			McKenzie	McKenzie	Rosboro Bridge to Ben & Kay	9/27/2017	Unclipped	Male	73	730	Carcass		334	Y	17442		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0336			McKenzie	Horse Creek	Trail Bridge to Separation Creek	10/3/2017	Unclipped	Female	76	760	Carcass	0 - 25%	336	Y	18309		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0337			McKenzie	Horse Creek	Pothole Creek to Trail Bridge	10/3/2017	Unclipped	Female	84	840	Carcass	0 - 25%	337	Y	19781		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0338			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/11/2017	Unclipped	Male	75	750	Carcass		338	Y	18464		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0339			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/11/2017	Unclipped	Male	71	710	Carcass		339	Y	19758		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0340			McKenzie	McKenzie	Rosboro Bridge to Ben & Kay	10/11/2017	Unclipped	Male	80	800	Carcass		340	Y	19760		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0343			McKenzie	South Fork McKenzie	Cougar Dam to Bridge	10/12/2017	Unclipped	Female	79	790	Carcass	0 - 25%	343	Y	16603		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0344			McKenzie	South Fork McKenzie	Cougar Dam to Bridge	10/12/2017	Unclipped	Female	83	830	Carcass	0 - 25%	344	Y	16604		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0345			McKenzie	South Fork McKenzie	Cougar Dam to Bridge	10/12/2017	Unclipped	Female	71	710	Carcass	0 - 25%	345	Y	16605		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0346			McKenzie	South Fork McKenzie	Bridge to Mouth	10/12/2017	Unclipped	Female	91	910	Carcass	0 - 25%	346	Y	19311		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0347			McKenzie	South Fork McKenzie	Bridge to Mouth	10/12/2017	Unclipped	Female	88	880	Carcass	0 - 25%	347	Y	19312		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0351			McKenzie	South Fork McKenzie	Cougar Dam to Bridge	10/12/2017	Unclipped	Male	75	750	Carcass		351	Y	19328		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0352			McKenzie	South Fork McKenzie	Cougar Dam to Bridge	10/12/2017	Unclipped	Male	73	730	Carcass		352	Y	19309		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0353			McKenzie	South Fork McKenzie	Cougar Dam to Bridge	10/12/2017	Unclipped	Male	80	800	Carcass		353	Y	19308		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0354			McKenzie	McKenzie	McKenzie Bridge to Hamlin	9/27/2017	Unclipped	Female	82	820	Carcass	0 - 25%	354	Y	1700		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0355			McKenzie	McKenzie	McKenzie Bridge to Hamlin	9/27/2017	Unclipped	Female	76	760	Carcass	0 - 25%	355	Y	18235		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0356			McKenzie	McKenzie	South Fork McKenzie to Forest Glen	9/27/2017	Unclipped	Male	92	920	Carcass		356	Y	19751	Usace floytag	Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0361			McKenzie	Horse Creek	Braids to Avenue Creek	10/9/2017	Unclipped	Female	67	670	Carcass	0 - 25%	361	Y	1078		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0362			McKenzie	Horse Creek	Avenue Creek to Bridge	10/9/2017	Unclipped	Female	77	770	Carcass	0 - 25%	362	Y	1077		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0363			McKenzie	Horse Creek	Avenue Creek to Bridge	10/9/2017	Unclipped	Female	76	760	Carcass	0 - 25%	363	Y	1079		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0364			McKenzie	Horse Creek	Avenue Creek to Bridge	10/9/2017	Unclipped	Male	87	870	Carcass		364	Y	1080		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0365			McKenzie	Horse Creek	Avenue Creek to Bridge	10/9/2017	Unclipped	Female	74	740	Carcass	0 - 25%	365	Y	1081		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0366			McKenzie	Horse Creek	Avenue Creek to Bridge	10/9/2017	Unclipped	Female	74	740	Carcass	0 - 25%	366	Y	1082		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0367			McKenzie	Horse Creek	Avenue Creek to Bridge	10/9/2017	Unclipped	Female	75	750	Carcass	0 - 25%	367	Y	1083		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0368			McKenzie	Horse Creek	Avenue Creek to Bridge	10/9/2017	Unclipped	Female	75	750	Carcass	0 - 25%	368	Y	1086		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0369			McKenzie	Horse Creek	Avenue Creek to Bridge	10/9/2017	Unclipped	Male	65	650	Carcass		369	Y	1085		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0370			McKenzie	Horse Creek	Avenue Creek to Bridge	10/9/2017	Unclipped	Female	87	870	Carcass	0 - 25%	370	Y	1084		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0371			McKenzie	Horse Creek	Avenue Creek to Bridge	10/9/2017	Unclipped	Female	79	790	Carcass	0 - 25%	371	Y	1090		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0372			McKenzie	Horse Creek	Avenue Creek to Bridge	10/9/2017	Unclipped	Female	68	680	Carcass	0 - 25%	372	Y	1089		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0373			McKenzie	Horse Creek	Avenue Creek to Bridge	10/9/2017	Unclipped	Female	83	830	Carcass	0 - 25%	373	Y	1087		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0374			McKenzie	Horse Creek	Avenue Creek to Bridge	10/9/2017	Unclipped	Female	74	740	Carcass	0 - 25%	374	Y	1088		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0375			McKenzie	Horse Creek	Avenue Creek to Bridge	10/9/2017	Unclipped	Female	66	660	Carcass	0 - 25%	375	Y	1091		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0376			McKenzie	Horse Creek	Avenue Creek to Bridge	10/9/2017	Unclipped	Male	85	850	Carcass		376	Y	1092		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0377			McKenzie	Horse Creek	Avenue Creek to Bridge	10/9/2017	Unclipped	Female	81	810	Carcass	0 - 25%	377	Y	1093		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0378			McKenzie	Horse Creek	Avenue Creek to Bridge	10/9/2017	Unclipped	Female	76	760	Carcass	0 - 25%	378	Y	1094		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0379			McKenzie	Horse Creek	Avenue Creek to Bridge	10/9/2017	Unclipped	Female	78	780	Carcass	0 - 25%	379	Y	1096		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0380			McKenzie	Horse Creek	Avenue Creek to Bridge	10/9/2017	Unclipped	Female	83	830	Carcass	0 - 25%	380	Y	1095		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0381			McKenzie	McKenzie	McKenzie Bridge to Hamlin	10/9/2017	Unclipped	Male	73	730	Carcass		381	Y	12773		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0382			McKenzie	McKenzie	McKenzie Bridge to Hamlin	10/9/2017	Unclipped	Female	83	830	Carcass	0 - 25%	382	Y	12774		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0383			McKenzie	McKenzie	McKenzie Bridge to Hamlin	10/9/2017	Unclipped	Female	81	810	Carcass	0 - 25%	383	Y	12775		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0384			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/9/2017	Unclipped	Female	71	710	Carcass	0 - 25%	384	Y	12776		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0401			McKenzie	McKenzie	McKenzie Bridge to Hamlin	10/3/2017	Unclipped	Male	81	810	Carcass		401	Y	12770		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0402			McKenzie	McKenzie	McKenzie Bridge to Hamlin	10/3/2017	Unclipped	Male	64	640	Carcass		402	Y	12771		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0403			McKenzie	McKenzie	McKenzie Bridge to Hamlin	10/3/2017	Unclipped	Female	78	780	Carcass	0 - 25%	403	Y	19938		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0404			McKenzie	McKenzie	McKenzie Bridge to Hamlin	10/3/2017	Unclipped	Female	72	720	Carcass	0 - 25%	404	Y	19920		Spring	17
+OtsCC17MCKR	OtsCC17MCKR_0405			McKenzie	McKenzie	McKenzie Bridge to Hamlin	10/3/2017	Unclipped	Female	85	850	Carcass	0 - 25%	405	Y	12772		Spring	17
+OtsCC17NSNT	OtsCC17NSNT_0500			North Santiam	North Santiam	Mehema to Powerlines	8/1/2017	Unclipped	Male	84	840	Carcass		500	Y	18389		Spring	17
+OtsCC17NSNT	OtsCC17NSNT_0501			North Santiam	North Santiam	Big Cliff Dam to Minto Dam	9/29/2017	Unclipped	Male	80	800	Carcass		501	Y	5697		Spring	17
+OtsCC17NSNT	OtsCC17NSNT_0502			North Santiam	North Santiam	Big Cliff Dam to Minto Dam	9/29/2017	Unclipped	Female	82	820	Carcass	0 - 25%	502	Y	5695		Spring	17
+OtsCC17NSNT	OtsCC17NSNT_0503			North Santiam	North Santiam	Big Cliff Dam to Minto Dam	9/29/2017	Unclipped	Female	88	880	Carcass	0 - 25%	503	Y	5283		Spring	17
+OtsCC17NSNT	OtsCC17NSNT_0504			North Santiam	North Santiam	Big Cliff Dam to Minto Dam	9/28/2017	Unclipped	Female	82	820	Carcass	0 - 25%	504	Y	5284		Spring	17
+OtsCC17NSNT	OtsCC17NSNT_0505			North Santiam	North Santiam	Big Cliff Dam to Minto Dam	9/28/2017	Unclipped	Male	74	740	Carcass	Unknown	505	Y	5279		Spring	17
+OtsCC17NSNT	OtsCC17NSNT_0506			North Santiam	North Santiam	Big Cliff Dam to Minto Dam	9/28/2017	Unclipped	Female	82	820	Carcass	0 - 25%	506	Y	5281		Spring	17
+OtsCC17NSNT	OtsCC17NSNT_0507			North Santiam	North Santiam	Big Cliff Dam to Minto Dam	9/29/2017	Unclipped	Female	82	820	Carcass	0 - 25%	507	Y	5699		Spring	17
+OtsCC17NSNT	OtsCC17NSNT_0508			North Santiam	North Santiam	Big Cliff Dam to Minto Dam	9/28/2017	Unclipped	Female	81	810	Carcass	0 - 25%	508	Y	5282		Spring	17
+OtsCC17NSNT	OtsCC17NSNT_0509			North Santiam	North Santiam	Big Cliff Dam to Minto Dam	9/28/2017	Unclipped	Female	80	800	Carcass	0 - 25%	509	Y	5285		Spring	17
+OtsCC17NSNT	OtsCC17NSNT_0510			North Santiam	North Santiam	Big Cliff Dam to Minto Dam	9/28/2017	Unclipped	Female	69	690	Carcass	0 - 25%	510	Y	5700		Spring	17
+OtsCC17NSNT	OtsCC17NSNT_0511			North Santiam	North Santiam	Minto Dam to Packsaddle	9/18/2017	Unclipped	Female	88	880	Carcass	25 - 50%	511	Y	16969		Spring	17
+OtsCC17NSNT	OtsCC17NSNT_0512			North Santiam	North Santiam	Packsaddle to Gates Bridge	9/18/2017	Unclipped	Female	85	850	Carcass	0 - 25%	512	Y	12496		Spring	17
+OtsCC17NSNT	OtsCC17NSNT_0513			North Santiam	North Santiam	Gates Bridge to Mill City	9/18/2017	Unclipped	Female	81	810	Carcass	0 - 25%	513	Y	17013		Spring	17
+OtsCC17NSNT	OtsCC17NSNT_0514			North Santiam	North Santiam	Packsaddle to Gates Bridge	6/19/2017	Unclipped	Unknown	71	710	Carcass		514	Y	16966		Spring	17
+OtsCC17NSNT	OtsCC17NSNT_0515			North Santiam	North Santiam	Big Cliff Dam to Minto Dam	9/28/2017	Unclipped	Male	83	830	Carcass		515	Y	5674		Spring	17
+OtsCC17NSNT	OtsCC17NSNT_0516			North Santiam	North Santiam	Big Cliff Dam to Minto Dam	9/28/2017	Unclipped	Female	79	790	Carcass	0 - 25%	516	Y	5675		Spring	17
+OtsCC17NSNT	OtsCC17NSNT_0517			North Santiam	North Santiam	Big Cliff Dam to Minto Dam	9/28/2017	Unclipped	Female	74	740	Carcass	0 - 25%	517	Y	5676		Spring	17
+OtsCC17NSNT	OtsCC17NSNT_0530			North Santiam	North Santiam	Minto Dam to Packsaddle	9/25/2017	Unclipped	Male	89	890	Carcass		530	Y	19934		Spring	17
+OtsCC17NSNT	OtsCC17NSNT_0531			North Santiam	North Santiam	Minto Dam to Packsaddle	9/25/2017	Unclipped	Male	82	820	Carcass		531	Y	18129		Spring	17
+OtsCC17NSNT	OtsCC17NSNT_0532			North Santiam	North Santiam	Minto Dam to Packsaddle	9/25/2017	Unclipped	Male	67	670	Carcass		532	Y	18130		Spring	17
+OtsCC17NSNT	OtsCC17NSNT_0533			North Santiam	North Santiam	Packsaddle to Gates Bridge	9/25/2017	Unclipped	Female	81	810	Carcass	0 - 25%	533	Y	18131		Spring	17
+OtsCC17NSNT	OtsCC17NSNT_0534			North Santiam	North Santiam	Gates Bridge to Mill City	9/25/2017	Unclipped	Female	79	790	Carcass	0 - 25%	534	Y	19919		Spring	17
+OtsCC17NSNT	OtsCC17NSNT_0535			North Santiam	North Santiam	Gates Bridge to Mill City	9/25/2017	Unclipped	Male	93	930	Carcass		535	Y	18132		Spring	17
+OtsCC17NSNT	OtsCC17NSNT_0536			North Santiam	North Santiam	Mill City to Fishermans Bend	9/25/2017	Unclipped	Male	75	750	Carcass		536	Y	19948		Spring	17
+OtsCC17NSNT	OtsCC17NSNT_0537			North Santiam	North Santiam	Packsaddle to Gates Bridge	9/25/2017	Unclipped	Male	73	730	Carcass		537	Y	19883		Spring	17
+OtsCC17NSNT	OtsCC17NSNT_0542			North Santiam	North Santiam	Minto Dam to Packsaddle	9/18/2017	Unclipped	Female	81	810	Carcass	0 - 25%	542	Y	18227		Spring	17
+OtsCC17NSNT	OtsCC17NSNT_0543			North Santiam	North Santiam	Packsaddle to Gates Bridge	9/18/2017	Unclipped	Female	86	860	Carcass	0 - 25%	543	Y	19384		Spring	17
+OtsCC17NSNT	OtsCC17NSNT_0544			North Santiam	North Santiam	Gates Bridge to Mill City	9/18/2017	Unclipped	Male	84	840	Carcass		544	Y	19385		Spring	17
+OtsCC17NSNT	OtsCC17NSNT_0550			North Santiam	North Santiam	Fishermans Bend to Mehema	9/28/2017	Unclipped	Female	78	780	Carcass	0 - 25%	550	Y	19927		Spring	17
+OtsCC17NSNT	OtsCC17NSNT_0551			North Santiam	North Santiam	Fishermans Bend to Mehema	9/28/2017	Unclipped	Female	89	890	Carcass	0 - 25%	551	Y	19929		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0700			South Santiam	South Santiam	Foster Dam to Pleasant Valley	7/24/2017	Unclipped	Female	79	790	Carcass	75 - 100%	700	Y	18240		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0701			South Santiam	South Santiam above Foster	Soda Fork to Little Boulder Creek	7/27/2017	Unclipped	Male	68	680	Carcass		701	Y	18268		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0702			South Santiam	South Santiam above Foster	Little Boulder Creek to Trout Creek Campground	7/27/2017	Unclipped	Female	74	740	Carcass	75 - 100%	702	Y	18269		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0703			South Santiam	South Santiam above Foster	Falls to Soda Fork	9/12/2017	Unclipped	Female	88	880	Carcass	25 - 50%	703	Y	19359		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0704			South Santiam	South Santiam	Sandersons to Mouth	7/26/2017	Unclipped	Female	78	780	Carcass	75 - 100%	704	Y	16967		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0705			South Santiam	South Santiam	Pleasant Valley to McDowell Creek	7/31/2017	Unclipped	Male	96	960	Carcass		705	Y	18068		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0706			South Santiam	South Santiam above Foster	2nd Trib below Campground to Gordon Creek Rd	8/16/2017	Unclipped	Male	98	980	Carcass		706	Y	5608		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0707			South Santiam	South Santiam above Foster	Falls to Soda Fork	9/12/2017	Unclipped	Female	84	840	Carcass	50 - 75%	707	Y	19360		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0708			South Santiam	South Santiam above Foster	Falls to Soda Fork	9/12/2017	Unclipped	Male	66	660	Carcass		708	Y	19361		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0709			South Santiam	South Santiam above Foster	Falls to Soda Fork	9/26/2017	Unclipped	Female	79	790	Carcass	0 - 25%	709	Y	19302		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0710			South Santiam	South Santiam above Foster	Trout Creek Campground to 2nd Trib below Campground	8/3/2017	Unclipped	Female	74	740	Carcass	75 - 100%	710	Y	17574		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0711			South Santiam	South Santiam above Foster	Falls to Soda Fork	9/26/2017	Unclipped	Female	71	710	Carcass	0 - 25%	711	Y	19303		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0712			South Santiam	South Santiam above Foster	Falls to Soda Fork	9/26/2017	Unclipped	Female	79	790	Carcass	0 - 25%	712	Y	19304		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0713			South Santiam	South Santiam above Foster	Falls to Soda Fork	9/26/2017	Unclipped	Female	74	740	Carcass	0 - 25%	713	Y	19305		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0714			South Santiam	South Santiam above Foster	Falls to Soda Fork	9/26/2017	Unclipped	Male	89	890	Carcass		714	Y	19306		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0715			South Santiam	South Santiam above Foster	2nd Trib below Campground to Gordon Creek Rd	8/9/2017	Unclipped	Female	87	870	Carcass	75 - 100%	715	Y	17575		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0716			South Santiam	South Santiam above Foster	Falls to Soda Fork	9/26/2017	Unclipped	Male	66	660	Carcass		716	Y	19307		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0720			South Santiam	South Santiam above Foster	Soda Fork to Little Boulder Creek	8/9/2017	Unclipped	Male	68	680	Carcass		720	Y	19358		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0721			South Santiam	South Santiam above Foster	2nd Trib below Campground to Gordon Creek Rd	9/6/2017	Unclipped	Female	72	720	Carcass	75 - 100%	721	Y	19407		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0723			South Santiam	South Santiam above Foster	Trout Creek Campground to 2nd Trib below Campground	9/18/2017	Unclipped	Female	84	840	Carcass	75 - 100%	723	Y	19847		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0724			South Santiam	South Santiam above Foster	Gordon Creek Rd to Moose Creek Bridge	9/18/2017	Unclipped	Female	76	760	Carcass	75 - 100%	724	Y	19848		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0725			South Santiam	South Santiam	Foster Dam to Pleasant Valley	9/20/2017	Unclipped	Female	86	860	Carcass	0 - 25%	725	Y	19921		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0726			South Santiam	South Santiam	Foster Dam to Pleasant Valley	9/20/2017	Unclipped	Male	89	890	Carcass		726	Y	19925		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0727			South Santiam	South Santiam	Foster Dam to Pleasant Valley	9/20/2017	Unclipped	Male	87	870	Carcass		727	Y	19928		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0729			South Santiam	South Santiam	Foster Dam to Pleasant Valley	9/20/2017	Unclipped	Male	62	620	Carcass		729	Y	19932		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0730			South Santiam	South Santiam above Foster	Falls to Soda Fork	9/6/2017	Unclipped	Female	79	790	Carcass	75 - 100%	730	Y	17435		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0731			South Santiam	South Santiam above Foster	Falls to Soda Fork	9/6/2017	Unclipped	Male	69	690	Carcass		731	Y	19767		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0732			South Santiam	South Santiam	Foster Dam to Pleasant Valley	9/20/2017	Unclipped	Female			Carcass	0 - 25%	732	Y	19944		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0738			South Santiam	South Santiam above Foster	Falls to Soda Fork	9/18/2017	Unclipped	Female	85	850	Carcass	0 - 25%	738	Y	19915		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0739			South Santiam	South Santiam above Foster	Falls to Soda Fork	9/18/2017	Unclipped	Female	71	710	Carcass	0 - 25%	739	Y	19914		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0740			South Santiam	South Santiam above Foster	Falls to Soda Fork	9/18/2017	Unclipped	Male	74	740	Carcass		740	Y	19916		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0741			South Santiam	South Santiam above Foster	Falls to Soda Fork	9/18/2017	Unclipped	Female	73	730	Carcass	0 - 25%	741	Y	19917		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0742			South Santiam	South Santiam above Foster	Falls to Soda Fork	9/18/2017	Unclipped	Female	77	770	Carcass	0 - 25%	742	Y	19918		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0743			South Santiam	South Santiam above Foster	Falls to Soda Fork	9/18/2017	Unclipped	Female	76	760	Carcass	0 - 25%	743	Y	19904	No pit tag	Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0744			South Santiam	South Santiam above Foster	Little Boulder Creek to Trout Creek Campground	9/18/2017	Unclipped	Unknown	81	810	Carcass		744	Y	19905		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0757			South Santiam	South Santiam above Foster	Little Boulder Creek to Trout Creek Campground	9/26/2017	Unclipped	Male	73	730	Carcass		757	Y	19362		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0758			South Santiam	South Santiam above Foster	Little Boulder Creek to Trout Creek Campground	9/26/2017	Unclipped	Female	74	740	Carcass	0 - 25%	758	Y	19363		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0759			South Santiam	South Santiam above Foster	Little Boulder Creek to Trout Creek Campground	9/26/2017	Unclipped	Male	79	790	Carcass		759	Y	19364		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0765			South Santiam	South Santiam	Foster Dam to Pleasant Valley	9/20/2017	Unclipped	Male	91	910	Carcass		765	Y	19874		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0766			South Santiam	South Santiam	Foster Dam to Pleasant Valley	9/26/2017	Unclipped	Male	94	940	Carcass		766	Y	19875		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0770			South Santiam	South Santiam above Foster	Falls to Soda Fork	10/4/2017	Unclipped	Female	79	790	Carcass	0 - 25%	770	Y	16566		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0772			South Santiam	South Santiam above Foster	Falls to Soda Fork	10/4/2017	Unclipped	Male	76	760	Carcass		772	Y	16962		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0773			South Santiam	South Santiam above Foster	Falls to Soda Fork	10/4/2017	Unclipped	Female	79	790	Carcass	0 - 25%	773	Y	16960		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0774			South Santiam	South Santiam above Foster	Falls to Soda Fork	10/4/2017	Unclipped	Male	86	860	Carcass		774	Y	16961		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0775			South Santiam	South Santiam above Foster	Falls to Soda Fork	10/4/2017	Unclipped	Female	67	670	Carcass	0 - 25%	775	Y	16577		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0776			South Santiam	South Santiam above Foster	Falls to Soda Fork	10/4/2017	Unclipped	Male	86	860	Carcass		776	Y	16963		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0777			South Santiam	South Santiam above Foster	Falls to Soda Fork	10/4/2017	Unclipped	Male	82	820	Carcass		777	Y	16964	No otoliths	Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0778			South Santiam	South Santiam above Foster	Falls to Soda Fork	10/4/2017	Unclipped	Female	76	760	Carcass	0 - 25%	778	Y	19763		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0779			South Santiam	South Santiam above Foster	Falls to Soda Fork	10/4/2017	Unclipped	Female	82	820	Carcass	0 - 25%	779	Y	19862		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0781			South Santiam	South Santiam above Foster	Falls to Soda Fork	10/4/2017	Unclipped	Male	83	830	Carcass		781	Y	19394		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0782			South Santiam	South Santiam above Foster	Falls to Soda Fork	10/4/2017	Unclipped	Female	66	660	Carcass	0 - 25%	782	Y	19395		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0784			South Santiam	South Santiam above Foster	Falls to Soda Fork	10/4/2017	Unclipped	Female	75	750	Carcass	0 - 25%	784	Y	19773		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0785			South Santiam	South Santiam above Foster	Falls to Soda Fork	10/4/2017	Unclipped	Female	83	830	Carcass	0 - 25%	785	Y	19774		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0786			South Santiam	South Santiam above Foster	Soda Fork to Little Boulder Creek	10/4/2017	Unclipped	Female	85	850	Carcass	0 - 25%	786	Y	19775		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0787			South Santiam	South Santiam above Foster	Soda Fork to Little Boulder Creek	10/4/2017	Unclipped	Male	82	820	Carcass		787	Y	19776		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0788			South Santiam	South Santiam above Foster	Soda Fork to Little Boulder Creek	10/4/2017	Unclipped	Female	73	730	Carcass	0 - 25%	788	Y	19779		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0789			South Santiam	South Santiam above Foster	Shot Pouch Rd to River Bend Park	10/11/2017	Unclipped	Female	70	700	Carcass	0 - 25%	789	Y	18010		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0790			South Santiam	South Santiam	little wiley	10/11/2017	Unclipped	Male	73	730	Carcass		790	Y	18011		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0831			South Santiam	South Santiam above Foster	Little Boulder Creek to Trout Creek Campground	10/4/2017	Unclipped	Male	86	860	Carcass		831	Y	19853		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0832			South Santiam	South Santiam above Foster	Little Boulder Creek to Trout Creek Campground	10/4/2017	Unclipped	Female	80	800	Carcass	0 - 25%	832	Y	19852		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0833			South Santiam	South Santiam above Foster	Little Boulder Creek to Trout Creek Campground	10/4/2017	Unclipped	Male	67	670	Carcass		833	Y	19854		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0834			South Santiam	South Santiam above Foster	Little Boulder Creek to Trout Creek Campground	10/4/2017	Unclipped	Female	78	780	Carcass	75 - 100%	834	Y	19855		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0835			South Santiam	South Santiam above Foster	Little Boulder Creek to Trout Creek Campground	10/4/2017	Unclipped	Female	85	850	Carcass	0 - 25%	835	Y	19856		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0836			South Santiam	South Santiam above Foster	Little Boulder Creek to Trout Creek Campground	10/4/2017	Unclipped	Male	87	870	Carcass		836	Y	19857		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_0837			South Santiam	South Santiam above Foster	Trout Creek Campground to 2nd Trib below Campground	10/4/2017	Unclipped	Male	86	860	Carcass		837	Y	19879		Spring	17
+OtsCC17MFWR	OtsCC17MFWR_0900			Middle Fork	Middle Fork	Pengra to Jasper	8/16/2017	Unclipped	Female	85	850	Carcass	75 - 100%	900	Y	18336		Spring	17
+OtsCC17MFWR	OtsCC17MFWR_0901			Middle Fork	Middle Fork	Dexter to Pengra	9/12/2017	Unclipped	Female	68	680	Carcass	75 - 100%	901	N	17008		Spring	17
+OtsCC17MFWR	OtsCC17MFWR_0902			Middle Fork	Middle Fork	Dexter to Pengra	9/29/2017	Unclipped	Female	79	790	Carcass	75 - 100%	902	Y	18443		Spring	17
+OtsCC17MFWR	OtsCC17MFWR_0912			Middle Fork	Middle Fork	Pengra to Jasper	9/29/2017	Unclipped	Female	77	770	Carcass	75 - 100%	912	N	19386		Spring	17
+OtsCC17MFWR	OtsCC17MFWR_0934			Middle Fork	Middle Fork	Jasper to Clearwater	8/24/2017	Unclipped	Female	89	890	Carcass	75 - 100%	934	Y	18408		Spring	17
+OtsCC17MFWR	OtsCC17MFWR_1006			Middle Fork	Fall Creek	dam to confluence	9/5/2017	Unclipped	Female	71	710	Carcass	75 - 100%	1006	Y	12758		Spring	17
+OtsCC17MFWR	OtsCC17MFWR_1051			Middle Fork	Fall Creek	NFD 1833 Bridge to Hehe Creek	7/12/2017	Unclipped	Male	81	810	Carcass		1051	Y	12759		Spring	17
+OtsCC17MFWR	OtsCC17MFWR_1052			Middle Fork	Fall Creek	NFD 1833 Bridge to Hehe Creek	8/9/2017	Unclipped	Female	67	670	Carcass	75 - 100%	1052	Y	12766		Spring	17
+OtsCC17MFWR	OtsCC17MFWR_1066			Middle Fork	Fall Creek	Gold Creek to NFD 1833 Bridge	10/2/2017	Unclipped	Male	73	730	Carcass		1066	Y	19880		Spring	17
+OtsCC17MFWR	OtsCC17MFWR_1067			Middle Fork	Fall Creek	Gold Creek to NFD 1833 Bridge	10/2/2017	Unclipped	Female	71	710	Carcass	0 - 25%	1067	Y	19881		Spring	17
+OtsCC17MFWR	OtsCC17MFWR_1077			Middle Fork	Fall Creek	Gold Creek to NFD 1833 Bridge	10/2/2017	Unclipped	Male	72	720	Carcass		1077	Y	19882		Spring	17
+OtsCC17MFWR	OtsCC17MFWR_1078			Middle Fork	Fall Creek	Gold Creek to NFD 1833 Bridge	10/2/2017	Unclipped	Male	64	640	Carcass		1078	Y	12769		Spring	17
+OtsCC17MFWR	OtsCC17MFWR_1079			Middle Fork	Fall Creek	Gold Creek to NFD 1833 Bridge	10/2/2017	Unclipped	Male	76	760	Carcass		1079	Y	12768	Pit tag reader not working	Spring	17
+OtsCC17MFWR	OtsCC17MFWR_1080			Middle Fork	Fall Creek	Gold Creek to NFD 1833 Bridge	10/2/2017	Unclipped	Female	70	700	Carcass	0 - 25%	1080	Y	12787		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_1200			South Santiam	South Santiam above Foster	River Bend Park to Foster Reservoir	9/25/2017	Unclipped	Male	75	750	Carcass		1200	Y	17048		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_1201			South Santiam	South Santiam above Foster	Moose Creek Bridge to Cascadia Park	9/25/2017	Unclipped	Female	78	780	Carcass	75 - 100%	1201	Y	17036		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_1202			South Santiam	South Santiam above Foster	Trout Creek C.G. to 2nd Trib below C.G.	10/2/2017	Unclipped	Female	83	830	Carcass	0 - 25%	1202	Y	19626		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_1203			South Santiam	South Santiam above Foster	Little Boulder Creek to Trout Creek Campground	10/2/2017	Unclipped	Female	73	730	Carcass	0 - 25%	1203	Y	19627		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_1204			South Santiam	South Santiam above Foster	Shot Pouch Rd to River Bend Park	10/2/2017	Unclipped	Male	82	820	Carcass		1204	Y	17037		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_1205			South Santiam	South Santiam above Foster	River Bend Park to Foster Reservoir	10/2/2017	Unclipped	Male	72	720	Carcass		1205	Y	19636		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_1206			South Santiam	South Santiam above Foster	River Bend Park to Foster Reservoir	10/2/2017	Unclipped	Male	75	750	Carcass		1206	Y	17045		Spring	17
+OtsCC17SSNT	OtsCC17SSNT_1207			South Santiam	South Santiam above Foster	Little Boulder Creek to Trout Creek Campground	10/4/2017	Unclipped	Male	67	670	Carcass		1207	Y	19011		Spring	17

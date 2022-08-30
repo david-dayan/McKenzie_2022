@@ -1,0 +1,33 @@
+reach	section
+Cougar Dam to Bridge	SFMK_below
+Bridge to Mouth	SFMK_below
+Leaburg Dam to Leaburg Landing	mainstem
+Avenue Creek to Bridge	mainstem
+Forest Glen to Rosboro Bridge	mainstem
+Rosboro Bridge to Ben & Kay	mainstem
+McKenzie Trail to McKenzie Bridge	mainstem
+McKenzie Bridge to Hamlin	mainstem
+South Fork McKenzie to Forest Glen	mainstem
+Road Access to Braids	mainstem
+Helfrich to Leaburg Lake	mainstem
+Olallie Campground to Belknap	mainstem
+Paradise to McKenzie Trail	mainstem
+Belknap to Paradise	mainstem
+Elk Creek to Frissel Campground	SFMK_above
+Twin Springs Campground to Homestead Campground	SFMK_above
+Frissel Campground to Roaring River	SFMK_above
+NFD 1980 Bridge to Cougar Reservoir	SFMK_above
+Dutch Oven Campground to Rebel Creek	SFMK_above
+Rebel Creek to NFD 1980 Bridge	SFMK_above
+Split Pt to Hwy Bridge	mainstem
+Spawning Channel	mainstem
+Braids to Avenue Creek	mainstem
+Cougar Reservoir to Bridge	SFMK_below
+McKenzie Hatchery to McKenzie Confluence	mainstem
+Split Pt to Hwy 126 Bridge	mainstem
+Hamlin to South Fork McKenzie	mainstem
+McKenzie	mainstem
+South Fork McKenzie	
+Horse Creek	mainstem
+Gate Creek	mainstem
+Lost Creek	mainstem

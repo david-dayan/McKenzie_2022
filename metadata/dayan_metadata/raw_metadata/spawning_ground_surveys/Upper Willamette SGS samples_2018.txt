@@ -1,0 +1,187 @@
+Pedigree Name	Individual Name	MotherID	FatherID	SubBasin	Stream	IndividualSampleLocation	DateSampled	Marks	Gender	LengthFork1	Eggs%	FieldID1	DNA	ScaleNumber	CommentsGeneral	Run	SpeciesID
+OtsCC18MCKR	OtsCC18MCKR_4001			McKenzie	McKenzie	Olallie Campground to Belknap	9/24/2018	Unclipped	Female	630	0 - 25%	4001	Y	17457		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4003			McKenzie	McKenzie	Olallie Campground to Belknap	9/24/2018	Unclipped	Male	600		4003	Y	17456		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4006			McKenzie	McKenzie	McKenzie Bridge to Hamlin	10/10/2018	Unclipped	Female	580	0 - 25%	4006	Y	19537		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4007			McKenzie	McKenzie	Spawning Channel	10/2/2018	Unclipped	Female	670	0 - 25%	4007	Y	11450		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4009			McKenzie	McKenzie	Spawning Channel	10/2/2018	Unclipped	Male	605		4009	Y	12985		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4017			McKenzie	South Fork McKenzie	Cougar Dam to Bridge	10/11/2018	Unclipped	Female	710	0 - 25%	4017	Y	17429		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4021			McKenzie	Horse Creek	Trail Bridge to Separation Creek	9/27/2018	Unclipped	Male	660		4021	Y	16614		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4022			McKenzie	McKenzie	Spawning Channel	10/2/2018	Unclipped	Female	640	0 - 25%	4022	Y	16617		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4023			McKenzie	McKenzie	Spawning Channel	10/2/2018	Unclipped	Female	575	0 - 25%	4023	Y	16616		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4025			McKenzie	McKenzie	Helfrich to Leaburg Lake	9/26/2018	Unclipped	Male	515		4025	Y	31642		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4026			McKenzie	McKenzie	Spawning Channel	10/2/2018	Unclipped	Female	730	25 - 50%	4026	Y	12988		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4027			McKenzie	McKenzie	Helfrich to Leaburg Lake	9/26/2018	Unclipped	Male	680		4027	Y	12308		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4028			McKenzie	South Fork McKenzie	Bridge to Mouth	10/2/2018	Unclipped	Male	660		4028	Y	12979		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4029			McKenzie	McKenzie	Spawning Channel	10/2/2018	Unclipped	Female	690	0 - 25%	4029	Y	16615		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4030			McKenzie	Horse Creek	Trail Bridge to Separation Creek	9/27/2018	Unclipped	Female	670	0 - 25%	4030	Y	14714		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4034			McKenzie	McKenzie	South Fork McKenzie to Forest Glen	9/24/2018	Unclipped	Female	660	0 - 25%	4034	Y	17392		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4035			McKenzie	McKenzie	South Fork McKenzie to Forest Glen	9/24/2018	Unclipped	Male	645		4035	Y	15558		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4036			McKenzie	McKenzie	South Fork McKenzie to Forest Glen	9/24/2018	Unclipped	Male	550		4036	Y	17057		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4037			McKenzie	McKenzie	McKenzie Bridge to Hamlin	9/24/2018	Unclipped	Male	550		4037	Y	14764		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4038			McKenzie	McKenzie	McKenzie Bridge to Hamlin	9/24/2018	Unclipped	Male	615		4038	Y	14712		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4039			McKenzie	McKenzie	McKenzie Bridge to Hamlin	9/24/2018	Unclipped	Male	760		4039	Y	17056		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4041			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/8/2018	Unclipped	Male	710		4041	Y	30004		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4042			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/8/2018	Unclipped	Male	610		4042	Y	30012		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4043			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/8/2018	Unclipped	Male	675		4043	Y	30013		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4044			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/8/2018	Unclipped	Female	775	0 - 25%	4044	Y	30014		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4046			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/8/2018	Unclipped	Female	690	0 - 25%	4046	Y	30017		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4047			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/8/2018	Unclipped	Male	625		4047	Y	30008		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4048			McKenzie	South Fork McKenzie	Bridge to Mouth	10/2/2018	Unclipped	Male	525		4048	Y	18555		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4049			McKenzie	South Fork McKenzie	Bridge to Mouth	10/2/2018	Unclipped	Male	655		4049	Y	18556		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4050			McKenzie	South Fork McKenzie	Cougar Dam to Bridge	10/2/2018	Unclipped	Male	660		4050	Y	12990		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4051			McKenzie	McKenzie	Rosboro Bridge to Ben & Kay	10/8/2018	Unclipped	Female	645	0 - 25%	4051	Y	30110		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4053			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/8/2018	Unclipped	Male	570		4053	Y	30003		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4054			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/8/2018	Unclipped	Male	535		4054	Y	19923		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4056			McKenzie	South Fork McKenzie	Cougar Dam to Bridge	10/2/2018	Unclipped	Male	675		4056	Y	12978		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4057			McKenzie	McKenzie	Spawning Channel	10/2/2018	Unclipped	Male	655		4057	Y	12986		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4059			McKenzie	Horse Creek	Avenue Creek to Bridge	10/8/2018	Unclipped	Female	710	0 - 25%	4059	Y	18396		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4060			McKenzie	South Fork McKenzie	Cougar Dam to Bridge	10/2/2018	Unclipped	Male	560		4060	Y	12989		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4062			McKenzie	Horse Creek	Road Access to Braids	10/4/2018	Unclipped	Female	640	0 - 25%	4062	Y	12982		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4063			McKenzie	Horse Creek	Avenue Creek to Bridge	10/8/2018	Unclipped	Female	700	0 - 25%	4063	Y	18395		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4064			McKenzie	Horse Creek	Avenue Creek to Bridge	10/8/2018	Unclipped	Female	720	0 - 25%	4064	Y	18393		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4065			McKenzie	South Fork McKenzie	Bridge to Mouth	10/2/2018	Unclipped	Male	610		4065	Y	12981		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4066			McKenzie	Horse Creek	Avenue Creek to Bridge	10/8/2018	Unclipped	Female	630	0 - 25%	4066	Y	18404		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4068			McKenzie	Horse Creek	Avenue Creek to Bridge	10/8/2018	Unclipped	Male	730		4068	Y	19535		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4071			McKenzie	McKenzie	Spawning Channel	10/2/2018	Unclipped	Female	640	0 - 25%	4071	Y	12987		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4073			McKenzie	South Fork McKenzie	Cougar Dam to Bridge	10/11/2018	Unclipped	Female	700	0 - 25%	4073	Y	18402		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4074			McKenzie	Horse Creek	Avenue Creek to Bridge	10/8/2018	Unclipped	Female	730	0 - 25%	4074	Y	18406		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4076			McKenzie	Horse Creek	Avenue Creek to Bridge	10/8/2018	Unclipped	Female	700	0 - 25%	4076	Y	12983	Decayed	Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4077			McKenzie	South Fork McKenzie	Cougar Dam to Bridge	10/11/2018	Unclipped	Female	720	0 - 25%	4077	Y	17454		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4079			McKenzie	South Fork McKenzie	Bridge to Mouth	10/11/2018	Unclipped	Female	710	0 - 25%	4079	Y	19543		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4080			McKenzie	Horse Creek	Avenue Creek to Bridge	10/8/2018	Unclipped	Female	770	0 - 25%	4080	Y		No Scales Taken	Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4081			McKenzie	McKenzie	McKenzie Bridge to Hamlin	10/10/2018	Unclipped	Female	640	0 - 25%	4081	Y	18401		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4082			McKenzie	Horse Creek	Avenue Creek to Bridge	10/8/2018	Unclipped	Female	710	0 - 25%	4082	Y	19536	Only 1 Otolith Taken	Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4084			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/8/2018	Unclipped	Male	625		4084	Y	30009		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4085			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/8/2018	Unclipped	Male	775		4085	Y	30016		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4086			McKenzie	McKenzie	McKenzie Bridge to Hamlin	10/10/2018	Unclipped	Female	560	0 - 25%	4086	Y	19542		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4087			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/8/2018	Unclipped	Female	660	0 - 25%	4087	Y	18468		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4088			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/8/2018	Unclipped	Female	630	0 - 25%	4088	Y	30018		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4089			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/8/2018	Unclipped	Male	630		4089	Y	30019		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4090			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/8/2018	Unclipped	Male	650		4090	Y	18470		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4092			McKenzie	South Fork McKenzie	Bridge to Mouth	10/11/2018	Unclipped	Female	720	0 - 25%	4092	Y	19526		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4094			McKenzie	South Fork McKenzie	Bridge to Mouth	10/11/2018	Unclipped	Female	650	0 - 25%	4094	Y	18403		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4095			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/8/2018	Unclipped	Female	635	0 - 25%	4095	Y	18467		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4096			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/8/2018	Unclipped	Female	725	0 - 25%	4096	Y	30020		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4097			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/8/2018	Unclipped	Female	560	0 - 25%	4097	Y	18471		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4098			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/8/2018	Unclipped	Female	530	0 - 25%	4098	Y	19950		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4099			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/8/2018	Unclipped	Female	725	0 - 25%	4099	Y	19946		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4100			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/8/2018	Unclipped	Female	570	0 - 25%	4100	Y	18469		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4101			McKenzie	Lost Creek	Cascade to Campground	10/3/2018	Unclipped	Female	605	0 - 25%	4101	Y	30054		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4102			McKenzie	McKenzie	South Fork McKenzie to Forest Glen	9/24/2018	Unclipped	Male	800		4102	Y	15557		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4103			McKenzie	McKenzie	McKenzie Bridge to Hamlin	9/24/2018	Unclipped	Male	660		4103	Y	14713		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4104			McKenzie	Horse Creek	Bridge to Mouth	9/27/2018	Unclipped	Female	750	0 - 25%	4104	Y	18560		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4105			McKenzie	Horse Creek	Bridge to Mouth	9/27/2018	Unclipped	Male	750		4105	Y	18561		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4106			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	9/25/2018	Unclipped	Male	570		4106	Y	17058		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4107			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	9/25/2018	Unclipped	Male	620		4107	Y	17059	Scales Not from Preferred Area	Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4108			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	9/25/2018	Unclipped	Male	570		4108	Y	17060		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4109			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	9/25/2018	Unclipped	Male	600		4109	Y	18462		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4110			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	9/25/2018	Unclipped	Male	540		4110	Y	18452		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4111			McKenzie	McKenzie	McKenzie Bridge to Hamlin	10/1/2018	Unclipped	Female	630	0 - 25%	4111	Y	18445	Oto 4111	Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4112			McKenzie	McKenzie	McKenzie Bridge to Hamlin	10/1/2018	Unclipped	Male	680		4112	Y	18449		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4113			McKenzie	McKenzie	McKenzie Bridge to Hamlin	10/1/2018	Unclipped	Female	730	0 - 25%	4113	Y	18446		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4114			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/2/2018	Unclipped	Male	530		4114	Y	31528		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4115			McKenzie	McKenzie	Rosboro Bridge to Ben & Kay	10/2/2018	Unclipped	Male	650		4115	Y	18450		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4116			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	9/25/2018	Unclipped	Male	500		4116	Y	18453		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4117			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	9/25/2018	Unclipped	Male	600		4117	Y	18454	Only 1 Otolith Taken	Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4118			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	9/25/2018	Unclipped	Male	650		4118	Y	18455		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4119			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	9/25/2018	Unclipped	Female	570	25 - 50%	4119	Y	18457		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4120			McKenzie	Horse Creek	Pothole Creek to Trail Bridge	9/26/2018	Unclipped	Female	690	0 - 25%	4120	Y	18559		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4121			McKenzie	McKenzie	Rosboro Bridge to Ben & Kay	9/25/2018	Unclipped	Female	530	0 - 25%	4121	Y	18410		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4122			McKenzie	Horse Creek	Braids to Avenue Creek	9/27/2018	Unclipped	Male	840		4122	Y	30002		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4123			McKenzie	Horse Creek	Avenue Creek to Bridge	9/27/2018	Unclipped	Male	575		4123	Y	18425	Only 1 Otolith Taken	Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4125			McKenzie	Horse Creek	Avenue Creek to Bridge	9/27/2018	Unclipped	Male	700		4125	Y	18557		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4126			McKenzie	South Fork McKenzie	Cougar Dam to Bridge	10/2/2018	Unclipped	Male	715		4126	Y	18558		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4127			McKenzie	South Fork McKenzie	Bridge to Mouth	10/2/2018	Unclipped	Male	505		4127	Y	18554		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4129			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/8/2018	Unclipped	Female	745	0 - 25%	4129	Y	30010		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4130			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/8/2018	Unclipped	Male	605		4130	Y	30011		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4131			McKenzie	McKenzie	McKenzie Bridge to Hamlin	10/1/2018	Unclipped	Male	565		4131	Y	31545		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4132			McKenzie	McKenzie	McKenzie Trail to McKenzie Bridge	10/1/2018	Unclipped	Female	615	0 - 25%	4132	Y	18456		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4133			McKenzie	McKenzie	McKenzie Trail to McKenzie Bridge	10/1/2018	Unclipped	Female	690	0 - 25%	4133	Y	31541		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4134			McKenzie	McKenzie	McKenzie Bridge to Hamlin	10/1/2018	Unclipped	Male	505		4134	Y	31523		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4135			McKenzie	McKenzie	McKenzie Bridge to Hamlin	10/1/2018	Unclipped	Male	730		4135	Y	18448		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4136			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/2/2018	Unclipped	Male	650		4136	Y	31527		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4137			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/2/2018	Unclipped	Male	770		4137	Y	31561		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4139			McKenzie	McKenzie	McKenzie Bridge to Hamlin	10/1/2018	Unclipped	Female	570	0 - 25%	4139	Y	31543		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4141			McKenzie	McKenzie	Paradise to McKenzie Trail	10/1/2018	Unclipped	Male	575		4141	Y	31559		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4144			McKenzie	McKenzie	Olallie Campground to Belknap	10/1/2018	Unclipped	Female	610	0 - 25%	4144	Y	31519		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4145			McKenzie	McKenzie	Olallie Campground to Belknap	10/1/2018	Unclipped	Female	720	0 - 25%	4145	Y	31520		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4146			McKenzie	McKenzie	Olallie Campground to Belknap	10/1/2018	Unclipped	Female	630	0 - 25%	4146	Y	31521		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4148			McKenzie	McKenzie	Olallie Campground to Belknap	10/1/2018	Unclipped	Female	690	0 - 25%	4148	Y	31552		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4149			McKenzie	McKenzie	Olallie Campground to Belknap	10/1/2018	Unclipped	Female	700	0 - 25%	4149	Y	31518		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4150			McKenzie	McKenzie	Olallie Campground to Belknap	10/1/2018	Unclipped	Male	720		4150	Y	31553		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4151			McKenzie	McKenzie	Belknap to Paradise	10/1/2018	Unclipped	Female	715	0 - 25%	4151	Y	31516		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4152			McKenzie	McKenzie	Paradise to McKenzie Trail	10/1/2018	Unclipped	Female	720	0 - 25%	4152	Y	31555		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4153			McKenzie	McKenzie	Rosboro Bridge to Ben & Kay	10/2/2018	Unclipped	Male	530		4153	Y	30070		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4154			McKenzie	McKenzie	McKenzie Bridge to Hamlin	10/1/2018	Unclipped	Male	635		4154	Y	31542		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4155			McKenzie	McKenzie	McKenzie Bridge to Hamlin	10/1/2018	Unclipped	Male	760		4155	Y	31544		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4156			McKenzie	McKenzie	South Fork McKenzie to Forest Glen	10/1/2018	Unclipped	Male	690		4156	Y	31505	Only 1 Otolith Taken	Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4157			McKenzie	McKenzie	McKenzie Bridge to Hamlin	10/1/2018	Unclipped	Female	690	0 - 25%	4157	Y	31501		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4158			McKenzie	McKenzie	McKenzie Bridge to Hamlin	10/1/2018	Unclipped	Male	610		4158	Y	31502		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4159			McKenzie	McKenzie	McKenzie Bridge to Hamlin	10/1/2018	Unclipped	Male	655		4159	Y	31503		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4160			McKenzie	McKenzie	South Fork McKenzie to Forest Glen	10/1/2018	Unclipped	Male	630		4160	Y	31506		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4161			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/2/2018	Unclipped	Male	730		4161	Y	30064		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4162			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/2/2018	Unclipped	Male	635		4162	Y	31556		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4163			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/2/2018	Unclipped	Female	585	0 - 25%	4163	Y	31557		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4164			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/2/2018	Unclipped	Female	690	0 - 25%	4164	Y	31581		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4165			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/2/2018	Unclipped	Female	670	0 - 25%	4165	Y	31580		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4166			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/2/2018	Unclipped	Male	690		4166	Y	31579		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4167			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/2/2018	Unclipped	Male	595		4167	Y	31578		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4168			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/2/2018	Unclipped	Male	735		4168	Y	31577		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4169			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/2/2018	Unclipped	Female	575	0 - 25%	4169	Y	31508		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4170			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/2/2018	Unclipped	Male	565		4170	Y	31511		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4171			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/2/2018	Unclipped	Male	710		4171	Y	31507		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4172			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/2/2018	Unclipped	Male	560		4172	Y	31509		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4173			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/2/2018	Unclipped	Female	705	0 - 25%	4173	Y	31510		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4174			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/2/2018	Unclipped	Female	750	0 - 25%	4174	Y	31512		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4175			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/2/2018	Unclipped	Male	590		4175	Y	31513		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4176			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/2/2018	Unclipped	Female	810	0 - 25%	4176	Y	31514		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4177			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/2/2018	Unclipped	Female	675	0 - 25%	4177	Y	31515		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4178			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/2/2018	Unclipped	Male	610		4178	Y	31564		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4179			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/2/2018	Unclipped	Female	715	0 - 25%	4179	Y	31525		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4180			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/2/2018	Unclipped	Female	695	0 - 25%	4180	Y	31526	Only 1 Otolith Taken	Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4181			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/2/2018	Unclipped	Male	780		4181	Y	31574		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4182			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/2/2018	Unclipped	Female	690	0 - 25%	4182	Y	30065		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4183			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/2/2018	Unclipped	Male	660		4183	Y	31573		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4184			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/2/2018	Unclipped	Male	670		4184	Y	30066		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4185			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/2/2018	Unclipped	Male	685		4185	Y	30067	Damaged Adipose/Partial Clip	Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4186			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/2/2018	Unclipped	Male	525		4186	Y	31522		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4187			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/2/2018	Unclipped	Male	615		4187	Y	30154		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4188			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/2/2018	Unclipped	Male	690		4188	Y	30155		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4189			McKenzie	McKenzie	Rosboro Bridge to Ben & Kay	10/2/2018	Unclipped	Male	525		4189	Y	19330		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4190			McKenzie	McKenzie	Rosboro Bridge to Ben & Kay	10/2/2018	Unclipped	Male	595		4190	Y	30159		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4191			McKenzie	McKenzie	Rosboro Bridge to Ben & Kay	10/2/2018	Unclipped	Male	515		4191	Y	30069		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4192			McKenzie	McKenzie	Rosboro Bridge to Ben & Kay	10/2/2018	Unclipped	Male	580		4192	Y	30063		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4193			McKenzie	McKenzie	Rosboro Bridge to Ben & Kay	10/2/2018	Unclipped	Male	520		4193	Y	31524		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4194			McKenzie	McKenzie	Rosboro Bridge to Ben & Kay	10/2/2018	Unclipped	Male	615		4194	Y	5677		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4195			McKenzie	McKenzie	Rosboro Bridge to Ben & Kay	10/2/2018	Unclipped	Male	670		4195	Y	19329		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4196			McKenzie	McKenzie	Rosboro Bridge to Ben & Kay	10/2/2018	Unclipped	Female	660	0 - 25%	4196	Y	5690		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4197			McKenzie	McKenzie	Rosboro Bridge to Ben & Kay	10/2/2018	Unclipped	Male	665		4197	Y	5287		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4198			McKenzie	McKenzie	Rosboro Bridge to Ben & Kay	10/2/2018	Unclipped	Female	650	0 - 25%	4198	Y	5280		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4199			McKenzie	McKenzie	Rosboro Bridge to Ben & Kay	10/2/2018	Unclipped	Male	670		4199	Y	5687		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4200			McKenzie	McKenzie	Rosboro Bridge to Ben & Kay	10/2/2018	Unclipped	Male	630		4200	Y	18451		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4201			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/8/2018	Unclipped	Male	740		4201	Y	30105		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4202			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/8/2018	Unclipped	Male	745		4202	Y	30109		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4203			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/8/2018	Unclipped	Male	685		4203	Y	30106		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4204			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/8/2018	Unclipped	Male	560		4204	Y	30107		Spring	17
+OtsCC18MCKR	OtsCC18MCKR_4205			McKenzie	McKenzie	Forest Glen to Rosboro Bridge	10/8/2018	Unclipped	Male	565		4205	Y	30108		Spring	17
+OtsCC18NSNT	OtsCC18NSNT_3001			North Santiam	North Santiam	Minto Dam to Packsaddle	7/31/2018	Unclipped	Female	610	75 - 100%	3001	Y	1051	Only 1 Otolith Taken	Spring	17
+OtsCC18NSNT	OtsCC18NSNT_3002			North Santiam	North Santiam	Mill City to Fishermans Bend	7/31/2018	Unclipped	Female	700	75 - 100%	3002	Y	1053		Spring	17
+OtsCC18NSNT	OtsCC18NSNT_3003			North Santiam	North Santiam	Mill City to Fishermans Bend	8/6/2018	Unclipped	Female	690	75 - 100%	3003	Y	18223		Spring	17
+OtsCC18NSNT	OtsCC18NSNT_3004			North Santiam	North Santiam	Mill City to Fishermans Bend	8/6/2018	Unclipped	Male	620		3004	Y	18224		Spring	17
+OtsCC18NSNT	OtsCC18NSNT_3021			North Santiam	North Santiam	Mill City to Fishermans Bend	9/13/2018	Unclipped	Female	660	75 - 100%	3021	Y	18225		Spring	17
+OtsCC18NSNT	OtsCC18NSNT_3022			North Santiam	North Santiam	Big Cliff Dam to Minto Dam	10/4/2018	Unclipped	Female	670	0 - 25%	3022	Y	18226		Spring	17
+OtsCC18NSNT	OtsCC18NSNT_3023			North Santiam	North Santiam	Big Cliff Dam to Minto Dam	10/4/2018	Unclipped	Female	600	0 - 25%	3023	Y	30023		Spring	17
+OtsCC18NSNT	OtsCC18NSNT_3024			North Santiam	North Santiam	Big Cliff Dam to Minto Dam	10/4/2018	Unclipped	Female	690	0 - 25%	3024	Y	30022		Spring	17
+OtsCC18NSNT	OtsCC18NSNT_3045			North Santiam	North Santiam	Packsaddle to Gates Bridge	8/21/2018	Unclipped	Female	720	75 - 100%	3045	Y	1163		Spring	17
+OtsCC18SSNT	OtsCC18SSNT_3501			South Santiam	South Santiam above Foster	Gordon Creek Rd to Moose Creek Bridge	8/28/2018	Unclipped	Male	590		3501	Y	18418		Spring	17
+OtsCC18SSNT	OtsCC18SSNT_3503			South Santiam	South Santiam above Foster	2nd Trib below Campground to Gordon Creek Rd	9/28/2018	Unclipped	Female	730	0 - 25%	3503	Y	30026		Spring	17
+OtsCC18SSNT	OtsCC18SSNT_3504			South Santiam	South Santiam above Foster	Falls to Soda Fork	9/19/2018	Unclipped	Male	605		3504	Y	17055		Spring	17
+OtsCC18SSNT	OtsCC18SSNT_3505			South Santiam	South Santiam above Foster	2nd Trib below Campground to Gordon Creek Rd	9/28/2018	Unclipped	Male	690		3505	Y	30052		Spring	17
+OtsCC18SSNT	OtsCC18SSNT_3506			South Santiam	South Santiam above Foster	Falls to Soda Fork	9/6/2018	Unclipped	Female	710	75 - 100%	3506	Y	10636		Spring	17
+OtsCC18SSNT	OtsCC18SSNT_3507			South Santiam	South Santiam above Foster	2nd Trib below Campground to Gordon Creek Rd	9/28/2018	Unclipped	Female	680	0 - 25%	3507	Y	30061		Spring	17
+OtsCC18SSNT	OtsCC18SSNT_3508			South Santiam	South Santiam above Foster	2nd Trib below Campground to Gordon Creek Rd	10/5/2018	Unclipped	Female	685	0 - 25%	3508	Y	19276		Spring	17
+OtsCC18SSNT	OtsCC18SSNT_3509			South Santiam	South Santiam above Foster	2nd Trib below Campground to Gordon Creek Rd	10/5/2018	Unclipped	Female	650	0 - 25%	3509	Y	30298		Spring	17
+OtsCC18SSNT	OtsCC18SSNT_3521			South Santiam	South Santiam	Pleasant Valley to McDowell Creek	8/15/2018	Unclipped	Female	595	75 - 100%	3521	Y	18417		Spring	17
+OtsCC18SSNT	OtsCC18SSNT_3522			South Santiam	South Santiam above Foster	Little Boulder Creek to Trout Creek Campground	10/5/2018	Unclipped	Female	720	0 - 25%	3522	Y	30148		Spring	17
+OtsCC18SSNT	OtsCC18SSNT_3534			South Santiam	South Santiam above Foster	Little Boulder Creek to Trout Creek Campground	9/28/2018	Unclipped	Male	700		3534	Y	31550		Spring	17
+OtsCC18SSNT	OtsCC18SSNT_3535			South Santiam	South Santiam above Foster	Falls to Soda Fork	9/28/2018	Unclipped	Female	660	0 - 25%	3535	Y	31563		Spring	17
