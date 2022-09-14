@@ -33,6 +33,10 @@ This notebook achieves several data prep goals for the McKenzie Genetic Pedigree
 __gt_0.1__: no re-runs, no metadata, no previous data, just first round genotyping from 2022, used to plan re-runs. wide format  
 __gt_l_0.1__: no re-runs, no metadata, no previous data, just first round genotyping from 2022, used to plan re-runs. long format  
 
+__gt_0.3__: re-runs incorporated, no metadata, no previous data, no filtering of any kind. wide format   
+__gt_l_0.3__: re-runs incorporated, no metadata, no previous data, no filtering of any kind. wide format  
+
+
 # Data Import 
 
 ### Plates 17-20 Error
@@ -346,26 +350,22 @@ This calls into question the best approach for re-runs. It suggests that there a
 
 Some notes from above:  
 
-Only 
 
 (1) __DNA quality likely drives missingness__ While very few samples have such poor DNA quality/quantity that they fail at nearly all markers, there's a clear realtionship between peak height (a proxy for DNA quality/quantity) at markers that did not fail, and number of markers that did fail, with mean peak height of around 3000 as the inflection point. This suggests tht for many re-run samples, using the DNA on hand may not improve genotypes.  
 
-(2) __Few individuals failed at all/most markers__ Most failed genotypes occured in indivudals that other wise genotyped well. This suggests that there was at least some DNA that could be successfully amplified and quantified and that running failed individuals (7 or fewer scored gentoyes) would mostly be wasteful/redundant. 
+(2) __Few individuals failed at all/most markers__ Most failed genotypes occured in individuals that other wise genotyped well. This suggests that there was at least some DNA that could be successfully amplified and quantified. 
 
-(3) __Within Panel correlation__  Markers within a panel were more likely to fail together than markers across panels, suggesting that amplification was often the problem.
+(3) __Within Panel correlation__  Markers within a panel were more likely to fail together than markers across panels, suggesting that amplification was sometimes the problem.
 
-There's mixed evidence that re-extraction is worth it. Let's be conservative and try to extract DNA again.
+There's mixed evidence that re-extraction is worth it (1 and 2 above conflict, and 3 is unclear if amplification itself was the problem or DNA quantity/quality used for amplification). Let's be conservative and try to extract DNA again.
 
 Only 140 individuals failed to the point of NEEDING to be re-run to avoid filtering (>=4 missing loci /  7 successfully genotyped loci). So, at a minimum, we need to conduct re-runs at 2 96-well plates. Reducing our threshold for re-runs to >=3 missing loci is very close to two plates worth of individuals (198). If we focus on these individuals, the observation that running the same individuals across all panels would mostly be wasteful does not apply. Among these 198 individuals with 8 or fewer succesfully genotyped loci, most are missing at least a single genotype from each of the three panels.
 
-140	198	552	
-89	143	491	
+
 
 ## Plan
 
-__Plan Summary__  
-
-Taken together, this suggests that the most efficeint use of time/resources for re-runs will involve re-extractions for some individuals, using previously extracted DNA for others, and taking a panel by panel approach, instead of running failed individuals at all markers.
+Let's keep planning
 
 __Re-Extractions__  
 
@@ -469,10 +469,14 @@ Require 9 scored loci:
 ~ 2 96-well plates panel 3
 
 Require 8 scored loci:
-~ 2 at each, almost all overlap, suggesting that we could substantially speed up work by using the same plate layout across all panels. If we took this approach, of the 2043 non-sex marker missing genotypes, we would regenotype 1067. This also wouldnt "waste" that many resources. Of the 594 panel re-runs from the 198 individuals with 3 or more missing genotypes total, only 114 have no missing data. If we choose to run 96 samples per plate (no negative controls) and use 2 plates, then we are 6 samples short. Let's be sure to pick these 6 that have 8, not 7 total loci genotyped.
+~ 2 96 well plates at each panel , almost all overlap, suggesting that we could substantially speed up work by using the same plate layout across all panels. If we took this approach, of the 2043 non-sex marker missing genotypes, we would regenotype 1067. This also wouldnt "waste" that many resources. Of the 594 panel re-runs from the 198 individuals with 3 or more missing genotypes total, only 114 have no missing data. If we choose to run 96 samples per plate (no negative controls) and use 2 plates, then we are 6 samples short. Let's be sure to pick these 6 that have 8, not 7 total loci genotyped.
 
 
+## Final Decision
 
+Went with the "require 8 scored loci" approach described above. Almost every sample that had 3 or more missing genotypes was extracted again from fresh tissue and run at all panels. 
+
+Also re-run ALL individuals that failed at the sex marker.
 
 
 __Current plan (lab work perspective)__
@@ -542,16 +546,457 @@ rerun %<>%
 ```
 
 
+# First Round Re-Run
+
+Let's import the genotypes from the first (hopefully only) re-runs, and evaluate them.
+
+```{r}
+
+#import
+gm_rerun_a <- read_tsv("genotype_data/genemapper_output/MCKR_Plate_29_30 Genotypes Table.txt", col_types = cols(.default = "c"))
+gm_rerun_b <- read_tsv("genotype_data/genemapper_output/MCKR_Plate_31_29 Genotypes Table.txt", col_types = cols(.default = "c"))
+
+gm_rerun <- bind_rows(gm_rerun_a, gm_rerun_b)
+
+# remove blanks and controls
+gm_rerun %<>%
+  filter(str_starts(`Sample Name`, "Ots"))
+
+
+# sorta long (each allele is its own column for each marker/individual)
+gt_rerun_l_0.1 <- gm_rerun %>%
+  select(sample = `Sample Name`, marker = Marker, panel = Panel, a1 = `Allele 1`, a2 = `Allele 2`)
+
+# super long (for conversion only, totally long - each allele/marker/individual is its own row)
+gt_rerun_0.1_sl <- gm_rerun %>%
+  select(sample = `Sample Name`, marker = Marker, panel = Panel, a1 = `Allele 1`, a2 = `Allele 2`) %>%
+  pivot_longer(cols = c(a1, a2), values_to = "allele")
+
+#now convert to wide format (each marker gets two columns, format for colony and cervus)
+gt_rerun_0.1 <- gt_rerun_0.1_sl %>%
+  pivot_wider(id_cols = c(sample), names_from = c(marker, name), names_prefix = "Ot",  values_from = allele)
+```
+
+## Missingness
+
+How did the reruns go?
+
+```{r}
+miss_rerun <- gt_rerun_l_0.1 %>% 
+  filter(marker != "OtY3") %>%
+  group_by(sample) %>%
+  count(a1) %>%
+  filter(is.na(a1)) %>%
+  rename(n_missing = n) %>% 
+  right_join(distinct(gt_rerun_l_0.1, sample)) %>%
+  filter(sample %in% gm_rerun_a$`Sample Name`) %>%
+  mutate(n_missing = case_when(is.na(n_missing) ~ 0,
+                               TRUE ~ as.numeric(n_missing))) %>%
+  mutate(carcass = case_when(str_starts(sample, "OtsAC") ~ "non-carcass",
+                             TRUE ~ "carcass"))
+miss_rerun %<>%
+  ungroup()
+
+ggplot(data = miss_rerun)+geom_histogram(aes(x = n_missing, fill = carcass), bins = 11, position = "dodge")
+
+miss_rerun %>%
+  count( carcass, n_missing)
+```
+
+Of the 192 samples re-run from tissue at all panels, 140 were fresh tissue and 52 were carcass samples. 
+
+For the fresh tissue samples, 90 (64%) were successfully genotyped at 8 or more markers and 94 (67%) were genotyped at 7 or more. This suggests that re-runs were pretty successful, and when combined with previous data, our dataset will be much more complete.
+
+For the carcass samples, 22 (42%) were successfully genotyped at 8 or more loci.
+
+Looking at the missingness distribution for re-runs and comparing to the first round genotyping, I suspect additional re-runs will provide very quickly diminishing returns; missingness rates are worse for re-runs made from fresh extractions than initial genotyping, suggesting that tissue quality is contributing to missingness.
+
+__Let's call it, NO MORE RERUNS__
+
 # Re-Run Incorporation
 
 In this section we will update the gt_0.1 dataset to include info from re-runs.
 
-For now we will skip this to prepare Cervus and Colony input files without re-runs to use to draft and debug our parentage and analysis R notebooks.
+```{r}
+
+gt_rerun_l_0.1 %<>%
+  rename(a1_rr = a1, a2_rr = a2)
+
+gt_l_0.2 <- gt_l_0.1 %>%
+  left_join(gt_rerun_l_0.1)
+```
+
+Now we can coalesce the two calls, but first, what should we do when an individual was genotyped twice at the same marker?
+
+To decide, we should know how often do called genotypes disagree, this is also a possibly useful estimate of overall genotype error rate, but probably an overestimate
+
+## Error Rate
 
 ```{r}
-# add step to convert straight from gt_0.1 to mckr_gts to skip this for now
-# eventually remove this and actually add re-runs
+#
+error_rate_dataset <- gt_l_0.2 %>%
+  filter(sample %in% gm_rerun_a$`Sample Name`) %>%
+  filter(!(is.na(a1)), !(is.na(a1_rr))) %>%
+  mutate(a1_agree = (a1 == a1_rr) | (a1==a2_rr),
+         a2_agree = (a2 == a1_rr) | (a2==a2_rr)) %>%
+  left_join(select(miss_rerun, -a1)) %>%
+  left_join(missing_count)
+```
+
+Wow, about 9%. This is potentially very bad because of the single mismatch tolerance in the assignment protocol. It's also way higher than the number we use as the prior in COLONY and CERVUS and higher than the error rate calculated from regenotyping about 1% of all samples in the previous work (~2% from 2007-2013 data)
+
+However, it could be that by focusing on the worst individuals (the ones needing re-runs) we're inflating the error rate. If this was the case there should be a relationship between probability of genotypes within an individual not agreeing and the number of missing genotypes for that individuals. Let's check before getting too worried here. 
+
+
+```{r}
+
+error2 <- error_rate_dataset %>%
+  group_by(sample) %>%
+  summarise(disagree_rate = sum(a1_agree == FALSE), n_missing = n_missing, missing_gt = missing_gt)
+
+ggplot(data = error2)+geom_smooth(aes(n_missing, disagree_rate/11), method = "lm")+ggtitle("gt disagree rate vs rerun missingness rate")
+```
+
+Woof okay what a relief, the error rate is much closer to expected for samples with 3 or fewer missing genotypes that will be retained in the analysis.
+
+Let's check just to be sure. When only examining individuals that will be retained in the analysis (at least 7 loci genotyped)
+
+```{r}
+error2 %>% 
+  ungroup() %>%
+  filter(missing_gt < 4) %>%
+  summarise(mean_error = mean(disagree_rate)/11)
+  
+```
+
+Nice!!! The mean error rate is 1.6%, very close to the average error rate from previous data.
+
+```{r, eval = FALSE}
+ggplot(data = error_rate_dataset)+geom_density(aes(x = n_missing, fill = a1_agree), alpha = 0.2)
+
+```
+
+## Incorporate Re-Runs
+
+We've also learned that there is a relationship between missingness rate and genotype accuracy, so perhaps this is the best way to break ties, use whatever came from the run with the least overal missing data. Forturnately the re-run almost always had fewer missing data than the original (makes sense), so let's just defer to the re-run genotype when there is overlap.
+
+```{r}
+# we can assign priority to the re-run by putting it first in a coalesce() call in dplyr
+
+gt_l_0.3 <- gt_l_0.2 %>%
+  rename(a1_1 = a1, a2_1 = a2) %>%
+  mutate(a1 = coalesce(a1_rr, a1_1),
+         a2 = coalesce(a2_rr, a2_1)) %>% # View(.) check if this worked here
+  select(sample_id = sample, marker, panel, a1, a2)
 ```
 
 
+## Missingness
+
+Now that we've added our re-runs how does the dataset look?
+
+First how many individuals are above the 7 locus threshold for retention in the analysis?
+```{r}
+gt_l_0.3 %>%
+  filter(marker != "OtY3") %>%
+  group_by(sample_id) %>%
+  summarise(n_gt = 11-sum(is.na(a1))) %>%
+  count(n_gt) %>% 
+  mutate(perc = n/2580) %>%arrange(desc(n_gt))
+```
+
+98.2% of individuals (2536 / 2580) are genotyped at 7 or more microsatellite loci. Of the 140 individuals that failed to meet this threshold after initial genotyping, re-runs were able to recover 96 of these!
+
+Let's plot missingness.
+
+```{r}
+ggplot(gt_l_0.3 %>%
+  filter(marker != "OtY3") %>%
+  group_by(sample_id) %>%
+  summarise(n_gt = 11-sum(is.na(a1))) %>%
+  count(n_gt) %>% 
+  mutate(perc = n/2580) %>%arrange(desc(n_gt))) + geom_bar(aes(x = n_gt, y = n ), stat = "identity")
+```
+
+How many of the ~2% of excluded samples are carcass samples?
+
+```{r}
+gt_l_0.3 %>%
+  filter(marker != "OtY3") %>%
+  group_by(sample_id) %>%
+  summarise(n_gt = 11-sum(is.na(a1))) %>%
+  mutate(carcass = case_when(str_starts(sample_id, "OtsAC")~"live",
+                             TRUE ~ "carcass")) %>%
+  count(carcass, n_gt) 
+```
+
+Of the 44 exlcuded samples 17 are carcasses, and 27 are live tissue.
+
+## Save
+
+Let's save some files at this point. 
+
+```{r}
+
+# super long (for conversion only, totally long - each allele/marker/individual is its own row)
+gt_0.3_sl <- gt_l_0.3 %>%
+  pivot_longer(cols = c(a1, a2), values_to = "allele")
+
+
+gt_0.3 <- gt_0.3_sl %>%
+  pivot_wider(id_cols = c(sample_id), names_from = c(marker, name), names_prefix = "Ot",  values_from = allele) %>%  
+  select(sample_id, starts_with("Ot201"),starts_with("Ot209"),starts_with("Ot249"),starts_with("Ot253"),starts_with("Ot215"), starts_with("Ot311"),starts_with("Ot409"),starts_with("Ot211"),starts_with("Ot208"),starts_with("Ot212"), starts_with("Ot515"), starts_with("OtOtY"))
+```
+
+```{r, eval = FALSE}
+save(gt_0.3, file= "genotype_data/gt_0.3.RData")
+save(gt_l_0.3,file =  "genotype_data/gt_l_0.3.RData")
+write_tsv(gt_0.3, file = "genotype_data/gt_0.3.txt")
+write_tsv(gt_l_0.3, file = "genotype_data/gt_l_0.3.txt")
+
+```
+
+
+
 # Prep input dataset
+
+Here we want to consolidate the genetic data for all individuals in the metadata.
+
+## Genetic Data Sources
+
+__data sources__  
+Genetic data comes from four sources: the final genetic dataset from Dayan (gt_0.3), a file from Nick Sard confirmed to be the exact file used as input for the 2016 tech report and manuscript pedigress (10APR2016_Cougar_adult), an additional file from Nick for carcass samples (04Jan2016_below_dam_Cougar_adult), and a file consolidated by Vickie Zeller in 2017 (progeny_microsats.txt) 
+
+Where they overlap (2007-2014), the 2017 Zeller dataset includes has different slightly genetic data with fewer missing data and a very small number of different genotype calls than the Sard files. These genotypes ARE NOT the ones used in the 2016 manuscript and tech report. However this file is the only source of genetic information for 2016 and 2017 Cougar Trap samples, so we use it there. Still searching for an explanation of why these files are different. The smaller number of uncalled genotypes suggests re-runs were completed to fill in missing data, but this is probably not the case because the only files that have matching genotypes come from a directory used for the RRS calculation in the 2014 USACE tech report (Directories_Shared_by_Nick/2014/Cougar Dam Tech Report/RRS_final) which is dated BEFORE any analyses for the 2016 tech report. Everywhere else uses the genotypes that match 10APR2016_Cougar_adult, therefore I suspect these genotypes are from a less conservative round of genotype scoring, and that the final genotypes were never uploaded to progeny. I'm still still looking for evidence to support this explanation. 
+
+## Merge 
+
+First let's load the data we'll need into R. 
+
+```{r}
+load("../metadata/dayan_metadata/processed_metadata/metadata.Rdata")
+
+prog_micro <- read_tsv("../genotypes/genotype_data/old_genotypes/Progeny_microsats.txt", col_types = cols(.default = "c"))
+
+sard_sgs_raw <- read_tsv("../metadata/prev_metadata/04JAN2016_below_dam_Cougar_adult_master.txt", col_types = cols(.default = "c"))
+
+```
+
+Let's unify the column names for merging. 
+
+```{r}
+# let's convert to the dayan datasets column naming convention
+
+gt_0.3 %<>% 
+  rename(OtY3_a1 = OtOtY3_a1, OtY3_a2 = OtOtY3_a2) # fix this typo first
+
+# let's also fix the naming convention mistake for 2018 cougar trap samples (named OtsAC18SFML in metadata but OtsAC18MCKR in genotype data)
+
+gt_0.4 <- gt_0.3 %>%
+  mutate(sample_id = case_when(str_starts(sample_id, "OtsAC18MCKR") ~ str_replace(sample_id, pattern = "MCKR", replacement = "SFMK"),
+                               TRUE ~ sample_id))
+
+prog_micro %<>%
+  select(sample_id = `Progeny name`, 
+         Ot201_a1 = Ots201b, Ot201_a2 = Ots201b_1,
+         Ot209_a1 = Ots209, Ot209_a2 = Ots209_1,
+         Ot249_a1 = Ots249, Ot249_a2 = Ots249_1,
+         Ot253b_a1 = Ots253b, Ot253b_a2 = Ots253b_1,
+         Ot215_a1 = Ots215, Ot215_a2 = Ots215_1,
+         Ot311_a1 = OtsG311, Ot311_a2 = OtsG311_1,
+         Ot409_a1 = OtsG409, Ot409_a2 = OtsG409_1,
+         Ot211_a1 = Ots211, Ot211_a2 = Ots211_1, 
+         Ot208_a1 = Ots208b, Ot208_a2 = Ots208b_1,
+         Ot212_a1 = Ots212, Ot212_a2 = Ots212_1,
+         Ot515_a1 = Ots515, Ot515_a2 = Ots515_1)
+
+sard_sgs_raw %<>%
+  select(sample_id = `Sample Name`, 
+         Ot201_a1 = OT201, Ot201_a2 = OT201_1,
+         Ot209_a1 = OT209, Ot209_a2 = OT209_1,
+         Ot249_a1 = OT249, Ot249_a2 = OT249_1,
+         Ot253b_a1 = Ot253b, Ot253b_a2 = Ot253b_1,
+         Ot215_a1 = Ot215, Ot215_a2 = Ot215_1,
+         Ot311_a1 = Ot311, Ot311_a2 = Ot311_1,
+         Ot409_a1 = Ot409, Ot409_a2 = Ot409_1,
+         Ot211_a1 = Ot211, Ot211_a2 = Ot211_1, 
+         Ot208_a1 = Ot208, Ot208_a2 = Ot208_1,
+         Ot212_a1 = Ot212, Ot212_a2 = Ot212_1,
+         Ot515_a1 = Ot515, Ot515_a2 = Ot515_1)
+
+#merge into single dataframe
+gt_0.5 <- bind_rows(gt_0.4, prog_micro, sard_sgs_raw)
+
+```
+
+
+__Merge__
+Now let's merge with the metadata.
+
+First, did any samples in the metadata fail to get the genos attached? We know from the meta_data_consolidation notebook there should be some issues here.
+```{r}
+full_data <- metadata %>%
+  left_join(gt_0.5)
+
+# let's start the work of cleaning this up
+
+# first, did any samples in the metadata fail to get the genos attached
+full_data %>%
+  filter(across(starts_with("Ot"), ~ is.na(.))) %>% View(.)
+
+```
+
+Only the ones we expected to fail are missing, great work! We'll just make a file that links these manually.
+
+Listing these here to answer any future questions:  
+9 NA sample names, these are individuals that are known to exist from the raw, source metadata, but there was no fin clip taken (8 sample), or they were removed from the analysis (couldn't reliably link metadata to fin clip, 1 sample). Consequently given no name.  
+
+OtsAC10SFMK_1118: This is a weird one, it's in Nick's data under its old name (MR10TH_118), but missing from the progeny microsats file. What's strange is that the source files used to query the progeny microsats (Vickie's data, later tabs), includes this sample but the genotypes are entered in a different font. No notes or other comments about this sample anywhere.  
+
+OtsAC14SFMK_0120 - only genetic data, named "OtsAC14SFMK_0" in the progeny microsats query  
+
+4 2016 carcass samples: OtsCC16MCKR_1100, OtsCC16MCKR_1161, OtsCC16MCKR_1162, OtsCC16MCKR_1243 -  These got skipped during first round genotyping when I didn't understand how to parse the different sets of "bridge to mouth" carcass samples. They were included during re-runs  
+
+Hatchery outplant HORs after 2017: These are neither potential parents nor potential offspring in this study and are not genotyped.  
+
+OtsAC14MCKR_0344: Sample given a name in metadata and a labeled tube supplied by ODFW, but the tube was totally empty, no ethanol, tag or fin clip.
+
+Now let's add these genotypes to the full_data dataframe.
+```{r}
+miss_a <- read_tsv("../genotypes/genotype_data/missing_genos.txt", col_types = cols(.default = "c"))
+miss_carc <-  read_tsv("../genotypes/genotype_data/missing_genos_carcass.txt", col_types = cols(.default = "c"))
+
+miss_genos <- bind_rows(miss_a, miss_carc)
+  
+```
+
+```{r}
+# sadly there is no coalescing join function yet in dplyr, let's borrow someone else's work 
+
+coalesce_join <- function(x, y, 
+                          by = NULL, suffix = c(".x", ".y"), 
+                          join = dplyr::full_join, ...) {
+    joined <- join(x, y, by = by, suffix = suffix, ...)
+    # names of desired output
+    cols <- union(names(x), names(y))
+    
+    to_coalesce <- names(joined)[!names(joined) %in% cols]
+    suffix_used <- suffix[ifelse(endsWith(to_coalesce, suffix[1]), 1, 2)]
+    # remove suffixes and deduplicate
+    to_coalesce <- unique(substr(
+        to_coalesce, 
+        1, 
+        nchar(to_coalesce) - nchar(suffix_used)
+    ))
+    
+    coalesced <- purrr::map_dfc(to_coalesce, ~dplyr::coalesce(
+        joined[[paste0(.x, suffix[1])]], 
+        joined[[paste0(.x, suffix[2])]]
+    ))
+    names(coalesced) <- to_coalesce
+    
+    dplyr::bind_cols(joined, coalesced)[cols]
+}
+
+full_data_0.2 <- coalesce_join(full_data, miss_genos, by = "sample_id")
+```
+
+__Sex__
+Next up is cleaning up the geno_sex column and consolidating into the final sex determination used for the study. 
+
+In the study, we will use genotypic sex, if available. If not then we will use phenotypic sex. If phenotypic sex is also missing, we will call sex NA, fortunately only a single sample has NA sex and it also is not genotyped at enough loci to make it to the final dataset, so all samples used for pedigree analysis are sexed!
+
+```{r}
+# now the geno_sex and OtY3 mess
+# for the new samples there is no geno sex in the metadata, let's fix this
+full_data_0.3 <- full_data_0.2 %>%
+  mutate(geno_sex = case_when(is.na(OtY3_a1) ~ geno_sex,
+                              OtY3_a2 == "M" ~ "M",
+                              OtY3_a2 == "308" ~ "F",
+                              TRUE ~ NA_character_),
+         sex = coalesce(geno_sex, pheno_sex),
+         sex = case_when(sex == "J" ~ "M",
+                         TRUE ~ sex)) %>% #call jacks males for the final sex variable
+  relocate(sex, .before = pheno_sex)
+
+
+```
+
+
+__Unify Missing Data__
+
+Missing genotypes are scored many different ways across the datasets. In both Colony and Cervus, missing data must be coded as "0"
+
+```{r}
+full_data_0.3 %<>%
+  mutate(across(starts_with("Ot"), ~ case_when(. == "000" ~ "0",
+                                               is.na(.) ~ "0",
+                                               TRUE ~ (.)))) 
+```
+
+
+# Final Unfiltered Dataset Summary
+
+Here we summarise the final dataset (before filtering for missing data) and conduct a final QC check against published metadata. 
+
+```{r}
+require(kableExtra)
+require(gt)
+require(gtsummary)
+
+
+distinct_full <- full_data_0.3 %>%
+  distinct(sample_id, .keep_all = TRUE) %>%
+  mutate(year = as.factor(year))
+
+
+
+
+tbl_summary(select(distinct_full, type, year), by = type) %>%
+  modify_header(label ~ "") %>%
+  modify_spanning_header(c("stat_1", "stat_2", "stat_3", "stat_4") ~ "**type**") %>%
+  as_kable_extra() %>%
+  kable_classic(full_width = F, html_font = "Arial")# %>%
+```
+
+__Discrepancies__
+
+Here we explain any discrepancies with previously published results (Sard 2016). 
+
+2009:  
+Hatchery Outplants 2009: In table 1 from Sard 2016 there are 1347 hatchery outplants from 2009, but 1386 total samples in 2009, despite that there are no other samples in 2009. I believe this is a simple typo in the mansucript. In all of Nick's summary files there are 1386 hatchery outplants. There are also 1386 in the final dataset provided by Nick (10APR2016_Cougar_adult_master). This difference is not due to filtering, Sard 2016 table 1 presents the unfiltered dataset, before duplicates and missing individuals are removed.
+
+2011:  
+Hatchery Outplants and Cougar 2011: In table 1 from Sard 2016 there are 344 hatchery outplants from 2011, but there are 345 in my data and in Nick's final dataset (10APR2016_Cougar_adult_master). 
+
+# Filtered Dataset
+
+## Rationale
+
+wednesday: need to create a key file from the Vickie spreadsheets to link old smaple names to progeny sample names, then merge genotype data only from the 10APR_Adult_cougar dataset. 
+
+
+The filtering approach used in the previous reports varies from colony/cervus run to run and year to year. In some cases no filtering is done prior to assignment in Cervus and Colony, in others very strict filtering is used (duplicates removed an only 10 or more genotyped loci tolerated). The transition seems to be at 2014 (offspring year), when the 2014 and 2015 offspring years were added to the June 2016 tech report. This is reflected in Sard's gt.prep scripts. Return years 2010 to 2013 seem to use the gt.prep script, but 2014 and 2015 each use their own gt.prep scripts that follow the much more strict 9 genotyped loci filtering cutoff and removal of potential duplicate samples. 
+
+A challenge here is that in the previous analyses, cervus was run by comparing a single parent year to a single offpsring year, then all possible pedigrees for a given offspring year were concatenated. This is not acceptable going forward as it creates many problems (discussed elsewhere). Instead, all possible parents for a given offspring must be considered simultaneously by cervus and colony. However, now we have a set of new problems; there is no way to filter the dataset in the same manner as before while also (1) fixing the problem described above because the different filtering parameters create different sets of parents from run to run that will now be combined into a single run, and (2) creating a single dataset applied analysis wide. 
+
+Yet another issue is that it is clear at some point, some re-runs were conducted to fill in missing data at samples that were excluded from the later reports. So now we could add back the missing samples. 
+
+Let's consider some examples:
+
+_MR09A_0145/OtsAC09MCKR_0145_  
+A hatchery outplant from 2009, this individual is missing data at 4 loci in all datasets compiled prior to 2017. It is included as a potential parent for 2012 and 2013 offspring, but excluded (due to missing data) for 2014 and 2015. In all datasets compiled in 2017 and later, it has no missing data.
+
+
+_MR10A_292/OtsAC10SFMK_0292_
+A hatchery outplant from 2010, this individual is missing data at 3 loci in all datasets compiled prior to 2017. It is included as a potential parent for 2013 offspring, but excluded (due to missing data) for 2014 and 2015. In all datasets compiled in 2017 and later, it has 1 missing loci.
+
+
+So what to do here??? 
+
+Going forward I chose to apply a single filtering scheme across the entire dataset.
+
+Where does the 7 loci cutoff come from?
+
+
+

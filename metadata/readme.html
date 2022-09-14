@@ -375,31 +375,23 @@ summary {
 </div>
 
 
-<div id="readme-for-directory-mckenzie_2021genotypesgenotype_data" class="section level1">
-<h1>Readme for directory mckenzie_2021/genotypes/genotype_data/</h1>
-<div id="directories" class="section level3">
-<h3>directories</h3>
-<p><strong>main directory</strong>: interemediate and final genotype files from 2022 <strong>genemapper_output</strong>: These are the raw genotype tables output by genemapper. <strong>old_genotypes</strong>: data from previous reports/manuscripts</p>
+<p>Readme for Metadata Directory</p>
+<p>Metadata for this project spans 15 years, two governmental agencies, subcontractors for field work, and two genetics labs with 5-6 different workers. This directory represents David Dayan’s best attempt to organize and consolidate into a single file with all relevant information for the 2022 USACE report, future manuscripts and future reports.</p>
+<div id="crucial-files" class="section level1">
+<h1>Crucial Files</h1>
+<p>If you’re here to pick up this project in the future there are a couple files you should prioritize:<br />
+(1) metadata.RData / metadata.xslx : This is the final metadata file used for the 2022 analysis. The xlsx file has a useful readme. File is in the dayan_metadata/processed_metadata subdirectory<br />
+(2) 10APR2016_Cougar_adult_master : This is the final dataset used for the 2016 manuscript.</p>
 </div>
-<div id="files-in-the-main-directory-genotype_data" class="section level3">
-<h3>Files in the main directory (genotype_data)</h3>
-<p><strong>gt_0.1</strong>: This is a wide format gentic dataset (no metadata) for all 2022 genotyping BEFORE re-runs were added.<br />
-<strong>gt_0.3</strong>: re-runs incorporated, no metadata, no previous data, no filtering of any kind. wide format<br />
-<strong>gt_l_0.3</strong>: re-runs incorporated, no metadata, no previous data, no filtering of any kind. long format</p>
-<p><strong>missing_genos…</strong> These files are used to fix some failed merging when combining old genotype data, new genotype data and the consolidated final metadata. No one should need to open these, but they are required to make the genotype prep notebook run smoothly (see genotype_data_prep notebook for details).</p>
-</div>
-<div id="files-in-subdirectory-genemapper_ouptut" class="section level3">
-<h3>Files in subdirectory “genemapper_ouptut”</h3>
-<p>These are the raw genotype tables output by genemapper. Note that plates 17-20 have a naming error in the raw files (see big mistake log).</p>
-<p>plates 29-30 and 31-29 are re-runs</p>
-</div>
-<div id="files-in-subdirectory-old_genotypes" class="section level3">
-<h3>Files in subdirectory “old_genotypes”</h3>
-<p><strong>progeny_microsats</strong>: 2017 Progeny query for microsat data. Also contains neatly organized (by tab) metadata for all samples 2007-2016. However note that the genotypic data has small differences from the dataset used in previous approaches, with a small number of different calls, but more commonly, genotypes that are missing in the data. Still no explanation on whether this is due to final data not being uploaded to progeny, or if re-runs were done after 2016 manuscript to fill missing data. Unlikely that the latter (re-runs) is the case though because these genotypes match a small subset files dated to 2014. It is the only source of genotype data after the 2016 manuscript (2016 and 2017 cougar trap samples), but before Dayan began genotyping in 2021.<br />
-<strong>id_key.txt</strong>: used to match current sample ids to previous sample_ids<br />
-<strong>10APR2016_cougar_Adult</strong>: This is the file used for the 2016 manuscript and tech reports for parentage assignment. USE THIS ONE.<br />
-<strong>04JAN2016_below_dam_cougar</strong>: This file contains some additional samples used in 2016 tech report and manuscript, but excluded from the 10APR2016_cougar_adult dataset because they are carcass samples from below the dam.</p>
-</div>
+<div id="subdirectories" class="section level1">
+<h1>Subdirectories</h1>
+<p>Some subdirectories have their own readmes, but the general outline below might still be useful</p>
+<p>dayan_metadata: Dayans working directory for metadata consolidation<br />
+- intake_forms: documents with supplemental information to spreadsheets<br />
+- processed_metadata: directory for Dayan’s secondary/complied metadata<br />
+- raw_metadata: primary, unprocessed metadata from field, or very close approximation to it<br />
+prev_metadata: secondary, compiled metadata and progeny database queries from Sandra Bohn, Vickie Zeller, and final datasets used in 2016 manuscript<br />
+maps: directory for maps from previous reports</p>
 </div>
 
 

@@ -158,6 +158,7 @@ progeny_2021%>%
 ```
 
 ## 2016 and 2017
+
 2016 was batch sampled so there is no individual level information in progeny. Instead there are 5 batch jars of fin clips from outplants above Cougar, separated by date of release and sometimes by sex. Manually created a spreadsheet of the available information for individual fin clips with applicable metadata and used that for 2016 and 2017.
 
 ```{r}
@@ -360,7 +361,22 @@ sgs_meta <- bind_rows(sard_sgs, sgs_2016, sgs_2017, sgs_2018, sgs_2019)
 
 # Precocial Males
 
-also add the precocial males
+In 2014 12 precocial males were included as potential offspring and parents. The sample came with the note 
+
+> These are precocials that were larger than the subyearlings we were targeting in the stream We suspect they came up from the reservoir to spawn.
+
+```{r}
+precocial_male <- progeny_2021 %>%
+  filter(str_starts(`Individual name`, "OtsAC14SFMK_15")) %>%
+  select(sample_id = `Individual name`) %>%
+  mutate(origin = "NOR",
+         year = 2014,
+         pheno_sex = "M")
+
+
+```
+
+
 
 # Combine
 ```{r}
@@ -368,12 +384,20 @@ cougar %<>%
   mutate(date = ymd_hms(date),
          date = ymd(date),
          length = as.numeric(length))
-metadata <- bind_rows(cougar, hatch_outplants, sgs_meta)
+metadata <- bind_rows(cougar, hatch_outplants, sgs_meta, precocial_male, .id = "type")
+
+metadata %<>%
+  mutate(type = case_when(type == 1 ~ "cougar_trap",
+                          type == 2 ~ "hatchery_outplant",
+                          type == 3 ~ "sgs",
+                          type == 4 ~ "precocial_male"))
 ```
 
 
 
 # Final Check
+
+Let's make sure every individual included in the metadata here has been genotyped. There are three files we'll check for this: Dayan's list of samples to genotype in 2021, the "progeny_microsats" file from Vickie Zeller and the below dam Sard dataset.
 
 ```{r}
 dayan_genotyped <- readxl::read_xlsx("../../../lab_work/genotyping/to_genotype.xlsx", sheet = 2)
@@ -390,8 +414,54 @@ Most missing are from a change in naming convention: there are 120 2018 cougar t
 
 All others make sense (e.g. 2019 HORs outplanted from Cougar trap - 2019 is not a parent year, so these aren't included ) except the following:
 
-OtsAC10SFMK_1118 -   
+OtsAC10SFMK_1118 - This is a weird one, it's in Nick's data under its old name (MR10TH_118), but missing from the progeny microsats file. What's strange is that the source files used to query the prgeny microsats (Vickie's data, later tabs), includes this sample but the genotypes are entered in a different font. No notes or other comments about this sample anywhere. It's definitely in the 2016 paper as a potential offspring. Should be included, but when we merge to get genotypes, we will have to manually add these from a different source.    
+
+OtsAC14SFMK_0120 - only genetic data, named "OtsAC14SFMK_0" in the progeny microsats query
+
 4 2016 carcass samples: OtsCC16MCKR_1100, OtsCC16MCKR_1161, OtsCC16MCKR_1162, OtsCC16MCKR_1243 -  These got skipped when I didn't understand how to parse the different "bridge to mouth" carcass samples. They should be included. At this point (when this notbeook is being written) first round genotyping is complete and re-runs are plated, but not extracted, amplified or genotyped.
 
 Fortunately there are several spots on the re-run plates where all the tissue was used in the first round genotyping, so no re-runs are possible. I manually edited the final plating files to add these samples to the re-runs.
+
+
+Still a couple QC things I missed
+```{r}
+metadata %<>%
+  mutate(origin = case_when(origin == "Clipped" ~ "HOR",
+                            origin == "N" ~ "NOR",
+                            origin == "Y" ~ "HOR",
+                            origin == "NA" ~ NA_character_,
+                            origin == "Unclipped" ~ "NOR",
+                            origin == "Unknown" ~ NA_character_,
+                            TRUE ~ origin),
+         pheno_sex = case_when(pheno_sex == "Female" ~ "F",
+                               pheno_sex == "Male" ~ "J",
+                               pheno_sex == "NA" ~ NA_character_,
+                               pheno_sex == "UNKNOWN" ~ NA_character_,
+                               TRUE ~ pheno_sex),
+         geno_sex = case_when(geno_sex == "NA" ~ NA_character_,
+                              TRUE ~ geno_sex))
+```
+
+
+__More Cleanup__
+
+Many samples made it to the metadata that will not be included as either potential parents or potential progeny. Some we are interested in keeping in the metadata, others not. 
+Cuugar Trap HOR 2018, 2019 and 2020: These individuals are never considered as potential parents or offspring. However it is important to keep them in the metadata. 
+SGS HORs: SGS individuals are only considered as parents above the dam, and only NOR SGS are considered as offspring. There are no HOR SGS samples above the dam, so we have no interest in HOR SGS samples. __REMOVE THESE__
+
+```{r}
+metadata %<>%
+  filter(! (type == "sgs" & origin == "HOR"))
+```
+
+
+
+# Save
+
+Let's save the final metadata as a txt file and an R object.
+
+```{r, eval = FALSE}
+save(metadata, file = "metadata.Rdata")
+write_tsv(metadata, "metadata.txt")
+```
 
