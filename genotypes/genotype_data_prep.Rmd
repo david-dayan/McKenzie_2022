@@ -1201,6 +1201,9 @@ Let's write a single function for Cervus that will parse the dataset and write t
 Cervus requires 4 files: three lists of sample_ids (dams, sires, offspring) with each individual on a newline, and a genotype file. The genotype file is tab delimited with a single row for each individual, two columns for each loci and no other data.
 
 ```{r, eval = FALSE}
+
+#note that I later moved the directories to the parentage directort and renamed them to CERVUS and COLONY (instead of CERVUS_inputs and COLONY_inputs)
+
 write_cervus_files <- function(offspring_year) {
   dams <- full_data_1.0 %>% 
     filter(offspring_year - year <= 6, offspring_year - year >= 3, cand_parent == TRUE, sex == "F") %>%
@@ -1270,6 +1273,9 @@ count(distinct(full_data_1.0, sample_id, .keep_all = TRUE), origin, year)
 Colony input is a little different, we'll need to modify our function. It only takes three files, genotypes for offspring, dams and sires. 
 
 ```{r, eval = FALSE}
+
+#note that I later moved the directories to the parentage directort and renamed them to CERVUS and COLONY (instead of CERVUS_inputs and COLONY_inputs)
+
 write_colony_files <- function(offspring_year) {
   dams <- full_data_1.0 %>% 
     filter(offspring_year - year <= 6, offspring_year - year >= 3, cand_parent == TRUE, sex == "F") %>%
