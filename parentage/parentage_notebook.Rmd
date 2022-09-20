@@ -1,0 +1,63 @@
+---
+title: "McKenzie 2022 Parentage Assignment Log"
+output:
+  html_document:
+    df_print: paged
+    code_folding: hide
+    toc: true
+    toc_float: true
+    toc_collapsed: false
+---
+
+```{r, message = FALSE, warning=FALSE}
+require(kableExtra)
+require(gt)
+require(gtsummary)
+require(tidyverse)
+require(magrittr)
+```
+
+
+# Summary
+
+This notebook contains a log of all work to create the final pedigree for the 2022 South Fork McKenzie River Chinook salmon genetic pedigree study.
+
+For each offspring year, assign parentage using two programs: _Cervus_ and _Colony_. Then create a consensus pedigree between the two programs. Finally, combine offspring years into a final pedigree used for downstream analysis.
+
+This is an R notebook. The .html version of this file is a fully rendered and interactive log. To view it, save the html and open in a browse. The .rmd version can be opened within R studio. To reproduce results or edit the analysis: clone the full repository onto tyour local machine and open the r project in rstudio. This will provide all needed data and objects. 
+
+# Rationale and Pedigree Years
+
+This notebook is a log of all work to produce a pedigree of all Chinook Salmon released above Cougar Dam on the South Fork McKenzie River from 2007 - 2017 using potential offspring sampled from 2010 to 2020.
+
+__Summary of Cohort Years__
+
+Previous reports and manuscripts evaluating the reintroduction of Chinook salmon above Cougar Dam on the South Fork McKenzie river have considered NOR salmon sampled from 2010 to 2015 as potential offspring of salmon released above Cougar Dam from 2007 - 2012. 
+
+Most Chinook salmon on the South Fork McKenzie express an age at maturity of 3 - 6 years. Therefore, previous reports (relying on 2010 - 2015 NOR returns) have inferred a pedigree for salmon released above the dam from 2007 - 2009. Results based on the pedigree of salmon released aboveCougar Dam in 2010 were also provided along with the caveat that age 6 offspring were not yet evaluated and some results such as Total Lifetime Fitness and Cohort Replacement Rate were likely underestimates.
+
+Continuing this work, we have since genotyped NOR salmon sampled on the South Fork McKenzie from 2016 to 2020, as well as salmon released above Cougar dam from 2013 to 2017. These new data allow us to complete the pedigree of salmon released above Cougar Dam in 2010, infer full pedigrees TLF  for salmon released above Cougar Dam from 2011 - 2014, and partial pedigrees for salmon released above the dam from 2015 - 2017.
+
+__Inferring 2007 - 2010 Pedigrees Again__
+
+Irrevocable updates to software packages used to assign parentage (COLONY) prevent us from exactly reproducing the approach used to infer the pedigrees used in previous reports. We chose to infer all pedigrees from 2007 to 2017 from the raw genetic data using a consistent approach rather than simply combining previous pedigrees with those inferred from new data.  
+
+This approach has several advantages:  
+(1) Trends - Results based on the pedigrees such as Cohort Replacement Rate and Total Lifetime Fitness suffer from the same biases across all years, allowing more confidence in the identification of year - year trends.   
+(2) Fitness modeling - Similar to above, applying a consistent approach to pedigree inference gives us more power to identify predictors of fitness by allowing us to combine data from more years into a single analysis  
+(3) Minor Issues - In reproducing previous results, minor errors in code were identified. While these errors ultimately had little effect on the final pedigrees and results, inferring the pedigrees again allows us to fix these small errors. For example in the Cervus pedigrees, the software is run using a single parent year and a single offspring year, then the results are concatenated for all parent years within an offspring year. This renders the likelihoods incomparable. Likelihoods are used to break ties when inferring the cervus pedigree, but it mostly doesn't matter because Colony is given priority in the consensus pedigree. 
+
+
+# Data Summary
+
+Input data is available in the directories:  
+"mckenzie_2022/parentage/CERVUS"    
+"project repository/parentage/COLONY"    
+
+- These directories contains inputs and outputs for/from Cervus and Colony  
+- Subdirectories are organized by offspring year, each subdirectory contains:  
+    - all data required to run Cervus and Colony for a given offspring year  
+    - unprocessed outputs from Cervus and Colony for a given offspring year  
+    - processed Cervus and Colony pedigrees for a given offspring year  
+    - note that the same parents occur can occur across multiple offspring years, so all information for a given parent may be spread across multiple subdirectories  
+

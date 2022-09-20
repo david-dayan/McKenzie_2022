@@ -280,6 +280,14 @@ sard_sgs %<>%
 
 2011-2013 do not have SFGL ids and are not in progeny, we will use the original hmsc id as the sample name for these, 2014-2015 will use the SFGL ids
 
+One issue here is that the field called "loc" in the dataset we're using has two values that are equal but are actually from different locations. Other datasets demonstrate that the value "Bridge to Mouth" is used as survey reach both on the South Fork and on Horse Creek. The Banks 2016 tech report excluded these samples. LEt's get rid of them manually.
+
+```{r}
+sard_sgs %<>%
+  filter(!(sample_id %in% c("OtsAC14SFMK_2043", "OtsAC14SFMK_2048", "OtsAC14SFMK_2049")))
+```
+
+
 ## 2016 - 2019
 
 The progeny fields for 2016-2019 are a total mess. Let's start from the raw metadata, because this is one of the few places where we have it.
@@ -452,6 +460,84 @@ SGS HORs: SGS individuals are only considered as parents above the dam, and only
 ```{r}
 metadata %<>%
   filter(! (type == "sgs" & origin == "HOR"))
+```
+
+
+__Yet more minor issues__
+
+```{r}
+# fix river km nas, release nas, "dam to to bridge,
+# also fix the cm/mm issue in the length field, we will assume any fish over 100 is measured in mm (every fish greater to 100 is either a jack of impossible large if measured in cm (next samllest non-jack after 100 is 258))
+
+metadata %<>%
+  mutate(release = case_when(release == "NA" ~ NA_character_,
+                             TRUE ~ release)) %>%
+  mutate(rkm = case_when(release == "Frissel Bridge" ~ "36.4",
+                         release == "Hard Rock" ~ "17.2",
+                         release == "Homestead" ~ "29.7",
+                         rkm == "NA" ~ NA_character_,
+                         TRUE ~ rkm),
+         sgs_reach = case_when(sgs_reach == "Dam to Bridge" ~ "Cougar Dam to Bridge",
+                               sgs_reach == "Cougar Reservoir to Bridge" ~ "Cougar Dam to Bridge",
+                               TRUE ~ sgs_reach),
+         length = case_when(length == 7000 ~ 70, #fix this obvious typo
+                            length > 100 ~ length /10,
+                            TRUE ~ length)) 
+
+```
+
+
+# Parent
+
+Before saving, let's add a field specifying if this individual should be a potential parent in the study. We'll ignore date so that this field can be used in future studies (e.g. 2019 is not a parent year, in this study but will be later). So ultimately this is defined only by if a fish could have potentially spawned above the dam. Therefore it includes:  
+* ALL Hatchery Outplants  
+* Cougar Trap Individuals Eventually release above dam (individual rows containing downstreaming release information should still be parent tagged if the same fish was later released upstream)   
+* Precocial Males  
+* SGS samples from above the Dam  
+
+We will name the field cand_parent
+
+```{r}
+cand_parent_list <-  metadata %>%
+  filter(type == "hatchery_outplant" | section == "SFMK_above" | release %in% c("Bridge 1980", "Frissel Bridge", "Hard Rock", "Homestead", "Reservoir", "Slide Creek") | type == "precocial_male") %>%
+  distinct(sample_id) %>% 
+  pull(sample_id)
+
+# let's look through all the excluded individuals to make sure they we didn't miss any parents
+#metadata %>%
+#  filter(!(sample_id %in% cand_parent_list)) %>% View()
+
+# yes, nearly all of these are forest glen or tailrace cougar fish that never returned, but there are also some weird cases let's look at those
+
+#metadata %>%
+#  filter(!(sample_id %in% cand_parent_list), !(release %in% c("Forest Glen", "Tailrace"))) %>% View()
+
+# there are 11 cougar samples with NA releases, most of these are trap morts and should be excluded, but a handful are special cases where we don't know where they went, we chose to include these as candidate parents, so let's tag them too
+```
+
+There are 11 cougar samples with NA releases, most of these are trap mortalities and should be excluded, but a handful are special cases where we don't know where they went, we chose to include these as candidate parents, so let's tag them too. The rationale here is that variance in fitness is so large and sampe size is so small that we want to retain every candidate parent possible as missing just successful parent could have a major impact on CRRs. Recording decision for each below:  
+
+OtsAC13SFMK_4176 - Trap Mort  
+OtsAC13SFMK_4236 - Trap Mort  
+OtsAC14SFMK_0120 - This tube came with a fin clip and id, but was missing from the  metadata, INCLUDE AS CANDIDATE PARENT    
+OtsAC15SFMK_0117 - Trap Mort  
+OtsAC16SFMK_1089 - Trap Mort  
+OtsAC16SFMK_1155 - Like 120 above, sample in box but no matching metadata, INCLUDE AS CANDIDATE PARENT  
+OtsAC16SFMK_1163 - Trap Mort  
+OtsAC16SFMK_1165 - Trap Mort  
+OtsAC17SFMK_0098 - sample in box but no matching metadata, INCLUDE AS CANDIDATE PARENT  
+OtsAC18SFMK_0021 - Trap Mort  
+OtsAC20SFMK_1212 - Trap Mort  
+
+```{r}
+# add these three to candidate parents
+cand_parent_list <- c(cand_parent_list, "OtsAC14SFMK_0120", "OtsAC16SFMK_1155", "OtsAC17SFMK_0098")
+```
+
+```{r}
+# make the variable
+metadata %<>% 
+  mutate(cand_parent = sample_id %in% cand_parent_list)
 ```
 
 

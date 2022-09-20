@@ -379,14 +379,20 @@ summary {
 <h1>Readme for directory mckenzie_2021/genotypes/genotype_data/</h1>
 <div id="directories" class="section level3">
 <h3>directories</h3>
-<p><strong>main directory</strong>: interemediate and final genotype files from 2022 <strong>genemapper_output</strong>: These are the raw genotype tables output by genemapper. <strong>old_genotypes</strong>: data from previous reports/manuscripts</p>
+<p><strong>main directory</strong>: intermediate and final genotype files from 2022<br />
+<strong>genemapper_output</strong>: These are the raw genotype tables output by genemapper.<br />
+<strong>old_genotypes</strong>: data from previous reports/manuscripts<br />
+<strong>CERVUS inputs</strong>: Formatted genetic input files and sample lists for CERVUS, organized by offspring year<br />
+<strong>COLONY inputs</strong>: Formatted genetic input files and sample lists for COLONY, organized by offspring year</p>
 </div>
 <div id="files-in-the-main-directory-genotype_data" class="section level3">
 <h3>Files in the main directory (genotype_data)</h3>
 <p><strong>gt_0.1</strong>: This is a wide format gentic dataset (no metadata) for all 2022 genotyping BEFORE re-runs were added.<br />
 <strong>gt_0.3</strong>: re-runs incorporated, no metadata, no previous data, no filtering of any kind. wide format<br />
-<strong>gt_l_0.3</strong>: re-runs incorporated, no metadata, no previous data, no filtering of any kind. long format</p>
-<p><strong>missing_genos…</strong> These files are used to fix some failed merging when combining old genotype data, new genotype data and the consolidated final metadata. No one should need to open these, but they are required to make the genotype prep notebook run smoothly (see genotype_data_prep notebook for details).</p>
+<strong>gt_l_0.3</strong>: re-runs incorporated, no metadata, no previous data, no filtering of any kind. long format <strong>gt_1.0</strong>: final dataset, fully filtered (missingness and duplicates), no metadata. one row per sample. wide format. SUBSET THIS ONE AS INPUT FOR CERVUS/COLONY<br />
+<strong>full_filtered_dataset</strong>: final dataset, fully filtered (missingness and duplicates), includes metadata (some individuals occur twice, USE CAUTION). wide format</p>
+<p><strong>missing_genos…</strong> These files are used to fix some failed merging when combining old genotype data, new genotype data and the consolidated final metadata. No one should need to open these, but they are required to make the genotype prep notebook run smoothly (see genotype_data_prep notebook for details).<br />
+<strong>duplicates.txt</strong> These are individuals that were identified as duplicates. The approach used was strict and required exact matching between samples within a year at all scored loci.</p>
 </div>
 <div id="files-in-subdirectory-genemapper_ouptut" class="section level3">
 <h3>Files in subdirectory “genemapper_ouptut”</h3>

@@ -2,17 +2,24 @@
 
 ### directories  
 
-__main directory__: interemediate and final genotype files from 2022
-__genemapper_output__: These are the raw genotype tables output by genemapper. 
-__old_genotypes__: data from previous reports/manuscripts
+__main directory__: intermediate and final genotype files from 2022  
+__genemapper_output__: These are the raw genotype tables output by genemapper.  
+__old_genotypes__: data from previous reports/manuscripts  
+__CERVUS inputs__: Formatted genetic input files and sample lists for CERVUS, organized by offspring year  
+__COLONY inputs__: Formatted genetic input files and sample lists for COLONY, organized by offspring year
+
 
 ### Files in the main directory (genotype_data)
 
 __gt_0.1__: This is a wide format gentic dataset (no metadata) for all 2022 genotyping BEFORE re-runs were added.  
 __gt_0.3__: re-runs incorporated, no metadata, no previous data, no filtering of any kind. wide format   
-__gt_l_0.3__: re-runs incorporated, no metadata, no previous data, no filtering of any kind. long format  
+__gt_l_0.3__: re-runs incorporated, no metadata, no previous data, no filtering of any kind. long format 
+__gt_1.0__: final dataset, fully filtered (missingness and duplicates), no metadata. one row per sample. wide format. SUBSET THIS ONE AS INPUT FOR CERVUS/COLONY    
+__full_filtered_dataset__: final dataset, fully filtered (missingness and duplicates), includes metadata (some individuals occur twice, USE CAUTION). wide format  
 
-__missing_genos...__ These files are used to fix some failed merging when combining old genotype data, new genotype data and the consolidated final metadata. No one should need to open these, but they are required to make the genotype prep notebook run smoothly (see genotype_data_prep notebook for details).
+__missing_genos...__ These files are used to fix some failed merging when combining old genotype data, new genotype data and the consolidated final metadata. No one should need to open these, but they are required to make the genotype prep notebook run smoothly (see genotype_data_prep notebook for details).  
+__duplicates.txt__ These are individuals that were identified as duplicates. The approach used was strict and required exact matching between samples within a year at all scored loci.  
+
 
  
 ### Files in subdirectory "genemapper_ouptut"

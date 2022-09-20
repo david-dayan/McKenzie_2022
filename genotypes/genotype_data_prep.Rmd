@@ -26,7 +26,8 @@ This notebook achieves several data prep goals for the McKenzie Genetic Pedigree
 
 (1) Convert raw genemapper output from 2022 and data from previous reports into two cleaned up and consolidated datasets, long and wide, that can be used to prepare data for Cervus and Colony runs, plan re-runs and serve as a long term store of data with good documentation.  
 (2) Plan which genotypes need re-runs.  
-(3) Prepare input datasets for Cervus and Colony.  
+(3) Conduct additional, final QC check on which samples to include and explanation of any remaining discrepancies with previous publications  
+(4) Prepare input datasets for Cervus and Colony.  
 
 # Dataset Definitions
  
@@ -185,7 +186,7 @@ Now we'll look at missingness and make decisions on re-runs.
 
 ### Missingness Rate
 
-Only individuals with genotypes at >=7 loci were included in the parentage analysis in previous reports, a threshold that was determined based on the non-exclusion probabilities observed across loci for assigning parentage to an individual parent or parent pair.
+Only individuals with genotypes at >=7 loci will be included in the parentage analysis , a threshold that was determined based on the non-exclusion probabilities observed across loci for assigning parentage to an individual parent or parent pair.
 
 As a bare minimum, we should try to get every individual over this barrier, and DPJ suggested this is the re-run genotyping approach used to arrive at the final dataset (re-run individuals with <=7 scored genotypes, once).
 
@@ -767,7 +768,7 @@ Here we want to consolidate the genetic data for all individuals in the metadata
 __data sources__  
 Genetic data comes from four sources: the final genetic dataset from Dayan (gt_0.3), a file from Nick Sard confirmed to be the exact file used as input for the 2016 tech report and manuscript pedigress (10APR2016_Cougar_adult), an additional file from Nick for carcass samples (04Jan2016_below_dam_Cougar_adult), and a file consolidated by Vickie Zeller in 2017 (progeny_microsats.txt) 
 
-Where they overlap (2007-2014), the 2017 Zeller dataset includes has different slightly genetic data with fewer missing data and a very small number of different genotype calls than the Sard files. These genotypes ARE NOT the ones used in the 2016 manuscript and tech report. However this file is the only source of genetic information for 2016 and 2017 Cougar Trap samples, so we use it there. Still searching for an explanation of why these files are different. The smaller number of uncalled genotypes suggests re-runs were completed to fill in missing data, but this is probably not the case because the only files that have matching genotypes come from a directory used for the RRS calculation in the 2014 USACE tech report (Directories_Shared_by_Nick/2014/Cougar Dam Tech Report/RRS_final) which is dated BEFORE any analyses for the 2016 tech report. Everywhere else uses the genotypes that match 10APR2016_Cougar_adult, therefore I suspect these genotypes are from a less conservative round of genotype scoring, and that the final genotypes were never uploaded to progeny. I'm still still looking for evidence to support this explanation. 
+Where they overlap (2007-2014), the 2017 Zeller dataset has slightly different genetic data with fewer missing data and a very small number of different genotype calls than the Sard files. These genotypes ARE NOT the ones used in the 2016 manuscript and tech report. However this file is the only source of genetic information for 2016 and 2017 Cougar Trap samples, so we use it there. Still searching for an explanation of why these files are different. The smaller number of uncalled genotypes suggests re-runs were completed to fill in missing data, but this is probably not the case because the only files that have matching genotypes come from a directory used for the RRS calculation in the 2014 USACE tech report (Directories_Shared_by_Nick/2014/Cougar Dam Tech Report/RRS_final) which is dated BEFORE any analyses for the 2016 tech report. Everywhere else uses the genotypes that match 10APR2016_Cougar_adult, therefore I suspect these Zeller genotypes are from a less conservative round of genotype scoring, and that the final genotypes were never uploaded to progeny. I'm still still looking for evidence to support this explanation. Unfortunately a progeny crash wiped out when and who uploaded genotypes to progeny.
 
 ## Merge 
 
@@ -776,9 +777,13 @@ First let's load the data we'll need into R.
 ```{r}
 load("../metadata/dayan_metadata/processed_metadata/metadata.Rdata")
 
-prog_micro <- read_tsv("../genotypes/genotype_data/old_genotypes/Progeny_microsats.txt", col_types = cols(.default = "c"))
+sard_genos <- readxl::read_xlsx("genotype_data/old_genotypes/10APR2016_Cougar_adult_master.xlsx", sheet = 1, col_types = "text")
+
+prog_micro <- read_tsv("genotype_data/old_genotypes/Progeny_microsats.txt", col_types = cols(.default = "c"))
 
 sard_sgs_raw <- read_tsv("../metadata/prev_metadata/04JAN2016_below_dam_Cougar_adult_master.txt", col_types = cols(.default = "c"))
+
+id_key <- read_tsv("genotype_data/old_genotypes/id_key.txt")
 
 ```
 
@@ -787,12 +792,11 @@ Let's unify the column names for merging.
 ```{r}
 # let's convert to the dayan datasets column naming convention
 
-gt_0.3 %<>% 
-  rename(OtY3_a1 = OtOtY3_a1, OtY3_a2 = OtOtY3_a2) # fix this typo first
 
 # let's also fix the naming convention mistake for 2018 cougar trap samples (named OtsAC18SFML in metadata but OtsAC18MCKR in genotype data)
 
 gt_0.4 <- gt_0.3 %>%
+  rename(OtY3_a1 = OtOtY3_a1, OtY3_a2 = OtOtY3_a2) %>%
   mutate(sample_id = case_when(str_starts(sample_id, "OtsAC18MCKR") ~ str_replace(sample_id, pattern = "MCKR", replacement = "SFMK"),
                                TRUE ~ sample_id))
 
@@ -824,8 +828,32 @@ sard_sgs_raw %<>%
          Ot212_a1 = Ot212, Ot212_a2 = Ot212_1,
          Ot515_a1 = Ot515, Ot515_a2 = Ot515_1)
 
+sard_genos %<>%
+  select(hmsc_id = `Sample.Name`, 
+         Ot201_a1 = OT201...6, Ot201_a2 = OT201...7,
+         Ot209_a1 = OT209...8, Ot209_a2 = OT209...9,
+         Ot249_a1 = OT249...10, Ot249_a2 = OT249...11,
+         Ot253b_a1 = Ot253b...12, Ot253b_a2 = Ot253b...13,
+         Ot215_a1 = Ot215...14, Ot215_a2 = Ot215...15,
+         Ot311_a1 = Ot311...16, Ot311_a2 = Ot311...17,
+         Ot409_a1 = Ot409...18, Ot409_a2 = Ot409...19,
+         Ot211_a1 = Ot211...20, Ot211_a2 = Ot211...21, 
+         Ot208_a1 = Ot208...22, Ot208_a2 = Ot208...23,
+         Ot212_a1 = Ot212...24, Ot212_a2 = Ot212...25,
+         Ot515_a1 = Ot515...26, Ot515_a2 = Ot515...27)
+
+# add new ids to sard data, note that we don't have these keys for the sard sgs samples
+
+sard_genos %<>%
+  left_join(id_key) %>%
+  relocate(sample_id)
+
+# now let's remove the rows from the prog_microsats file we don't need
+prog2 <- prog_micro %>%
+  filter(!(sample_id %in% sard_genos$sample_id))
+
 #merge into single dataframe
-gt_0.5 <- bind_rows(gt_0.4, prog_micro, sard_sgs_raw)
+gt_0.5 <- bind_rows(gt_0.4, sard_genos, sard_sgs_raw, prog2)
 
 ```
 
@@ -836,13 +864,13 @@ Now let's merge with the metadata.
 First, did any samples in the metadata fail to get the genos attached? We know from the meta_data_consolidation notebook there should be some issues here.
 ```{r}
 full_data <- metadata %>%
-  left_join(gt_0.5)
+  left_join(gt_0.5, by = c("sample_id" = "sample_id"))
 
 # let's start the work of cleaning this up
 
 # first, did any samples in the metadata fail to get the genos attached
 full_data %>%
-  filter(across(starts_with("Ot"), ~ is.na(.))) %>% View(.)
+ filter(across(starts_with("Ot"), ~ is.na(.))) %>% View(.)
 
 ```
 
@@ -850,10 +878,6 @@ Only the ones we expected to fail are missing, great work! We'll just make a fil
 
 Listing these here to answer any future questions:  
 9 NA sample names, these are individuals that are known to exist from the raw, source metadata, but there was no fin clip taken (8 sample), or they were removed from the analysis (couldn't reliably link metadata to fin clip, 1 sample). Consequently given no name.  
-
-OtsAC10SFMK_1118: This is a weird one, it's in Nick's data under its old name (MR10TH_118), but missing from the progeny microsats file. What's strange is that the source files used to query the progeny microsats (Vickie's data, later tabs), includes this sample but the genotypes are entered in a different font. No notes or other comments about this sample anywhere.  
-
-OtsAC14SFMK_0120 - only genetic data, named "OtsAC14SFMK_0" in the progeny microsats query  
 
 4 2016 carcass samples: OtsCC16MCKR_1100, OtsCC16MCKR_1161, OtsCC16MCKR_1162, OtsCC16MCKR_1243 -  These got skipped during first round genotyping when I didn't understand how to parse the different sets of "bridge to mouth" carcass samples. They were included during re-runs  
 
@@ -923,6 +947,19 @@ full_data_0.3 <- full_data_0.2 %>%
 ```
 
 
+__Column Names__
+
+Let's also clean up the column names
+
+```{r}
+full_data_0.3 %<>%
+  mutate(old_id = coalesce(hmsc_id.x, hmsc_id.y)) %>%
+  select(- c(starts_with("hmsc"), starts_with("OtY"))) %>%
+  relocate(old_id, .after = sample_id)
+  
+```
+
+
 __Unify Missing Data__
 
 Missing genotypes are scored many different ways across the datasets. In both Colony and Cervus, missing data must be coded as "0"
@@ -952,51 +989,315 @@ distinct_full <- full_data_0.3 %>%
 
 
 
-tbl_summary(select(distinct_full, type, year), by = type) %>%
+tbl_summary(select(distinct_full, type, year, origin), by = type) %>%
   modify_header(label ~ "") %>%
   modify_spanning_header(c("stat_1", "stat_2", "stat_3", "stat_4") ~ "**type**") %>%
   as_kable_extra() %>%
   kable_classic(full_width = F, html_font = "Arial")# %>%
+
+
 ```
 
-__Discrepancies__
+## Discrepancies
 
-Here we explain any discrepancies with previously published results (Sard 2016). 
+Here we explain any remaining discrepancies in sample sizes with previously published results (Sard 2016 and Banks 2016). 
 
-2009:  
-Hatchery Outplants 2009: In table 1 from Sard 2016 there are 1347 hatchery outplants from 2009, but 1386 total samples in 2009, despite that there are no other samples in 2009. I believe this is a simple typo in the mansucript. In all of Nick's summary files there are 1386 hatchery outplants. There are also 1386 in the final dataset provided by Nick (10APR2016_Cougar_adult_master). This difference is not due to filtering, Sard 2016 table 1 presents the unfiltered dataset, before duplicates and missing individuals are removed.
+### 2009 
+Hatchery Outplants 2009: In table 1 from Sard 2016 there are 1347 hatchery outplants from 2009, but 1386 total samples in 2009, despite that there are no other samples in 2009. I believe this is simply a little unclear in the manuscript, nothing is actually wrong. The issue stems from the fact that in 2009, 39 hatchery outplants were from Leaburg Hatchery, while 1347 were from McKenzie Hatchery. 
 
-2011:  
-Hatchery Outplants and Cougar 2011: In table 1 from Sard 2016 there are 344 hatchery outplants from 2011, but there are 345 in my data and in Nick's final dataset (10APR2016_Cougar_adult_master). 
+### 2011  
+__Hatchery Outplants:__ In table 1 from Sard 2016 there are 344 hatchery outplants from 2011, but there are 345 in my data and in Nick's final dataset (10APR2016_Cougar_adult_master). This isn't explained by filtering, there are 339 hatchery outplants actually considered as potential parents after filtering. There are no files in all of Nick's directories with 344 hatchery outplants from 2011. Ultimately cannot provide an explanation for this discrepancy nor can I fix it.
+
+__Cougar Trap 2011:__ In table 1 from Sard 2016 there are 387 Cougar trap samples including 30 HORs and 257 NORs from 2011, but there are 386 (29 HOR + 257 NOR) in my data and in Nick's final dataset (10APR2016_Cougar_adult_master).  There are no files in all of Nick's directories with 387 Cougar trap samples from 2011. Perhaps they were counted in excel and someone included the header row? I can't explain where this extra fish comes from.
+
+__Explanations?__
+If things were counted using excel it's easy to make this mistake (one missing from one group and one extra in the other) since one group follows the other (hatchery outplants and HOR Cougar trap), so it's possible one fish got counted in the wrong category, (since the total is the same 731) but I can't demonstrate this. Ultimately we can't explain this discrepancy with 100% confidence.
+
+### 2014  
+The June 2016 tech report (Banks 2016) has VERY different samples size than my metadata for 2014 at both hatchery outplants and cougar trap samples. The draft of the USACE proposal (before I got to it) for this work also had VERY different numbers from my metadata. 
+
+__Hatchery Outplants:__
+
+The discrepancy with the proposal is resolved. The proposal stated there were 683 hatchery outplants. This is an easy mistake to make if you are unfamililar with how the Cougar trap metadata recycling program is recorded in the raw spreadsheets or that the Forest Glen Release site is below the dam, not above. Whoever put these numbers together combined all NORs released from the trap according to progeny. If only the first instance of an individual is recorded (how the data is recorded in progeny) (including those released downstream that never returned) there appear to be 192 NOR trap fish released, combined with the 491 hatchery outplants above for a total of 683. 
+
+The discrepancy with the Banks report is also explainable, but not with 100% confidence. Here the 491 hatchery outplants released above cougar dam were potentially combined with (a) the 70 hatchery outplants released above trailbridge dam on the mainstem (not part of this study, but labeled as outplants when the tissues come from ODFW) and (b) the 128 NOR cougar trap individuals released above the dam according to the Sard datasets. This adds up, but it seems like a surprising mistake to make, given that these folks are familiar with the system. It's an an easy mistake to miss in review though, because they never deal with hatchery outplants in the report (2014 is not a parent year).
+
+In any case, I pulled any individual with a OtsAC14MCKR or OtsAC14SFMK pedigree out of the tissue archive, searched the boxes for the original intake forms and physically accounted for all tissue samples from 2014. I found 561 hatchery outplants, with 70 released above trailbridge dam for a total of 491 in this study. This matches the progeny data.
+
+__Cougar trap__
+
+The Banks report (2016, Table 1) states that 193 NOR Cougar trap samples are released above the Dam. My table above states there are 214 total Cougar trap samples, regardless of origin or where they are released, so really there's no discrepancy because they are counting different individuals (NOR vs total), but let's dig a little deeper here, because some confusing things are going on.  
+
+First, 193 NOR trap individuals are not released above the dam as stated in the report, this is an error. 193 seems to arise from the 192 NOR trap samples (regardless of release site) in Nicks's dataaset, plus the single individual with no metadata (named OtsAC14SFMK_0120 / MRA14_0120 / OtsAC14SFMK_0 depending on the dataset), but the data carries the same error as described before: Forest Glen is below the dam, and some of the fish that are recycled (at Forest Glen) never return to be reintroduced above the dam. After accounting for this only 133 NOR Cougar Trap samples are released above the dam.
+
+Here I spent a lot of time to be confident that my version of the metadata is correct. I went back to the original spreadsheets from the Cougar Trap provided by USACE and parsed them (see cougar_trap_metadata_mgmt notebook). Much like the mistake described for 2014 hatchery outplants, this is an easy one to miss because the 2014 report never deals with where these fish are released, they are only interested in them as offspring. My metadata and the previous dataset agree on the total number of unique individuals that are considered as offspring from this year (192). 
+
+__SGS__  
+There is an apparent discrepancy in the number of NOR SGS in my metadata and what is presented in the Banks 2016 report (table 2). In the table only 21 carcass samples are listed in 2014, this corresponds to the number of NOR carcass samples between the confluence with the mainstem and Cougar Dam . This is correct as far as I can tell.
+
+My data has 27 listed in the table above, this is because I also include above dam carcass samples as potential parents (5), and because of a sgs field crew error where the same individual id was used for two fish (3039a -the last fish of one work day and 3039b - the frst fish of the next work day). I split these up but the previous report counted chose to ignore one.
+
+Another potential area for confusion here: While the table states only 21 samples were taken from carcasses on the South Fork below cougar in 2014,  all of the input datasets for colony and cervus (and raw output pedigrees) contain 75 2014 carcass samples as potential offspring. This corresponds to the total number of NOR carcasses sampled anywhere on the McKenzie that passed the filtering threshold used for that year (tolerate only 2 missing genotypes, remove duplicates), not just on the south fork from South Fork to the Dam. It would appear that these were included as potential offspring in the pedigree inference, but none were assigned to a parent.
+
+
+
+### 2015 
+__Hatchery outplants__   
+My dataset contains 600 hatchery outplants. Table 1 in Banks 2016 states there are 619 HOR individuals outplanted above the dam. Again there is no discrepancy here, we're counting different things. Table 1 from Banks 2016 considers both the 600 hatchery outplants and the 19 HOR individuals from the Cougar trap that were released above the dam.
+
+__Cougar Trap__   
+Table 1 from the Banks report states that 241 NOR individuals were outplanted above the dam. This is a similar mistake to before, there are 241 unique NOR individuals sampled at the Cougar Trap. However, all of these fish were recycled downstream to Forest Glen or released into the tailrace on their first capture. Only 136 returned and were outplanted above the Dam. Since the previous report was unconcerned with where these fish eventually wound up, it was an easy mistake to make.  
+
+__SGS__
+Banks 2016 tech report table 2 states 55 NOR carcass samples below. My metatdata agrees and includes two additional samples from above the dam.
 
 # Filtered Dataset
 
 ## Rationale
 
-wednesday: need to create a key file from the Vickie spreadsheets to link old smaple names to progeny sample names, then merge genotype data only from the 10APR_Adult_cougar dataset. 
+The filtering approach used in the previous reports varies from colony/cervus run to run and year to year. In some cases no filtering is done prior to assignment in Cervus and Colony, in others very strict filtering is used (duplicates removed and individuals missing 2 or more loci removed) prior to assignment. The transition occurs at 2014 (offspring year), when the 2014 and 2015 offspring years were added for the June 2016 tech report. This is reflected in the change in Sard's gt.prep scripts. Return years 2010 to 2013 use the gt.prep script, but 2014 and 2015 each use their own prep scripts (e.g. gt.prep.2014) that follow the much more strict 9 genotyped loci filtering cutoff and removal of potential duplicate samples. 
 
-
-The filtering approach used in the previous reports varies from colony/cervus run to run and year to year. In some cases no filtering is done prior to assignment in Cervus and Colony, in others very strict filtering is used (duplicates removed an only 10 or more genotyped loci tolerated). The transition seems to be at 2014 (offspring year), when the 2014 and 2015 offspring years were added to the June 2016 tech report. This is reflected in Sard's gt.prep scripts. Return years 2010 to 2013 seem to use the gt.prep script, but 2014 and 2015 each use their own gt.prep scripts that follow the much more strict 9 genotyped loci filtering cutoff and removal of potential duplicate samples. 
-
-A challenge here is that in the previous analyses, cervus was run by comparing a single parent year to a single offpsring year, then all possible pedigrees for a given offspring year were concatenated. This is not acceptable going forward as it creates many problems (discussed elsewhere). Instead, all possible parents for a given offspring must be considered simultaneously by cervus and colony. However, now we have a set of new problems; there is no way to filter the dataset in the same manner as before while also (1) fixing the problem described above because the different filtering parameters create different sets of parents from run to run that will now be combined into a single run, and (2) creating a single dataset applied analysis wide. 
-
-Yet another issue is that it is clear at some point, some re-runs were conducted to fill in missing data at samples that were excluded from the later reports. So now we could add back the missing samples. 
-
-Let's consider some examples:
-
-_MR09A_0145/OtsAC09MCKR_0145_  
-A hatchery outplant from 2009, this individual is missing data at 4 loci in all datasets compiled prior to 2017. It is included as a potential parent for 2012 and 2013 offspring, but excluded (due to missing data) for 2014 and 2015. In all datasets compiled in 2017 and later, it has no missing data.
-
-
-_MR10A_292/OtsAC10SFMK_0292_
-A hatchery outplant from 2010, this individual is missing data at 3 loci in all datasets compiled prior to 2017. It is included as a potential parent for 2013 offspring, but excluded (due to missing data) for 2014 and 2015. In all datasets compiled in 2017 and later, it has 1 missing loci.
-
+A challenge here is that in the previous analyses, cervus was run by comparing a single parent year to a single offpsring year, then all possible pedigrees for a given offspring year were concatenated. This is not acceptable going forward as it creates many problems (discussed elsewhere). Instead, all possible parents for a given offspring must be considered simultaneously by cervus and colony. However, now we have a set of new problems; there is no way to filter the dataset in the same manner as before while also (1) fixing the problem described above because the different filtering parameters create different sets of parents from run to run that will now be combined into a single run, and (2) creating a single dataset that can be applied analysis wide. 
 
 So what to do here??? 
 
-Going forward I chose to apply a single filtering scheme across the entire dataset.
+Going forward, I chose to apply a single filtering scheme across the entire dataset.
 
-Where does the 7 loci cutoff come from?
+In the North Santiam system the filtering cutoff of 7 scored loci was used, based on the non-exclusion probabilities calculated in CERVUS. Using the non-exclusion probabilities published in the supplemnt to the North Santiam manuscript, if we choose the 7 worse loci, this corresponds to a non-exclusion probability of 0.00019 for the first parent, 4.56E-06 for the second parent and 5.4E-10 for a parent pair.  
+
+>Note that in the paper, the authors added these up sequentially in order by name (instead of ordered by worse exclusion power) for non-exclusion probs of 6.85E-05	for the first parent, 1.47E-06 for the second parent and 6.42E-11 for a parent pair. This is not as conservative as it could be. Another anti-conservative decision made in this paper is that all data were combined across all years. This inflates the diversity relative to what is used to actually run cervus (offspring year by offspring year) and makes for more liberal estimates of the non-exclusion probability.  
+
+The approach in the 2016 sard paper was different, they avoided the inflation of diversity problem by calculating the non-exclusion probabilities for each dataset, but ran into a different problem: they didn't account for missing data and present the probabilities assuming all 11 loci are scored. They explain their rationale here with a comment to the effect of "only a tiny portion of individuals weren't genotyped at 10 or 11 loci, so any effect is probably small." This seems fair, but isn't as defensible if the missing data rate (or filtering cutoff) is less strict. 
+
+My solution is to apply the North Santiam cutoff to have a consistent dataset across all offspring years (7 loci required before inclusion in pedigree analysis), but to report the expected non-exclusion probability and associated expected number of false parent-offspring pairs for each dataset as a data supplement. This seems to be the best of both worlds, but will create a little bit of extra work.  
+
+## Missingness Filter
+
+Finally, let's apply the missingness filter (individuals must be genotyped at at least 7 of 11 loci)
+
+```{r}
+full_data_0.4 <- full_data_0.3 %>%
+  mutate(miss_gt = rowSums(across(starts_with("Ot"), ~ .x == "0"))/2)
+                           
+full_data_0.4 %<>%
+  filter(miss_gt <=4)
+```
+
+Let's create a table of who was removed, this will likely need to be summarised in the report.
+
+```{r}
+miss_filt <- full_data_0.3 %>%
+  mutate(miss_gt = rowSums(across(starts_with("Ot"), ~ .x == "0"))/2) %>%
+  filter(!(miss_gt <=4))
+
+kable(miss_filt %>%
+  count(year, type, origin, sex), caption = "number of individuals filtered from the full dataset due to missingness (fewer than 7 scored loci)") %>%
+  kable_classic(full_width = F, html_font = "Cambria")
+```
+
+Most are SGS samples, no surprise there, but something to note is that the 2019 Cougar Trap samples have a lot of bad samples. We already knew this because they made up a lot of the re-runs and a lot still failed even with freshly extracted DNA. Something likely went wrong with tissue sampling or storage this year. 
+
+## Duplicate Filter
+
+Here we remove any samples that are potentially from the same individual. There are several ways the same individual could be genotyped more than once: (1) carcass tissue sample taken from NOR cougar trap sample released downstream, (2) batch sampling leads to one fin clip being split into two, and then being treated as two separate samples, (3) above dam carcass sample from an individual released upstream
+
+In the North Santiam paper/reports this method is explained:
+
+> Sets of identical genotypes were assumed to represent a single individual and the duplicates removed from the dataset. Genotypes that matched at all but one locus were also removed, as the probability of observing a near-identical multilocus genotype at 10 of the microsatellite loci used in this study was extremely low (< 1×10-20) in each year, as calculated in GenAlEx (Peakall and Smouse 2012). 
+
+In the McKenzie paper and reports the duplicate filtering is not described, and we know that it was only applied to some input datasets for parentage and not others. We do have the list of duplicates by offspring year through the "gts.duplicated" files. From these files I inferred that only perfect matches were considered duplicates.
+
+We'll take the same approach (perfect matches are considered duplicates)
+
+```{r}
+duplicates <- full_data_0.4 %>%
+  distinct(sample_id, .keep_all = TRUE) %>% #some individuals are in there mutliple times on purpose
+  group_by(year, across(starts_with("Ot"))) %>%
+  filter(n()>1) %>% 
+  arrange(year, across(starts_with("Ot")))
+
+```
+
+19 pairs of individuals within years have perfectly matching genotypes.
+
+Of the 19 pairs of individuals with perfectly matching genotypes, 5 seem more likely to be sibs than duplicates. For example OtsAC09SFMK_0167 and OtsAC09SFMK_0168 are released on different days at different sites. How could this possibly be the same fish without an error in the metadata? Similarly, MR12TH_227 and MR12TH_230 are both cougar trap samples released at Hard Rock on the same day, but they had recorded lengths that differed by 90mm. Seems more likely they are sibs than the same fish.
+
+More frequently (14 of 19), the pair is easily explained, either they are from a batch sample jar (e.g. 2016 hatchery outplants), or they are from a fish that was sampled, released and then likely sampled again as a carcass.
+
+I think we should filter these individuals out, regardless of whether we think they are duplicates or not. Later, in the pedigree assignment script, perfectly tied parentages are chosen by taking whichever occurs first in the dataset. So it the filtering will happen at that point anyway. Describing it as a filtering step seems more transparent for the readers/reviewers than having to get into the weeds of the CERVUS/COLONY consensus assignment algorithm. 
+
+I wrote these out to file, because they are likely going to of interest. For example, if fish are recycled downstream and don't return, this is taken as evidence that they might have been strays. However, if we demonstrate that many simply die on their attempt to reach the trap a second time, it suggests the recycling program is potentially harming NORs trying to return to above dam habitat. 
+
+```{r, eval = FALSE}
+write_tsv(duplicates, file = "./genotype_data/duplicates.txt")
+```
+
+Let's do the filtering. If one sample is a carcass sample, we keep the live fish.
+
+```{r}
+dups_to_remove <- duplicates %>%
+  rowid_to_column(var = "row_id") %>%
+  filter(row_id %% 2 == 0) %>% # the carcass sample is always the second in the pair with a live sample because of the way we arranged the data, so we can just take the modulo of the row number to get the right individuals from the pairs to filter
+  pull(sample_id)
+
+full_data_1.0 <- full_data_0.4 %>%
+  filter(!(sample_id %in% dups_to_remove))
+```
+
+Let's also create a table describing who was removed.
+```{r}
+kable(duplicates %>%
+        ungroup() %>%
+  count(year, type, origin, sex), caption = "number of individuals filtered from the full dataset due duplication (all scored loci match)") %>%
+  kable_classic(full_width = F, html_font = "Cambria")
+```
 
 
+# Save Final Datasets
+
+Let's save these as r objects, tsv and excel spreadsheets.
+
+
+We would like to save the final unfiltered dataset and the final filtered dataset under clear, new names. We also need some files with ONLY genotype data to subset for cervus and colony inputs, this file also no longer needs multiple rows per fish (from fish that were sampled twice)
+
+```{r, eval = FALSE}
+# unfiltered (no missingness or duplicates filtered)
+full_unfilt <- full_data_0.3
+save(full_unfilt, file = "genotype_data/full_unfiltered_dataset.R")
+write_tsv(full_unfilt, file = "genotype_data/full_unfiltered_dataset.txt")
+
+# fully filtered 
+save(full_data_1.0, file = "genotype_data/full_filtered_dataset.R")
+write_tsv(full_data_1.0, file = "genotype_data/full_filtered_dataset.txt")
+
+# genos and sample id only (filtered only)
+gt_1.0 <- full_data_1.0 %>%
+  distinct(sample_id, .keep_all = TRUE) %>%
+  select(sample_id, starts_with("Ot"))
+save(gt_1.0, file = "genotype_data/filtered_genotypes.R")
+write_tsv(gt_1.0, file = "genotype_data/filtered_genotypes.R")
+
+```
+
+# Cervus and Colony Output Files
+
+Here we subset the dataset into input files for Colony and Cervus which are run per offspring year.
+
+## Summary  
+
+__Age Structure__
+Each potential offspring is assigned to candidate parents 3, 4, 5 and 6 years prior.
+
+__Offspring__  
+All NOR individuals within a year on the South Fork McKenzie are considered potential offspring, regardless of type, release location or sampling location. This includes all NOR cougar trap samples, all SGS samples above or below the dam, and all precocial males samples above the dam.    
+
+__Parents__  
+Only individuals released above the dam are considered candidate parents. This includes hatchery outplants, NOR and HOR Cougar Trap samples, SGS samples above the dam and precocial males. We also include 3 cougar trap individuals with no recorded release site variable as these are potentially released above the dam.
+
+## CERVUS 
+
+Let's write a single function for Cervus that will parse the dataset and write the necesary files for a given offspring year.
+
+Cervus requires 4 files: three lists of sample_ids (dams, sires, offspring) with each individual on a newline, and a genotype file. The genotype file is tab delimited with a single row for each individual, two columns for each loci and no other data.
+
+```{r, eval = FALSE}
+write_cervus_files <- function(offspring_year) {
+  dams <- full_data_1.0 %>% 
+    filter(offspring_year - year <= 6, offspring_year - year >= 3, cand_parent == TRUE, sex == "F") %>%
+    distinct(sample_id) %>%
+    pull(sample_id)
+  sires <- full_data_1.0 %>% 
+    filter(offspring_year - year <= 6, offspring_year - year >= 3, cand_parent == TRUE, sex == "M") %>%
+    distinct(sample_id) %>%
+    pull(sample_id)
+  offspring <- full_data_1.0 %>% 
+    filter(offspring_year == year , origin == "NOR") %>%
+    distinct(sample_id) %>%
+    pull(sample_id)
+  write_tsv(filter(select(gt_1.0, sample_id), sample_id %in% dams), file = paste0("genotype_data/CERVUS_inputs/", offspring_year, "/", offspring_year, "_dams.txt"), col_names = FALSE)
+  write_tsv(filter(select(gt_1.0, sample_id), sample_id %in% sires), file = paste0("genotype_data/CERVUS_inputs/", offspring_year, "/", offspring_year, "_sires.txt"), col_names = FALSE)
+  write_tsv(filter(select(gt_1.0, sample_id), sample_id %in% offspring), file = paste0("genotype_data/CERVUS_inputs/", offspring_year, "/", offspring_year, "_offspring.txt"), col_names = FALSE)
+  write_tsv(filter(gt_1.0, sample_id %in% c(offspring, dams, sires)), file = paste0("genotype_data/CERVUS_inputs/", offspring_year, "/", offspring_year, "_genos.txt"), col_names = FALSE)
+}
+ 
+write_cervus_files(2010)
+write_cervus_files(2011)
+write_cervus_files(2012)
+write_cervus_files(2013)
+write_cervus_files(2014)
+write_cervus_files(2015)
+write_cervus_files(2016)
+write_cervus_files(2017)
+write_cervus_files(2018)
+write_cervus_files(2019)
+write_cervus_files(2020)
+```
+
+
+```{r, eval = FALSE}
+# lets Test this for offspring year 2013, let's count who should be in these files
+kable(full_data_1.0 %>%
+        ungroup() %>%
+        filter(year %in% c(2007, 2008, 2009, 2010)) %>%
+  count(sex, type, origin, release)) %>%
+  kable_classic(full_width = F, html_font = "Cambria")
+
+count(full_data_1.0, origin, year)
+
+# 1472 dams, YES THIS WORKED
+# 2276 sires, YES THIS WORKED
+# 228 offspring, YES THIS WORKED
+# 3991 total genotypes, YES THIS WORKED
+
+# also 2020, this includes both the above dam SGS and precocial males as parents, there are also parents from the recycling so there's some additional things that could break
+kable(full_data_1.0 %>%
+        ungroup() %>%
+        filter(year %in% c(2014, 2015, 2016, 2017)) %>%
+  count(sex, type, origin, release, section)) %>%
+  kable_classic(full_width = F, html_font = "Cambria")
+
+count(distinct(full_data_1.0, sample_id, .keep_all = TRUE), origin, year)
+
+# there are three cougar samples with missing metadata included as parents, a 2014 male, a 2016 female and a 2017 male
+# also note that there are a couple cougar individuals in the metadata with two above dam releases, a male in 2015 and a female in 2016
+# 1624 dams in output dataset, actual number should be 1624 (1624 plus one missing meta (2016 female) minus one counted twice in the table below (2016). YES THIS LOOKS GOOD
+# 1092 sires in the output dataset, should be 1091 + 2 (cougar males missing metas) - 1 (2017 male with two upstream releases) # YES THIS LOOKS GOOD
+# 162 offspring YES THIS LOOKS GOOD
+```
+
+## COLONY
+
+Colony input is a little different, we'll need to modify our function. It only takes three files, genotypes for offspring, dams and sires. 
+
+```{r, eval = FALSE}
+write_colony_files <- function(offspring_year) {
+  dams <- full_data_1.0 %>% 
+    filter(offspring_year - year <= 6, offspring_year - year >= 3, cand_parent == TRUE, sex == "F") %>%
+    distinct(sample_id) %>%
+    pull(sample_id)
+  sires <- full_data_1.0 %>% 
+    filter(offspring_year - year <= 6, offspring_year - year >= 3, cand_parent == TRUE, sex == "M") %>%
+    distinct(sample_id) %>%
+    pull(sample_id)
+  offspring <- full_data_1.0 %>% 
+    filter(offspring_year == year , origin == "NOR") %>%
+    distinct(sample_id) %>%
+    pull(sample_id)
+  write_tsv(filter(gt_1.0, sample_id %in% dams), file = paste0("genotype_data/COLONY_inputs/", offspring_year, "/", offspring_year, "_dams_genos.txt"), col_names = FALSE)
+  write_tsv(filter(gt_1.0, sample_id %in% sires), file = paste0("genotype_data/COLONY_inputs/", offspring_year, "/", offspring_year, "_sires_genos.txt"), col_names = FALSE)
+  write_tsv(filter(gt_1.0, sample_id %in% offspring), file = paste0("genotype_data/COLONY_inputs/", offspring_year, "/", offspring_year, "_offspring_genos.txt"), col_names = FALSE)
+}
+
+write_colony_files(2010)
+write_colony_files(2011)
+write_colony_files(2012)
+write_colony_files(2013)
+write_colony_files(2014)
+write_colony_files(2015)
+write_colony_files(2016)
+write_colony_files(2017)
+write_colony_files(2018)
+write_colony_files(2019)
+write_colony_files(2020)
+```
 
