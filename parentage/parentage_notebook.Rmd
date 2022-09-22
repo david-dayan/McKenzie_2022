@@ -61,3 +61,132 @@ Input data is available in the directories:
     - processed Cervus and Colony pedigrees for a given offspring year  
     - note that the same parents occur can occur across multiple offspring years, so all information for a given parent may be spread across multiple subdirectories  
 
+# Colony Log
+
+## Sard Approach Summary
+
+__Which approach is used WITHIN each year?__
+In some years, colony was run multiple times with different parameters. By comparing the final Colony output pedigree in each offspring year used to generate the consensus pedigrees to the output pedigrees from each Colony run I was able to determine the Colony run parameters.
+
+_2015_  
+This approach corresponds to the "long" directories instead of the run1 and run 2 directories
+
+>Output file path & name : 'C:\ZSL\Colony\Mck 2015 returns long\Mck 2015 returns long'
+Number of loci : 11
+Number of offspring in the sample : 263
+Outbreeding (0) or inbreeding (1) model : 0
+Number of male candidates : 2171
+Number of female candidates : 1621
+Number of known paternal sibships : 0
+Number of known maternal sibships : 0
+Number of offspring with excluded fathers : 0
+Number of offspring with excluded mothers : 0
+Male mating system : Polygamy
+Female mating system : Polygamy
+Number of threads : 1
+Number of Excluded Paternal Sibships : 0
+Number of Excluded Maternal Sibships : 0
+Dioecious (2) or monoecious (1) : 2
+Seed for random number generator : 764
+Allele frequency : No updating by accounting for the inferred relationship
+Species : Diploid
+Sibship scaling : Yes
+Sibship size prior : Yes
+paternal & maternal sibship sizes : 1  1
+Known population allele frequency : No
+Number of run : 1
+Length of run : Medium
+Monitor intermiediate results by : Every 1 second
+Prob. a dad is included in the male candidates : .70
+Prob. a mum is included in the female candidates : .70
+
+Also here is the corresponding .DAT file header
+
+>263       ! Number of offspring in the sample
+11        ! Number of loci
+764       ! Seed for random number generator
+0         ! 0/1=Not updating/updating allele frequency
+2         ! 2/1=Dioecious/Monoecious species
+0         ! 0/1=Inbreeding absent/present
+0         ! 0/1=Diploid species/HaploDiploid species
+0  0      ! 0/1=Polygamy/Monogamy for males & females
+0         ! 0/1 = Clone inference = No/Yes
+1         ! 0/1=Scale full sibship=No/Yes
+1 1 1     ! 0/1/2/3=No sibship prior/Weak sibship prior/Medium sibship prior/Strong sibship prior
+0         ! 0/1=Unknown/Known population allele frequency
+1         ! Number of runs
+2         ! 1/2/3/4 = Short/Medium/Long/VeryLong run
+1         ! 0/1=Monitor method by Iterate#/Time in second
+1         ! Monitor interval in Iterate# / in seconds
+1         ! 0/1=DOS/Windows version
+1         ! 0/1/2=Pair-Likelihood-Score(PLS)/Full-Likelihood(FL)/FL-PLS-combined(FPLS) method
+1         ! 0/1/2/3=Low/Medium/High/VeryHigh precision
+
+>201a,209a,249a,253a,215a,311a,409a,211a,208a,212a,515a
+0,0,0,0,0,0,0,0,0,0,0
+0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01
+0.02,0.02,0.02,0.02,0.02,0.02,0.02,0.02,0.02,0.02,0.02
+
+_2014_  
+2014 is the same as 2015, there are multiple runs, the one labeled "long" is the one used in the final pedigree.
+
+_2013_  
+2013 also used multiple runs, but they were just replicate runs with the same settings used to examine convergence. 
+
+__How does the approach changes among years?__
+
+In addition to multiple Colony run parameters being used within a given year, we also have to parse the different run parameters used year to year. 
+
+For example, in comparing 2011 run parameters to 2015 run parameters it is clear different Colony settings were used from year to year, including use of a sibship prior, likelihood calculation method and run precision. Other run parameters were consistent: run length, marker error rate, chance of sampling a parent, and the obvious immutable aspects of the biology of salmon (outbreeding, dioecious, diploid, etc).
+
+## Colony Parameters and Rationale 
+
+No consistent approach was applied across all offspring years, therefore we need to settle on a single approach. I chose to defer to the advice of Wang in the 2018 colony user guide which has been informed by many publications since the inception of Colony in 2008.
+
+We will use __medium run length__ and the combined __FPLS__ analysis method. Given the potential for half-sibships because there is both male and female polygamy among salmon, run time could get very large under full-likelihood. However, sibship size in the dataset is not likely to be large (total cohort size is small), and the medium run length under FPLS has been shown to produce stable results across runs in this system and in the North Santiam, so we are unlikely to have issues with this approach. Finally, our system is typical (or even better than typical) with respect to information content of our marker dataset and sample sizes, and I feel comfortable taking Wang's suggestion that medium run lengths and the FPLS are sufficient to accurate construct the pedigree.
+
+We do not __update allele frequencies__, this was never used in the past in this system of North Santiam. I agree with this decision, previous pedigrees have suggested that family sizes /sibships among returning offspring is small relative to overall sample sizes, therefore the empirical allele frequency is probably not strongly biased by family structure/relatedness within the sample. 
+
+I plan to use a weak __sibsip prior__ set to 1 for both paternal and maternal sibships (default setting). See Wang:
+> Isuggest using the sibship prior with small average sibship sizes to effectively reduce the chances that unrelated or loosely related individuals being falsely inferred as siblings. The prior discourages a reconstructed family cluster becoming excessively large because of the inclusion of unrelated or loosely related individuals. By doing so, the prior can speed up computation substantially and usually increase inference accuracy as checked by analyzing simulated data.
+
+I plan to use medium __likelihood precision__. This is always used before and my version of Colony only allows medium precision under FPLS.  
+
+I plan to use __sibship scaling__ following the suggestion by Wang.
+
+I will use the the marker error rates publoshed previously for this system. Regenotyping of individuals has confirmed that when at least 7 markers are successfully genotyped for a sample, the average error rate is ~2% for all loci. However, we will also use the inferred pedigree to confirm this error rate (as discussed in Wang 2018 - Methods in Ecology and Evolution).
+
+# Cervus Log
+
+## Sard Approach
+Similar to Colony, there is no consistent approach used for Cervus across all offspring years. 
+
+__Data Structures__ 
+For 2010 to 2013 offspring years, assignment was done one parent year to one offspring year at a time, with multiple pedigrees combined to form the final Cervus pedigree for one offspring year.
+
+This was fixed after 2013. In 2014 and 2015, all parents for a given offspring are considered simulataneously.
+
+__Run Parameters__  
+For 2010 to 2013 offspring years, the simulation was run using the empirical number of candidate mothers and fathers in each dataset and 10000 offspring, 100% parent sampling rate, confidence determined using delta and 80/95% confidence, 2% error rates, the portion loci typed from the input dataset, and 6 minimum loci typed. For the assignment, 6 or more loci were required and the assumed rate of sampled parents was 100%.
+
+For 2014 and 2015 offspring years, the simulation was run using the empirical number of candidate mothers and fathers in each dataset and 10000 offspring, __70%__ parent sampling rate confidence determined using delta and 80/95% confidence, 2% error rates, the portion loci typed from the input dataset, and __9__ minimum loci typed. For the assignment, __9 or more loci__ were required and the assumed rate of sampled parents was __70%__. (changes from 2010-2013 __bolded__).
+
+## Cervus Parameters
+
+Since there is no consistent approach taken across all offspring years, and we need to include all candidate parents for a given offspring in a single run to make LODs/likelihoods comparable, we can't simply reproduce the approach previously used. Instead we need to come up with a single, consisten approach. Will hew as close as possible to what what done in either previous MCKR analysis or a NSNT analysis, but make changes where nothing is consists. Rationale for all decisions is below.
+
+__Simulation Parameters__  
+(1) Parent Samples:   
+  (a) Use empirical sample size for dataset  
+  (b) 1000 offspring (10000 takes way too long given other changes, and this level of precision for delta/lod cutoff doesn't seem necessary given margins from previous simulations)  
+  (c) 95% parent sampling rate. The decision to transition from 100% to 70% sampling rate for parents was motivated by the finding that many unsampled parents seems to be contributing to the returning offspring. The 2014 report found that 22% of age 0 offspring failed to assign to parents, despite sampling and successfully genotyping every candidate parent known to be released above the dam. The 2016 report used grandparentage analysis to assess the rate of unsampled parents (adfluvials and/or precocial males). This analysis suggesting that at least 79 unsampled parents contribute to production of age 0 offspring from 2008-2013. This corresponds to about 1.5% of sampled parents, or in the words of the report "likely a few more than ten fish per year." Increasing the unsampled parent rate in Cervus makes the assignments more conservative. In simple terns a high unsampled parent rate will push the CRR down by assigning fewer offspring to parents, while a low unsampled parent rate will increase the CRR. Our only empirical estimate is ~1.5%. We also need to include "unsampled parents" that are not considered because they were not successfully genotyped or they were duplicates (i.e. were filtered). For our data, about 0.7% of candidate parents are excluded because of filtering. This suggests the 70% sampling rate is too conservative. Indeed in the 2015 Cervus simulations (using 70% sampling rate), 49% of simulated offspring are not assigned to their true parents. To put it in the words of the Cervus developers, if the true sampling rate for parents is that low, maybe "cervus is not the appropriate software and instead [we] should do a sibship analysis". Given our understanding that less than 1% of sampled parents are excluded due to genotyping failure in our dataset and the empirical estimate of adfluvials and precocial males is ~1.5%, the 95% sampling rate used in the NSNT publication seems more appropriate. It also has the benefit of already being used in a peer reviewed mansucript.  
+(2) Confidence (cutoffs): consistent with all previous approaches, we will use 80/95% confidence cutoff and the delta, instead of the LOD.  
+(3) Error Rates: We will stick with the 2% error rate. This is slightly conservative, as our error rate estimated from replication is ~1.6% and we find similar estimated error rates using the pedigree based approach of Colony.  
+(4) 7 or more typed loci required for comparison. Based on our NEPs.  
+  
+__Assignment Parameters__  
+Same as simulation parameters.  
+
+
+
+  
