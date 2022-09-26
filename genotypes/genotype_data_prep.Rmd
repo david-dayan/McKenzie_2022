@@ -1063,7 +1063,7 @@ A challenge here is that in the previous analyses, cervus was run by comparing a
 
 So what to do here??? 
 
-Going forward, I chose to apply a single filtering scheme across the entire dataset.
+Going forward, I chose to apply a single filtering scheme across the entire dataset. A single filtering approach is critical if we wish to identify long term trends in downstream results such as CRR, or combine pedigrees to identify grandparentage,
 
 In the North Santiam system the filtering cutoff of 7 scored loci was used, based on the non-exclusion probabilities calculated in CERVUS. Using the non-exclusion probabilities published in the supplemnt to the North Santiam manuscript, if we choose the 7 worse loci, this corresponds to a non-exclusion probability of 0.00019 for the first parent, 4.56E-06 for the second parent and 5.4E-10 for a parent pair. For a dataset of ~3000 potential offpsring (i.e. 2007 - 2020 MCKR returns), this corresponds to a worse case scenario (assuming all individuals are only genotyped at 7 loci) of about 1 spurious first parent, 0 spurious second parents, and 0 spurious parent pairs. In other words 7 scored loci is PLENTY to reach an acceptable level of exclusion power.     
 
