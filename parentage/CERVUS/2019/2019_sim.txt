@@ -1,0 +1,154 @@
+Cervus 3.0.7 - (c) Copyright Tristan Marshall 1998-2014
+Distributed by Field Genetics Ltd - www.fieldgenetics.com
+Licensed for non-commercial use only
+
+Simulation of parentage analysis completed 9/26/2022 3:17:49 PM
+
+
+**** Summary statistics ****
+
+
+Mother alone:
+
+Level       Confidence (%)  Critical Delta  Assignments        Assignment Rate  
+Strict               95.00            0.00                981                 98%
+Relaxed              80.00            0.00                981                 98%
+Unassigned                                                 19                  2%
+Total                                                    1000                100%
+
+Father alone:
+
+Level       Confidence (%)  Critical Delta  Assignments        Assignment Rate  
+Strict               95.00            0.00                971                 97%
+Relaxed              80.00            0.00                971                 97%
+Unassigned                                                 29                  3%
+Total                                                    1000                100%
+
+Parent pair (sexes known):
+
+Level       Confidence (%)  Critical Delta  Assignments        Assignment Rate  
+Strict               95.00            1.50                951                 95%
+Relaxed              80.00            0.00               1000                100%
+Unassigned                                                  0                  0%
+Total                                                    1000                100%
+
+
+**** Files ****
+
+Input
+  Allele frequency file:          2019_alf.alf
+
+Output
+  Simulation summary file:        2019_sim.txt
+  Simulation data file:           2019_sim.sim
+
+
+**** Loci ****
+
+       1  Locus1
+       2  Locus2
+       3  Locus3
+       4  Locus4
+       5  Locus5
+       6  Locus6
+       7  Locus7
+       8  Locus8
+       9  Locus9
+      10  Locus10
+      11  Locus11
+
+
+**** Simulation parameters ****
+
+Input
+  Number of offspring:                                      1000
+  Number of candidate mothers:                              1579
+  Proportion of candidate mothers sampled:                     0.9500
+  Number of candidate fathers:                              1159
+  Proportion of candidate fathers sampled:                     0.9500
+    Number of parent pairs:                              1830061
+
+  Proportion of loci typed:                                    0.98700000
+  Proportion of loci mistyped:                                 0.02000000
+  Error rate in likelihood calculations:                       0.02000000
+  Minimum number of typed loci:                                7
+
+Output
+  Confidence determined using:                             Delta
+  Relaxed confidence level:                                   80.00%
+  Strict confidence level:                                    95.00%
+
+
+**** Delta distributions ****
+
+
+Mother alone:
+
+Identity of most likely candidate               N        Mean Delta  Standard Deviation
+True mother                                         959       14.57                4.36
+Non-mother (true mother sampled)                      4        0.80                0.75
+Non-mother (true mother unsampled)                   18        2.19                1.49
+None                                                 19
+Total                                              1000
+
+Father alone:
+
+Identity of most likely candidate               N        Mean Delta  Standard Deviation
+True father                                         949       14.87                4.20
+Non-father (true father sampled)                      2        0.66                0.52
+Non-father (true father unsampled)                   20        2.17                2.17
+None                                                 29
+Total                                              1000
+
+Parent pair (sexes known):
+
+Identity of most likely candidate               N        Mean Delta  Standard Deviation
+True parent pair                                    914       23.70                5.58
+Non-parent pair (true parent pair sampled)            1        0.45                0.00
+Non-parent pair (true mother unsampled)              36        2.73                2.74
+Non-parent pair (true father unsampled)              48        2.23                2.63
+Non-parent pair (neither true parent sampled)         1        0.65                0.00
+None                                                  0
+Total                                              1000
+
+
+**** Breakdown of parentage assignments ****
+
+
+Mother alone:
+
+Identity of most likely candidate               Confidence level
+                                                Strict          Relaxed         Most likely   
+True mother                                         959 ( 98%)      959 ( 98%)      959 ( 98%)  
+Non-mother (true mother sampled)                      4 (  0%)        4 (  0%)        4 (  0%)  
+Non-mother (true mother unsampled)                   18 (  2%)       18 (  2%)       18 (  2%)  
+Total assignments                                   981             981             981         
+No assignment made                                   19              19              19         
+Total tests                                        1000            1000            1000         
+
+Father alone:
+
+Identity of most likely candidate               Confidence level
+                                                Strict          Relaxed         Most likely   
+True father                                         949 ( 98%)      949 ( 98%)      949 ( 98%)  
+Non-father (true father sampled)                      2 (  0%)        2 (  0%)        2 (  0%)  
+Non-father (true father unsampled)                   20 (  2%)       20 (  2%)       20 (  2%)  
+Total assignments                                   971             971             971         
+No assignment made                                   29              29              29         
+Total tests                                        1000            1000            1000         
+
+Parent pair (sexes known):
+
+Identity of most likely candidate               Confidence level
+                                                Strict          Relaxed         Most likely   
+True parent pair                                    914 ( 96%)      914 ( 91%)      914 ( 91%)  
+Non-parent pair (true parent pair sampled)            0 (  0%)        1 (  0%)        1 (  0%)  
+Non-parent pair (true mother unsampled)              17 (  2%)       36 (  4%)       36 (  4%)  
+Non-parent pair (true father unsampled)              20 (  2%)       48 (  5%)       48 (  5%)  
+Non-parent pair (neither true parent sampled)         0 (  0%)        1 (  0%)        1 (  0%)  
+Total assignments                                   951            1000            1000         
+No assignment made                                   49               0               0         
+Total tests                                        1000            1000            1000         
+
+
+********************************************************************************

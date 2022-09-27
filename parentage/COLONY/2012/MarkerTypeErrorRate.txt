@@ -1,0 +1,5 @@
+Locus-1 Locus-2 Locus-3 Locus-4 Locus-5 Locus-6 Locus-7 Locus-8 Locus-9 Locus-10 Locus-11 
+Ot201 Ot209 Ot249 Ot253 Ot215 Ot311 Ot409 Ot211 Ot208 Ot212 Ot515 
+0 0 0 0 0 0 0 0 0 0 0 
+0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 
+0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 0.02 

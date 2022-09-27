@@ -1,0 +1,111 @@
+Cervus 3.0.7 - (c) Copyright Tristan Marshall 1998-2014
+Distributed by Field Genetics Ltd - www.fieldgenetics.com
+Licensed for non-commercial use only
+
+Parentage analysis completed 9/26/2022 6:53:20 PM
+
+
+**** Summary statistics ****
+
+
+Mother alone:
+
+Level       Confidence (%)  Critical Delta  Assignments        Assignment Rate  
+                                            Observed Expected  Observed Expected
+Strict               95.00            0.00      160 (    158)      99%    ( 98%)
+Relaxed              80.00            0.00      160 (    158)      99%    ( 98%)
+Unassigned                                        2 (      4)       1%    (  2%)
+Total                                           162 (    162)     100%    (100%)
+
+Father alone:
+
+Level       Confidence (%)  Critical Delta  Assignments        Assignment Rate  
+                                            Observed Expected  Observed Expected
+Strict               95.00            0.00      152 (    159)      94%    ( 98%)
+Relaxed              80.00            0.00      152 (    159)      94%    ( 98%)
+Unassigned                                       10 (      3)       6%    (  2%)
+Total                                           162 (    162)     100%    (100%)
+
+Parent pair (sexes known):
+
+Level       Confidence (%)  Critical Delta  Assignments        Assignment Rate  
+                                            Observed Expected  Observed Expected
+Strict               95.00            2.00      146 (    154)      90%    ( 95%)
+Relaxed              80.00            0.00      161 (    162)      99%    (100%)
+Unassigned                                        1 (      0)       1%    (  0%)
+Total                                           162 (    162)     100%    (100%)
+
+
+**** Number of individuals tested ****
+
+Offspring (total):                                           162
+  Tested (typed at 7 or more loci):                          162
+  Not tested (typed at fewer than 7 loci):                     0
+
+Candidate mothers (total):                                  1624
+  Tested (typed at 7 or more loci):                         1624
+  Not tested (typed at fewer than 7 loci):                     0
+  Average number of candidate mothers per offspring:        1624
+  Average proportion of sampled candidate mothers:             1.0000
+
+Candidate fathers (total):                                  1092
+  Tested (typed at 7 or more loci):                         1092
+  Not tested (typed at fewer than 7 loci):                     0
+  Average number of candidate fathers per offspring:        1092
+  Average proportion of sampled candidate fathers:             1.0000
+
+Average candidate parent pairs per offspring:            1773408
+
+
+**** Files ****
+
+Input
+  Offspring file:                 2020_offspring.txt
+  Candidate mother file:          2020_dams.txt
+  Candidate father file:          2020_sires.txt
+  Genotype file:                  2020_genos.txt
+  Allele frequency file:          2020_alf.alf
+  Simulation data file:           2020_sim.sim
+
+Output
+  Parentage summary file:         2020_summary.txt
+  Parentage data file:            2020_summary.csv
+
+
+**** Loci ****
+
+       1  Locus1
+       2  Locus2
+       3  Locus3
+       4  Locus4
+       5  Locus5
+       6  Locus6
+       7  Locus7
+       8  Locus8
+       9  Locus9
+      10  Locus10
+      11  Locus11
+
+
+**** Simulation parameters ****
+
+Input
+  Number of offspring:                                      1000
+  Number of candidate mothers:                              1624
+  Proportion of candidate mothers sampled:                     0.9500
+  Number of candidate fathers:                              1092
+  Proportion of candidate fathers sampled:                     0.9500
+    Number of parent pairs:                              1773408
+
+  Proportion of loci typed:                                    0.98700000
+  Proportion of loci mistyped:                                 0.02000000
+  Error rate in likelihood calculations:                       0.02000000
+  Minimum number of typed loci:                                7
+
+Output
+  Confidence determined using:                             Delta
+  Relaxed confidence level:                                   80.00%
+  Strict confidence level:                                    95.00%
+
+
+********************************************************************************
