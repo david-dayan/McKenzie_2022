@@ -11,7 +11,7 @@ Code=
 [FileInfo]
 FileName=C:\Users\dayand\Desktop\MCKR_parentage\CERVUS\2011\2011_sim.sim
 FileType=.sim
-CreationDate=9/22/2022 12:19:00 PM
+CreationDate=9/27/2022 2:57:16 PM
 
 [AlleleFrequencyDataFile]
 FileName=C:\Users\dayand\Desktop\MCKR_parentage\CERVUS\2011\2011_alf.alf
@@ -28,8 +28,8 @@ PropLociTyped=0.987
 PropLociMistyped=0.02
 MinTypedLoci=7
 UseCorrectedLikelihoods=1
-UseMistypingRateAsLikelihoodErrorRate=0
-LikelihoodErrorRate=0
+UseMistypingRateAsLikelihoodErrorRate=1
+LikelihoodErrorRate=0.02
 CriticalStatisticName=Delta
 TruncateAtZero=1
 RelaxedConfidence=80
@@ -40,11 +40,11 @@ InbreedingRate=0
 AlwaysTestSelfing=0
 SimulateFemaleRelatives=0
 FemalePropRelatives=0
-FemaleRelatedTo=
+FemaleRelatedTo=Offspring
 FemaleRelatedness=0
 SimulateMaleRelatives=0
 MalePropRelatives=0
-MaleRelatedTo=
+MaleRelatedTo=Offspring
 MaleRelatedness=0
 
 [SimulationSummaryFile]
@@ -70,14 +70,14 @@ FileName=
 [MaleParentAlone]
 RelaxedCriterion=0
 StrictCriterion=0
-NRelaxed=704
-NStrict=704
+NRelaxed=974
+NStrict=974
 
 [FemaleParentAlone]
 RelaxedCriterion=0
 StrictCriterion=0
-NRelaxed=695
-NStrict=695
+NRelaxed=970
+NStrict=970
 
 [MaleParentGivenFemaleParent]
 RelaxedCriterion=999
@@ -93,9 +93,9 @@ NStrict=0
 
 [ParentPairSexesKnown]
 RelaxedCriterion=0
-StrictCriterion=0
-NRelaxed=527
-NStrict=527
+StrictCriterion=1.5
+NRelaxed=999
+NStrict=954
 
 [ParentPairSexesUnknown]
 RelaxedCriterion=999

@@ -2,7 +2,7 @@ Cervus 3.0.7 - (c) Copyright Tristan Marshall 1998-2014
 Distributed by Field Genetics Ltd - www.fieldgenetics.com
 Licensed for non-commercial use only
 
-Parentage analysis completed 9/22/2022 1:28:31 PM
+Parentage analysis completed 9/27/2022 4:51:42 PM
 
 
 **** Summary statistics ****
@@ -12,27 +12,27 @@ Mother alone:
 
 Level       Confidence (%)  Critical Delta  Assignments        Assignment Rate  
                                             Observed Expected  Observed Expected
-Strict               95.00            0.00       86 (    279)      21%    ( 69%)
-Relaxed              80.00            0.00       86 (    279)      21%    ( 69%)
-Unassigned                                      315 (    122)      79%    ( 30%)
+Strict               95.00            0.00      218 (    389)      54%    ( 97%)
+Relaxed              80.00            0.00      218 (    389)      54%    ( 97%)
+Unassigned                                      183 (     12)      46%    (  3%)
 Total                                           401 (    401)     100%    (100%)
 
 Father alone:
 
 Level       Confidence (%)  Critical Delta  Assignments        Assignment Rate  
                                             Observed Expected  Observed Expected
-Strict               95.00            0.00       93 (    282)      23%    ( 70%)
-Relaxed              80.00            0.00       93 (    282)      23%    ( 70%)
-Unassigned                                      308 (    119)      77%    ( 30%)
+Strict               95.00            0.00      261 (    391)      65%    ( 97%)
+Relaxed              80.00            0.00      261 (    391)      65%    ( 97%)
+Unassigned                                      140 (     10)      35%    (  3%)
 Total                                           401 (    401)     100%    (100%)
 
 Parent pair (sexes known):
 
 Level       Confidence (%)  Critical Delta  Assignments        Assignment Rate  
                                             Observed Expected  Observed Expected
-Strict               95.00            0.00       54 (    211)      13%    ( 53%)
-Relaxed              80.00            0.00       54 (    211)      13%    ( 53%)
-Unassigned                                      347 (    190)      87%    ( 47%)
+Strict               95.00            1.50      167 (    383)      42%    ( 95%)
+Relaxed              80.00            0.00      234 (    401)      58%    (100%)
+Unassigned                                      167 (      0)      42%    (  0%)
 Total                                           401 (    401)     100%    (100%)
 
 
@@ -99,7 +99,7 @@ Input
 
   Proportion of loci typed:                                    0.98700000
   Proportion of loci mistyped:                                 0.02000000
-  Error rate in likelihood calculations:                       0.000E+0000
+  Error rate in likelihood calculations:                       0.02000000
   Minimum number of typed loci:                                7
 
 Output

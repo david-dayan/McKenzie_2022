@@ -2,7 +2,7 @@ Cervus 3.0.7 - (c) Copyright Tristan Marshall 1998-2014
 Distributed by Field Genetics Ltd - www.fieldgenetics.com
 Licensed for non-commercial use only
 
-Simulation of parentage analysis completed 9/22/2022 12:19:00 PM
+Simulation of parentage analysis completed 9/27/2022 2:57:16 PM
 
 
 **** Summary statistics ****
@@ -11,25 +11,25 @@ Simulation of parentage analysis completed 9/22/2022 12:19:00 PM
 Mother alone:
 
 Level       Confidence (%)  Critical Delta  Assignments        Assignment Rate  
-Strict               95.00            0.00                695                 69%
-Relaxed              80.00            0.00                695                 69%
-Unassigned                                                305                 30%
+Strict               95.00            0.00                970                 97%
+Relaxed              80.00            0.00                970                 97%
+Unassigned                                                 30                  3%
 Total                                                    1000                100%
 
 Father alone:
 
 Level       Confidence (%)  Critical Delta  Assignments        Assignment Rate  
-Strict               95.00            0.00                704                 70%
-Relaxed              80.00            0.00                704                 70%
-Unassigned                                                296                 30%
+Strict               95.00            0.00                974                 97%
+Relaxed              80.00            0.00                974                 97%
+Unassigned                                                 26                  3%
 Total                                                    1000                100%
 
 Parent pair (sexes known):
 
 Level       Confidence (%)  Critical Delta  Assignments        Assignment Rate  
-Strict               95.00            0.00                527                 53%
-Relaxed              80.00            0.00                527                 53%
-Unassigned                                                473                 47%
+Strict               95.00            1.50                954                 95%
+Relaxed              80.00            0.00                999                100%
+Unassigned                                                  1                  0%
 Total                                                    1000                100%
 
 
@@ -70,7 +70,7 @@ Input
 
   Proportion of loci typed:                                    0.98700000
   Proportion of loci mistyped:                                 0.02000000
-  Error rate in likelihood calculations:                       0.000E+0000
+  Error rate in likelihood calculations:                       0.02000000
   Minimum number of typed loci:                                7
 
 Output
@@ -85,30 +85,30 @@ Output
 Mother alone:
 
 Identity of most likely candidate               N        Mean Delta  Standard Deviation
-True mother                                         695       17.76                2.74
-Non-mother (true mother sampled)                      0        0.00                0.00
-Non-mother (true mother unsampled)                    0        0.00                0.00
-None                                                305
+True mother                                         952       15.49                3.98
+Non-mother (true mother sampled)                      2        2.05                1.81
+Non-mother (true mother unsampled)                   16        1.49                1.75
+None                                                 30
 Total                                              1000
 
 Father alone:
 
 Identity of most likely candidate               N        Mean Delta  Standard Deviation
-True father                                         704       17.85                2.94
-Non-father (true father sampled)                      0        0.00                0.00
-Non-father (true father unsampled)                    0        0.00                0.00
-None                                                296
+True father                                         949       14.83                4.39
+Non-father (true father sampled)                      3        0.53                0.62
+Non-father (true father unsampled)                   22        1.47                1.60
+None                                                 26
 Total                                              1000
 
 Parent pair (sexes known):
 
 Identity of most likely candidate               N        Mean Delta  Standard Deviation
-True parent pair                                    527       41.58                4.19
+True parent pair                                    909       24.82                5.75
 Non-parent pair (true parent pair sampled)            0        0.00                0.00
-Non-parent pair (true mother unsampled)               0        0.00                0.00
-Non-parent pair (true father unsampled)               0        0.00                0.00
-Non-parent pair (neither true parent sampled)         0        0.00                0.00
-None                                                473
+Non-parent pair (true mother unsampled)              43        2.19                1.99
+Non-parent pair (true father unsampled)              44        2.21                2.32
+Non-parent pair (neither true parent sampled)         3        0.56                0.64
+None                                                  1
 Total                                              1000
 
 
@@ -119,35 +119,35 @@ Mother alone:
 
 Identity of most likely candidate               Confidence level
                                                 Strict          Relaxed         Most likely   
-True mother                                         695 (100%)      695 (100%)      695 (100%)  
-Non-mother (true mother sampled)                      0 (  0%)        0 (  0%)        0 (  0%)  
-Non-mother (true mother unsampled)                    0 (  0%)        0 (  0%)        0 (  0%)  
-Total assignments                                   695             695             695         
-No assignment made                                  305             305             305         
+True mother                                         952 ( 98%)      952 ( 98%)      952 ( 98%)  
+Non-mother (true mother sampled)                      2 (  0%)        2 (  0%)        2 (  0%)  
+Non-mother (true mother unsampled)                   16 (  2%)       16 (  2%)       16 (  2%)  
+Total assignments                                   970             970             970         
+No assignment made                                   30              30              30         
 Total tests                                        1000            1000            1000         
 
 Father alone:
 
 Identity of most likely candidate               Confidence level
                                                 Strict          Relaxed         Most likely   
-True father                                         704 (100%)      704 (100%)      704 (100%)  
-Non-father (true father sampled)                      0 (  0%)        0 (  0%)        0 (  0%)  
-Non-father (true father unsampled)                    0 (  0%)        0 (  0%)        0 (  0%)  
-Total assignments                                   704             704             704         
-No assignment made                                  296             296             296         
+True father                                         949 ( 97%)      949 ( 97%)      949 ( 97%)  
+Non-father (true father sampled)                      3 (  0%)        3 (  0%)        3 (  0%)  
+Non-father (true father unsampled)                   22 (  2%)       22 (  2%)       22 (  2%)  
+Total assignments                                   974             974             974         
+No assignment made                                   26              26              26         
 Total tests                                        1000            1000            1000         
 
 Parent pair (sexes known):
 
 Identity of most likely candidate               Confidence level
                                                 Strict          Relaxed         Most likely   
-True parent pair                                    527 (100%)      527 (100%)      527 (100%)  
+True parent pair                                    908 ( 95%)      909 ( 91%)      909 ( 91%)  
 Non-parent pair (true parent pair sampled)            0 (  0%)        0 (  0%)        0 (  0%)  
-Non-parent pair (true mother unsampled)               0 (  0%)        0 (  0%)        0 (  0%)  
-Non-parent pair (true father unsampled)               0 (  0%)        0 (  0%)        0 (  0%)  
-Non-parent pair (neither true parent sampled)         0 (  0%)        0 (  0%)        0 (  0%)  
-Total assignments                                   527             527             527         
-No assignment made                                  473             473             473         
+Non-parent pair (true mother unsampled)              26 (  3%)       43 (  4%)       43 (  4%)  
+Non-parent pair (true father unsampled)              20 (  2%)       44 (  4%)       44 (  4%)  
+Non-parent pair (neither true parent sampled)         0 (  0%)        3 (  0%)        3 (  0%)  
+Total assignments                                   954             999             999         
+No assignment made                                   46               1               1         
 Total tests                                        1000            1000            1000         
 
 

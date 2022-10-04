@@ -1,0 +1,83 @@
+Cervus 3.0.7 - (c) Copyright Tristan Marshall 1998-2014
+Distributed by Field Genetics Ltd - www.fieldgenetics.com
+Licensed for non-commercial use only
+
+Parentage analysis completed 9/27/2022 1:53:41 PM
+
+
+**** Summary statistics ****
+
+**** The minimum number of typed loci in the simulation was 7 but in parentage analysis was 6 ****
+
+**** Number of individuals tested ****
+
+Offspring (total):                                           252
+  Tested (typed at 6 or more loci):                          252
+  Not tested (typed at fewer than 6 loci):                     0
+
+Candidate mothers (total):                                  1470
+  Tested (typed at 6 or more loci):                         1470
+  Not tested (typed at fewer than 6 loci):                     0
+  Average number of candidate mothers per offspring:        1470
+  Average proportion of sampled candidate mothers:             1.0000
+
+Candidate fathers (total):                                  1481
+  Tested (typed at 6 or more loci):                         1481
+  Not tested (typed at fewer than 6 loci):                     0
+  Average number of candidate fathers per offspring:        1481
+  Average proportion of sampled candidate fathers:             1.0000
+
+Average candidate parent pairs per offspring:            2177070
+
+
+**** Files ****
+
+Input
+  Offspring file:                 2017_offspring.txt
+  Candidate mother file:          2017_dams.txt
+  Candidate father file:          2017_sires.txt
+  Genotype file:                  2017_genos.txt
+  Allele frequency file:          2017_alf.alf
+
+Output
+  Parentage summary file:         2017_summary.txt
+  Parentage data file:            2017_summary.csv
+
+
+**** Loci ****
+
+       1  Locus1
+       2  Locus2
+       3  Locus3
+       4  Locus4
+       5  Locus5
+       6  Locus6
+       7  Locus7
+       8  Locus8
+       9  Locus9
+      10  Locus10
+      11  Locus11
+
+
+**** Simulation parameters ****
+
+Input
+  Number of offspring:                                      1000
+  Number of candidate mothers:                              1470
+  Proportion of candidate mothers sampled:                     0.9500
+  Number of candidate fathers:                              1481
+  Proportion of candidate fathers sampled:                     0.9500
+    Number of parent pairs:                              2177070
+
+  Proportion of loci typed:                                    0.98700000
+  Proportion of loci mistyped:                                 0.02000000
+  Error rate in likelihood calculations:                       0.000E+0000
+  Minimum number of typed loci:                                7
+
+Output
+  Confidence determined using:                             Delta
+  Relaxed confidence level:                                   80.00%
+  Strict confidence level:                                    95.00%
+
+
+********************************************************************************

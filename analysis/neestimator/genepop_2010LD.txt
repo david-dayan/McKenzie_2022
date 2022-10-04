@@ -1,0 +1,36 @@
+Output from NeEstimator v2.1
+Starting time: Tue Oct  4 14:46:27 2022
+Input File: "genepop_2010.txt"
+
+Number of Loci = 11
+
+LD mating model: Random
+
+(Symbol "No S*" in Frequency means that NO Singleton Alleles are accepted.)
+
+Population     1 [OtsAC13SFMK_4140]  (Number of Individuals = 94)
+****************
+--------------------------------------------------------------------------------------
+Lowest Allele Frequency Used     0.050       0.020       0.010       No S*         0+
+--------------------------------------------------------------------------------------
+
+LINKAGE DISEQUILIBRIUM METHOD
+
+Harmonic Mean Sample Size =       92.9        92.6        92.5        92.5        92.5
+Independent Comparisons =       2225       12266       23384       23384       31052
+OverAll r^2 =                 0.013613    0.013177    0.013121    0.013121    0.012726
+Expected r^2 Sample =         0.011139    0.011167    0.011182    0.011182    0.011185
+Estimated Ne^ =                  132.6       163.8       169.8       169.8       214.1
+
+95% CIs for Ne^
+* Parametric                      98.6       140.0       150.8       150.8       189.0
+                                 193.0       195.6       193.5       193.5       245.9
+
+* JackKnife on Samples            64.8       109.7       116.6       116.6       143.5
+                                 651.5       291.3       288.0       288.0       387.6
+
+**************************************************************************************
+
+Ending time: Tue Oct  4 14:46:27 2022
+-------------------------------------
+

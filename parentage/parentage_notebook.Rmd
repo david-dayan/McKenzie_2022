@@ -34,19 +34,21 @@ This notebook is a log of all work to produce a pedigree of all Chinook Salmon r
 
 Previous reports and manuscripts evaluating the reintroduction of Chinook salmon above Cougar Dam on the South Fork McKenzie river have considered NOR salmon sampled from 2010 to 2015 as potential offspring of salmon released above Cougar Dam from 2007 - 2012. 
 
-Most Chinook salmon on the South Fork McKenzie express an age at maturity of 3 - 6 years. Therefore, previous reports (relying on 2010 - 2015 NOR returns) have inferred a pedigree for salmon released above the dam from 2007 - 2009. Results based on the pedigree of salmon released aboveCougar Dam in 2010 were also provided along with the caveat that age 6 offspring were not yet evaluated and some results such as Total Lifetime Fitness and Cohort Replacement Rate were likely underestimates.
+Most Chinook salmon on the South Fork McKenzie express an age at maturity of 3 - 6 years. Therefore, previous reports (relying on 2010 - 2015 NOR returns) have inferred a pedigree for salmon released above the dam from 2007 - 2009. Results based on the pedigree of salmon released above Cougar Dam in 2010 were also provided along with the caveat that age 6 offspring were not yet evaluated and some results such as Total Lifetime Fitness and Cohort Replacement Rate were likely underestimates.
 
 Continuing this work, we have since genotyped NOR salmon sampled on the South Fork McKenzie from 2016 to 2020, as well as salmon released above Cougar dam from 2013 to 2017. These new data allow us to complete the pedigree of salmon released above Cougar Dam in 2010, infer full pedigrees TLF  for salmon released above Cougar Dam from 2011 - 2014, and partial pedigrees for salmon released above the dam from 2015 - 2017.
 
-## Inferring 2007 - 2010 Pedigrees Again
+## Inferring Pedigrees Again
 
-Irrevocable updates to software packages used to assign parentage (COLONY) prevent us from exactly reproducing the approach used to infer the pedigrees used in previous reports. We chose to infer all pedigrees from 2007 to 2017 from the raw genetic data using a consistent approach rather than simply combining previous pedigrees with those inferred from new data.  
+Irrevocable updates to software packages used to assign parentage (COLONY) prevent us from exactly reproducing the approach used to infer the pedigrees used in previous reports. We chose to infer all pedigrees from parent years 2007 to 2017 (offspring year 2010 - 2020) from the raw genetic data using a consistent approach rather than simply combining previous pedigrees with those inferred from new data.  
+
+This means that parent year results from 2007-2010 and offspring year results from 2010 - 2015, that have previously been reported on may change. We will evaluate how much changes to the parentage assignment approach affect dwonstream summary statistics such as assignment rate, cohort replacement rate, and fitness for these years.
 
 This approach has several advantages:  
 (1) Trends - Results based on the pedigrees such as Cohort Replacement Rate and Total Lifetime Fitness suffer from the same biases across all years, allowing more confidence in the identification of year - year trends.   
 (2) Fitness modeling - Similar to above, applying a consistent approach to pedigree inference gives us more power to identify predictors of fitness by allowing us to combine data from more years into a single analysis  
-(4) Grandparentage and Great-Grandparentage: If a unified filtering and pedigree inference approach is used for the entire dataset we can more confidently combine pedigrees inferred for one offspring year with one another, allowing for a 3 or 4 generation pedigrees. This means we can identify gradnparentage and great grandparentage, opening up the potential to address many important questions such as fitness effects of hatchery selection.
-(3) Minor Issues - In reproducing previous results, minor errors in code were identified. While these errors ultimately had little effect on the final pedigrees and results, inferring the pedigrees again allows us to fix these small errors. For example in the Cervus pedigrees, the software is run using a single parent year and a single offspring year, then the results are concatenated for all parent years within an offspring year. This renders the likelihoods incomparable. Likelihoods are used to break ties when inferring the cervus pedigree, but it mostly doesn't matter because Colony is given priority in the consensus pedigree. 
+(3) Grandparentage and Great-Grandparentage: If a unified filtering and pedigree inference approach is used for the entire dataset, we can more confidently combine pedigrees inferred for a single offspring year with one another, allowing for a 3 (or perhaps even 4) generation pedigree. This means we can identify gradnparentage and great grandparentage, opening up the potential to address many important questions such as fitness effects of hatchery selection.  
+(4) Minor Issues - In reproducing previous results, minor errors in code were identified. While these errors ultimately are expected to have little effect on the final pedigrees and results, inferring the pedigrees again allows us to fix these small errors and evaluate their effects. For example in the Cervus pedigrees, the software is run using a single parent year and a single offspring year, then the results are concatenated for all parent years within an offspring year. This renders the likelihoods incomparable. Likelihoods are used to break ties when inferring the cervus pedigree, but it likely never had a large effect because Colony is given priority in the consensus pedigree. 
 
 
 # Data Summary
@@ -73,7 +75,10 @@ load(file = "../genotypes/genotype_data/full_filtered_dataset.R") #note that thi
 
 ## Sard Approach Summary
 
-__Which approach is used WITHIN each year?__
+Previous workers updated/improved their methods between reports. There is no consistent colony approach used. 
+
+
+__Which approach is used WITHIN each year?__  
 In some years, colony was run multiple times with different parameters. By comparing the final Colony output pedigree in each offspring year used to generate the consensus pedigrees to the output pedigrees from each Colony run I was able to determine the Colony run parameters.
 
 _2015_  
@@ -145,31 +150,32 @@ __How does the approach changes among years?__
 
 In addition to multiple Colony run parameters being used within a given year, we also have to parse the different run parameters used year to year. 
 
-For example, in comparing 2011 run parameters to 2015 run parameters it is clear different Colony settings were used from year to year, including use of a sibship prior, likelihood calculation method and run precision. Other run parameters were consistent: run length, marker error rate, chance of sampling a parent, and the obvious immutable aspects of the biology of salmon (outbreeding, dioecious, diploid, etc).
+For example, in comparing 2011 run parameters to 2015 run parameters it is clear different Colony settings were used from year to year, including use of a sibship prior, likelihood calculation method and run precision. Other run parameters were consistent: run length, marker error rate, chance of sampling a parent, and the obvious immutable aspects of the biology of salmon (outbreeding, dioecious, diploid, etc). We detail all decisions below.
 
 ## Colony Parameters and Rationale 
 
-No consistent approach was applied across all offspring years, therefore we need to settle on a single approach. I chose to defer to the advice of Wang in the 2018 colony user guide which has been informed by many publications since the inception of Colony in 2008.
+No consistent approach was applied across all offspring years, therefore we need to settle on a single approach. I chose to defer to the advice of Wang in the 2018 colony user guide which has been informed by many publications since the release of Colony in 2008.
 
-We will use __medium run length__ and the combined __FPLS__ analysis method. Given the potential for half-sibships because there is both male and female polygamy among salmon, run time could get very large under full-likelihood. However, sibship size in the dataset is not likely to be large (total cohort size is small), and the medium run length under FPLS has been shown to produce stable results across runs in this system and in the North Santiam, so we are unlikely to have issues with this approach. Finally, our system is typical (or even better than typical) with respect to information content of our marker dataset and sample sizes, and I feel comfortable taking Wang's suggestion that medium run lengths and the FPLS are sufficient to accurate construct the pedigree.
+We will use __medium run length__ and the combined __FPLS__ analysis method. Given the potential for half-sibships (there is both male and female polygamy among salmon), run time could get very long under full-likelihood. However, sibship size in the dataset is not likely to be large (total cohort size is small), and the medium run length under FPLS has been shown to produce stable results across runs in this system and in the North Santiam, so we are unlikely to have issues with this approach. Finally, our system is typical (or even better than typical) with respect to information content of our marker dataset and sample sizes, and I feel comfortable taking Wang's suggestion that medium run lengths and the FPLS are sufficient to accurate construct the pedigree.
 
-We do not __update allele frequencies__, this was never used in the past in this system of North Santiam. I agree with this decision, previous pedigrees have suggested that family sizes /sibships among returning offspring is small relative to overall sample sizes, therefore the empirical allele frequency is probably not strongly biased by family structure/relatedness within the sample. 
+We do not __update allele frequencies__, this was never used in the past in this system of North Santiam. I agree with this decision, previous pedigrees have suggested that family sizes /sibships among returning offspring is small relative to overall sample sizes (including parents), therefore the empirical allele frequency is probably not strongly biased by family structure/relatedness within the sample. 
 
-I plan to use a weak __sibsip prior__ set to 1 for both paternal and maternal sibships (default setting). See Wang:
-> Isuggest using the sibship prior with small average sibship sizes to effectively reduce the chances that unrelated or loosely related individuals being falsely inferred as siblings. The prior discourages a reconstructed family cluster becoming excessively large because of the inclusion of unrelated or loosely related individuals. By doing so, the prior can speed up computation substantially and usually increase inference accuracy as checked by analyzing simulated data.
+I plan to use a weak __sibsip prior__ set to 1 for both paternal and maternal sibships (default setting). See Wang:  
+
+> I suggest using the sibship prior with small average sibship sizes to effectively reduce the chances that unrelated or loosely related individuals being falsely inferred as siblings. The prior discourages a reconstructed family cluster becoming excessively large because of the inclusion of unrelated or loosely related individuals. By doing so, the prior can speed up computation substantially and usually increase inference accuracy as checked by analyzing simulated data.
 
 I plan to use medium __likelihood precision__. This is always used before and my version of Colony only allows medium precision under FPLS.  
 
 I plan to use __sibship scaling__ following the suggestion by Wang.
 
-I will use the the marker error rates publoshed previously for this system. Regenotyping of individuals has confirmed that when at least 7 markers are successfully genotyped for a sample, the average error rate is ~2% for all loci. However, we will also use the inferred pedigree to confirm this error rate (as discussed in Wang 2018 - Methods in Ecology and Evolution).
+I will use the the marker error rates published previously for this system. Regenotyping of individuals has confirmed that when at least 7 markers are successfully genotyped for a sample, the average error rate is ~2% for all loci. However, we will also use the inferred pedigree to confirm this error rate (as discussed in Wang 2018 - Methods in Ecology and Evolution).
 
 # Cervus Log
 
 ## Sard Approach
-Similar to Colony, there is no consistent approach used for Cervus across all offspring years. 
+Similar to Colony, there is no consistent approach used for Cervus across all offspring years that can be applied. They updated/improved their methods between reports.
 
-__Pedigree Structure__ 
+__Pedigree Structure__   
 For 2010 to 2013 offspring years, assignment was done one parent year to one offspring year at a time, with multiple pedigrees combined to form the final Cervus pedigree for one offspring year.
 
 This was fixed after 2013. In 2014 and 2015, all parents for a given offspring are considered simulataneously.
@@ -188,11 +194,14 @@ For each offspring year, include all candidate parents parents (released above t
 
 __Simulation Parameters__  
 (1) Parent Samples:   
-  (a) Use empirical sample size of sires and dams for dataset  
-  (b) 1000 offspring (10000 takes way too long given other changes, and this level of resolution for delta/lod cutoff doesn't seem necessary given margins in delta from previous simulations)  
-  (c) 95% parent sampling rate. The decision to transition from 100% to 70% sampling rate for parents seems to have been motivated by the finding that many unsampled parents are likely to be contributing to the returning offspring. The 2014 report found that 22% of age 0 offspring failed to assign to parents, despite sampling and successfully genotyping every candidate parent known to be released above the dam. The 2016 report used grandparentage analysis to assess the rate of unsampled parents (adfluvials and/or precocial males). This analysis suggesting that at least 79 unsampled parents contribute to production of age 0 offspring from 2008-2013. This corresponds to about 1.5% of sampled parents, or in the words of the report "likely a few more than ten fish per year" (i.e. ~ 2%) Increasing the unsampled parent rate in Cervus makes the assignments more conservative. Put simply, a higher unsampled parent rate than in river will bias CRR down by failing to assign offspring to true parents, while a lower unsampled parent rate than in river will bias the CRR upwards by assigning offspring to false parents when the true parent is unsampled. Our only empirical estimate is ~1.5%. We also need to include "unsampled parents" that are not considered because they were not successfully genotyped or they were duplicates (i.e. were filtered). For our data, about 0.7% of candidate parents are excluded because of filtering, for a total of about 2.2% unsampled parents. This suggests the 70% sampling rate is far too conservative. Indeed, in the 2015 Cervus simulations (using 70% sampling rate), 49% of simulated offspring are not assigned to their true parents. To put it in the words of the Cervus developers, if the true sampling rate for parents is that low, perhaps "cervus is not the appropriate software and instead [we] should do a sibship analysis". Given our understanding that less than 1% of sampled parents are excluded due to genotyping failure in our dataset and the empirical estimate of adfluvials and precocial males is ~1.5%, the 95% sampling rate used in the NSNT publication seems more appropriate. It also has the benefit of already being used in a peer reviewed mansucript.  
+      (a) Use empirical sample size of sires and dams for dataset    
+      (b) 1000 offspring (10000 takes way too long given other changes, and this level of resolution for delta/lod cutoff doesn't seem necessary given margins in delta from previous simulations)    
+      (c) 95% parent sampling rate. The decision to transition from 100% to 70% sampling rate for parents seems to have been motivated by the finding that many unsampled parents are likely to be contributing to the returning offspring. The 2014 report found that 22% of age 0 offspring failed to assign to parents, despite sampling and successfully genotyping every candidate parent known to be released above the dam. The 2016 report used grandparentage analysis to assess the rate of unsampled parents (adfluvials and/or precocial males). This analysis suggesting that at least 79 unsampled parents contribute to production of age 0 offspring from 2008-2013. This corresponds to about 1.5% of sampled parents, or in the words of the report "likely a few more than ten fish per year" (i.e. ~ 2%) Increasing the unsampled parent rate in Cervus makes the assignments more conservative. Put simply, a higher unsampled parent rate than in river will bias CRR down by failing to assign offspring to true parents, while a lower unsampled parent rate than in river will bias the CRR upwards by assigning offspring to false parents when the true parent is unsampled. Our only empirical estimate is ~1.5%. We also need to include "unsampled parents" that are not considered because they were not successfully genotyped or they were duplicates (i.e. were filtered). For our data, about 0.7% of candidate parents are excluded because of filtering, for a total of about 2.2% unsampled parents. This suggests the 70% sampling rate is far too conservative. Indeed, in the 2015 Cervus simulations (using 70% sampling rate), 49% of simulated offspring are not assigned to their true parents. To put it in the words of the Cervus developers, if the true sampling rate for parents is that low, perhaps "cervus is not the appropriate software and instead [we] should do a sibship analysis". Given our understanding that less than 1% of sampled parents are excluded due to genotyping failure in our dataset and the empirical estimate of adfluvials and precocial males is ~1.5%, the 95% sampling rate used in the NSNT publication seems more appropriate. It also has the benefit of already being used in a peer reviewed mansucript.    
+  
 (2) Confidence (cutoffs): consistent with all previous approaches, we will use 80/95% confidence cutoff and the change in likelihood from the next most likely parentage (the delta), instead of the raw LOD.  
+
 (3) Error Rates: We will stick with the 2% error rate. This is slightly conservative, as our error rate estimated from replication is ~1.6% and we find similar estimated error rates using the pedigree based approach of Colony.  
+
 (4) 7 or more typed loci required for comparison. Based on our the non-exclusion probabilities (NEPs). We will present the NEPs for each year given the 7 - 11 compared genotypes later, but for an example, if only the 7 worst loci are considered in the 2016 offspring year, this corresponds to a NEP for the first parent of 1.6x10^-4, 3.8x10^-6 for the second parent and 4.34x10^10 for the parent pair. Given offspring sample size of 330, the expected number of false paretages due to insufficient genetic information is substantially less than 1. 
   
 
@@ -202,25 +211,25 @@ __Simulation Parameters__
 
 In brief, the approach is to combine the raw outputs from each offspring year within each software package so that there is a single raw output from Colony and a single raw output from Cervus. Then, each of these are cleaned and filtered separately. Finally, we create a consensus pedigree, which is used as the final pedigree for all downstream analyses..
 
-1.	Criteria below are always applied in the order presented here.  
-2.	Run Colony and Cervus for each offspring year according to parameters described in "Log" sections above.
-3.	Colony pedigree: 
-    a.	Mismatch Filtering (see note 2 below though):  
-        i.	Remove any parent-offspring duo (i.e one parent one offspring) with >1 mismatch  
-        ii.	Remove any parent-offspring trios (two parents, one offspring) with >2 mismatches  
-    b. remove any impossible trios (see note 1 below though)  
-        i.	Both parents must have returned in the same year    
-        ii.	Both parents must have been released either above Minto (below Detroit) or above Detroit   
-        iii.	If one parent of a trio was collected as a carcass sample, recovery date must be after the release date of the other parent  
-4.	Cervus pedigree:  
-    a.	Exclude impossible trios (see 3b above)
-    b.	Trios (offspring and two parents): for each offspring choose best trio
-        i.	If there is at least one trio with (a) =<2 total mismatches, (b) each parent has =<1 mismatch, (c) significant LOD/DELTA, then we will make a trio match for this offspring. If there is no trio that meets these criteria, then move on to attempt duo match below.
-        ii.	Best trio is chosen by total number of mismatches, ties are broken by LOD score, if  LOD is also tied, choose whichever parentage occurs first.  
-    c.	Duos (offspring and single parent):  
-        i.	If no trio available for offspring, we attempt duo match.  
-        ii.	If there is a dam or sire with =<1 mm and significant LOD, we will make a duo assignment.   
-        iii.	Best duo is chosen by number of mismatches, ties are broken by LOD score, if LOD is also tied, choose whichever parentage occurs first.  
+1.	Criteria below are always applied in the order presented here.   
+2.	Run Colony and Cervus for each offspring year according to parameters described in "Log" sections above.  
+3.	Colony pedigree:   
+    a.	Mismatch Filtering (see note 2 below though):    
+        i.	Remove any parent-offspring duo (i.e one parent one offspring) with >1 mismatch    
+        ii.	Remove any parent-offspring trios (two parents, one offspring) with >2 mismatches    
+    b. remove any impossible trios (see note 1 below though)    
+        i.	Both parents must have returned in the same year      
+        ii.	Both parents must have been released either above Minto (below Detroit) or above Detroit     
+        iii.	If one parent of a trio was collected as a carcass sample, recovery date must be after the release date of the other parent    
+4.	Cervus pedigree:    
+    a.	Exclude impossible trios (see 3b above)  
+    b.	Trios (offspring and two parents): for each offspring choose best trio  
+        i.	If there is at least one trio with (a) =<2 total mismatches, (b) each parent has =<1 mismatch, (c) significant LOD/DELTA, then we will make a trio match for this offspring. If there is no trio that meets these criteria, then move on to attempt duo match below.  
+        ii.	Best trio is chosen by total number of mismatches, ties are broken by LOD score, if  LOD is also tied, choose whichever parentage occurs first.    
+    c.	Duos (offspring and single parent):    
+        i.	If no trio available for offspring, we attempt duo match.    
+        ii.	If there is a dam or sire with =<1 mm and significant LOD, we will make a duo assignment.    
+        iii.	Best duo is chosen by number of mismatches, ties are broken by LOD score, if LOD is also tied, choose whichever parentage occurs first.    
 5.	Consensus Pedigree – here we combine the colony and cervus results into the final pedigree used for later analysis  
     a.	Disagreements are defined as any parent that does not agree between the two programs. This includes an assignment in one program and no assignment in the other.  
     c.	If no disagreement, this is the final consensus assignment  
@@ -254,15 +263,15 @@ Here we record some known challenges with the approach above.
 3.	For the consensus pedigree there are a few general ideas from previous papers we are trying to implement into specific criteria here.   
     a.	Mismatches takes precedence to resolve disagreements  
     b.	Colony has greater accuracy when unknown parents are possible (Harrison et al 2013). In our systems this is always a possibility, so ambiguous cases (disagreements where we have no additional criteria to evaluate) default to colony.   
-    c.	The power to exclude parentage is greater for trios than duos (see non-exclusion probabilities in table s3 in Sard 2016, and elsewhere)    
+    c.	The power to exclude parentage is greater for trios than duos (see non-exclusion probabilities in table s3 in Sard 2016, and elsewhere)      
     
 4. Mismatches. Both Cervus and Colony rely on more complex approaches to exclude parentages than simple mismatches. While we do not exclude parentage based on a single mismatch, we do for more than one mismatch. Given the way this filter is applied within the assignment algorithm above, the ultimate effect is to exclude parentages that would otherwise be deemed acceptable by Cervus and/or Colony, pushing CRR and fitness down. We chose to keep this approach to remain consistent with previous approaches, but I want to note the problems this creates.  
     (i) Genotyping error leads to type II error when combined with mismatch filtering. We have much lower non-exclusion probabilities than we need to produce accurate pedigrees given the number of loci and their information content. Instead we should think about type II error/ power. Increasing the number of loci has the effect of increasing type II error (incorrectly excluding parentage) when we use mismatch filtering, because the of chance of a mismatch due to genotyping error increases with the number of loci. Genotyping error arises in our dataset from miscalled alleles and allele dropout/null alleles. We can estimate the first (miscalled alleles) directly using replicates. Also Colony uses inferred families to estimate both the miscalled allele rate and the allele droput rate. From these sources, the overall error rate four our data seems to be ~1-2% per locus. This means that when an individual is scored at all 11 loci, there's a ~20% chance that there is at least a single genotyping error. It's not hard to see how we might be sacrificing a lot of power to achieve extremely small type I error rates when you consider this error rate. Fortunately the inference of the consensus pedigree should make it somewhat straightforward to estimate how big of a problem we have here - if very few parentages are filtered out in the consensus pedigree due to mismatches compared to the raw Colony and Cervus pedigrees we can move on knowing this genotype error/mismatch filtering problem isn't very important. Let's keep this in mind.     
-    (ii) Confusing methods/results text. Colony and Cervus both provide critical thresholds for assigning parentage. In the case of Colony, this is a posterior probability of parentage given the genotypes in the full dataset, the rate of unsampled parents and the error rate. Without the mismatch filtering, we could simply present the threshold used for each program and provide the parentage, but because we further filter the pedigree with additional steps, it creates a confusing situation for interpreting the probabilities of parentage/cutoff for assignment.   
+    (ii) Confusing methods/results text. Colony and Cervus both provide critical thresholds for assigning parentage. In the case of Colony, this is a posterior probability of parentage given the genotypes in the full dataset, the rate of unsampled parents and the error rate. Without the mismatch filtering, we could simply present the threshold used for each program and provide the parentage, but because we further filter the pedigree with additional steps, it creates a confusing situation for interpreting the probabilities of parentage/cutoff for assignment.    
   
-5.	Application of the ideas above (3) tend to result in increasing the number of assignments when generating a consensus pedigree relative to the pedigree produced by either colony or cervus. This is anti-conservative (biases CRR and fitness upwards), however we have also identified occasions where either the Colony of Cervus pedigrees alone may by conservative (bias CRR and fitness downward, for example the impossible parentage problem in Colony described in note 1 above, or the mismatch filterin problem in note 4). Ultimately there is no perfect way to make a consesus pedigree and we have no empirical information against which to optimize our approach. Instead we prioritize consistency across years.   
+5.	Application of the ideas above (3) tend to result in increasing the number of assignments when generating a consensus pedigree relative to the pedigree produced by either colony or cervus. This is anti-conservative (biases CRR and fitness upwards), however we have also identified occasions where either the Colony of Cervus pedigrees alone may by conservative (bias CRR and fitness downward, for example the impossible parentage problem in Colony described in note 1 above, or the mismatch filtering problem in note 4). Ultimately there is no perfect way to make a consesus pedigree and we have no empirical information against which to optimize our approach. Instead we prioritize consistency across years.   
 
-#Assignment 
+# Assignment 
 
 ## Cervus
 
@@ -308,7 +317,7 @@ cervus_raw %<>%
          trio_mm = "Trio loci mismatching",
          trio_lod = "Trio LOD score",
          trio_confidence = "Trio confidence") %>%
-  select(-c("Pair top LOD","Pair top LOD_1" , "Trio top LOD"  ) ) # remove unused columns
+  select(-contains("Delta"  ) ) # remove unused columns
 
 rm(cervus_2010, cervus_2011, cervus_2012, cervus_2013, cervus_2014, cervus_2015, cervus_2016, cervus_2017,cervus_2018, cervus_2019, cervus_2020)
 ```
@@ -317,21 +326,21 @@ rm(cervus_2010, cervus_2011, cervus_2012, cervus_2013, cervus_2014, cervus_2015,
 # combine with metadata
 
 #offspring
-cervus_full <- full_dataset %>%
+cervus_full <- full_data_1.0 %>%
   distinct(sample_id, .keep_all = TRUE) %>%
   select(sample_id, year, type, date) %>%
   rename_with(.fn = ~ paste0("offspring_", .x)) %>%
   right_join(cervus_raw, by = c("offspring_sample_id" = "offspring_sample_id"))
 
 #father
-cervus_full <- full_dataset %>%
+cervus_full <- full_data_1.0 %>%
   distinct(sample_id, .keep_all = TRUE) %>%
   select(sample_id, year, type, date) %>%
   rename_with(.fn = ~ paste0("father_", .x)) %>%
   right_join(cervus_full, by = c("father_sample_id" = "father_sample_id"))
 
 #mother
-cervus_full <- full_dataset %>%
+cervus_full <- full_data_1.0 %>%
   distinct(sample_id, .keep_all = TRUE) %>%
   select(sample_id, year, type, date) %>%
   rename_with(.fn = ~ paste0("mother_", .x)) %>%
@@ -426,19 +435,22 @@ full_colony_raw <- bind_rows(colony_2010, colony_2011, colony_2012, colony_2013,
 
 ## lets add the metadata we'll need to filter later (year, type, date) for offspring and each parent
 #offspring
-full_colony <- full_dataset %>%
+full_colony <- full_data_1.0 %>%
+  distinct(sample_id, .keep_all = TRUE) %>%
   select(sample_id, year, type, date) %>%
   rename_with(.fn = ~ paste0("offspring_", .x)) %>%
   right_join(full_colony_raw, by = c("offspring_sample_id" = "OffspringID"))
 
 #father
-full_colony <- full_dataset %>%
+full_colony <- full_data_1.0 %>%
+    distinct(sample_id, .keep_all = TRUE) %>%
   select(sample_id, year, type, date) %>%
   rename_with(.fn = ~ paste0("father_", .x)) %>%
   right_join(full_colony, by = c("father_sample_id" = "FatherID"))
 
 #mother
-full_colony <- full_dataset %>%
+full_colony <- full_data_1.0 %>%
+  distinct(sample_id, .keep_all = TRUE) %>%
   select(sample_id, year, type, date) %>%
   rename_with(.fn = ~ paste0("mother_", .x)) %>%
   right_join(full_colony, by = c("mother_sample_id" = "MotherID"))
@@ -471,9 +483,10 @@ colony_duos <- full_colony %>%
 # for duos the situation is much more challenging because the singleparents are often not in the cervus output (see note 2 from assignment criteria summary) and we need to count mismatches ourselves
 
 #get simplified genotype data
-long_genos <- full_dataset %>%
-  select(sample_id, starts_with(c("Ot", "Ssa", "Ogo"))) %>%
-  pivot_longer(-sample_id, names_to = "marker", names_pattern = "(.+)\\.\\.\\.")
+long_genos <- full_data_1.0 %>%
+  select(sample_id, starts_with(c("Ot"))) %>%
+  pivot_longer(-sample_id, names_to = "marker") %>%
+  mutate(marker = str_remove(marker, "_a[:digit:]"))
 
 
 # debugging example data, do not use in final analysis
@@ -504,7 +517,7 @@ for (i in (1:nrow(mm_info))){
     match_marker = match_marker + (sum(pull(long_genos[long_genos$marker == m & long_genos$sample_id == as.character(mm_info[i,1]), 3] ) %in% pull(long_genos[long_genos$marker == m & long_genos$sample_id == as.character(mm_info[i,2]), 3] )) >=1)
     #print(match_marker)
   }
-  mismatch = 12-(match_marker)
+  mismatch = 11-(match_marker)
   #mm_info[i,1] <- as.character(comps_to_make[i,1]) #print parent to results matrix
   #mm_info[i,2] <- as.character(comps_to_make[i,2]) #print offspring to results matrix
   mm_info[i,3] <- mismatch# print number of mismatches
@@ -540,4 +553,330 @@ full_colony %>%
 #only cheked for 2016, but it worked perfectly in that year, come back and check again with the full dataset before finalizing assignments. 
 ```
 
+## Consensus Assignment 
+
+
+```{r}
+## collect and simplify mm info for tie breaking
+#colony first
+colony_for_consensus <- colony_final %>%
+  rename(colony_mother= mother_sample_id, colony_father = father_sample_id) %>%
+  left_join(select(all_of(colony_trios), offspring_sample_id, colony_mother= mother_sample_id, colony_father = father_sample_id, colony_trio_mm = trio_mm), by = c("offspring_sample_id" = "offspring_sample_id", "colony_mother" = "colony_mother", "colony_father" = "colony_father")) %>%
+  left_join(select(all_of(mm_info), offspring_sample_id, colony_mother= mother_sample_id, colony_father = father_sample_id, colony_father_mm = mm, colony_mother_mm = mm), by = c("offspring_sample_id" = "offspring_sample_id", "colony_mother" = "colony_mother", "colony_father" = "colony_father")) %>%
+  mutate(colony_father_mm = case_when(is.na(colony_father) ~ NA_real_,
+                               TRUE ~ colony_father_mm),
+         colony_mother_mm = case_when(is.na(colony_mother) ~ NA_real_,
+                               TRUE ~ colony_mother_mm)) 
+
+#now cervus
+cervus_for_consensus <- cervus_final %>%
+  select(offspring_sample_id,  cervus_mother = mother_sample_id, cervus_mother_mm = mother_mm, cervus_father = father_sample_id, cervus_father_mm = father_mm, cervus_trio_mm = trio_mm)
+
+#now combine
+consensus_df <- colony_for_consensus %>%
+  left_join(cervus_for_consensus, by = c("offspring_sample_id" = "offspring_sample_id"))
+
+```
+
+```{r}
+# now we apply the consensus rules
+
+# let's get trio information to make some of this easier/faster
+consensus_df %<>%
+  replace_na(list(colony_mother = "none", colony_father = "none", cervus_father = "none", cervus_mother = "none")) %>%
+  mutate(colony_trio = case_when((colony_mother != "none" & colony_father != "none") ~ 1,
+                                 TRUE ~ 0),
+         cervus_trio = case_when((cervus_mother != "none" & cervus_father != "none") ~ 1,
+                                 TRUE ~ 0)
+         )
+
+# total agreement
+
+final_pedigree <- consensus_df %>%
+  mutate(final_mother = case_when((colony_mother == cervus_mother & colony_father == cervus_father) ~ colony_mother, 
+                                  (colony_trio == 1 & cervus_trio == 1) & (cervus_trio_mm < colony_trio_mm) ~ cervus_mother,
+                                  (colony_trio == 1 & cervus_trio == 1) & (cervus_trio_mm > colony_trio_mm) ~ colony_mother,
+                                  (colony_trio == 1 & cervus_trio == 1) ~ colony_mother,
+                                  (colony_trio == 1 & cervus_trio == 0) ~ colony_mother,
+                                  (colony_trio == 0 & cervus_trio == 1) ~ cervus_mother,
+                                  (colony_mother == "none" & cervus_mother != "none" ) ~ cervus_mother, 
+                                  (colony_mother != "none" & cervus_mother == "none") ~ colony_mother,
+                                  (colony_mother == "none" & cervus_mother == "none") ~ "none",
+                                  (colony_mother_mm <= cervus_mother_mm) ~ colony_mother,
+                                  (colony_mother_mm > cervus_mother_mm) ~ cervus_mother)) %>%
+  mutate(final_father = case_when((colony_father == cervus_father & colony_father == cervus_father) ~ colony_father, 
+                                  (colony_trio == 1 & cervus_trio == 1) & (cervus_trio_mm < colony_trio_mm) ~ cervus_father,
+                                  (colony_trio == 1 & cervus_trio == 1) & (cervus_trio_mm > colony_trio_mm) ~ colony_father,
+                                  (colony_trio == 1 & cervus_trio == 1) ~ colony_father,
+                                  (colony_trio == 1 & cervus_trio == 0) ~ colony_father,
+                                  (colony_trio == 0 & cervus_trio == 1) ~ cervus_father,
+                                  (colony_father == "none" & cervus_father != "none" ) ~ cervus_father, 
+                                  (colony_father != "none" & cervus_father == "none") ~ colony_father,
+                                  (colony_father == "none" & cervus_father == "none") ~ "none",
+                                  (colony_father_mm <= cervus_father_mm) ~ colony_father,
+                                  (colony_father_mm > cervus_father_mm) ~ cervus_father)) %>%
+  relocate(final_mother, final_father, colony_mother, colony_father, cervus_mother, cervus_father)
+
+```
+
+
+```{r, eval = FALSE}
+# it looks like the code above wasn't perfect, there's a case where each program assigns a single good parent, but of opposite sex. Reading the description of the assignment criteria, one would think the final retained parentage would be a single parent, but the code above will produce a trio. This is not good becaue it can also produce impossible parentages. This only happens in 0.07% of the assignments, so it was easy to miss in the first round of debugging.
+
+# this code chunk does some testing/debugging of the fix, don't run in the final
+
+# cases of this are below
+
+ final_pedigree %>%
+  filter(final_father != "none", final_mother != "none", cervus_father == "none", cervus_mother != "none", colony_father != "none", colony_mother == "none") %>% View(.)
+
+ final_pedigree %>%
+  filter(final_father != "none", final_mother != "none", cervus_father != "none", cervus_mother == "none", colony_father == "none", colony_mother != "none") %>% View(.)
+
+#fortunately this is fixable. We can use the same dataframe from above and simply choose a single parent on the basis of MM, with ties going to colony. 
+
+
+fp2 <- final_pedigree %>%
+  mutate(final_father = case_when((final_father != "none" & final_mother != "none" & cervus_father == "none" & cervus_mother != "none" & colony_father != "none" & colony_mother == "none" & cervus_mother_mm < colony_father_mm) ~ "none",
+                                  TRUE ~ final_father)) %>%
+  mutate(final_mother = case_when((final_father != "none" & final_mother != "none" & cervus_father == "none" & cervus_mother != "none" & colony_father != "none" & colony_mother == "none" & cervus_mother_mm >= colony_father_mm) ~ "none",
+                                  TRUE ~ final_mother)) %>%
+  mutate(final_mother = case_when((final_father != "none" & final_mother != "none" & cervus_father != "none" & cervus_mother == "none" & colony_father == "none" & colony_mother != "none" & (colony_mother_mm > cervus_father_mm)) ~ "none",
+                                  TRUE ~ final_mother)) %>%
+  mutate(final_father = case_when((final_father != "none" & final_mother != "none" & cervus_father != "none" & cervus_mother == "none" & colony_father == "none" & colony_mother != "none" & (colony_mother_mm <= cervus_father_mm)) ~ "none",
+                                  TRUE ~ final_father))
+
+
+
+# check if this worked
+anti_join(fp2, final_pedigree) %>% View(.) 
+# yes, for the fathers, we should have only changed on eof the three cases
+
+```
+
+```{r}
+# now we implement the fix from above
+final_pedigree %<>%
+  mutate(final_father = case_when((final_father != "none" & final_mother != "none" & cervus_father == "none" & cervus_mother != "none" & colony_father != "none" & colony_mother == "none" & cervus_mother_mm < colony_father_mm) ~ "none",
+                                  TRUE ~ final_father)) %>%
+  mutate(final_mother = case_when((final_father != "none" & final_mother != "none" & cervus_father == "none" & cervus_mother != "none" & colony_father != "none" & colony_mother == "none" & cervus_mother_mm >= colony_father_mm) ~ "none",
+                                  TRUE ~ final_mother)) %>%
+  mutate(final_mother = case_when((final_father != "none" & final_mother != "none" & cervus_father != "none" & cervus_mother == "none" & colony_father == "none" & colony_mother != "none" & (colony_mother_mm > cervus_father_mm)) ~ "none",
+                                  TRUE ~ final_mother)) %>%
+  mutate(final_father = case_when((final_father != "none" & final_mother != "none" & cervus_father != "none" & cervus_mother == "none" & colony_father == "none" & colony_mother != "none" & (colony_mother_mm <= cervus_father_mm)) ~ "none",
+                                  TRUE ~ final_father))
+
+```
+
+
+```{r, eval = FALSE}
+# quick stats 
+final_pedigree %>%
+  summarise(unassigned_n = sum(final_mother == "none" & final_father == "none", na.rm = TRUE))
+
+#write_tsv(final_pedigree, "final_pedigree.txt")
+```
+
+
+
+# QC
+
+## Compare to Nick Sard Pedigrees
+
+How much did all the changes we've made to data structures, filtering, assignment criteria etc actually matter? One would hope that the final results are robust to the somewhat minor changes in the approach. 
+
+### Assignment Rate Overall
+Let's get the overall assignment rate (to at least one parent), by year
+
+```{r, eval = FALSE}
+# quick stats 
+final_pedigree %>%
+  left_join(distinct(full_data_1.0, sample_id, .keep_all = TRUE) %>% select(sample_id, year), by = c("offspring_sample_id" = "sample_id")) %>%
+  group_by(year) %>%
+  summarise(n = n(), assigned_n = n() - sum(final_mother == "none" & final_father == "none", na.rm = TRUE), assn_rate = (n()-sum(final_mother == "none" & final_father == "none", na.rm = TRUE))/n())
+
+#write_tsv(final_pedigree, "final_pedigree.txt")
+```
+
+__Nick Sard's Pedigrees 2010 - 2013 __  
+For ease of comparison we will use the pedigree files used to publish the Sard 2016 manuscript, which don't include carcass samples. Let's filter out the carcass samples from above and calculate the assignment rates again.
+
+```{r}
+final_pedigree %>%
+  left_join(distinct(full_data_1.0, sample_id, .keep_all = TRUE) %>% select(sample_id, year, type), by = c("offspring_sample_id" = "sample_id")) %>%
+  filter(type != "sgs") %>%
+  group_by(year) %>%
+  summarise(n = n(), assigned_n = n() - sum(final_mother == "none" & final_father == "none", na.rm = TRUE), assn_rate = (n()-sum(final_mother == "none" & final_father == "none", na.rm = TRUE))/n())
+```
+
+
+Let's compare these assignment rates to the ones from the pedigrees used for the Sard 2016 manuscript (Note that Nick's pedigree I'm using here doesn't include carcasss samples, so the totals may be a little different).
+
+Here assignment rate is the proportion of offspring that have at least one parent in the final pedigree.
+
+2010: I had 6% assignment rate (14/221), same with Nick (6% 13/221).  
+2011: I had 39% assignment rate (138/356), similar to Nick's (38% 136/357).  
+2012: I had 65% assignment rate (326/500), similar to Nick's (64% 320/500).  
+2013: I had 69% assignment rate (153/223), similar to Nick's (67% 151/223).  
+
+__Nick Sard's Pedigrees 2014 - 2015__  
+
+We can also pull up the final pedigrees used for the 2014 and 2015 offspring years used to publish the Banks 2016 USACE report. Note that while we mostly agree on which carcass samples should be included in the final report, Nick's actual cervus and colony runs included many more carcass samples (outside the South Fork), to make rates comparable from these files, we'll look only at the non-carcass samples.
+
+2014: I had 58% assignment rate (118/203), similar to Nick's (62% 123/197).  
+2015: I had 73% assignment rate (176/241), similar to Nick's (72% 173/240).  
+
+
+
+```{r, eval = FALSE}
+# this section is for debugging a previous version of the Cervus outputs that had an error, it doesn't not apply to the current versions of the input files and does not need to be run (eval = FALSE)
+
+# 2011 was very different in assignment rate between my pedigree and Nick's pedigree (24% vs 38%, respectively), it turns out this was due to a typo in the cervus simulation parameters. 
+
+sard_2011 <- read_tsv("Sard_pedigrees/2011.combined.pedigree.txt")
+
+sard_2011 %<>% 
+  setNames(paste0('sard_', names(.)))
   
+
+comp_2011 <- final_pedigree %>%
+  left_join(distinct(full_data_1.0, sample_id, .keep_all = TRUE) %>% select(sample_id, year, type, old_id), by = c("offspring_sample_id" = "sample_id")) %>%
+  filter(year == 2011) %>%
+  left_join(sard_2011, by = c("old_id" = "sard_offspring"))
+
+comp_2011 %>%
+  filter(final_mother == "none" & final_father == "none") %>% View()
+
+# Let's examine cases where I did not assign parentage but Sard did, the primary disagreement between our pedigrees  
+# (1) OtsAC11SFMK_0079: Sard assigns OtsAC07SFMK_0266 and OtsAC07SFMK_0016 (MR07_016 and MR07_266). This is the assignment in my raw Colony output, but it was removed from the final Colony output. My Cervus output did not include this parentage, so the trio LOD was not positive (see note 2 in Assignment Criteria Summary section). Both parents appear in the raw Cervus output for other offpsring and appear to have spawned together in the Cervus output (other offspring have OtsAC07SFMK_0266 and OtsAC07SFMK_0016 as parents and agree with Sard pedigrees). In my assignment algorithm, Colony trios are only removed if there are greater than 2 mismatches, but it pulls this data from the Cervus output for convenience (calculating trio mm is not trivial like duo mm). 
+# 
+# If the trio doesn't appear in the Cervus output does this break the script? Yes. Before filtering the Colony trios there are 45 NAs in the trio mismatch columns. All are from 2011, including OtsAC11SFMK_0079. So this explains the discrepancy in assignment rate, but what went wrong in the 2011 Cervus run to cause the problem in the first place? OtsAC11SFMK_0079 OtsAC07SFMK_0266 and OtsAC07SFMK_0016 are all in the input dataset.
+# 
+# Input dataset includes inds? Yes
+# Genotypes are consistent? Sard assigns the same parents to a different offspring, so we only need to check the offspring genos. The offspring genos agree  
+# Cervus run parameters typo? __YES__ The error rate in likelihood calculation was set to 0, instead of 2%
+```
+
+
+__Conclusion__
+Very limited differences in assignment rate between my final pedigree and Nick's final pedigree from 2010 - 2015, with some years assigning slightly fewer or slightly more offspring to at least a single parent (see table below). This is great news. I made changes that make the assignment both more conservative and more liberal and I was unsure what the end effect would be. There may be many small differences in the final pedigrees, but ultimately the assignment rate (how many of the potential offspring are derived from parents above the dam), is a summary statistic that closely tracks others such as TLF CRR, and I don't expect there'll be major differences in the conclusions drawn about these years with such minor differences in assignment rate.
+
+```{r}
+kable(data.frame( "Offspring Year" = c(2010, 2011, 2012, 2013, 2014, 2015), "Dayan" =  c(6,39,65,69, 58, 73), "Sard" = c(6,38,64, 67, 62, 72)), caption = "Assignment rates of non-carcass samples for the 6 years where both Dayan and Sard infer pedigrees. Assignment rate is the % of offspring assigned to at least one parent") %>%
+  kable_classic(full_width = F, html_font = "Cambria" )
+  
+```
+
+## Basic Stats
+
+Let's look at some basic stats from the pedigree to make sure it fits our expectations. 
+
+__Fitness__
+First let's count the frequencies of unique mothers and fathers. This should be the same as fitness for succesful parents. Given previous results in MCKR and NSNT, it should have a negative binomial distribution with a mean around 0.7. 
+
+```{r, message = FALSE, warning=FALSE}
+plot_data <- final_pedigree %>% group_by(final_mother) %>% summarise(n = n())
+ggplot(data = filter(plot_data, final_mother != "none"))+geom_histogram(aes(x = n))+xlab("Number of Offspring for Successful Female Parents")+theme_classic()
+
+plot_data <- final_pedigree %>% group_by(final_father) %>% summarise(n = n())
+ggplot(data = filter(plot_data, final_father != "none"))+geom_histogram(aes(x = n))+xlab("Number of Offspring for Successful Male Parents")+theme_classic()
+```
+
+These look good.
+
+__Fitness vs Data Quality
+
+Throughout any genotyping process there's a tradeoff between accuracy and completeness. This has been especially challenging with microsatellites. There has been a desire to tolerate higher missing data than the previous dataset (very little missing data) because I might score ambiguous alleles differently than previous workers. This has caused a new issue though: as the missng data rate goes up, non-exclusion power goes down. We will assess this more directly later, but for now. Do we see a positive relationship between fitness and missingness - an indication of a problem, or is there an inverse relationship - our expectation if everything is working correctly.
+
+```{r, eval = FALSE}
+ggplot(data = parents, aes(miss_gt, tlf))+geom_count()+geom_smooth(method = "lm")
+```
+
+Okay, looks good! individuals with lots of missing data have lower fitness on average than individuals with complete data.
+
+
+# Write Files
+
+
+```{r}
+pedigree <- final_pedigree %>%
+  select(offspring_sample_id, mother = final_mother, father = final_father)
+```
+
+
+Let's save the final pedigree
+
+```{r, eval = FALSE}
+pedigree <- final_pedigree %>%
+  select(offspring_sample_id, mother = final_mother, father = final_father)
+
+save(pedigree, file = "./pedigree.R")
+write_tsv(pedigree, "./pedigree.txt")
+
+```
+
+# Power Analysis
+
+Let's attempt to get an idea on the accuracy of our pedigree, at least, our raw Cervus and Colony pedigrees.
+
+We will provide the non-exclusion probabilities, simulation results, inferred error rates, false expected number of false parent-offspring pairs, and   
+
+Save this work for later as it is important, but not required for the report:
+
+> I also think it is important to provide some context to readers about the accuracy of the final pedigree: how many parent true offspring pairs do we expect are spuriously excluded from the pedigree due to misgenotyping and how many false parent offspring pairs are included because of the limitations of the information content of our dataset. With a little work, I think we can provide meaningful estimates of both of these types of errors. I'll continue to think about this as I work on the project over the next few weeks.
+
+# Generations
+
+Before we get to the actual analysis, how many grandparentages or great grand-parentages are in the pedigree.
+
+```{r}
+# Grandparents
+# a quick way to count grandparentages is to see how many times an individual appears as both a parent and an offspring in the pedigree.
+
+dedup_full <- full_data_1.0 %>%
+  group_by(sample_id) %>%
+  slice_max(date, with_ties = FALSE)
+
+grandparents <- pedigree %>%
+  mutate(offspring_also_parent = case_when(offspring_sample_id %in% c(mother, father) ~ TRUE,
+                                           TRUE ~ FALSE)) %>%
+  left_join(select(dedup_full, sample_id, year), by = c("offspring_sample_id" = "sample_id"))
+
+kable(grandparents %>%
+  filter(offspring_also_parent == TRUE) %>%
+  count(year), caption = "Number of offspring that are also parents (grandparentages)") %>%
+  kable_classic(full_width = T, html_font = "Cambria" )
+
+# sample sizes for different types of crosses
+grandparents %<>%
+  left_join(select(dedup_full, sample_id, origin), by = c("father" = "sample_id")) %>%
+  rename(father_origin = origin) %>%
+  left_join(select(dedup_full, sample_id, origin), by = c("mother" = "sample_id")) %>%
+  rename(mother_origin = origin) %>%
+  mutate(cross = case_when(father_origin == "NOR" & mother_origin == "NOR" ~ "WxW",
+                           father_origin == "HOR" & mother_origin == "HOR" ~ "HxH",
+                           father_origin == "NOR" & mother_origin == "HOR" ~ "HxW",
+                           father_origin == "HOR" & mother_origin == "NOR" ~ "HxW"))
+
+kable(grandparents %>%
+    filter(!is.na(cross)) %>%
+    distinct(father, mother, .keep_all = TRUE) %>%
+  count(cross), caption = "Number of Distinct Crosses, by origin") %>%
+  kable_classic(full_width = T, html_font = "Cambria" )
+
+
+# how many individuals with both parents and fitness (ie F1s with offspring that can be used to compare fitness of offspring from different crosses)
+kable(grandparents %>%
+  filter(!is.na(cross), offspring_also_parent == TRUE) %>%
+  count(cross), caption = "Number of Offspring with two known parents and offspring (fitness greater than 0), by parent cross type") %>%
+  kable_classic(full_width = T, html_font = "Cambria" )
+
+
+#grandparents %>%
+#  filter(!is.na(cross), offspring_also_parent == TRUE) %>%
+#  count(year, cross)
+```
+
+
+```
+

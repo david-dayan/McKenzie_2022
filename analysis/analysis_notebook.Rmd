@@ -1,0 +1,1079 @@
+---
+title: "South Fork McKenzie River Pedigree Project Analysis Notebook"
+output:
+  html_document:
+    df_print: paged
+    code_folding: hide
+    toc: true
+    toc_float: true
+    toc_collapsed: false
+---
+
+```{r, message = FALSE, warning=FALSE}
+require(RLDNe)
+require(car)
+require(DHARMa)
+require(emmeans)
+require(MASS)
+require(effects)
+require(glmmTMB)
+require(lme4)
+require(kableExtra)
+require(gt)
+require(gtsummary)
+require(tidyverse)
+require(magrittr)
+require(countreg)
+require(lmerTest)
+require(lubridate)
+```
+
+
+# Summary
+
+This notebook contains a log of all analyses for the 2022 South Fork McKenzie River spring Chinook salmon genetic pedigree study. Inference of the pedigree used here is conducted in a separate notebook titled "parentage_notebook" in this same repository.
+
+This is an R notebook. The .html version of this file is a fully rendered and interactive log. To view it, save the html and open in a browse. The .rmd version can be opened within R studio. To reproduce results or edit the analysis: clone the full repository onto your local machine and open the r project in rstudio. This will provide all needed data and objects.
+
+# Pedigrees and Cohort Rationale
+
+This notebook relies on a pedigree of all Chinook Salmon released above Cougar Dam on the South Fork McKenzie River from 2007 - 2017 using potential offspring sampled from 2010 to 2020.
+
+## Summary of Cohort Years
+
+Previous reports and manuscripts evaluating the reintroduction of Chinook salmon above Cougar Dam on the South Fork McKenzie river have considered NOR salmon sampled from 2010 to 2015 as potential offspring of salmon released above Cougar Dam from 2007 - 2012. 
+
+Most Chinook salmon on the South Fork McKenzie express an age at maturity of 3 - 6 years. Therefore, previous reports (relying on 2010 - 2015 NOR returns) have inferred a pedigree for salmon released above the dam from 2007 - 2009. Results based on the pedigree of salmon released above Cougar Dam in 2010 were also provided along with the caveat that age 6 offspring were not yet evaluated and some results such as Total Lifetime Fitness and Cohort Replacement Rate were likely underestimates.
+
+Continuing this work, we have since genotyped NOR salmon sampled on the South Fork McKenzie from 2016 to 2020, as well as salmon released above Cougar dam from 2013 to 2017. These new data allow us to complete the pedigree of salmon released above Cougar Dam in 2010, infer full pedigrees TLF  for salmon released above Cougar Dam from 2011 - 2014, and partial pedigrees for salmon released above the dam from 2015 - 2017.
+
+## Inferring Pedigrees Again
+
+Irrevocable updates to software packages used to assign parentage (COLONY) prevent us from exactly reproducing the approach used to infer the pedigrees used in previous reports. We chose to infer all pedigrees from parent years 2007 to 2017 (offspring year 2010 - 2020) from the raw genetic data using a consistent approach rather than simply combining previous pedigrees with those inferred from new data.  
+
+This means that parent year results from 2007-2010 and offspring year results from 2010 - 2015, that have previously been reported on may change. In the parentage assignment notebook we evaluated how much changes to the parentage assignment approach affected assignment rate, cohort replacement rate. The overall assignment rate differed an average of 1.6% across the six years where pedigrees were previously inferred.
+
+This approach has several advantages:  
+(1) Trends - Results based on the pedigrees such as Cohort Replacement Rate and Total Lifetime Fitness suffer from the same biases across all years, allowing more confidence in the identification of year - year trends.   
+(2) Fitness modeling - Similar to above, applying a consistent approach to pedigree inference gives us more power to identify predictors of fitness by allowing us to combine data from more years into a single analysis  
+(3) Grandparentage and Great-Grandparentage: If a unified filtering and pedigree inference approach is used for the entire dataset, we can more confidently combine pedigrees inferred for a single offspring year with one another, allowing for a 3 (or perhaps even 4) generation pedigree. This means we can identify gradnparentage and great grandparentage, opening up the potential to address many important questions such as fitness effects of hatchery selection.  
+(4) Minor Issues - In reproducing previous results, minor errors in code were identified. While these errors ultimately are expected to have little effect on the final pedigrees and results, inferring the pedigrees again allows us to fix these small errors and evaluate their effects. For example in the Cervus pedigrees, the software is run using a single parent year and a single offspring year, then the results are concatenated for all parent years within an offspring year. This renders the likelihoods incomparable. Likelihoods are used to break ties when inferring the cervus pedigree, but it likely never had a large effect because Colony is given priority in the consensus pedigree. 
+
+Throughout the notebook we present the results for all parent years using the newly inferred pedigrees.
+
+# Goals 
+
+(1) Summarise dataset and release history  
+(2) Summarise assignment of offspring to parents, use to infer age structure.      
+(3) Estimate total lifetime fitness (TLF) for parent cohorts  
+(4) Estimate cohort replacement rates for parent cohorts  
+(5) Assess variables that influence fitness with general linear models  
+(6) Estimate effective number of breeders using NeEstimator  
+(7) Compare HOR and NOR fitness
+
+This is an R notebook. The .html version of this file is a fully rendered and interactive log. To view it, save the html and open in a browse. The .rmd version can be opened within R studio. To reproduce results or edit the analysis: clone the full repository onto tyour local machine and open the r project in rstudio. This will provide all needed data and objects. 
+
+# Data
+
+__Genotype and Metadata__  
+A log of the work to consolidate sample metadata can be found in the _cougar_trap_metadata_mgmt_ and the _meta_data_consolidation_ R notebooks in the metadata directory of this repository. There are also readmes in that directory that explain subdirectory structure and files. 
+
+The log (R notebook) for genotype data prep is titled _genotype_data_prep_ and can be found in the genotypes directory of this repository.
+
+Here, we import the final outputs of this notebook containing both sample metadata and genotype which include (by R environment name):
+
+(1) __full_unfilt:__ All genotypes and metadata, no genotype quality filtering. Includes all individuals known to be potential parents or offspring for the project.
+(2) __full_data_1.0:__ Genotypes and metadata, after removing individuals with fewer than 7 scored genotypes and removing duplicates. 
+
+```{r}
+load("../genotypes/genotype_data/full_unfiltered_dataset.R")
+load("../genotypes/genotype_data/full_filtered_dataset.R")
+```
+
+
+Both files also contain some individuals twice (for example: Cougar trap LSDR samples have two rows, one for each observation at the Cougar Trap). So, let's also produce some objects that only include the final observations for individuals.
+
+(3) __dedup_unfilt:__ same as full_unfilt above, but only last observation of an individual retained.     
+(4) __dedup:__ same as full_data_1.0 above, but only second observation of an individual retained.     
+
+```{r}
+dedup <- full_data_1.0 %>%
+  group_by(sample_id) %>%
+  slice_max(date, with_ties = FALSE) %>%
+  ungroup()
+
+dedup_unfilt <- full_unfilt %>%
+  group_by(sample_id) %>%
+  slice_max(date, with_ties = FALSE) %>%
+  ungroup()
+```
+
+
+__Pedigree__
+
+The log for inferring final consensus pedigree can be found in the _parentage_notebook_ in the parentage directory of this repository. It includes parentages for all potential offspring sampled from 2010 - 2020.
+
+Here we import the final consensus pedigree. Note that this pedigree only has rows for assigned parentages, offspring with no parentage assigned do not appear in this object.
+
+```{r}
+load("../parentage/pedigree.R")
+```
+
+# Dataset and Release Summary Counts
+
+## Parents
+
+### Counts and Sex Ratios
+
+Throughout this report (and previous reports), it has been useful to split the dataset up and present results by offspring and candidate parents. Let's keep with this approach and present the numbers of potential parents (__table N1__) and the numbers of potential offspring __table N7__ .
+
+Here we only present the numbers for final filtered dataset for two reasons:  
+
+(1) In later analyses where we calculate demographic parameters such as CRR, we define the number of candidate parents as the number of potential parents passed to Colony or Cervus, to which we assign potential offspring. Keeping this consistent will make these tables less confusing down the road.   
+(2) Duplicates: There are many individuals filtered from the raw dataset because they have identical genotypes to another sample. This is potentially due to tissue samples being stored in a shared container (one fin clip gets split into multiple pieces), or spawning ground surveys sampling the same individual that was already sampled at the Cougar Trap. Including these individuals in the number of parents is misleading.  
+
+
+```{r}
+#unfilt_parent_summary <- dedup_unfilt %>%
+#  filter(cand_parent == TRUE) %>%
+#  count(year, type, origin) %>%
+#  rename(n_unfiltered = n)
+
+# let's add a column for sex ratio
+
+filt_parent_summary <- dedup %>%
+  filter(cand_parent == TRUE) %>%
+  count(year, type, origin) %>%
+  rename(n_final = n)
+
+filt_parent_summary %<>%
+  unite("type_origin", type, origin) %>%
+  pivot_wider(id_cols = year, names_from = type_origin, values_from = n_final)
+
+options(knitr.kable.NA = '')
+kable(filt_parent_summary, caption = "Table N1: Number of Candidate Parents") %>%
+  kable_classic(full_width = T, html_font = "Arial" )
+# there are two 
+```
+
+__Table N1:__ Number of individuals relased above Cougar dam retained in the final filtered dataset. These values correspond to candidate parents used in the assignments. "Hatchery Outplant HOR" refers to individuals trapped at either McKenzie or Leaburg hatchery and released above the dam, all are HOR. Cougar Trap includes both NOR, HOR and unknown origin (NA) individuals released above the dam. Precocial males refers to a small set of jacks sampled on the spawning grounds above the dam in 2014. SGS refers to additional individuals sampled during spawning ground surveys above the dam.  
+
+
+Let's also split up the parent cohorts by sex. Here we split into different tables to make them more manageable.
+
+```{r}
+kable(dedup %>%
+  filter( cand_parent == TRUE, year < 2018) %>%
+  count(year, sex) %>%
+  pivot_wider(id_cols = year, names_from = sex, values_from = n) %>%
+  mutate(sex_ratio = M/`F`), caption = "Table N2: Sex Ratios of all Candidate Parents", align = "c", digits = 2 ) %>%
+  kable_classic(full_width = F, html_font = "Arial")
+```
+__Table N2:__ Number of candidate parents females (F) and males (M) (individual released above Cougar Dam and retained in the final dataset). Here we split by source, individuals are either from Cougar Trap (NOR and HOR) or from the hatchery (HOR). Sex ratio is presented as n_male/n_female.
+
+```{r}
+kable(dedup %>%
+  filter(type == "hatchery_outplant", cand_parent == TRUE) %>%
+  count(year, sex) %>%
+  pivot_wider(id_cols = year, names_from = sex, values_from = n) %>%
+  mutate(sex_ratio = M/`F`), caption = "Table N3: Sex Ratios of Candidate Parents from Hatchery", align = "c", digits = 2) %>%
+  kable_classic(full_width = F, html_font = "Arial"  )
+
+kable(dedup %>%
+  filter(type == "cougar_trap", cand_parent == TRUE, year < 2018) %>%
+  count(year, sex) %>%
+  pivot_wider(id_cols = year, names_from = sex, values_from = n) %>%
+  mutate(sex_ratio = M/`F`), caption = "Table N4: Sex Ratios of Candidate Parents from Cougar Trap", align = "c", digits = 2) %>%
+  kable_classic(full_width = F, html_font = "Arial"  )
+
+```
+__Tables N3 - N4:__ Number of candidate parents females (F) and males (M) (individual released above Cougar Dam and retained in the final dataset). Here we split by source, individuals are either from Cougar Trap (NOR and HOR) or from the hatchery (HOR). Sex ratio is presented as n_male/n_female.
+
+### Cougar Trap LSDR / Recycling
+
+Finally, let's summarise the approaches used for releasing individuals from the Cougar Trap. 
+
+Some terms to define:  
+(1) __Late-season downstream release (LSDR):__ Individuals that arrive at the Cougar Trap on and after September 1st are double floy tagged and released downstream at Forest Glen. If they return to the trap a second time, they are released above the dam.  
+(2) __Recycling__: All individuals at the Cougar Trap, regardless of date, are first released downstream of the dam (either in Forest Glen, or just the dam tailrace). If they return a secodn time they are released above the dam.
+
+__LDSR / Recycling Summary__
+During 2010, 2011 and 2012, neither LSDR or recycling was used. All fish that were trapped and survived were released above the dam.   
+During 2013 and 2014, the LSDR approach was applied to NOR fish after September 1st. Some HORs on and after September 1st were also LSDR but not all.   
+From 2015 onwards all NOR are recycled. Some HOR are also recycled, but most are not.
+
+Let's collect some numbers here. 
+
+```{r}
+
+kable(full_data_1.0 %>%
+  filter(type == "cougar_trap", origin == "NOR", year %in% c(2013, 2014)) %>%
+    filter(date %within% interval(ymd("2013-09-01"), ymd("2013-12-01")) |  date %within% interval(ymd("2014-09-01"), ymd("2014-12-01"))) %>%
+  count(year, recapture) %>%
+  pivot_wider(id_cols = year, names_from = recapture, values_from = n) %>%
+  mutate("percent recaptured" = (RE/NEW)*100) %>%
+  rename("n new" = NEW, "n recaptured" = RE)  , digits = 1, caption = "Table N5: LSDR Program Summary", align = "c") %>%
+  kable_classic(full_width = F, html_font = "Arial" )
+```
+__Table N5__: LSDR summary: Number of NOR fish sampled at Cougar trap on or after September 1st (n new), and the number of these fish that returned a second time.  
+_note: Banks 2016 tech report states that 74 (not 75 as presented here) NOR fish returned on or after September 1st in 2014. I went back to Nick's data to make sure I didn't mess something up. His data also has 75, not 74 individuals. The discrepancy stems from a single individual in 2014 with only 7 loci scored. This individual is in Nick's raw data, but not in the pedigree file used to calculate these numbers in the report, due to missingness. Here we apply a different filtering approach (details in genotype data prep), so the individual is retained._   
+
+
+```{r}
+
+kable(full_data_1.0 %>%
+  filter(type == "cougar_trap", origin == "NOR", year > 2014) %>%
+    group_by(sample_id) %>% # a couple individuals are recorded three times, this will break these counts, just get the first two instances
+    slice_max(date, n = 2, with_ties = FALSE) %>%
+    ungroup() %>%
+  count(year, recapture) %>%
+  pivot_wider(id_cols = year, names_from = recapture, values_from = n) %>%
+  select(-`NA`) %>% # one NA individual with no metadata
+  mutate("percent recaptured" = (RE/NEW)*100) %>%
+  rename("n new" = NEW, "n recaptured" = RE)  , digits = 1, caption = "Table N6: Recycling Program Summary", align = "c") %>%
+  kable_classic(full_width = F, html_font = "Arial" )
+  
+  
+```
+__Table N6__: Recycling Summary: Number of NOR fish sampled at Cougar trap, and the number of these fish that returned a second time.
+
+## Offspring
+
+Now let's summarise the potential offspring. Once again we present the counts from the final filtered dataset, because these are the values we use to calculate demographic results such as CRR, and there may be duplicates in the unfiltered dataset due to batch sampling or carcass sampling.
+
+```{r}
+kable(dedup %>%
+  filter(origin == "NOR") %>%
+  count(year, type) %>%
+  pivot_wider(id_cols = year, names_from = type, values_from = n), caption = "Table N7: Potential Offspring Counts") %>%
+  kable_classic(full_width = F, html_font = "Arial" )
+```
+__Table N7:__ Number of potential offspring (NOR individuals after filtering), sampled at the Cougar Trap, during spawning ground surveys, or as precocial males observed on spawning grounds above the dam. Note that spawning ground survey counts include individuals from surveys above the dam as well (1 in 2014 and 4 in 2016)
+
+# Assignments
+
+Here we summarise assignment of offspring to parents, infer age structure and evaluate the efficacy of LSDR and recycling programs at excluding NOR immigrants from above the dam. 
+
+For summarizing assignments we'll start simply, then get more complex.
+
+## Assignments, by Offpsring Year
+
+We'll start simply. How many offspring in a given year assign to parents above the dam
+
+```{r}
+# let's get the metadata on the pedigree
+pedigree_meta <- dedup %>%
+  select(sample_id, year, type, date) %>%
+  rename_with(.fn = ~ paste0("offspring_", .x)) %>%
+  right_join(pedigree, by = c("offspring_sample_id" = "offspring_sample_id"))
+
+#father
+pedigree_meta <- dedup %>%
+  select(sample_id, year, type, date) %>%
+  rename_with(.fn = ~ paste0("father_", .x)) %>%
+  right_join(pedigree_meta, by = c("father_sample_id" = "father")) %>%
+  rename(father = father_sample_id)
+
+#mother
+pedigree_meta <- dedup %>%
+  select(sample_id, year, type, date) %>%
+  rename_with(.fn = ~ paste0("mother_", .x)) %>%
+  right_join(pedigree_meta, by = c("mother_sample_id" = "mother")) %>%
+  rename(mother = mother_sample_id)
+
+pedigree_meta %<>%
+  mutate(parent_year = (coalesce(father_year, mother_year)))
+```
+
+```{r, message = FALSE, warning=FALSE}
+kable(pedigree_meta %>%
+  group_by(offspring_year) %>%
+  summarise(n = n(), assigned_n = n() - sum(mother == "none" & father == "none", na.rm = TRUE), assn_rate = (n()-sum(mother == "none" & father == "none", na.rm = TRUE))/n()) %>%
+  mutate(assignment_percentage = assn_rate*100) %>%
+  select(offspring_year,n_offspring = n, n_assigned = assigned_n, assignment_percentage), digits = 1, caption = "Table N8: Assignment rates per year") %>%
+kable_classic(full_width = F, html_font = "Arial" )
+
+```
+__Table N8:__ Number of potential offspring that assign to parents above the dam. Potential offspring are defined as any individual sampled (below dam, at Cougar Trap, or above dam), that are NOR.  
+_Note: People may be interested in just how many individuals show up at the trap, not ALL potential offspring. We will consider this in the section__ [Recycling]
+
+
+## AAM: Assignments, by Offspring Year and Parent Year
+
+Here we get more complex and split the assignment summaries according to parent year. This allows us evaluate age at maturity (AAM) and split each offspring year into age classes.
+
+First a table with everything.
+
+```{r, message = FALSE, warning=FALSE}
+kable(pedigree_meta %>%
+  filter(!(is.na(parent_year))) %>% # exclude non-assigments
+  mutate(age = as.numeric(offspring_year) - as.numeric(parent_year)) %>%
+  group_by(offspring_year, age) %>%
+  summarise(n = n()) %>%
+  mutate(percent = 100*(n/sum(n))), digits = 0, caption = "Table N9: Age Structure, by Offspring Year") %>%
+  kable_classic(full_width = F, html_font = "Arial") %>%
+  kable_styling(fixed_thead = T) %>%
+  scroll_box(height = "400px")
+  
+  
+```
+__Table N9:__ Age of offspring in each offspring year. 
+
+Let's also present this as a figure. 
+
+```{r}
+aam_data <- pedigree_meta %>%
+  mutate(parent_year = (coalesce(father_year, mother_year))) %>%
+  filter(!(is.na(parent_year))) %>%
+  mutate(age = as.numeric(offspring_year) - as.numeric(parent_year)) %>%
+  mutate(age = as.factor(age), offspring_year = as.factor(offspring_year)) 
+
+
+ggplot(data = aam_data) + 
+  geom_bar(aes(offspring_year, fill = age), position = position_dodge(preserve = 'single'))+scale_fill_viridis_d(name = "Age")+scale_colour_viridis_d(name = "Age")+theme_bw()+xlab("Offspring Year")+scale_x_discrete(labels = c("2010*", "2011*", "2012*", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"))
+```
+  
+__Figure N1__ Number of age 3, 4, 5 and 6 individuals in each offspring year.  
+_* note earliest parent year in dataset is 2007, so only offpsring years from 2013 and later could possibly have all offspring ages_
+
+__Averages__  
+Finally let's produce a summary table of age structure, averaged across all years where we can assign ages for all offspring (2013 - 2020). This will come in handy later.
+
+```{r}
+kable(aam_data %>%
+  filter(!(offspring_year %in% c("2010" ,"2011", "2012"))) %>%
+  count(age) %>%
+  summarise(age = age, n = n, proportion = n / sum(n)), caption = "Table N10: Mean Age Structure", align = "c", digits = 3,) %>%
+kable_classic(full_width = F, html_font = "Arial" )
+```
+__Table N10:__ Mean age structure of returning NOR offspring from 2013-2020. This includes all years we have the data to assign to parents in 3, 4, 5, and 6 years prior.  
+
+Age 6 offspring compose just ~2% of TLF, but age 5 offspring compose 42%. So we can probably comfortably use our dataset to describe TLF for 2007 - 2015 parent years. Fitness of parents in our pedigree (up to 2020 offspring year) is likely to strongly underestimate 2016 and 2017 TLF.
+
+## Assignments, by Offspring Year and Parent Type/Year
+
+Here we summarise assignment of offspring to different parent types and year. 
+
+Each below table represents a single pair of offspring and parent years. The type of offspring is listed in the first column and the results are split between parent types along the remaining columns (e.g. same format as table 3 from NSNT report)
+
+When the "type" of parent varies between two parents, the female parent type is listed first.  For example, if an offspring is assigned to a reintroduced mother and carcass father, the column would be called "reintro/carcass."
+
+Note that some tables are missing e.g. 2017 offspring assigned to 2011 parents. This is because there are no such assignments in the pedigree, or only a single assigment.
+
+
+
+```{r}
+# the format of the table in the report is difficult to produce in r
+# let's not change the format of the table, instead we'll write some helper functions for filling it out 
+
+#let's add a column for the type of assignment, and one for combined types
+pedigree_meta %<>%
+  mutate(assn_type = case_when((mother == "none" & father == "none") ~ "none",
+                               (mother == "none" & father != "none") ~ "male_only",
+                               (mother != "none" & father == "none") ~ "female_only",
+                               (mother != "none" & father != "none") ~ "pair",)) %>%
+  mutate(parent_type = case_when((father_type == mother_type) ~ father_type,
+                                 (is.na(father_type) & !(is.na(mother_type))) ~ mother_type,
+                                  (is.na(mother_type) & !(is.na(father_type))) ~ father_type,
+                                   (father_type != mother_type) ~ paste(mother_type, father_type, sep = "/")))
+
+# function
+t4_helper <- function(p_year, off_year){pedigree_meta %>%
+  filter(offspring_year == off_year) %>%
+  filter(parent_year == p_year) %>%
+  mutate(parent_type = as.factor(parent_type)) %>%
+  select(offspring_type, parent_type, assn_type) %>%
+  tbl_strata(
+    strata = parent_type,
+    .tbl_fun = ~ .x %>%
+      tbl_summary( by = assn_type, percent = NULL)
+  ) %>%
+  modify_caption(paste(paste("parent year: ", p_year), paste("offspring year: ", off_year), sep = "  ,")) %>%
+  as_kable_extra() %>%
+  kable_classic(full_width = F, html_font = "Arial")
+}
+```
+Note that we're only presenting these tables for the new offspring years.
+
+```{r, cache = TRUE}
+#t4 helper function example
+
+t4_helper("2010", "2016")
+t4_helper("2011", "2016")
+t4_helper("2012", "2016")
+t4_helper("2013", "2016")
+
+# t4_helper("2011", "2017") none so this breaks
+t4_helper("2012", "2017")
+t4_helper("2013", "2017")
+# t4_helper("2014", "2017") only one so this breaks
+
+t4_helper("2012", "2018")
+t4_helper("2013", "2018")
+t4_helper("2014", "2018")
+t4_helper("2015", "2018")
+
+t4_helper("2013", "2019")
+t4_helper("2014", "2019")
+t4_helper("2015", "2019")
+t4_helper("2016", "2019")
+
+# t4_helper("2014", "2020") none so this breaks
+t4_helper("2015", "2020")
+t4_helper("2016", "2020")
+# t4_helper("2017", "2020") none so this breaks
+```
+
+## Recycling
+
+In this section we make the assumption that offspring that do not assign to any candidate parent are not offspring of salmon above the dam, and are instead NOR immigrants (i.e. strays) from the mainstem of SFMK below dam populations. 
+
+Under this assumption we can evaluate the efficacy of the recycling or LSDR approach at excluding NOR immigrants from being released above the dam. We exclude offspring year 2010 - 2012, since we do not have all of the potential parents from these offspring years included as candidate parents in our parentage analysis.
+
+### GLM
+
+If we think about this for a while the essential question being asked is:
+
+>On a given day, what is the probability that an NOR individual that arrives at the Cougar trap is not assigned to a parent above the dam?  
+
+We term this probability "probability of immigrant". We can model "probability of immigrant" as the response variable in a binomial GLM, using the explanatory variable julian date, and (optionally) including random effect of year. We are also interested in the effect of sex here. It is covariate that we expect will reduce overdispersion in the model fit because we expect the relationship between straying and date to depend on sex.
+
+We could get a lot more detailed with our modeling here, but let's attempt to model probability of immigrant as a function of julian day and sex. 
+
+First let's plot make some simple plots.
+
+```{r, warning=FALSE, message=FALSE}
+strays <- pedigree_meta %>% 
+  filter(offspring_year > 2012, offspring_type == "cougar_trap") %>%
+  left_join(select(dedup, sample_id, sex), by = c("offspring_sample_id" = "sample_id")) %>%
+  mutate(immigrant = case_when(assn_type == "none" ~ "immigrant",
+                               TRUE ~ "return"),
+         immigrant_i = case_when(assn_type == "none" ~ 1,
+                               TRUE ~ 0),
+         jday = yday(ymd(offspring_date)))
+
+ggplot(strays, aes(jday, immigrant_i))+geom_count(alpha = 0.5)+geom_smooth(method = "glm", method.args=list(family="binomial"))+theme_classic()+xlab("Julian Day")+ylab("Immigrant\n1 = immigrant 0 = return")+scale_color_viridis_d()+geom_vline(aes(xintercept = 245), linetype = "dashed", color  = "red")
+```
+
+__Figure N2:__ Julian day vs immigrant count at Cougar Trap. An offspring with no assigned parentage is considered an immigrant (scored as 1), an offpsring with at least one parent is considered a return (scored as zero). Circle size corresponds to number of individuals that day. Offspring years from 2013-2020 are considered. Smoothing curve is a simple binomial glm on the immigrant variable using only the effect of Julian day. Julian day 245 is on or one day from the September 1st cutoff used for LSDR. It is displayed as vertical dashed red line.
+
+Here we see there is a clear relationship between the propensity for an individual to be assigned a parent from above the dam and the day it is sampled at the Cougar Trap. 
+
+We also know that the overall assignemnt rate varies from year to year. Let's see if the relationship between Julian day and the propensity for an immigrant to be sampled at the Cougar trap depends on year.
+
+```{r, warning=FALSE, message=FALSE}
+ggplot(strays, aes(jday, immigrant_i, color = as.factor(offspring_year)))+geom_count(alpha = 0.5)+geom_smooth(method = "glm", method.args=list(family="binomial"))+theme_classic()+xlab("Julian Day")+ylab("Immigrant?\n1 = immigrant \n 0 = return")+scale_color_viridis_d(name = "Offspring Year")+geom_vline(aes(xintercept = 245), linetype = "dashed", color  = "red")
+```
+
+__Figure N3:__ Julian day vs immigrant count at Cougar Trap, by offspring year. An offspring with no assigned parentage is considered an immigrant (scored as 1), an offpsring with at least one parent is considered a return (scored as zero). Circle size corresponds to number of individuals that day. Offspring years from 2013-2020 are considered. Smoothing curve is a simple binomial glm on the immigrant variable using only the effect of Julian day. Julian day 245 is on or one day from the September 1st cutoff used for LSDR. It is displayed as vertical dashed red line.
+
+Yes, while the general trend is the same, there is some variation among year. 2020 saw almost no immigrants. 
+
+__Fit GLM__  
+Now let's fit a smple glm using sex, julian day and their interaction
+```{r}
+strays %<>%
+  mutate(immigrant = as.factor(immigrant))
+
+strays %<>%
+  mutate(offspring_year = as.factor(offspring_year))
+
+stray_glm <- glm( immigrant ~ jday + sex +jday*sex , family = binomial, data = strays)
+summary(stray_glm)
+drop1(stray_glm, test = "Chisq")
+```
+
+The interaction between the effect of julian day and sex is only marginally significant (p = 0.046, likelihood ratio test). So let's drop it and fit again. We will consider both model fits. 
+
+```{r}
+stray_glm2 <- glm( immigrant ~ jday + sex , family = binomial, data = strays)
+summary(stray_glm2)
+drop1(stray_glm2, test = "Chisq")
+```
+
+When we ignore the interaction, the effect both variables are still strongly significant, both by Wald tests and likelihood ratio tests.
+
+```{r, eval = FALSE}
+stray_glm2 <- glmer( immigrant ~ jday*sex+ (1|offspring_year) , family = binomial, data = strays)
+summary(stray_glm2)
+drop1(stray_glm2, test = "Chisq")
+```
+
+__GLM Interpretation__  
+The response variable is coded with immigrant as the first level and return as the second. Therefore a negative estimated effect of an explanatory variable means that that variable increases the propensity for an immigrant at the trap. (It might be worth releveling the "immigrant" variable factor to make effect estimates and figures consistent with the "probability of immigrant" language used earlier)
+
+So, to interpet the model with the interaction, later in the season there is a significant increase in the proability of immigrants arriving at the trap, and this effect is stronger for males than females. Once you control for julian date, there is no greater propensity for male immigrants to arrive a the trap than for female immigrants.
+
+Let's also plot this model.
+
+```{r}
+require(effects)
+
+#let's not use the effect package plotting tools and just get the effects
+
+#eff1 <- predictorEffect("sex_ratio_y_l", final_model, focal.levels = seq(-0.4,0.7,by = 0.1))
+eff1 <- predictorEffect("jday", stray_glm)
+effdf <- as.data.frame(eff1)
+
+
+ggplot(data = effdf, aes(x = (jday), y = fit, color = sex))+ 
+  geom_line()+geom_smooth( aes(ymin = lower, ymax = upper, fill = sex, colour = sex), stat = "identity") +
+  theme_bw()+ylab("1 - Predicted Probability of Immigrant") + scale_color_manual(labels = c("Female", "Male"), name = "Sex", values = c("#228833", "#AA3377")) + scale_fill_manual(labels = c("Female", "Male"), name = "Sex", values = c("#228833", "#AA3377"))+xlab("Julian Day")+geom_vline(aes(xintercept = 245), linetype = "dashed", color  = "red")
+
+```
+__Figure N4:__ Predicted probability that an individual arriving at Cougar Trap assigns to a parent released above the Dam vs Julian Day. Vertical red dashed line corresponds to Julian Day 245, on or near September 1st.
+
+__Summary__  
+This is somewhat preliminary. We still should do model validation and think about how to incorporate other covariates or whether or not to include random effect of year. 
+
+However, it seems like there is a strong relationship between Julian Day the probability that an NOR individual captured at the Cougar trap is an immigrant (doesn't assign to a parent above the trap). Moreover, there is a sex specific pattern. The same proportion of males and females are likely to be immigrants overall, however later in the season males are more likely to be immigrants. These results fit with our biological expectations. 
+
+With respect to the broader question, the efficacy of LSDR and or recycling, it seems that relatively few (<20%) of NOR salmon sampled at the trap before around July 1st (Julian day 182, most years) are immigrants. By September 1st, the date previously used as the cutoff for LSDR, about 30% of females and about 40% of males are predicted to be immigrants. However, it should be noted that these results are highly variable among years.
+
+These model predictions using data from return years 2013-2020 are somewhat different from the results reported in 2013, 2014 and 2015 using either the new pedigrees (figure N2) or the pedigrees used to produce previous reports (Banks 2014 and Sard 2016). In Sard 2016, the authors found that during 2013 ~78% of NOR salmon sampled at the Cougar Trap after September 1st were likely immigrants. In Banks 2016, the authors found similar results for offspring years 2014 and 2015 (74% and 77%, respectively). These values are in close agreement with those from the newly inferred pedigrees. In one new offspring year for this report (2019), we oberved a similarly high immigrant after September 1st, but it was lower in all other years (2016, 2017, 2018 and 2020).
+
+# Fitness
+
+In this section, we calculate the number of offspring assigned to parents from the pedigree and calculate summary statistics.
+
+## Data Prep
+
+Let's get our first parent-focused dataframe together. This will have one row for each unqiue candidate parent as well as the number of offspring assigned to it in the pedigree. 
+
+```{r}
+#first let's get a dataframe that can be easily used to calculate parent level information
+# all candidate parents, the number of time they appear in the pedigree and their metadata
+
+parents <- dedup %>%
+  filter(cand_parent == TRUE)
+
+father_counts <- pedigree %>%
+  group_by(father) %>%
+  count() %>%
+  rename(parent = father)
+
+mother_counts <- pedigree %>%
+  group_by(mother) %>%
+  count() %>%
+  rename(parent = mother)
+
+parent_counts <- bind_rows(mother_counts, father_counts) 
+rm(mother_counts)
+rm(father_counts)
+
+parents %<>%
+  left_join(parent_counts, by = c("sample_id" = "parent")) %>%
+  rename(tlf = n) %>%
+  mutate(tlf = replace_na(tlf, 0))
+```
+
+
+## TLF Results
+
+Let's put together some tables of fitness averages by groups. 
+
+Note that TLF only applies when we have ages 3, 4, 5 and 6 offspring for a year. However, our AAM results suggests that fitness using only ages 3, 4 and 5 offspring only slightly underestimates TLF (98% of returning offspring are ages 3, 4 or 5), so using returns from 2010 to 2020, we have TLF estimates for 2007-2014 parent years, a good approximation for 2015, and only partial fitness estimates for 2016 and 2017. These caveats are noted in all subsequent tables and figures
+
+```{r, message = FALSE, warning=FALSE}
+# average fitness, by parent year
+kable(parents %>%
+        filter(year < 2018) %>%
+  group_by(year) %>%
+  summarise(N = n(), mean_tlf = mean(tlf), sd_tlf = sd(tlf), range = paste(min(tlf), " -  ", max(tlf))) %>%
+    mutate(year = as.character(year),
+      year = case_when(year == 2015 ~ "2015*",
+                       year == 2016 ~ "2016**",
+                       year == 2017 ~ "2017**",
+                            TRUE ~ year)), align = "c", caption = "Table N11: Total Lifetime Fitness by Parent Year", digits = 2) %>%
+  kable_classic(full_width = F, html_font = "Arial")
+```
+__Table N11:__ TLF per parent year.   
+_* Note that 2015 estimates do not include potential year 6 offspring. However we expect these offspring to contribute very little to TLF (~2%)_   
+_** Note that 2016 and 2017 offspring do not include potential year 5 and 6 offspring, and potential year 4 5 and 6 offspring, which are expected to substantially contribute to TLF for these parents years_  
+
+```{r, message = FALSE, warning=FALSE}
+# average fitness, by parent year
+kable(parents %>%
+        filter(year < 2018, type %in% c("cougar_trap", "hatchery_outplant")) %>%
+  group_by(year, type) %>%
+  summarise(N = n(), mean_tlf = mean(tlf), sd_tlf = sd(tlf), range = paste(min(tlf), " -  ", max(tlf))) %>%
+        mutate(year = as.character(year),
+      year = case_when(year == 2015 ~ "2015*",
+                       year == 2016 ~ "2016**",
+                       year == 2017 ~ "2017**",
+                            TRUE ~ year),
+      type = case_when(type == "hatchery_outplant" ~ "hatchery",
+                       type == "cougar_trap" ~ "cougar trap")) %>%
+    rename(source = type,), align = "c", caption = "Table N12: Total Lifetime Fitness by Parent Year and Source", digits = 2) %>%
+  kable_classic(full_width = F, html_font = "Arial")
+```
+__Table N12:__ TLF per parent year, and parent source. Parent source refers to either*** individuals trapped at the Cougar Trap and released above the dam ("Cougar Trap", NOR and HOR) or individuals trapped at McKEnzie or Leaburg Hatcheries and released above the dam ("Hatchery", HOR)  
+_* Note that 2015 estimates do not include potential year 6 offspring. However we expect these offspring to contribute very little to TLF (~2%)_   
+_** Note that 2016 and 2017 offspring do not include potential year 5 and 6 offspring, and potential year 4 5 and 6 offspring, which are expected to substantially contribute to TLF for these parents years_   
+_*** Note that there are 5 individuals sampled during spawning ground surveys above the dam and 12 precocial males sampled above the dam that were included as candidate parents. None had an offspring assigned to them and they are not presented in this table_ 
+
+```{r}
+# average fitness, by parent year
+kable(parents %>%
+        filter(year < 2018, type %in% c("cougar_trap", "hatchery_outplant")) %>%
+  group_by(year, type, sex) %>%
+  summarise(N = n(), mean_tlf = mean(tlf), sd_tlf = sd(tlf), range = paste(min(tlf), " -  ", max(tlf))) %>%
+        mutate(year = as.character(year),
+      year = case_when(year == 2015 ~ "2015*",
+                       year == 2016 ~ "2016**",
+                       year == 2017 ~ "2017**",
+                            TRUE ~ year),
+      type = case_when(type == "hatchery_outplant" ~ "hatchery",
+                       type == "cougar_trap" ~ "cougar trap")) %>%
+    rename(source = type,), align = "c", caption = "Table N13: Total Lifetime Fitness by Parent Year, Source and Sex", digits = 2) %>%
+  kable_classic(full_width = F, html_font = "Arial")
+```
+__Table N13:__ TLF per parent year, parent source and sex. Parent source refers to either*** individuals trapped at the Cougar Trap and released above the dam ("Cougar Trap", NOR and HOR) or individuals trapped at McKEnzie or Leaburg Hatcheries and released above the dam ("Hatchery", HOR)  
+_* Note that 2015 estimates do not include potential year 6 offspring. However we expect these offspring to contribute very little to TLF (~2%)_   
+_** Note that 2016 and 2017 offspring do not include potential year 5 and 6 offspring, and potential year 4 5 and 6 offspring, which are expected to substantially contribute to TLF for these parents years_   
+_*** Note that there are 5 individuals sampled during spawning ground surveys above the dam and 12 precocial males sampled above the dam that were included as candidate parents. None had an offspring assigned to them and they are not presented in this table_ 
+
+Let's also put together a figure to make any trend easier to identify.
+```{r, message = FALSE, warning=FALSE}
+plot_data <- parents %>%
+        filter(year < 2016, type %in% c("cougar_trap", "hatchery_outplant")) %>%
+  group_by(year, type, sex) %>%
+  summarise(N = n(), mean_tlf = mean(tlf), sd_tlf = sd(tlf), se_tlf = sd(tlf)/sqrt(n()), range = paste(min(tlf), " -  ", max(tlf))) %>%
+  mutate(type = case_when(type == "hatchery_outplant" ~ "hatchery",
+                       type == "cougar_trap" ~ "cougar trap")) %>%
+  ungroup() %>%
+  unite("type_sex", type, sex)
+
+ggplot(data = plot_data, aes(x = year, y = mean_tlf, color = c(type_sex)))+geom_point(size = 2)+geom_line(size = 1.5, alpha = 0.5)+geom_errorbar(aes(ymin=mean_tlf-se_tlf, ymax=mean_tlf+se_tlf), width=.1)+scale_color_viridis_d(labels = c("Cougar Trap Female", "Cougar Trap Male", "Hatchery Female", "Hatchery Male"), name = "Source, Sex")+theme_classic()+scale_x_continuous(n.breaks = 9)+xlab("Year")+ylab("TLF")
+
+```
+__Figure N5:__ Mean TLF* and standard error by Candidate Parent Source, Sex and Year. Source refers to either Cougar Trap (includes NOR and HOR) or Hatchery (only HOR).  
+_* Note that 2015 estimates do not include potential year 6 offspring. However we expect these offspring to contribute very little to TLF (~2%)_   
+
+From the figure, some trends appear that might be more difficult for some to notice in the tables:  
+(1) Parents from Cougar Trap usually ahve higher TLF than parents from the hatchery.  
+(2) Male TLF is almost always lower than female TLF among parents outplanted from the hatchery, but not among parents from Cougar trap.  
+(3) Changes in fitness from year to year appear correlated between Cougar Trap and the hatchery.  
+
+# Cohort Replacement Rates
+
+Here we estimate the cohort replacement rate (CRR) across different groups of parents. 
+
+CRR is defined as the number of spawners produced by a spawner. 
+
+Results are prepared for each of the following groups:   
+
+* All parents, by year  
+* All parents, by year and sex
+
+```{r, message = FALSE, warning=FALSE}
+a <- pedigree_meta %>%
+  filter(!(father_type == "none" & mother_type == "none")) %>% 
+  group_by(parent_year) %>%
+  summarise(offspring_n = n())
+
+b <- dedup %>%
+  filter(cand_parent == TRUE) %>%
+  count(year) %>%
+  rename(parent_year = year, n_candidate_parents = n)
+
+kable(left_join(a,b) %>%
+        mutate(parent_year = as.character(parent_year),
+      parent_year = case_when(parent_year == 2015 ~ "2015*",
+                       parent_year == 2016 ~ "2016**",
+                       parent_year == 2017 ~ "2017**",
+                            TRUE ~ parent_year),
+      CRR = offspring_n / n_candidate_parents ), align = "c", caption = "Table N13: Cohort Replacement Rate") %>% kable_classic(full_width = F, html_font = "Arial") %>%
+  kable_styling(fixed_thead = T) 
+
+rm(a)
+rm(b)
+
+
+
+
+```
+__Table N13:__ Cohort Replacement Rate (CRR) per parent year. CRR is defined as the number of spawners produced by a spawner. In our case it is the number of offspring successfully assigned to at least one parent in a given year, divided by the number of candidate parents in that year.  
+_* Note that 2015 estimates do not include potential year 6 offspring. However we expect these offspring to contribute very little to TLF (~2%)_   
+_** Note that 2016 and 2017 offspring do not include potential year 5 and 6 offspring, and potential year 4 5 and 6 offspring, which are expected to substantially contribute to TLF for these parents years_  
+
+
+
+```{r, message = FALSE, warning = FALSE}
+# add offspring sex to pedigree_meta
+
+pedigree_meta %<>%
+  left_join(select(dedup, sex, sample_id), by = c("offspring_sample_id" = "sample_id")) %>%
+  rename(offspring_sex = sex)
+
+father_male_offspring_counts <- pedigree_meta %>%
+  filter(offspring_sex == "M") %>%
+  group_by(father) %>%
+  count() %>%
+  rename(parent = father)
+
+mother_female_offspring_counts <- pedigree_meta %>%
+  filter(offspring_sex == "F") %>%
+  group_by(mother) %>%
+  count() %>%
+  rename(parent = mother)
+
+parent_counts_same_sex <- bind_rows(mother_female_offspring_counts, father_male_offspring_counts) 
+rm(father_male_offspring_counts)
+rm(mother_female_offspring_counts)
+
+parents %<>%
+  left_join(parent_counts_same_sex, by = c("sample_id" = "parent")) %>%
+  rename(same_sex_offspring = n) %>%
+  mutate(same_sex_offspring = replace_na(same_sex_offspring, 0))
+
+kable(parents %>%
+  group_by(year, sex) %>%
+    filter(year < 2018) %>%
+  summarise(n = n(), crr_sex = sum(same_sex_offspring)/n()) %>%
+    mutate(year = as.character(year),
+      year = case_when(year == 2015 ~ "2015*",
+                       year == 2016 ~ "2016**",
+                       year == 2017 ~ "2017**",
+                            TRUE ~ year)),
+       align = "c", digits = 2, caption = "Table N14") %>%
+  kable_classic(full_width = F, html_font = "Arial") %>%
+  kable_styling(fixed_thead = T) %>%
+  scroll_box(height = "400px")
+# Let's check one of these to make sure the code is working correctly. In 2016, there were 452 male outplants. These 452 potential fathers appear in the final pedigree 1092 times. Of these 1092 offspring, 723 is male. Therefore the correct CRR for 2016 male outplants is 1.5995575. This matches the table.
+```
+__Table N14:__ Sex specific CRR by year, sex. Here CRR refers to the nuber of female offspring produced by female parents, or the number of male offspring produced by male parents.
+_* Note that 2015 estimates do not include potential year 6 offspring. However we expect these offspring to contribute very little to TLF (~2%)_   
+_** Note that 2016 and 2017 offspring do not include potential year 5 and 6 offspring, and potential year 4 5 and 6 offspring, which are expected to substantially contribute to TLF for these parents years_   
+
+
+
+# Effective Number of Breeders
+
+Calculated Nb using LD method from NeEstimator v2.1. Used GUI, so only logging the parameters used here, not calculating the values.
+
+Parameters:  
+S+ option (exclude singletons)  
+CIs: 95% confidence intervals from jacknife re-sampling method  
+Data: Data for a given year is the assigned offspring of that year  
+
+## Data Prep
+Let's create the input data for NeEstimator. We'll take advantage of a wrapper function from adegenet and rLDNE to output a genepop file all assigned offspring for each parent year.
+
+__2007__
+
+```{r, message=FALSE, warning=FALSE, eval = FALSE}
+# Here we filter the genotype data to get only offspring from 2007 cohort
+offspring_of_2007 <- pedigree_meta %>%
+  filter(mother_year == 2007 | father_year ==2007) %>%
+  pull(offspring_sample_id)
+
+gts_off_of_2007 <- dedup %>%
+  filter(sample_id %in% offspring_of_2007) %>%
+  select(sample_id, starts_with("Ot")) %>% #grab the genotypes
+  mutate(across(.cols = everything(), ~na_if(., "0")))
+
+#now we put bth alleles into a single column for each locus
+gts_off_of_2007 %<>%
+  gather(key = var, value = value, -sample_id) %>%
+  mutate(var = str_extract(var, "\\d+") %>% as.numeric()) %>% 
+  group_by(sample_id, var) %>%
+  summarise(combined = paste(value, collapse = "")) %>% 
+  spread(key = var, value = combined) 
+
+# add a dummy pop variable for conversion, fix NAs
+gts_off_of_2007 %<>%
+  add_column(pop = "p") %>%
+  relocate(sample_id, pop) %>%
+  mutate(across(.cols = everything(), ~str_replace(., "NANA", "000000")))
+
+write_genepop_zlr(loci = gts_off_of_2007[,3:ncol(gts_off_of_2007)],pops = gts_off_of_2007$pop,ind.ids = gts_off_of_2007$sample_id,folder = "neestimator/",filename ="genepop_2007.txt",ncode = 3,diploid = T)
+
+
+```
+
+__2008__
+```{r, message=FALSE, warning=FALSE, eval = FALSE}
+# Here we filter the genotype data to get only offspring from 2008 cohort
+offspring_of_2008 <- pedigree_meta %>%
+  filter(mother_year == 2008 | father_year ==2008) %>%
+  pull(offspring_sample_id)
+
+gts_off_of_2008 <- dedup %>%
+  filter(sample_id %in% offspring_of_2008) %>%
+  select(sample_id, starts_with(c("Ot"))) %>% #grab the genotypes
+  mutate(across(.cols = everything(), ~na_if(., "0")))
+
+#now we put bth alleles into a single column for each locus
+gts_off_of_2008 %<>%
+  gather(key = var, value = value, -sample_id) %>%
+  mutate(var = str_extract(var, "\\d+") %>% as.numeric()) %>% 
+  group_by(sample_id, var) %>%
+  summarise(combined = paste(value, collapse = "")) %>% 
+  spread(key = var, value = combined) 
+
+# add a dummy pop variable for conversion, fix NAs
+gts_off_of_2008 %<>%
+  add_column(pop = "p") %>%
+  relocate(sample_id, pop) %>%
+  mutate(across(.cols = everything(), ~str_replace(., "NANA", "000000")))
+
+write_genepop_zlr(loci = gts_off_of_2008[,3:ncol(gts_off_of_2008)],pops = gts_off_of_2008$pop,ind.ids = gts_off_of_2008$sample_id,folder = "neestimator/",filename ="genepop_2008.txt",ncode = 3,diploid = T)
+
+
+```
+
+__2009__
+```{r, message=FALSE, warning=FALSE, eval = FALSE}
+# Here we filter the genotype data to get only offspring from 2009 cohort
+offspring_of_2009 <- pedigree_meta %>%
+  filter(mother_year == 2009 | father_year ==2009) %>%
+  pull(offspring_sample_id)
+
+gts_off_of_2009 <- dedup %>%
+  filter(sample_id %in% offspring_of_2009) %>%
+  select(sample_id, starts_with(c("Ot"))) %>% #grab the genotypes
+  mutate(across(.cols = everything(), ~na_if(., "0")))
+
+#now we put bth alleles into a single column for each locus
+gts_off_of_2009 %<>%
+  gather(key = var, value = value, -sample_id) %>%
+  mutate(var = str_extract(var, "\\d+") %>% as.numeric()) %>% 
+  group_by(sample_id, var) %>%
+  summarise(combined = paste(value, collapse = "")) %>% 
+  spread(key = var, value = combined) 
+
+# add a dummy pop variable for conversion, fix NAs
+gts_off_of_2009 %<>%
+  add_column(pop = "p") %>%
+  relocate(sample_id, pop) %>%
+  mutate(across(.cols = everything(), ~str_replace(., "NANA", "000000")))
+
+write_genepop_zlr(loci = gts_off_of_2009[,3:ncol(gts_off_of_2009)],pops = gts_off_of_2009$pop,ind.ids = gts_off_of_2009$sample_id,folder = "neestimator/",filename ="genepop_2009.txt",ncode = 3,diploid = T)
+
+
+```
+
+__2010__
+```{r, message=FALSE, warning=FALSE, eval = FALSE}
+# Here we filter the genotype data to get only offspring from 2010 cohort
+offspring_of_2010 <- pedigree_meta %>%
+  filter(mother_year == 2010 | father_year ==2010) %>%
+  pull(offspring_sample_id)
+
+gts_off_of_2010 <- dedup %>%
+  filter(sample_id %in% offspring_of_2010) %>%
+  select(sample_id, starts_with(c("Ot"))) %>% #grab the genotypes
+  mutate(across(.cols = everything(), ~na_if(., "0")))
+
+#now we put bth alleles into a single column for each locus
+gts_off_of_2010 %<>%
+  gather(key = var, value = value, -sample_id) %>%
+  mutate(var = str_extract(var, "\\d+") %>% as.numeric()) %>% 
+  group_by(sample_id, var) %>%
+  summarise(combined = paste(value, collapse = "")) %>% 
+  spread(key = var, value = combined) 
+
+# add a dummy pop variable for conversion, fix NAs
+gts_off_of_2010 %<>%
+  add_column(pop = "p") %>%
+  relocate(sample_id, pop) %>%
+  mutate(across(.cols = everything(), ~str_replace(., "NANA", "000000")))
+
+write_genepop_zlr(loci = gts_off_of_2010[,3:ncol(gts_off_of_2010)],pops = gts_off_of_2010$pop,ind.ids = gts_off_of_2010$sample_id,folder = "neestimator/",filename ="genepop_2010.txt",ncode = 3,diploid = T)
+
+
+```
+
+__2011__
+```{r, message=FALSE, warning=FALSE, eval = FALSE}
+# Here we filter the genotype data to get only offspring from 2011 cohort
+offspring_of_2011 <- pedigree_meta %>%
+  filter(mother_year == 2011 | father_year ==2011) %>%
+  pull(offspring_sample_id)
+
+gts_off_of_2011 <- dedup %>%
+  filter(sample_id %in% offspring_of_2011) %>%
+  select(sample_id, starts_with(c("Ot"))) %>% #grab the genotypes
+  mutate(across(.cols = everything(), ~na_if(., "0")))
+
+#now we put bth alleles into a single column for each locus
+gts_off_of_2011 %<>%
+  gather(key = var, value = value, -sample_id) %>%
+  mutate(var = str_extract(var, "\\d+") %>% as.numeric()) %>% 
+  group_by(sample_id, var) %>%
+  summarise(combined = paste(value, collapse = "")) %>% 
+  spread(key = var, value = combined) 
+
+# add a dummy pop variable for conversion, fix NAs
+gts_off_of_2011 %<>%
+  add_column(pop = "p") %>%
+  relocate(sample_id, pop) %>%
+  mutate(across(.cols = everything(), ~str_replace(., "NANA", "000000")))
+
+write_genepop_zlr(loci = gts_off_of_2011[,3:ncol(gts_off_of_2011)],pops = gts_off_of_2011$pop,ind.ids = gts_off_of_2011$sample_id,folder = "neestimator/",filename ="genepop_2011.txt",ncode = 3,diploid = T)
+
+
+```
+
+__2012__
+```{r, message=FALSE, warning=FALSE, eval = FALSE}
+# Here we filter the genotype data to get only offspring from 2012 cohort
+offspring_of_2012 <- pedigree_meta %>%
+  filter(mother_year == 2012 | father_year ==2012) %>%
+  pull(offspring_sample_id)
+
+gts_off_of_2012 <- dedup %>%
+  filter(sample_id %in% offspring_of_2012) %>%
+  select(sample_id, starts_with(c("Ot"))) %>% #grab the genotypes
+  mutate(across(.cols = everything(), ~na_if(., "0")))
+
+#now we put bth alleles into a single column for each locus
+gts_off_of_2012 %<>%
+  gather(key = var, value = value, -sample_id) %>%
+  mutate(var = str_extract(var, "\\d+") %>% as.numeric()) %>% 
+  group_by(sample_id, var) %>%
+  summarise(combined = paste(value, collapse = "")) %>% 
+  spread(key = var, value = combined) 
+
+# add a dummy pop variable for conversion, fix NAs
+gts_off_of_2012 %<>%
+  add_column(pop = "p") %>%
+  relocate(sample_id, pop) %>%
+  mutate(across(.cols = everything(), ~str_replace(., "NANA", "000000")))
+
+write_genepop_zlr(loci = gts_off_of_2012[,3:ncol(gts_off_of_2012)],pops = gts_off_of_2012$pop,ind.ids = gts_off_of_2012$sample_id,folder = "neestimator/",filename ="genepop_2012.txt",ncode = 3,diploid = T)
+
+
+```
+
+__2013__
+```{r, message=FALSE, warning=FALSE, eval = FALSE}
+# Here we filter the genotype data to get only offspring from 2013 cohort
+offspring_of_2013 <- pedigree_meta %>%
+  filter(mother_year == 2013 | father_year ==2013) %>%
+  pull(offspring_sample_id)
+
+gts_off_of_2013 <- dedup %>%
+  filter(sample_id %in% offspring_of_2013) %>%
+  select(sample_id, starts_with(c("Ot"))) %>% #grab the genotypes
+  mutate(across(.cols = everything(), ~na_if(., "0")))
+
+#now we put bth alleles into a single column for each locus
+gts_off_of_2013 %<>%
+  gather(key = var, value = value, -sample_id) %>%
+  mutate(var = str_extract(var, "\\d+") %>% as.numeric()) %>% 
+  group_by(sample_id, var) %>%
+  summarise(combined = paste(value, collapse = "")) %>% 
+  spread(key = var, value = combined) 
+
+# add a dummy pop variable for conversion, fix NAs
+gts_off_of_2013 %<>%
+  add_column(pop = "p") %>%
+  relocate(sample_id, pop) %>%
+  mutate(across(.cols = everything(), ~str_replace(., "NANA", "000000")))
+
+write_genepop_zlr(loci = gts_off_of_2013[,3:ncol(gts_off_of_2013)],pops = gts_off_of_2013$pop,ind.ids = gts_off_of_2013$sample_id,folder = "neestimator/",filename ="genepop_2013.txt",ncode = 3,diploid = T)
+
+
+```
+
+__2014__
+```{r, message=FALSE, warning=FALSE, eval = FALSE}
+# Here we filter the genotype data to get only offspring from 2014 cohort
+offspring_of_2014 <- pedigree_meta %>%
+  filter(mother_year == 2014 | father_year ==2014) %>%
+  pull(offspring_sample_id)
+
+gts_off_of_2014 <- dedup %>%
+  filter(sample_id %in% offspring_of_2014) %>%
+  select(sample_id, starts_with(c("Ot"))) %>% #grab the genotypes
+  mutate(across(.cols = everything(), ~na_if(., "0")))
+
+#now we put bth alleles into a single column for each locus
+gts_off_of_2014 %<>%
+  gather(key = var, value = value, -sample_id) %>%
+  mutate(var = str_extract(var, "\\d+") %>% as.numeric()) %>% 
+  group_by(sample_id, var) %>%
+  summarise(combined = paste(value, collapse = "")) %>% 
+  spread(key = var, value = combined) 
+
+# add a dummy pop variable for conversion, fix NAs
+gts_off_of_2014 %<>%
+  add_column(pop = "p") %>%
+  relocate(sample_id, pop) %>%
+  mutate(across(.cols = everything(), ~str_replace(., "NANA", "000000")))
+
+write_genepop_zlr(loci = gts_off_of_2014[,3:ncol(gts_off_of_2014)],pops = gts_off_of_2014$pop,ind.ids = gts_off_of_2014$sample_id,folder = "neestimator/",filename ="genepop_2014.txt",ncode = 3,diploid = T)
+
+
+```
+
+__2015__
+```{r, message=FALSE, warning=FALSE, eval = FALSE}
+# Here we filter the genotype data to get only offspring from 2015 cohort
+offspring_of_2015 <- pedigree_meta %>%
+  filter(mother_year == 2015 | father_year ==2015) %>%
+  pull(offspring_sample_id)
+
+gts_off_of_2015 <- dedup %>%
+  filter(sample_id %in% offspring_of_2015) %>%
+  select(sample_id, starts_with(c("Ot"))) %>% #grab the genotypes
+  mutate(across(.cols = everything(), ~na_if(., "0")))
+
+#now we put bth alleles into a single column for each locus
+gts_off_of_2015 %<>%
+  gather(key = var, value = value, -sample_id) %>%
+  mutate(var = str_extract(var, "\\d+") %>% as.numeric()) %>% 
+  group_by(sample_id, var) %>%
+  summarise(combined = paste(value, collapse = "")) %>% 
+  spread(key = var, value = combined) 
+
+# add a dummy pop variable for conversion, fix NAs
+gts_off_of_2015 %<>%
+  add_column(pop = "p") %>%
+  relocate(sample_id, pop) %>%
+  mutate(across(.cols = everything(), ~str_replace(., "NANA", "000000")))
+
+write_genepop_zlr(loci = gts_off_of_2015[,3:ncol(gts_off_of_2015)],pops = gts_off_of_2015$pop,ind.ids = gts_off_of_2015$sample_id,folder = "neestimator/",filename ="genepop_2015.txt",ncode = 3,diploid = T)
+
+
+```
+
+## Results
+
+Neestimator results are not formatted to be easily parsed by machine. Instead, wrote results manually to a spreadsheet.
+
+```{r, message=FALSE, warning=FALSE}
+ne <- read_tsv("neestimator/ne_estimator_results.txt")
+
+# let's build a table by parent year of number of candidate parents, number of successful parents, and number of assigned offspring
+a <- parents %>%
+  filter(year <2016) %>%
+  group_by(year) %>%
+  summarise(n_cand = n(), n_successful = sum(tlf >0))
+
+b <- pedigree_meta %>%
+  count(parent_year) %>%
+  filter(parent_year < 2016) %>%
+  rename(year = parent_year)
+
+nb_table <- left_join(a,b) %>%
+  rename(n_offspring = n)
+  
+#left_join(nb_table, ne) #just to check the offspring datasets were correct, looks good!
+
+kable(nb_table %<>%
+  left_join(ne) %>%
+  select(-N_offspring, Nb = Ne) %>%
+    mutate(year = as.character(year),
+           year = case_when(year == "2015" ~ "2015*",
+                            TRUE ~ year),
+           Nb_Nsuccess_ratio = Nb/n_successful),
+       align = "c", digits = 2, caption = "Table N15: Effective Number of Breeders") %>%
+  kable_classic(full_width = F, html_font = "Arial") 
+  
+```
+__Table N15__ Effective number of breeders (Nb) per parent year as estimated by NeEstimator. Number of candidate parents (N_cand) is the number of salmon released above the Cougar Dam in a given year that were sampled, and successfully genotyped. N_successful is the number of candidate parents with one or more offspring in the pedigree. N_offspring is the nmber of offspring assigned to candidate parents released above the dam that parent year. 95% Confidence intervals based on jack-knife are provided. Finally the Nb_Nsuccess ratio is the Nb estimate divided by the number of successful breeders. 
+
+

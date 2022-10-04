@@ -1,0 +1,36 @@
+Output from NeEstimator v2.1
+Starting time: Tue Oct  4 14:46:10 2022
+Input File: "genepop_2008.txt"
+
+Number of Loci = 11
+
+LD mating model: Random
+
+(Symbol "No S*" in Frequency means that NO Singleton Alleles are accepted.)
+
+Population     1 [CBD_12_3011]  (Number of Individuals = 247)
+****************
+--------------------------------------------------------------------------------------
+Lowest Allele Frequency Used     0.050       0.020       0.010       No S*         0+
+--------------------------------------------------------------------------------------
+
+LINKAGE DISEQUILIBRIUM METHOD
+
+Harmonic Mean Sample Size =      246.8       246.8       246.8       246.8       246.8
+Independent Comparisons =       2960       11322       21825       33438       38588
+OverAll r^2 =                 0.006233    0.005860    0.005708    0.005440    0.005232
+Expected r^2 Sample =         0.004104    0.004104    0.004104    0.004104    0.004104
+Estimated Ne^ =                  154.4       187.7       205.8       247.5       293.4
+
+95% CIs for Ne^
+* Parametric                     133.4       172.3       192.6       232.8       275.0
+                                 180.7       205.4       220.5       263.7       313.8
+
+* JackKnife on Samples           103.7       147.0       167.0       203.7       235.2
+                                 252.1       248.6       260.8       308.8       380.2
+
+**************************************************************************************
+
+Ending time: Tue Oct  4 14:46:11 2022
+-------------------------------------
+

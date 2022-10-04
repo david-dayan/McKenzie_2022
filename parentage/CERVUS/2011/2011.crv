@@ -11,48 +11,21 @@ Code=
 [FileInfo]
 FileName=C:\Users\dayand\Desktop\MCKR_parentage\CERVUS\2011\2011.crv
 FileType=.crv
-CreationDate=9/22/2022 2:25:44 PM
-
-[GenotypeFile]
-FileName=C:\Users\dayand\Desktop\MCKR_parentage\CERVUS\2011\2011_genos.txt
-HeaderRow=0
-ReadLocusNames=1
-FirstAlleleColumnNumber=2
-IDColumnNumber=1
-NLoci=0
-PropLociTyped=0
-ColumnsPerLocus=2
-SexColumn=0
-UnknownSexLabel=
-
-[CodecFile]
-FileName=
-HeaderRow=1
-UseSameCodingForAllLoci=1
-GenotypeFileName=C:\Users\dayand\Desktop\MCKR_parentage\CERVUS\2011\2011_genos.txt
-
-[AlleleFrequencySummaryFile]
-FileName=
-DoHardyWeinberg=1
-HWMinExpectedFrequency=5
-UseYatesCorrection=1
-UseBonferroniCorrection=1
-DoNullAllele=1
+CreationDate=9/27/2022 3:01:51 PM
 
 [AlleleFrequencyDataFile]
-FileName=C:\Users\dayand\Desktop\MCKR_parentage\CERVUS\2011\2011_alf.alf
+FileName=C:\Users\dayand\Desktop\MCKR_parentage\CERVUS\2017\2017_alf.alf
 HeaderRow=1
 
 [SimulationParameters]
-AnalysisType=
-NOffspring=10000
-NCandidateMales=0
-PropCandidateMalesSampled=0
-NCandidateFemales=0
-PropCandidateFemalesSampled=0
-PropLociTyped=0
-PropLociMistyped=0.01
-MinTypedLoci=6
+NOffspring=1000
+NCandidateFemales=1470
+PropCandidateFemalesSampled=0.95
+NCandidateMales=1481
+PropCandidateMalesSampled=0.95
+PropLociTyped=0.987
+PropLociMistyped=0.02
+MinTypedLoci=7
 CriticalStatisticName=Delta
 TruncateAtZero=1
 RelaxedConfidence=80
@@ -63,21 +36,22 @@ InbreedingRate=0
 AlwaysTestSelfing=0
 SimulateFemaleRelatives=0
 FemalePropRelatives=0
-FemaleRelatedTo=Offspring
+FemaleRelatedTo=
 FemaleRelatedness=0
 SimulateMaleRelatives=0
 MalePropRelatives=0
-MaleRelatedTo=Offspring
+MaleRelatedTo=
 MaleRelatedness=0
 UseCorrectedLikelihoods=1
-UseMistypingRateAsLikelihoodErrorRate=1
-LikelihoodErrorRate=0.01
+UseMistypingRateAsLikelihoodErrorRate=0
+LikelihoodErrorRate=0
+AnalysisType=Parent pair (sexes known)
 
 [SimulationSummaryFile]
-FileName=
+FileName=C:\Users\dayand\Desktop\MCKR_parentage\CERVUS\2017\2017_sim.txt
 
 [SimulationDataFile]
-FileName=C:\Users\dayand\Desktop\MCKR_parentage\CERVUS\2011\2011_sim.sim
+FileName=C:\Users\dayand\Desktop\MCKR_parentage\CERVUS\2017\2017_sim.sim
 
 [SimulationOutput]
 RepeatSimulation=0
@@ -95,18 +69,17 @@ FileName=
 
 [ParentageParameters]
 AnalysisType=Parent pair (sexes known)
-UseSimulationParameters=1
-CalculateConfidenceLevels=1
 AlwaysTestSelfing=0
-MinTypedLoci=7
+MinTypedLoci=6
 UseCorrectedLikelihoods=1
 UseMistypingRateAsLikelihoodErrorRate=0
 LikelihoodErrorRate=0
+CalculateConfidenceLevels=0
 CriticalStatisticName=Delta
 TruncateAtZero=1
 
 [OffspringFile]
-FileName=C:\Users\dayand\Desktop\MCKR_parentage\CERVUS\2011\2011_offspring.txt
+FileName=C:\Users\dayand\Desktop\MCKR_parentage\CERVUS\2017\2017_offspring.txt
 HeaderRow=0
 OffspringIDColumnNumber=1
 IncludesKnownParents=0
@@ -115,61 +88,38 @@ IncludesCandidateParents=0
 CandidateParentIDColumnNumber=0
 
 [CandidateFemaleFile]
-FileName=C:\Users\dayand\Desktop\MCKR_parentage\CERVUS\2011\2011_dams.txt
+FileName=C:\Users\dayand\Desktop\MCKR_parentage\CERVUS\2017\2017_dams.txt
 HeaderRow=0
 CandidateParentFormat=One column for all offspring
 OffspringIDColumnNumber=0
 CandidateParentIDColumnNumber=1
 
 [CandidateMaleFile]
-FileName=C:\Users\dayand\Desktop\MCKR_parentage\CERVUS\2011\2011_sires.txt
+FileName=C:\Users\dayand\Desktop\MCKR_parentage\CERVUS\2017\2017_sires.txt
 HeaderRow=0
 CandidateParentFormat=One column for all offspring
 OffspringIDColumnNumber=0
 CandidateParentIDColumnNumber=1
 
+[GenotypeFile]
+FileName=C:\Users\dayand\Desktop\MCKR_parentage\CERVUS\2017\2017_genos.txt
+HeaderRow=0
+IDColumnNumber=1
+FirstAlleleColumnNumber=2
+ColumnsPerLocus=2
+
+[CodecFile]
+FileName=
+HeaderRow=0
+UseSameCodingForAllLoci=1
+GenotypeFileName=C:\Users\dayand\Desktop\MCKR_parentage\CERVUS\2017\2017_genos.txt
+
 [ParentageSummaryFile]
-FileName=C:\Users\dayand\Desktop\MCKR_parentage\CERVUS\2011\2011_summary.txt
+FileName=C:\Users\dayand\Desktop\MCKR_parentage\CERVUS\2017\2017_summary.txt
 
 [ParentageDataFile]
-FileName=C:\Users\dayand\Desktop\MCKR_parentage\CERVUS\2011\2011_summary.csv
+FileName=C:\Users\dayand\Desktop\MCKR_parentage\CERVUS\2017\2017_summary.csv
 OutputType=All parents with positive LOD scores
 SortedBy=Joint LOD score
 IncludeNonExclusionProbabilities=0
-
-[IdentityParameters]
-TestSexesSeparately=0
-MinMatchingLoci=0
-AllowFuzzyMatching=0
-MaxMismatchingLoci=0
-ShowAllComparisons=0
-
-[IdentitySummaryFile]
-FileName=
-
-[IdentityDataFile]
-FileName=
-
-[ConversionSourceFile]
-FileName=
-HeaderRow=0
-AlleleIDLength=2
-UseFirstIDAsPopulationName=0
-PopulationColumnNumber=0
-IDColumnNumber=0
-MumIDColumnNumber=0
-DadIDColumnNumber=0
-FirstAlleleColumnNumber=0
-NLoci=0
-ContainsAlleleFrequencyData=0
-
-[ConversionSourceAlleleFrequencyDataFile]
-FileName=
-HeaderRow=0
-
-[ConversionDestinationFile]
-FileName=
-WriteAlleleFrequencyData=0
-AlleleIDLength=2
-WritePopulationNames=0
 
