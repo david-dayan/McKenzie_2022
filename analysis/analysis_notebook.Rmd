@@ -26,6 +26,7 @@ require(magrittr)
 require(countreg)
 require(lmerTest)
 require(lubridate)
+require(khroma)
 ```
 
 
@@ -120,6 +121,16 @@ load("../parentage/pedigree.R")
 ```
 
 # Dataset and Release Summary Counts
+
+Let's summarise the complete dataset, by source and origin, without respect to where the fish wound up.
+```{r}
+kable(dedup %>% count(year, type, origin, section) %>% 
+  pivot_wider(id_cols = year, names_from = c(type, origin, section), values_from = n, names_sep = "\n"), caption = "Table N0: sample sizes by source", align = "c") %>%
+  kable_classic(full_width = T, html_font = "Arial" )
+  
+  
+```
+__Table N0:__ Sample sizes after filtering by year, origin and source. Source column names refer to three values, separated by spaces: (1) where was the sample originally encountered (hatchery, cougar trap, during a spawning ground survey, or as a precocial male), (2) origin, and (3) for SGS samples only, was the SGS conducted above or below Cougar Dam
 
 ## Parents
 
@@ -295,7 +306,28 @@ kable_classic(full_width = F, html_font = "Arial" )
 
 ```
 __Table N8:__ Number of potential offspring that assign to parents above the dam. Potential offspring are defined as any individual sampled (below dam, at Cougar Trap, or above dam), that are NOR.  
-_Note: People may be interested in just how many individuals show up at the trap, not ALL potential offspring. We will consider this in the section__ [Recycling]
+
+People may be interested in just how many individuals show up at the trap, not ALL potential offspring, this will also be useful for comparing our assignmetn rates with the previously published ones (which don't include carcass samples). We will consider this in greater detail in the section [Recycling], but let's make revised table split by source.
+
+
+```{r}
+kable(pedigree_meta %>%
+  group_by(offspring_year) %>%
+    filter(offspring_type == "cougar_trap") %>%
+  summarise(n = n(), assigned_n = n() - sum(mother == "none" & father == "none", na.rm = TRUE), assn_rate = (n()-sum(mother == "none" & father == "none", na.rm = TRUE))/n()) %>%
+  mutate(assignment_percentage = assn_rate*100) %>%
+  select(offspring_year,n_offspring = n, n_assigned = assigned_n, assignment_percentage), digits = 1, caption = "Table N8: Assignment rates per year, Cougar Only") %>%
+kable_classic(full_width = F, html_font = "Arial" )
+
+```
+__Table N8b:__ Number of potential offspring sampled intially at Cougar Trap that assign to parents above the dam. Potential offspring are defined as any individual sampled (below dam, at Cougar Trap, or above dam), that are NOR.  
+
+__NOTE BUG__ My values are a little different here than when I calculated similar ones in the parentage notebook. I msitakenly included to the precocial males in the parentage notebook. After removing these, the mean absolute difference in assignment rates is even smaller (0.7% vs 1.5%). 
+
+```{r, eval = FALSE}
+#getting that mean differnce in assignment rates number
+(0.063-(13/221)+0.388-(136/357)+0.652-(320/500)+0.686-(151/223)+.613-(117/191)+.73-(173/240))/6
+```
 
 
 ## AAM: Assignments, by Offspring Year and Parent Year
@@ -330,7 +362,7 @@ aam_data <- pedigree_meta %>%
 
 
 ggplot(data = aam_data) + 
-  geom_bar(aes(offspring_year, fill = age), position = position_dodge(preserve = 'single'))+scale_fill_viridis_d(name = "Age")+scale_colour_viridis_d(name = "Age")+theme_bw()+xlab("Offspring Year")+scale_x_discrete(labels = c("2010*", "2011*", "2012*", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"))
+  geom_bar(aes(offspring_year, fill = age), position = position_dodge(preserve = 'single'))+scale_fill_viridis_d(name = "Age")+scale_color_viridis_d(name = "Age")+theme_bw()+xlab("Offspring Year")+scale_x_discrete(labels = c("2010*", "2011*", "2012*", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"))
 ```
   
 __Figure N1__ Number of age 3, 4, 5 and 6 individuals in each offspring year.  
@@ -612,7 +644,7 @@ _* Note that 2015 estimates do not include potential year 6 offspring. However w
 _** Note that 2016 and 2017 offspring do not include potential year 5 and 6 offspring, and potential year 4 5 and 6 offspring, which are expected to substantially contribute to TLF for these parents years_   
 _*** Note that there are 5 individuals sampled during spawning ground surveys above the dam and 12 precocial males sampled above the dam that were included as candidate parents. None had an offspring assigned to them and they are not presented in this table_ 
 
-```{r}
+```{r, message = FALSE, warning=FALSE}
 # average fitness, by parent year
 kable(parents %>%
         filter(year < 2018, type %in% c("cougar_trap", "hatchery_outplant")) %>%
@@ -633,6 +665,50 @@ _* Note that 2015 estimates do not include potential year 6 offspring. However w
 _** Note that 2016 and 2017 offspring do not include potential year 5 and 6 offspring, and potential year 4 5 and 6 offspring, which are expected to substantially contribute to TLF for these parents years_   
 _*** Note that there are 5 individuals sampled during spawning ground surveys above the dam and 12 precocial males sampled above the dam that were included as candidate parents. None had an offspring assigned to them and they are not presented in this table_ 
 
+```{r, message = FALSE, warning=FALSE}
+# average fitness, by parent year
+kable(parents %>%
+        filter(year < 2018, type %in% c("cougar_trap", "hatchery_outplant")) %>%
+  group_by(year, origin, sex) %>%
+  summarise(N = n(), mean_tlf = mean(tlf), sd_tlf = sd(tlf), range = paste(min(tlf), " -  ", max(tlf))) %>%
+        mutate(year = as.character(year),
+      year = case_when(year == 2015 ~ "2015*",
+                       year == 2016 ~ "2016**",
+                       year == 2017 ~ "2017**",
+                            TRUE ~ year)
+      ) %>%
+    pivot_wider(id_cols = c(year, sex), names_from = origin, values_from = c(N, mean_tlf, sd_tlf, range) ) %>%
+    select(year, sex, N_HOR, mean_tlf_HOR, sd_tlf_HOR, range_HOR, N_NOR, mean_tlf_NOR, sd_tlf_NOR, range_NOR), align = "c", caption = "Table N13c: Total Lifetime Fitness by Parent Year, Origin, and Sex", digits = 2) %>%
+  kable_classic(full_width = F, html_font = "Arial")
+```
+__Table N13b:__ TLF per parent year, origin and sex. Note NA origin individuals are excluded. 
+_* Note that 2015 estimates do not include potential year 6 offspring. However we expect these offspring to contribute very little to TLF (~2%)_   
+_** Note that 2016 and 2017 offspring do not include potential year 5 and 6 offspring, and potential year 4 5 and 6 offspring, which are expected to substantially contribute to TLF for these parents years_   
+_*** Note that there are 5 individuals sampled during spawning ground surveys above the dam and 12 precocial males sampled above the dam that were included as candidate parents. None had an offspring assigned to them and they are not presented in this table_ 
+
+
+```{r, message = FALSE, warning=FALSE}
+# average fitness, by parent year
+kable(parents %>%
+        filter(year < 2018, type %in% c("cougar_trap", "hatchery_outplant")) %>%
+  group_by(year, type, origin, sex) %>%
+  summarise(N = n(), mean_tlf = mean(tlf), sd_tlf = sd(tlf), range = paste(min(tlf), " -  ", max(tlf))) %>%
+        mutate(year = as.character(year),
+      year = case_when(year == 2015 ~ "2015*",
+                       year == 2016 ~ "2016**",
+                       year == 2017 ~ "2017**",
+                            TRUE ~ year),
+      type = case_when(type == "hatchery_outplant" ~ "hatchery",
+                       type == "cougar_trap" ~ "cougar trap")) %>%
+    rename(source = type,), align = "c", caption = "Table N13c: Total Lifetime Fitness by Parent Year, Source Origin, and Sex", digits = 2) %>%
+  kable_classic(full_width = F, html_font = "Arial")
+```
+__Table N13c:__ TLF per parent year, parent source, origin and sex. Parent source refers to either*** individuals trapped at the Cougar Trap and released above the dam ("Cougar Trap", NOR and HOR) or individuals trapped at McKEnzie or Leaburg Hatcheries and released above the dam ("Hatchery", HOR)  
+_* Note that 2015 estimates do not include potential year 6 offspring. However we expect these offspring to contribute very little to TLF (~2%)_   
+_** Note that 2016 and 2017 offspring do not include potential year 5 and 6 offspring, and potential year 4 5 and 6 offspring, which are expected to substantially contribute to TLF for these parents years_   
+_*** Note that there are 5 individuals sampled during spawning ground surveys above the dam and 12 precocial males sampled above the dam that were included as candidate parents. None had an offspring assigned to them and they are not presented in this table_ 
+
+
 Let's also put together a figure to make any trend easier to identify.
 ```{r, message = FALSE, warning=FALSE}
 plot_data <- parents %>%
@@ -646,6 +722,17 @@ plot_data <- parents %>%
 
 ggplot(data = plot_data, aes(x = year, y = mean_tlf, color = c(type_sex)))+geom_point(size = 2)+geom_line(size = 1.5, alpha = 0.5)+geom_errorbar(aes(ymin=mean_tlf-se_tlf, ymax=mean_tlf+se_tlf), width=.1)+scale_color_viridis_d(labels = c("Cougar Trap Female", "Cougar Trap Male", "Hatchery Female", "Hatchery Male"), name = "Source, Sex")+theme_classic()+scale_x_continuous(n.breaks = 9)+xlab("Year")+ylab("TLF")
 
+
+plot_data <- parents %>%
+        filter(year < 2016, !(is.na(origin))) %>%
+  group_by(year, origin, sex) %>%
+  summarise(N = n(), mean_tlf = mean(tlf), sd_tlf = sd(tlf), se_tlf = sd(tlf)/sqrt(n()), range = paste(min(tlf), " -  ", max(tlf))) %>%
+  ungroup() %>%
+  unite("origin_sex", origin, sex)
+
+ggplot(data = plot_data, aes(x = year, y = mean_tlf, color = c(origin_sex)))+geom_point(size = 2)+geom_line(size = 1.5, alpha = 0.5)+geom_errorbar(aes(ymin=mean_tlf-se_tlf, ymax=mean_tlf+se_tlf), width=.1)+scale_color_bright(labels = c("HOR Female", "HOR Male", "NOR Female", "NOR Male"), name = "Origin, Sex")+theme_classic()+scale_x_continuous(n.breaks = 9, labels = c("2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015*"))+xlab("Year")+ylab("TLF")
+
+
 ```
 __Figure N5:__ Mean TLF* and standard error by Candidate Parent Source, Sex and Year. Source refers to either Cougar Trap (includes NOR and HOR) or Hatchery (only HOR).  
 _* Note that 2015 estimates do not include potential year 6 offspring. However we expect these offspring to contribute very little to TLF (~2%)_   
@@ -654,6 +741,35 @@ From the figure, some trends appear that might be more difficult for some to not
 (1) Parents from Cougar Trap usually ahve higher TLF than parents from the hatchery.  
 (2) Male TLF is almost always lower than female TLF among parents outplanted from the hatchery, but not among parents from Cougar trap.  
 (3) Changes in fitness from year to year appear correlated between Cougar Trap and the hatchery.  
+
+Finally let's put together a summary table of mean TLF for sexes, and origin, not divided by year to use in the text.
+
+```{r, eval = FALSE}
+kable(parents %>%
+        filter(year < 2016) %>%
+  group_by(origin) %>%
+  summarise(N = n(), mean_tlf = mean(tlf), sd_tlf = sd(tlf), range = paste(min(tlf), " -  ", max(tlf))
+      ),
+     align = "c", caption = "", digits = 2) %>%
+  kable_classic(full_width = F, html_font = "Arial")
+
+kable(parents %>%
+        filter(year < 2016) %>%
+  group_by(sex) %>%
+  summarise(N = n(), mean_tlf = mean(tlf), sd_tlf = sd(tlf), range = paste(min(tlf), " -  ", max(tlf))
+      ),
+     align = "c", caption = "", digits = 2) %>%
+  kable_classic(full_width = F, html_font = "Arial")
+
+kable(parents %>%
+        filter(year < 2016) %>%
+  group_by() %>%
+  summarise(N = n(), mean_tlf = mean(tlf), sd_tlf = sd(tlf), range = paste(min(tlf), " -  ", max(tlf))
+      ),
+     align = "c", caption = "", digits = 2) %>%
+  kable_classic(full_width = F, html_font = "Arial")
+```
+
 
 # Cohort Replacement Rates
 
@@ -730,7 +846,7 @@ parents %<>%
 kable(parents %>%
   group_by(year, sex) %>%
     filter(year < 2018) %>%
-  summarise(n = n(), crr_sex = sum(same_sex_offspring)/n()) %>%
+  summarise(n = n(), crr_sex = sum(same_sex_offspring)/n(), n_offspring_same_sex = sum(same_sex_offspring)) %>%
     mutate(year = as.character(year),
       year = case_when(year == 2015 ~ "2015*",
                        year == 2016 ~ "2016**",
@@ -1076,4 +1192,941 @@ kable(nb_table %<>%
 ```
 __Table N15__ Effective number of breeders (Nb) per parent year as estimated by NeEstimator. Number of candidate parents (N_cand) is the number of salmon released above the Cougar Dam in a given year that were sampled, and successfully genotyped. N_successful is the number of candidate parents with one or more offspring in the pedigree. N_offspring is the nmber of offspring assigned to candidate parents released above the dam that parent year. 95% Confidence intervals based on jack-knife are provided. Finally the Nb_Nsuccess ratio is the Nb estimate divided by the number of successful breeders. 
 
+# Predictors of Fitness
+
+In this section we fit a GLMM on TLF of salmon released above the dam.
+
+## Mixed Modeling Approach Overview
+
+We primarily follow the approach described in Zuur et al 2009. Mixed Effects Models and Extensions in Ecology with R.
+
+(0) __Define Predictors__ BEfore any analysis, we need to think about what predictors are in the dataset or can be extracted from it and how they may interact.
+(1) __Exploratory Data Analysis:__ First we explore the relationships between all predictors in the dataset.  
+(2) __Multicollinearity:__  In addition to our findings from EDA above, we fit main effects models and calculate variance inflation factors to identify multicollinearity among main effects.  
+(3) __Random Effects Model Selection:__ After removing effects contributing to multicollinearity in a main effects only model, we fit an otherwise saturated models including all main effects and interactions, but varied which random effects were included. Model fit was by REML. We chose the best random effects structure by AIC and LRTs.  
+(4) __Fixed Effects Model Selection:__ We then conducted model selection on the fixed effects using LRTs and backward stepwise selection on Wald tests for signficant effects (p < 0.05 not multiple comparison corrected). Model fit was by ML. For the LRTs we stepwise dropped non-significant interaction terms from the model, to evaluate if main effects were significant.  
+(5) __Model Validation:__ We validated the model using simulated residuals from the DHARMa package.  
+(6) __Estimated Marginal Means and Effect:__ To improve biological intepretation of signficant predictors of fitness, we estimated marginal means for significant effects.  
+
+## Predictors
+There are a lot of potential predictors and interactions. Here we describe each and rationalize which to consider interactions between.
+
+(1) __Release Day__: What day were individuals released? We will transform date into Julian Day. Here we can expect an optimum so we may want to consider a non-linear effect.    
+(2) __Release Location__: There are several release locations at various points above the dam from the head of the reservoir all the way to 37km upriver. We can consider release location as a factor or rkm as a continuous variable. We will consider both and only retain one.     
+(3) __Origin__: What is the origin of the individual, NOR or HOR?    
+  (a) Origin of Parents: Since our pedigree includes so many years we can also consider (for NOR individuals) whether an individuals descends from a HORxHOR, HORxNOR, or NORxNOR cross. This one is a bit complicated though, and will drastically reduce sample size. Since our mixed modeling tools are not tolerant of missing data will will not inclde this, but will return to it in a post-hoc analysis.      
+  (b) Origin of Grandparents: Same as above but for grandparents. Unlikely to include since we have so few F2s with fitness estimates in the dataset.   
+(4) __Source__: Was the individual trucked from the Cougar Trap of the Hatchery. This is expected to be strongly collinear with origin, so it is unlikely to be retained in the model, but there are 218 cougar trap HORs that can be compared to hatchery outplant HORs.    
+(5) __Release Group Variables__: These are variables nested within release group, the set of fish released together from the same source on the same day at the same location.   
+  (a) Release group: Used as a random effect, the release group itself. Fitting as a random effect allows us to beneift from shrinkage to improve estimates at fixed effects, and we can also gain an understanding of how inter-release group variance contributes to variance in fitness overall.   
+  (b) Release Group Sex Ratio: What is the sex ratio of fish in a release group? If individuals from a single release group are more likely to spawn together than individuals from different release group, sex ratio might matter. Fit as non-linear effect as there is expected to be an optimum.    
+  (c) Release Group Density: What is the density of a release group? Is there an optimum number to release at one time? Fit as non-linear effect.  
+(6) __Annual Variables__: These are variables nested within year.  
+  (a) Year: Random effect of year.   
+  (b) Annual Density: Is there an optimum density for releases? Fit as non-linear effect.  
+  (c) Annual Sex Ratio: This was the single most important predictor in the North Santiam. Fit as non-linear effect as there is expected to be an optimum.    
+(7) __Size__: We have an estimate of size at maturity for about half (4321/8985) of our candidate parents. Our modeling tools are not compatible with missing data, so this would effectively cut our sample size in half. We chose not to fit it, but will consider it in a post hoc analysis. For example, it is known that origin effects on fitness are mediated at least somewhat through size, so if origin has an effect we should examine if there is a size interaction.  
+
+__Interactions__  
+* Sex * Sex Ratios: This one seems obvious  
+* Sex * Release Day: This one follows from ecology of salmon spawning. Selective pressures on males and females differ over time during spawning.  
+* Sex * Origin: Previous work in this system found this interaction. We should follow up here.  
+
+There are other interactions that might be interesting (e.g sex* release group density), but each one costs a lot of degrees of freedom, especially for release day, which might be fit as a non-linear effect. Let's ignore all other interactions.  
+
+## Data, EDA and Multicollinearity
+
+Here we prepare the dataset for modeling and conduct some exploratory data analysis.
+
+Our dataset includes all candidate parents (i.e. released above the dam) from 2007 to 2015. Note that 2015 TLF does not include age 6 offsrping in their TLFs, but our AAM analysis suggests year 6 offspring contribute little to TLF (~2%).
+
+
+```{r}
+mm_data <-  parents %>%
+  filter( year <2016) %>%
+  select(date, sex, release, rkm, origin, year, type, tlf) %>%
+  drop_na() %>%
+  mutate(jday = as.numeric(format(date, "%j"))) %>% #julian day in this case: days since the first day of the year
+  mutate(jday_c = scale(jday, scale = F), #center the julian day to help with convergence
+         sex = as.factor(sex),
+         release= as.factor(release),
+         year = as.factor(year),
+         group = as.factor(paste(date, release, type)))
+
+# The dataset include 7438 individuals
+
+# lets add density
+dens <- mm_data %>%
+ group_by(jday, release, year, type) %>%
+  summarise(density = n())
+
+mm_data %<>%
+  left_join(dens)
+
+# lets add overall size of release in a year
+dens <- mm_data %>%
+ group_by(year) %>%
+  summarise(annual_n = n())
+
+mm_data %<>%
+  left_join(dens)
+
+
+# lets add sex ratio
+#build release group sex ratio variable
+f <- mm_data %>% 
+  filter(sex == "F") %>%
+  group_by(release, jday, year, type) %>% 
+  summarise(n_female_rg = n()) 
+
+mm_data %<>%
+  left_join(f)
+
+m <- mm_data %>% 
+  filter(sex == "M") %>%
+  group_by(release, jday, year, type) %>% 
+  summarise(n_male_rg = n()) 
+
+mm_data %<>%
+  left_join(m) %>%
+  mutate(sex_ratio_rg = n_male_rg/n_female_rg)
+
+# maybe the release groups all mix thoroughly spawn together and we should fit sex ratio at the level of year
+f <- mm_data %>% 
+  filter(sex == "F") %>%
+  group_by( year) %>% 
+  summarise(n_female_y = n()) 
+
+mm_data %<>%
+  left_join(f)
+
+m <- mm_data %>% 
+  filter(sex == "M") %>%
+  group_by( year) %>% 
+  summarise(n_male_y = n()) 
+
+mm_data %<>%
+  left_join(m) %>%
+  mutate(sex_ratio_y = n_male_y/n_female_y)
+
+
+mm_data %<>%
+  mutate(sex_ratio_rg_l = log(sex_ratio_rg),
+         sex_ratio_y_l = log(sex_ratio_y))
+
+# there are a bunch of days where the only males or only females are released, this means we wind up with NAs when trying to log transform release group level variable, reducing sample size by 375 individuals. If we don't use that variable (release group sex ratio), then we can get rid of this dataset and use one with the full set of individuals, let's remember this
+
+mm_data %<>%
+  drop_na()
+
+# oops forgot to convert origin to a factor
+mm_data %<>%
+  mutate(origin = as.factor(origin))
+
+```
+
+Let's explore the data a bit too and look for issues with collinearity. We will assume that fitness in Mckenzie is best fit with a negative binomial, just like in North Santiam, but we'll explore the possibility of using other distributions as well (poisson, hurdle and zero inflation).
+
+```{r}
+##################################################################
+##################################################################
+#Here are some functions that we took from the pairs help file and
+#modified, or wrote ourselves. To cite these, use the r citation: citation()
+
+panel.cor <- function(x, y, digits=1, prefix="", cex.cor = 6)
+{
+  usr <- par("usr"); on.exit(par(usr))
+  par(usr = c(0, 1, 0, 1))
+  r1=cor(x,y,use="pairwise.complete.obs")
+  r <- abs(cor(x, y,use="pairwise.complete.obs"))
+  txt <- format(c(r1, 0.123456789), digits=digits)[1]
+  txt <- paste(prefix, txt, sep="")
+  if(missing(cex.cor)) { cex <- 0.9/strwidth(txt) } else {
+     cex = cex.cor}
+  text(0.5, 0.5, txt, cex = cex * r)
+}
+
+##################################################################
+panel.smooth2=function (x, y, col = par("col"), bg = NA, pch = par("pch"),
+                        cex = 1, col.smooth = "black", span = 2/3, iter = 3, ...)
+{
+  points(x, y, pch = pch, col = col, bg = bg, cex = cex)
+  ok <- is.finite(x) & is.finite(y)
+  if (any(ok))
+    lines(stats::lowess(x[ok], y[ok], f = span, iter = iter),
+          col = 1, ...)
+}
+
+##################################################################
+panel.lines2=function (x, y, col = par("col"), bg = NA, pch = par("pch"),
+                       cex = 1, ...)
+{
+  points(x, y, pch = pch, col = col, bg = bg, cex = cex)
+  ok <- is.finite(x) & is.finite(y)
+  if (any(ok)){
+    tmp=lm(y[ok]~x[ok])
+    abline(tmp)}
+}
+
+##################################################################
+panel.hist <- function(x, ...)
+{
+  usr <- par("usr"); on.exit(par(usr))
+  par(usr = c(usr[1:2], 0, 1.5) )
+  h <- hist(x, plot = FALSE)
+  breaks <- h$breaks; nB <- length(breaks)
+  y <- h$counts; y <- y/max(y)
+  rect(breaks[-nB], 0, breaks[-1], y, col="white", ...)
+}
+
+
+
+```
+
+```{r}
+select(mm_data, tlf, sex, jday, density,sex_ratio_y_l, sex_ratio_rg_l, annual_n , release, origin) %>%
+  pairs(., lower.panel = panel.cor, diag.panel = panel.hist, upper.panel = panel.smooth2)
+
+mm_data %>%
+  select(tlf, sex, jday, density,sex_ratio_y_l, sex_ratio_rg_l, annual_n , release, origin) %>%
+  mutate(tlf = log(tlf)) %>%
+  pairs(., lower.panel = panel.cor, diag.panel = panel.hist, upper.panel = panel.smooth2)
+
+```
+
+The bi-plots are revealing some issues with balance and collinearity. We will explore mutlicollinearity with VIFs, but wrt balance, it looks like annual density (total number of individuals released in a year), might be a problem. There is one year where many more individuals were released than others. This might cause an issue fitting models. Let's exclude it from the modeling. 
+
+Let's fit a model of fixed effects and look for collinearity among predictors
+
+
+```{r}
+beyond_opt_main <- glm.nb(tlf ~ poly(jday_c,2) + sex + poly(density, 2) + poly(sex_ratio_y_l,2) + poly(sex_ratio_rg_l,2) +  origin + release , data = mm_data)
+kable(vif(beyond_opt_main), caption = "Variance Inflation Factors for fully saturated fixed effect model") %>% kable_classic(full_width = F, html_font = "Cambria" ) 
+```
+
+Unlike the North Santiam dataset, it looks like releases were structured in such a way that there is limited multicollinearity in the dataset! The worst offender is origin, with a DF corrected GVIF of  1.58. This is barely above the value of 1.5 applied by the most conservative modelers, and well below the more typical cutoffs of 10 or 5. From the biplots, we can assume much of the VIF comes from collinearity between origin and release location, release group density, or all three combined. NORs are only released at two sites and HORs are released at 5. NORs are also released at lower densities than HORs. 
+
+To check that this is the source of the multicollinearity, let's build a model without release group density and without release location. 
+
+```{r}
+beyond_opt_main <- glm.nb(tlf ~ poly(jday_c,2) + sex + poly(density, 2) + poly(sex_ratio_y_l,2) + poly(sex_ratio_rg_l,2) + origin, data = mm_data)
+kable(vif(beyond_opt_main), caption = "Variance Inflation Factors for model without release location") %>% kable_classic(full_width = F, html_font = "Cambria" ) 
+
+beyond_opt_main <- glm.nb(tlf ~ poly(jday_c,2) + sex  + poly(sex_ratio_y_l,2) + poly(sex_ratio_rg_l,2)  + origin + release, data = mm_data)
+kable(vif(beyond_opt_main), caption = "Variance Inflation Factors for model without release group density") %>% kable_classic(full_width = F, html_font = "Cambria" ) 
+```
+
+Yes, removing either release group density or release location reduces GVIFs.
+
+## Distribution  
+
+We have assumed so far that the negative binomial is the correct distribution to model fitness. This follows previous work by our lab and even major review papers, so it is clear negative binomial is superior to poisson and quasipoisson. However, there are extensions to negative binomial to deal with zero-inflation including ZINB and hurdle models and we should always check that a simpler model isn't better. 
+
+We will fit fully saturated fixed effect model with interactions (no random effects) under poisson, quasipoisson, negbin, zero inflated negbin and hurdle negbin models, conduct a simple model selection procedure (only remove predictors that don't pass an LRT at p < 0.05) and compare fits of the optimized model.
+
+### Poisson
+
+Let's start with Poisson. 
+
+```{r}
+pois <- glm(tlf ~ poly(jday_c,2) + sex + poly(density, 2) + poly(sex_ratio_y_l,2) + poly(sex_ratio_rg_l,2) + origin + sex*origin + sex*poly(sex_ratio_y_l, 2)+ sex*poly(jday_c,2), data = mm_data, family = "poisson")
+drop1(pois, test = "Chisq")
+```
+
+Dropping sex*density(non-linear) and refitting. 
+```{r}
+pois <- glm(tlf ~ poly(jday_c,2) + sex + poly(density, 2) + poly(sex_ratio_y_l,2) + poly(sex_ratio_rg_l,2) + origin + sex*origin + sex*poly(sex_ratio_y_l, 2) + sex*density, data = mm_data, family = "poisson")
+drop1(pois, test = "Chisq")
+```
+
+Dropping sex*density and refitting. 
+
+```{r}
+pois <- glm(tlf ~ poly(jday_c,2) + sex + poly(density, 2) + poly(sex_ratio_y_l,2) + poly(sex_ratio_rg_l,2) + origin + sex*origin + sex*poly(sex_ratio_y_l, 2) , data = mm_data, family = "poisson")
+drop1(pois, test = "Chisq")
+```
+
+
+Final Poisson model includes: Julian Day (Non-linear), Release Group Density (Non-Linear), Annual Sex Ratio (Non-Linear), Sex, Origin, and the interaction between Sex and Origin and Sex and Annual Sex Ratio.
+
+Let's look at the model fit
+```{r, message = FALSE, warning=FALSE}
+summary(pois)
+simulationOutput <- simulateResiduals(fittedModel = pois, plot = F)
+plot(simulationOutput)
+testZeroInflation(simulationOutput)
+```
+
+__Conclusion__   
+Model fit under poisson is very poor. Overdispersed, zero-inflated and a strong relationship between residuals and predictors. The model is struggling between fitting all the zeros and fitting the tlf > 1. We should not expect reliable parameter estimates or p-values out of a Poisson fit. 
+
+### NegBin
+
+Let's see if estimating variance and mean separately (e.g. negative binomial) fixes the overdispersion.  
+
+```{r}
+glm_nb <- glm.nb(tlf ~ poly(jday_c,2) + sex + poly(density, 2) + poly(sex_ratio_y_l,2) + poly(sex_ratio_rg_l,2) + origin + sex*origin + sex*poly(sex_ratio_y_l, 2)+ sex*poly(jday_c,2), data = mm_data)
+drop1(glm_nb, test = "Chisq")
+```
+
+Drop the sex* non-linear julian day interaction
+```{r}
+glm_nb <- glm.nb(tlf ~ poly(jday_c,2) + sex + poly(density, 2) + poly(sex_ratio_y_l,2) + poly(sex_ratio_rg_l,2)+ origin + sex*origin + sex*poly(sex_ratio_y_l, 2)+ sex*jday_c, data = mm_data)
+drop1(glm_nb, test = "Chisq")
+```
+Drop the sex*  julian day interaction
+```{r}
+glm_nb <- glm.nb(tlf ~ poly(jday_c,2) + sex + poly(density, 2) + poly(sex_ratio_y_l,2) + poly(sex_ratio_rg_l,2) +  origin + sex*origin + sex*poly(sex_ratio_y_l, 2), data = mm_data)
+drop1(glm_nb, test = "Chisq")
+```
+
+Drop sex*origin effect
+```{r}
+glm_nb <- glm.nb(tlf ~ poly(jday_c,2) + sex + poly(density, 2) + poly(sex_ratio_y_l,2) + poly(sex_ratio_rg_l,2) +  origin  + sex*poly(sex_ratio_y_l, 2), data = mm_data)
+drop1(glm_nb, test = "Chisq")
+```
+
+Drop non-linear sex ratio of release group
+```{r}
+glm_nb <- glm.nb(tlf ~ poly(jday_c,2) + sex + poly(density, 2) + poly(sex_ratio_y_l,2) + sex_ratio_rg_l +  origin  + sex*poly(sex_ratio_y_l, 2), data = mm_data)
+drop1(glm_nb, test = "Chisq")
+```
+
+
+Final model is sex, release day (non-linear), release group density and sex ratio, origin and the interaction between sex and annual sex ratio.
+
+Let's evaluate model fit
+
+```{r, message = FALSE, warning=FALSE}
+summary(glm_nb)
+simulationOutput <- simulateResiduals(fittedModel = glm_nb, plot = F)
+plot(simulationOutput)
+testZeroInflation(simulationOutput)
+```
+
+__Conclusion__  
+This is a good fit to the data. We could probablit do even better with random effects, but this demosntrates at least that the negbin fixes the problems of the poisson. There is no evidence of any model fit problems, nor a zero inflation problem. However, let's look at zero-inflation models anyway.
+
+### ZINB
+
+Here we fit a zero inflated negative binomial. Here we model zero TLF and non-zero TLF separately. For the zero part of the model we do not include any predictors. We can't use the drop1 function to do model selection before, so we make (the rather big) assumption that model selection would have followed the same results as the negbin model and fit the final model after model selection using that distribution
+```{r}
+zinb <- zeroinfl(tlf ~ poly(jday_c,2) + sex + poly(density, 2) + poly(sex_ratio_y_l,2) + sex_ratio_rg_l +  origin  + sex*poly(sex_ratio_y_l, 2) | 1, data = mm_data, dist = "negbin" )
+summary(zinb)
+```
+
+### Comparison
+Let's compare models. First let's use a rootogram.
+
+```{r}
+rootogram(pois, main = "Poisson")
+rootogram(glm_nb, main = "Negative Binomial")
+rootogram(zinb, main = "Zero-Inflated Negative Binomial")
+```
+
+
+Now let's look at AIC and BIC
+```{r}
+AIC(pois, glm_nb, zinb)
+BIC(pois, glm_nb, zinb)
+```
+
+Finally, let's conduct some likelihood ratio tests on nested models. 
+
+```{r}
+lmtest::lrtest(glm_nb, zinb )
+```
+
+### Conclusion  
+
+The model fits above overwhelmingly support a Negative Binomial over the Zero-Inflated or Poisson models. The Poisson is a very poor fit to the data. Zero-inflated negative binomial and negative binomial provide equaivalently good fits, so we should choose the one with fewer parameters. 
+
+## Model Selection
+
+### Random Effects
+Now lets fit the beyond optimal model. This has more fixed effects than we could possibly want in our final model, but that is desirable for finding the optimum random effect structure. We should also fit all fixed effects that could reasonably be non-linear using polynomials, as the linear model is nested within the polynomial and therefore the polynomial is better as the satured/beyond optimal.
+
+```{r, cache = TRUE, eval = FALSE}
+mm_beyond_opt <- glmmTMB(tlf ~ poly(jday_c,2) + sex + poly(density, 2) + poly(sex_ratio_y_l,2) + poly(sex_ratio_rg_l,2) + origin + release + sex*origin + sex*poly(sex_ratio_y_l, 2)+ sex*poly(jday_c,2) + (1|group) + (1|year), data = mm_data, family = nbinom2, REML = TRUE)
+
+mm_beyond_opt2 <- glmmTMB(tlf ~ poly(jday_c,2) + sex + poly(density, 2) + poly(sex_ratio_y_l,2) + poly(sex_ratio_rg_l,2) + origin + release + sex*origin + sex*poly(sex_ratio_y_l, 2)+ sex*poly(jday_c,2) + (1|year), data = mm_data, family = nbinom2, REML = TRUE)
+
+mm_beyond_opt3 <- glmmTMB(tlf ~ poly(jday_c,2) + sex + poly(density, 2) + poly(sex_ratio_y_l,2) + poly(sex_ratio_rg_l,2) + origin + release + sex*origin + sex*poly(sex_ratio_y_l, 2)+ sex*poly(jday_c,2) + (1|group) , data = mm_data, family = nbinom2, REML = TRUE)
+
+mm_beyond_opt4 <- glmmTMB(tlf ~ poly(jday_c,2) + sex + poly(density, 2) + poly(sex_ratio_y_l,2) + poly(sex_ratio_rg_l,2) + origin + release + sex*origin + sex*poly(sex_ratio_y_l, 2)+ sex*poly(jday_c,2) , data = mm_data, family = nbinom2, REML = TRUE)
+
+
+
+AIC(mm_beyond_opt, mm_beyond_opt2, mm_beyond_opt3, mm_beyond_opt4)
+BIC(mm_beyond_opt, mm_beyond_opt2, mm_beyond_opt3, mm_beyond_opt4)
+
+lmtest::lrtest(mm_beyond_opt4, mm_beyond_opt)
+lmtest::lrtest(mm_beyond_opt4, mm_beyond_opt2)
+lmtest::lrtest(mm_beyond_opt4, mm_beyond_opt3)
+summary(mm_beyond_opt)
+```
+
+AIC and BIC and LRTs agree the best fit to the data is the full random effects model including both release group and year. 
+
+Ultimately the correct random effects structure is a question about the inferences we'd like to make and AIC is only one piece of information to help us understand the releaitonship between parsimony and model fit. 
+
+For example, so many of our variables are calculated at the level of release group, and including release group as a random effect means these variables will be competing with random intercepts for release group. Same goes for year. 
+
+Since we are interested in evaluating the significance of predictors primarily, I'd prefer to be conservative and include them as random effectes. Failing to include year and release group as random effects implies that we are uninterested in the correlation within groups. Inferentially, this implies that the fixed effects at the level of release group or year (release group: sex ratio, density and year: n and sex ratio) are the only effects that might lead to correlation within the levels, and we freely pool across all levels of release group or year and attribute all variance to fixed effects.
+
+We will include random effects for year and release group.
+
+
+
+### Fixed Effects
+
+Now let's turn to the otherside of the model and conduct model selection on the fixed effects.
+
+We will conduct backwards stepwsie selection using Wald Tests and LRT, separately. 
+
+#### Non-Linear Effects
+We have a lot of potential non-linear effects. This will make a typical backwards stepwise model selection procedure very painful.
+
+Let's fit a saturated model, with and without each non-linear effect and only retain the ones that improve the fit to the data according to LR tests and AIC.
+
+Let's refit the model using ML and take our first look
+
+```{r}
+mm_beyond_opt <- glmmTMB(tlf ~ poly(jday_c,2) + sex + poly(density, 2) + poly(sex_ratio_y_l,2) + poly(sex_ratio_rg_l,2) + origin + release + sex*origin + sex*poly(sex_ratio_y_l, 2)+ sex*poly(jday_c,2) + (1|group) + (1|year), data = mm_data, family = nbinom2)
+
+summary(mm_beyond_opt)
+```
+
+Now let's examine the of modeling effects of julian day, release group density, annual sex ratio and release group sex ratio as non-linear improves the model, in turn.
+
+```{r}
+mm_beyond_opt_lin <- glmmTMB(tlf ~ jday_c + sex + density + sex_ratio_y_l + sex_ratio_rg_l + origin + release + sex*origin + sex*sex_ratio_y_l+ sex*jday_c + (1|group) + (1|year), data = mm_data, family = nbinom2)
+
+mm_beyond_opt_j <- glmmTMB(tlf ~ poly(jday_c,2) + sex + density + sex_ratio_y_l + sex_ratio_rg_l + origin + release + sex*origin + sex*sex_ratio_y_l+ sex*poly(jday_c,2) + (1|group) + (1|year), data = mm_data, family = nbinom2)
+
+mm_beyond_opt_s <- glmmTMB(tlf ~ jday_c + sex + density + poly(sex_ratio_y_l,2) + sex_ratio_rg_l + origin + release + sex*origin + sex*poly(sex_ratio_y_l,2)+ sex*jday_c + (1|group) + (1|year), data = mm_data, family = nbinom2)
+
+mm_beyond_opt_d <- glmmTMB(tlf ~ jday_c + sex + poly(density,2) + sex_ratio_y_l + sex_ratio_rg_l + origin + release + sex*origin + sex*sex_ratio_y_l+ sex*jday_c + (1|group) + (1|year), data = mm_data, family = nbinom2)
+
+mm_beyond_opt_r <- glmmTMB(tlf ~ jday_c + sex + density + sex_ratio_y_l + poly(sex_ratio_rg_l,2) + origin + release + sex*origin + sex*sex_ratio_y_l+ sex*jday_c + (1|group) + (1|year), data = mm_data, family = nbinom2)
+
+AIC(mm_beyond_opt, mm_beyond_opt_lin, mm_beyond_opt_j, mm_beyond_opt_s, mm_beyond_opt_d, mm_beyond_opt_r)
+BIC(mm_beyond_opt, mm_beyond_opt_lin, mm_beyond_opt_j, mm_beyond_opt_s, mm_beyond_opt_d, mm_beyond_opt_r)
+```
+
+__Conclusion__
+Only fitting density as non-linear improves the fit, and only marginally so. We will keep it and remove any non-linear effect using our standard model selection.
+
+So our starting model for model selection is below
+
+```{r}
+mm_start <- glmmTMB(tlf ~ jday_c + sex + poly(density, 2) + sex_ratio_y_l + sex_ratio_rg_l + origin + release + sex*origin + sex*sex_ratio_y_l+ sex*jday_c + (1|group) + (1|year), data = mm_data, family = nbinom2)
+summary(mm_start)
+```
+
+#### Wald Tests
+
+
+First interaction to remove is sex*jday
+
+```{r}
+mm_wald <- glmmTMB(tlf ~ jday_c + sex + poly(density, 2) + sex_ratio_y_l + sex_ratio_rg_l + origin + release + sex*origin + sex*sex_ratio_y_l + (1|group) + (1|year), data = mm_data, family = nbinom2)
+
+summary(mm_wald)
+```
+
+Next is sex ratio of release group
+
+```{r}
+mm_wald <- glmmTMB(tlf ~ jday_c + sex + poly(density, 2) + sex_ratio_y_l  + origin + release + sex*origin + sex*sex_ratio_y_l + (1|group) + (1|year), data = mm_data, family = nbinom2)
+
+summary(mm_wald)
+```
+
+Next to remove is non-linear effect of density.
+```{r}
+mm_wald <- glmmTMB(tlf ~ jday_c + sex + density + sex_ratio_y_l  + origin + release + sex*origin + sex*sex_ratio_y_l + (1|group) + (1|year), data = mm_data, family = nbinom2)
+
+summary(mm_wald)
+```
+
+Now density goes.
+
+```{r}
+mm_wald <- glmmTMB(tlf ~ jday_c + sex  + sex_ratio_y_l  + origin + release + sex*origin + sex*sex_ratio_y_l + (1|group) + (1|year), data = mm_data, family = nbinom2)
+
+summary(mm_wald)
+```
+
+Final model according to Wald Tests includes Julian Day, Sex, Annual Sex Ratio, Release Location, Origin, Sex * Origin and Sex * Annual Sex Ratio
+
+#### LRT
+
+```{r}
+mm_lrt <- glmmTMB(tlf ~ jday_c + sex + poly(density, 2) + sex_ratio_y_l + sex_ratio_rg_l + origin + release + sex*origin + sex*sex_ratio_y_l  + sex*jday_c+ (1|group) + (1|year), data = mm_data, family = nbinom2)
+drop1(mm_lrt, test = "Chisq")
+```
+
+First to drop is the jday*sex interaction.
+
+```{r}
+mm_lrt <- glmmTMB(tlf ~ jday_c + sex + poly(density, 2) + sex_ratio_y_l + sex_ratio_rg_l + origin + release + sex*origin + sex*sex_ratio_y_l + (1|group) + (1|year), data = mm_data, family = nbinom2)
+drop1(mm_lrt, test = "Chisq")
+```
+
+
+Then the release group sex ratio
+
+```{r}
+mm_lrt <- glmmTMB(tlf ~ jday_c + sex + poly(density, 2) + sex_ratio_y_l  + origin + release + sex*origin + sex*sex_ratio_y_l + (1|group) + (1|year), data = mm_data, family = nbinom2)
+drop1(mm_lrt, test = "Chisq")
+```
+
+Then non-linear density effect. 
+
+```{r}
+mm_lrt <- glmmTMB(tlf ~ jday_c + sex + density + sex_ratio_y_l  + origin + release + sex*origin + sex*sex_ratio_y_l + (1|group) + (1|year), data = mm_data, family = nbinom2)
+drop1(mm_lrt, test = "Chisq")
+```
+
+Now density
+
+```{r}
+mm_lrt <- glmmTMB(tlf ~ jday_c + sex +  sex_ratio_y_l  + origin + release + sex*origin + sex*sex_ratio_y_l + (1|group) + (1|year), data = mm_data, family = nbinom2)
+drop1(mm_lrt, test = "Chisq")
+```
+
+Uh-oh something different. Now we remove release location effect.
+
+```{r}
+mm_lrt <- glmmTMB(tlf ~ jday_c + sex +  sex_ratio_y_l  + origin + sex*origin + sex*sex_ratio_y_l + (1|group) + (1|year), data = mm_data, family = nbinom2)
+drop1(mm_lrt, test = "Chisq")
+```
+
+Done. Final model includes sex, annual sex ratio, release day, origin and two interactions sex* origin and sex * annual sex ratio
+
+### Final Model
+
+Stepwise selection according to Wald Test and likelihood ratio tests do not produce the same final model. Using likelihood ratio tests produces a sparse model that does not include the effect of release location compared to the Wald Test approach.
+
+I think we should be more conservative here and use the final model from the LRT model selection procedure for a few reasons:  
+(1) For this question (which predictors of fitness are significant), I'm inclined towards being conservative, generally.  
+(2) There is moderate collinearity between origin and release location. Not enough to warrant excluding one or the other from the model selection procedure, but enough to elicit a small amount of concern.   
+(3) Following up on 2 above, while there is not strong collinearity between origin and release location, this is because a small number HORs from Cougar got placed at otherwise only hatchery outplant HOR relerase locations (such as homestead). So, if we restrict ourselves to the NOR cougar and hatchery outplant HOR comparison, we likely would have set off some multicollinearity flags
+
+Let's define our final model and collect the results
+
+```{r}
+final_model <- mm_lrt
+kable(broom.mixed::tidy(final_model) %>% select(effect, group, term, estimate, std.error, p.value), caption =  "Final Model Fit", digits = 3) %>% kable_classic(font = "Arial")
+```
+
+## Model validation
+
+Let's check on the fit.
+```{r}
+simulateResiduals(final_model, plot = TRUE)
+```
+
+Model fits excellently! The qq plot of simulated residuals shows a good fit, there is no evidence of overdispersion, and outliers don't seem to drive the fit. We also don't see any pattern to the residuals. 
+
+## Effects
+
+Here we interpret the model fit. 
+
+There are three significant main effects, and two significant interactions. There are also two random effects.
+
+__Main Effects__
+There are 4 main effects in the final model, but one (sex) is not signficant and retained only because of it's interaction with origin and annual sex ratio. 
+
+Interpreting the meaning of the fitted model parameters can be very challenging because of the link-function and the fact that multiple predictors are significant and interact. 
+ 
+We use the effects package to translate the estimated parameters from the model into something we can actually understand. The approach here predicts the effect of different levels of a focal predictor, holding all others constant at a fixed values. 
+
+These fixed values are determined differently for factor and numerical predictors. For numerical predictors (annual sex ratio and Julian Day of release), the fixed value is the simple mean. For factor predictors (sex and origin), we use a weighted average of the fitted values the levels of the factor, with weights proportional to the number of cases in each level.  
+
+```{r, message = FALSE, warning=FALSE}
+require(effects)
+plot(predictorEffect("origin",final_model),
+lines=list(multiline=TRUE), confint=list(style="bars"))
+plot(predictorEffect("sex_ratio_y_l",final_model), lines=list(multiline=TRUE), confint=list(style="bars"))
+plot(predictorEffect("jday_c",final_model))
+```
+
+__Origin:__ NOR salmon have substantially higher predicted fitness than HOR (Wald Test p = 0.000705) and this effect is somewhat stronger for males than females, but this interaction is only marginally significant and has a limited effect size (Wald Test = 0.0387). NOR males are predicted to be 2.1 fold more fit the HOR males, and NOR females are predicted to be 1.6 fold more fit than HOR females.  
+__Sex Ratio:__ Overall, the annual sex ratio has a small effect on fitness, with male biased sex ratios producing somewhat higher fitness than females (Wald Test p = ), however this effect was much stronger for females than males (Wald Test p = ). Put in simple terms, changes in annual sex ratio affects fitness mostly through females, who perform worse when the sex ratio is female biased. Using the most extreme values in observed in any years (male:female ratio 0.6 and 2.0), female fitness is predicted to vary 3.5 fold, whereas male fitness is expected to vary 1.4 fold.  
+__Release Day:__ Earlier releases are predicted to have greater fitness than later releases (Wald Test p value ). Individuals released on the earliest day are predicted to have 1.7 fold greater fitness than the latest release day.
+
+__Random Effects__
+
+The among year standard deviation in TLF was 0.5529 (log scale), and the among release group standard deviation was 0.2915 (log scale)
+
+
+__Publication Plots__
+
+Since the interaction is significant, let's plot and examine the effects of sex and sex ratio together.
+
+
+```{r}
+
+
+#let's not use the effect package plotting tools and just get the effects
+
+#eff1 <- predictorEffect("sex_ratio_y_l", final_model, focal.levels = seq(-0.4,0.7,by = 0.1))
+eff1 <- predictorEffect("sex_ratio_y_l", final_model)
+effdf <- as.data.frame(eff1)
+
+effdf %<>%
+  mutate(sex_ratio = exp(sex_ratio_y_l))
+
+actual_means <- mm_data %>%
+  group_by(year, sex, sex_ratio_y) %>%
+  summarise(mean_tlf = mean(tlf))
+
+ggplot(data = effdf, aes(x = (sex_ratio), y = fit, color = sex))+ 
+  geom_line()+scale_x_continuous(trans = "log", n.breaks = 10) +
+  xlab( bquote(atop("Sex Ratio",(N[male]/N[female])))) +
+  geom_smooth( aes(ymin = lower, ymax = upper, fill = sex, colour = sex), stat = "identity") +
+  theme_bw()+ylab("TLF")+coord_cartesian(ylim = c(0, 1.25)) + scale_color_manual(labels = c("Female", "Male"), name = "Sex", values = c("#228833", "#AA3377")) + scale_fill_manual(labels = c("Female", "Male"), name = "Sex", values = c("#228833", "#AA3377")) +
+  geom_rug(data = mm_data, aes(x = sex_ratio_y, y = NULL, color = NULL)) 
+
+```
+
+The plot above shows the predicted TLF (lines and 95% confidence intervals) from the final mixed model fit, and the mean TLF from the empirical data (triangles) against sex ratio in a given year for both male and female Chinook salmon outplanted or reintroduced above Cougar dam from 2007 to 2015. 
+
+
+```{r}
+
+
+#let's not use the effect package plotting tools and just get the effects
+
+#eff1 <- predictorEffect("sex_ratio_y_l", final_model, focal.levels = seq(-0.4,0.7,by = 0.1))
+eff1 <- predictorEffect("origin", final_model)
+effdf <- as.data.frame(eff1)
+
+
+ggplot(data = effdf, aes(x = (origin), y = fit, color = sex))+ 
+  geom_point(position=position_dodge(width=0.3)) + 
+  geom_errorbar(aes(ymin = lower, ymax = upper), position=position_dodge(width=0.3), width = 0.1)+scale_color_manual(labels = c("Female", "Male"), name = "Sex", values = c("#228833", "#AA3377"))+ylab("TLF")+xlab("Origin")+theme_bw()
+  
+
+```
+
+```{r}
+
+
+#let's not use the effect package plotting tools and just get the effects
+
+#eff1 <- predictorEffect("sex_ratio_y_l", final_model, focal.levels = seq(-0.4,0.7,by = 0.1))
+eff1 <- predictorEffect("jday_c", final_model)
+effdf <- as.data.frame(eff1)
+
+effdf %<>%
+  mutate(jday = jday_c + 220)
+
+actual_means <- mm_data %>%
+  group_by(year, sex, sex_ratio_y) %>%
+  summarise(mean_tlf = mean(tlf))
+
+ggplot(data = effdf, aes(x = (jday), y = fit))+ 
+  geom_line()+
+  geom_smooth( aes(ymin = lower, ymax = upper), stat = "identity") +
+  theme_bw()+
+  xlab("Julian Day of Release")+ylab("TLF") 
+
+```
+
+
+# Other Analyses
+
+This section of the notebook is dedicated to the numerous small questions and half-formed ideas that pop up during the work. It is much less well documented than the rest and is not intended to be shared widely.
+
+## Double Transport
+
+One dowsnide to the recycling/lsdr program is that NOR salmon descended from above the dam have to migrate through the south fork twice and be transported twice. Despite this NOR fitness is still greater than HOR fitness, but can we look into it in more detail. Is it possible for us to compare fitness of recycled individuals to individuals placed above the dam immediately? 
+
+No, probably not without a lot of thought, whether or not a fish is recycled is confounded with so many other variables. For example we know later release dates reduce fitness. So do later release dates reduce fitness BECAUSE NOR fish are being released later due to LSDR/recycling? 
+
+## Size effects
+
+We have an estimate of size at maturity for about half (4321/8985) of our candidate parents. Our modeling tools are not compatible with missing data, so this would effectively cut our sample size in half. We chose not to fit it, but are examining it in a post hoc analysis in more detail here. 
+
+Size at maturity is positively correlated with fitness in many salmonid species. Fitness differences between HOR and NOR salmon are partially mediated through lower size of HOR vs NOR adults returning to spawn, which is in turn driven by both growth rates and differences in age at maturity for NOR and HOR salmon.
+
+In this analysis we ask several questions:
+
+(1) Is size a significant predictor of fitness?  
+(2) Do HOR and NOR salmon released above the dam vary in size?  
+(3) Are these size differences driven by differences in AAM between NOR and HOR fish?  
+(4) Can we parse the effects of size and origin? What is the best way to articulate the causal relationships between these variables and fitness? In other words do our data allow us to state things like "fitness differences between NOR and HOR candidate parents are driven by differences in size at maturity between HOR and NOR salmon"?
+
+### Analysis
+
+```{r, message=FALSE, warning = FALSE}
+mm_data_size <-  parents %>%
+  filter( year <2016) %>%
+  select(date, sex, release, rkm, origin, year, type, length, tlf) %>%
+  drop_na() %>%
+  mutate(jday = as.numeric(format(date, "%j"))) %>% #julian day in this case: days since the first day of the year
+  mutate(jday_c = scale(jday, scale = F), #center the julian day to help with convergence
+         sex = as.factor(sex),
+         release= as.factor(release),
+         year = as.factor(year),
+         group = as.factor(paste(date, release, type)))
+
+# The dataset include 7438 individuals
+
+# lets add density
+dens <- mm_data_size %>%
+ group_by(jday, release, year, type) %>%
+  summarise(density = n())
+
+mm_data_size %<>%
+  left_join(dens)
+
+# lets add overall size of release in a year
+dens <- mm_data_size %>%
+ group_by(year) %>%
+  summarise(annual_n = n())
+
+mm_data_size %<>%
+  left_join(dens)
+
+
+# lets add sex ratio
+#build release group sex ratio variable
+f <- mm_data_size %>% 
+  filter(sex == "F") %>%
+  group_by(release, jday, year, type) %>% 
+  summarise(n_female_rg = n()) 
+
+mm_data_size %<>%
+  left_join(f)
+
+m <- mm_data_size %>% 
+  filter(sex == "M") %>%
+  group_by(release, jday, year, type) %>% 
+  summarise(n_male_rg = n()) 
+
+mm_data_size %<>%
+  left_join(m) %>%
+  mutate(sex_ratio_rg = n_male_rg/n_female_rg)
+
+# maybe the release groups all mix thoroughly spawn together and we should fit sex ratio at the level of year
+f <- mm_data_size %>% 
+  filter(sex == "F") %>%
+  group_by( year) %>% 
+  summarise(n_female_y = n()) 
+
+mm_data_size %<>%
+  left_join(f)
+
+m <- mm_data_size %>% 
+  filter(sex == "M") %>%
+  group_by( year) %>% 
+  summarise(n_male_y = n()) 
+
+mm_data_size %<>%
+  left_join(m) %>%
+  mutate(sex_ratio_y = n_male_y/n_female_y)
+
+
+mm_data_size %<>%
+  mutate(sex_ratio_rg_l = log(sex_ratio_rg),
+         sex_ratio_y_l = log(sex_ratio_y))
+
+# there are a bunch of days where the only males or only females are released, this means we wind up with NAs when trying to log transform release group level variable, reducing sample size by 375 individuals. If we don't use that variable (release group sex ratio), then we can get rid of this dataset and use one with the full set of individuals, let's remember this
+
+mm_data_size %<>%
+  drop_na()
+
+# oops forgot to convert origin to a factor
+mm_data_size %<>%
+  mutate(origin = as.factor(origin))
+
+```
+
+__Size effect__  
+
+To assess the effect of size, we will compare the final model to a model with an additional effet of size and conduct LRT and Wald Tests
+
+```{r}
+size_glmm <- glmmTMB(tlf ~ jday_c + sex +  sex_ratio_y_l  + origin + sex*origin + sex*sex_ratio_y_l + length+ (1|group) + (1|year), data = mm_data_size, family = nbinom2)
+null_size_glmm <-  glmmTMB(tlf ~ jday_c + sex +  sex_ratio_y_l  + origin + sex*origin + sex*sex_ratio_y_l +  (1|group) + (1|year), data = mm_data_size, family = nbinom2)
+
+size_glmm2 <- glmmTMB(tlf ~ jday_c + sex +  sex_ratio_y_l  + origin + sex*origin + sex*sex_ratio_y_l + length*origin+ (1|group) + (1|year), data = mm_data_size, family = nbinom2)
+
+AIC(size_glmm, null_size_glmm, size_glmm2)
+BIC(size_glmm, null_size_glmm, size_glmm2)
+anova(size_glmm, null_size_glmm, size_glmm2)
+summary(size_glmm)
+
+```
+
+Yes, size is signficiantly predictive of TLF, but we already see the relationship with origin here. The origin effect is much reduced when also including size, suggesting correlation between these two predictors. There is no evidence of size*origin interaction.
+
+Let's look more closely at the relationship between sex, size at maturity, and origin.
+
+We'll make some summary plots and then fit a mixed model evaluating differences in length between sex and origin, using year as a random effect
+
+```{r}
+ggplot(data = mm_data_size) + geom_boxplot(aes(origin, length, color = sex))+theme_bw()
+
+ggplot(data = mm_data_size) + geom_boxplot(aes(year, length, color = origin))+theme_bw()
+mm_data_size %>%
+  group_by(origin, sex) %>% 
+  summarise(mean = mean(length), sd = sd(length))
+
+mm_data_size %>%
+  group_by(origin) %>% 
+  summarise(mean = mean(length), sd = sd(length))
+
+summary(lmer(length ~ origin + sex+ (1|year), data = mm_data_size))
+drop1(lmer(length ~ origin + sex+ (1|year), data = mm_data_size), test = "Chisq")
+
+```
+
+NOR candidate parents are signficantly larger (beta = 2.92, se = 0.26, pvalue LRT < 2e-16), after controlling for the effect of sex and fitting year as a random effect. 
+
+So we've established larger candidate parents produce more offspring, NOR candidate parents are significantly larger, and NOR candidate parents have higher fitness. Can we attempt to parse these effects? 
+
+How much of the variation in fitness is due to origin alone and how much is due to size alone. Let's estimate partial coefficients of determination for origin and size. This is rarely reported in glmms, but to my understanding there is no reason why it is inappropriate (Stoffel et al 2021)
+
+```{r}
+# let's rescale some of the variable (fitting with lme4 which has a much harder time converging than glmmtmb)
+#mm_data_size_scaled <- mm_data_size %>%
+#  select(tlf, jday_c, sex, sex_ratio_y_l, origin,length, group, year) %>%
+#  mutate(jday2 = jday_c/44,
+#         length2 = length/10)
+
+
+
+glmfit <- glm.nb(tlf ~ jday_c + sex +  sex_ratio_y_l  + origin + sex*origin + sex*sex_ratio_y_l + length+ group + year, data = mm_data_size_scaled)
+glmfit <- glm.nb(tlf ~ jday_c + sex +  sex_ratio_y_l  + origin + sex*origin + sex*sex_ratio_y_l + length+ group + year, data = mm_data_size_scaled)
+
+r2 <- rsq::rsq.partial(glmfit, adj = TRUE)
+r2b <- rsq::rsq.glmm(lm4fit)
+```
+
+Okay, holding off on this for now because there is no straightforard implementation in R for glmmTMB, or any negbin glmm for that matter. It seems like it can be done according to Nakagawa 2017 (https://royalsocietypublishing.org/doi/10.1098/rsif.2017.0213). We "just" do commonality analysis on our model fit (https://besjournals.onlinelibrary.wiley.com/doi/pdf/10.1111/2041-210X.12166). The challenge is taking the time to parse the model object in R, and fitting conditioned models to calculate the partial R2s.  
+
+
+### Conclusions
+
+Larger candidate parents produce more offspring. NOR candidate parents are significantly larger. NOR candidate parents have higher fitness. Ultimately, we need to do some variance partitioning through commonality analysis to parse how much of the origin effect is mediated by the difference in size between NOR and HOR candidate parents. 
+
+
+
+## F1s
+
+
+
+```{r}
+
+```
+
+
+## Great-Grandparentage
+
+This section is still mostly a dumping ground for code, needs to be documented and organized into something easily read by others.
+
+
+__Comparing F2 to F1 Fitness__
+note: take code chunk below and revise it to use the pedigree_meta, to keep track of parent and grandparent origin, also note that starting from pedigree means only offsping are included. probably best o use the code below to id f1s and f2s, the append these labels to the dedup dataset, along with fitness, after filtering to remove individuals that are not candidate parents
+```{r}
+grandparents <- pedigree %>%
+  mutate(offspring_also_parent = case_when(offspring_sample_id %in% c(mother, father) ~ TRUE,
+                                           TRUE ~ FALSE)) %>%
+  left_join(select(dedup, sample_id, year), by = c("offspring_sample_id" = "sample_id"))
+
+
+# F1s are individuals descended from known parents 
+F1_list <- grandparents %>%
+  filter(mother != "none" | father != "none") %>%
+  pull(offspring_sample_id)
+
+#F2s are individuals descended from F1s
+F2_list <- grandparents %>%
+  filter(mother %in% F1_list | father %in% F1_list) %>%
+  pull(offspring_sample_id)
+  
+grandparents %<>%
+   mutate(F1 = offspring_sample_id %in% F1_list,
+          F2 = offspring_sample_id %in% F2_list) 
+
+F2grandparent_list_dam <- grandparents %>% filter(F1 == TRUE, F2 == TRUE, offspring_also_parent == TRUE) %>% pull(mother)
+F2grandparent_list_sire <- grandparents %>% filter(F1 == TRUE, F2 == TRUE, offspring_also_parent == TRUE) %>% pull(father)
+
+grandparents %>% 
+  filter(offspring_sample_id %in% F2grandparent_list_dam | offspring_sample_id %in% F2grandparent_list_sire )
+  
+
+kable(count(grandparents, F1, F2, offspring_also_parent) %>%
+  rename(known_parents = F1, known_grandparents = F2, known_offspring = offspring_also_parent)) %>% kable_classic(full_width = F, html_font = "Cambria" ) 
+
+# here we present the F2s broken down by return year. they need to return in 2015 or earlier for us to have a TLF
+kable(grandparents %>% filter(F2 == TRUE) %>% count(year), caption = "F2 Sample Sizes, by return year") %>% kable_classic(full_width = F, html_font = "Cambria" ) 
+
+# at some point we also need to subdivide these into those that descend from HORxHOR, HORxNOR and NORxNOR crosses. Ideally we would compare F0 fitness to F1 fitness to F2 fitness, but the F1s and F2s would all need to be NOR
+
+f2s <- grandparents %>%
+  left_join(parent_counts, by = c("offspring_sample_id" = "parent") ) %>%
+  rename(fitness = n) %>%
+  mutate(fitness = as.numeric(fitness),
+         fitness = case_when(is.na(fitness) ~ 0,
+                             TRUE ~ fitness)) %>%
+  filter(F2 == TRUE, offspring_sample_id %in% parents$sample_id,  year < 2017)
+
+
+
+
+f1s <- grandparents %>%
+  left_join(parent_counts, by = c("offspring_sample_id" = "parent") ) %>%
+  rename(fitness = n) %>%
+  mutate(fitness = as.numeric(fitness),
+         fitness = case_when(is.na(fitness) ~ 0,
+                             TRUE ~ fitness)) %>%
+  filter(F1 == TRUE, offspring_sample_id %in% parents$sample_id, year < 2017) 
+
+a <- f2s %>% 
+  group_by(year) %>%
+  summarise(mean_fitness_f2 = mean(fitness), n_f2 = n())
+  
+b <- f1s %>% 
+  group_by(year) %>%
+  summarise(mean_fitness_f1 = mean(fitness), n_f1 = n())
+
+f0s <- grandparents %>%
+  left_join(parent_counts, by = c("offspring_sample_id" = "parent") ) %>%
+  rename(fitness = n) %>%
+  mutate(fitness = as.numeric(fitness),
+         fitness = case_when(is.na(fitness) ~ 0,
+                             TRUE ~ fitness)) %>%
+  filter(F1 == FALSE, offspring_sample_id %in% parents$sample_id, year < 2017) # pretty sure this isnt working the right way
+
+a <- f2s %>% 
+  group_by(year) %>%
+  summarise(mean_fitness_f2 = mean(fitness), n_f2 = n())
+  
+b <- f1s %>% 
+  group_by(year) %>%
+  summarise(mean_fitness_f1 = mean(fitness), n_f1 = n())
+
+c <- f0s %>% 
+  group_by(year) %>%
+  summarise(mean_fitness_f0 = mean(fitness), n_f0 = n())
+
+left_join(b, a) %>%
+  left_join(c)
+
+```
+
+There are 3 years where we can compare TLF of F1s and F2s in our dataset, 2014, 2015 and 2016.
+
+In 2014, there are only 3 F2s.
+In 2015, the mean fitness of an F1 (ignoring parent origin, n = 123) was 0.31. The F2s (n = 28) had lower fitness, 0.28. 
+In 2016, we only have years 3 and 4 offspring. F2s were way more fit than F1s, but this could have more to do with a change in AAM between F2s and F1s than any difference in TLF. We need 2021 retunrs to compare. 
+
+__Conclusion__  
+Not enough F2s with TLF to make a comparison.
 

@@ -1153,7 +1153,7 @@ kable(duplicates %>%
   count(year, type, origin, sex), caption = "number of individuals filtered from the full dataset due duplication (all scored loci match)") %>%
   kable_classic(full_width = F, html_font = "Cambria")
 ```
-
+__Table above has an error, these are the total number of duplicates, not the total removed__
 
 # Save Final Datasets
 

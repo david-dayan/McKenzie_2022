@@ -717,13 +717,13 @@ Here assignment rate is the proportion of offspring that have at least one paren
 2010: I had 6% assignment rate (14/221), same with Nick (6% 13/221).  
 2011: I had 39% assignment rate (138/356), similar to Nick's (38% 136/357).  
 2012: I had 65% assignment rate (326/500), similar to Nick's (64% 320/500).  
-2013: I had 69% assignment rate (153/223), similar to Nick's (67% 151/223).  
+2013: I had 69% assignment rate (153/223), similar to Nick's (68% 151/223).  
 
 __Nick Sard's Pedigrees 2014 - 2015__  
 
 We can also pull up the final pedigrees used for the 2014 and 2015 offspring years used to publish the Banks 2016 USACE report. Note that while we mostly agree on which carcass samples should be included in the final report, Nick's actual cervus and colony runs included many more carcass samples (outside the South Fork), to make rates comparable from these files, we'll look only at the non-carcass samples.
 
-2014: I had 58% assignment rate (118/203), similar to Nick's (62% 123/197).  
+2014: I had 58% assignment rate (118/203), similar to Nick's (61% 117/191). *bug here, includes precocial males, fixed in analysis notebook  
 2015: I had 73% assignment rate (176/241), similar to Nick's (72% 173/240).  
 
 
@@ -761,8 +761,10 @@ comp_2011 %>%
 __Conclusion__
 Very limited differences in assignment rate between my final pedigree and Nick's final pedigree from 2010 - 2015, with some years assigning slightly fewer or slightly more offspring to at least a single parent (see table below). This is great news. I made changes that make the assignment both more conservative and more liberal and I was unsure what the end effect would be. There may be many small differences in the final pedigrees, but ultimately the assignment rate (how many of the potential offspring are derived from parents above the dam), is a summary statistic that closely tracks others such as TLF CRR, and I don't expect there'll be major differences in the conclusions drawn about these years with such minor differences in assignment rate.
 
+__NOTE__ My values are a little off here. I'm including a few extra potential offspring here in this notebook compared to when I estimate similar values in the analysis notebook. I have more confidence in the approach I took in the analysis notebook, and it's a very small difference, but this is one little bug worth tracking down. edit: tracked down and fixed in analysis notebook, use those numbers, not these. 
+
 ```{r}
-kable(data.frame( "Offspring Year" = c(2010, 2011, 2012, 2013, 2014, 2015), "Dayan" =  c(6,39,65,69, 58, 73), "Sard" = c(6,38,64, 67, 62, 72)), caption = "Assignment rates of non-carcass samples for the 6 years where both Dayan and Sard infer pedigrees. Assignment rate is the % of offspring assigned to at least one parent") %>%
+kable(data.frame( "Offspring Year" = c(2010, 2011, 2012, 2013, 2014, 2015), "Dayan" =  c(6,39,65,69, 58, 73), "Sard" = c(6,38,64, 68, 61, 72)), caption = "Assignment rates of non-carcass samples for the 6 years where both Dayan and Sard infer pedigrees. Assignment rate is the % of offspring assigned to at least one parent") %>%
   kable_classic(full_width = F, html_font = "Cambria" )
   
 ```
@@ -878,5 +880,44 @@ kable(grandparents %>%
 ```
 
 
+
+
+```{r, eval = FALSE}
+# extra parent counting code
+
+grandparents <- pedigree %>%
+  mutate(offspring_also_parent = case_when(offspring_sample_id %in% c(mother, father) ~ TRUE,
+                                           TRUE ~ FALSE)) %>%
+  left_join(select(dedup_full, sample_id, year), by = c("offspring_sample_id" = "sample_id"))
+
+
+# F1s are individuals descended from known parents 
+F1_list <- grandparents %>%
+  filter(mother != "none" | father != "none") %>%
+  pull(offspring_sample_id)
+
+#F2s are individuals descended from F1s
+F2_list <- grandparents %>%
+  filter(mother %in% F1_list | father %in% F1_list) %>%
+  pull(offspring_sample_id)
+  
+grandparents %<>%
+   mutate(F1 = offspring_sample_id %in% F1_list,
+          F2 = offspring_sample_id %in% F2_list) 
+
+F2grandparent_list_dam <- grandparents %>% filter(F1 == TRUE, F2 == TRUE, offspring_also_parent == TRUE) %>% pull(mother)
+F2grandparent_list_sire <- grandparents %>% filter(F1 == TRUE, F2 == TRUE, offspring_also_parent == TRUE) %>% pull(father)
+
+grandparents %>% 
+  filter(offspring_sample_id %in% F2grandparent_list_dam | offspring_sample_id %in% F2grandparent_list_sire ) %>% View(.)
+  
+
+kable(count(grandparents, F1, F2, offspring_also_parent) %>%
+  rename(known_parents = F1, known_grandparents = F2, known_offspring = offspring_also_parent)) %>% kable_classic(full_width = F, html_font = "Cambria" ) 
+
+# here we present the F2s broken down by return year. they need to return in 2015 or earlier for us to have a TLF
+kable(grandparents %>% filter(F2 == TRUE) %>% count(year), caption = "F2 Sample Sizes, by return year") %>% kable_classic(full_width = F, html_font = "Cambria" ) 
+
+# at some point we also need to subdivide these into those that descend from HORxHOR, HORxNOR and NORxNOR crosses. Ideally we would compare F0 fitness to F1 fitness to F2 fitness, but the F1s and F2s would all need to be NOR
 ```
 

@@ -3184,6 +3184,410 @@ dedup_unfilt &lt;- full_unfilt %&gt;%
 </div>
 <div id="dataset-and-release-summary-counts" class="section level1">
 <h1>Dataset and Release Summary Counts</h1>
+<p>Let’s summarise the complete dataset, by source and origin, without respect to where the fish wound up.</p>
+<pre class="r"><code>kable(dedup %&gt;% count(year, type, origin, section) %&gt;% 
+  pivot_wider(id_cols = year, names_from = c(type, origin, section), values_from = n, names_sep = &quot;\n&quot;), caption = &quot;Table N0: sample sizes by source&quot;, align = &quot;c&quot;) %&gt;%
+  kable_classic(full_width = T, html_font = &quot;Arial&quot; )</code></pre>
+<table class=" lightable-classic" style="font-family: Arial; margin-left: auto; margin-right: auto;">
+<caption>
+Table N0: sample sizes by source
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+year
+</th>
+<th style="text-align:center;">
+hatchery_outplant HOR NA
+</th>
+<th style="text-align:center;">
+cougar_trap HOR NA
+</th>
+<th style="text-align:center;">
+cougar_trap NOR NA
+</th>
+<th style="text-align:center;">
+sgs NOR SFMK_below
+</th>
+<th style="text-align:center;">
+cougar_trap NA NA
+</th>
+<th style="text-align:center;">
+precocial_male NOR NA
+</th>
+<th style="text-align:center;">
+sgs NOR SFMK_above
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+2007
+</td>
+<td style="text-align:center;">
+745
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2008
+</td>
+<td style="text-align:center;">
+873
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2009
+</td>
+<td style="text-align:center;">
+1383
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2010
+</td>
+<td style="text-align:center;">
+496
+</td>
+<td style="text-align:center;">
+30
+</td>
+<td style="text-align:center;">
+221
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2011
+</td>
+<td style="text-align:center;">
+340
+</td>
+<td style="text-align:center;">
+29
+</td>
+<td style="text-align:center;">
+356
+</td>
+<td style="text-align:center;">
+45
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2012
+</td>
+<td style="text-align:center;">
+430
+</td>
+<td style="text-align:center;">
+17
+</td>
+<td style="text-align:center;">
+500
+</td>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2013
+</td>
+<td style="text-align:center;">
+440
+</td>
+<td style="text-align:center;">
+22
+</td>
+<td style="text-align:center;">
+223
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2014
+</td>
+<td style="text-align:center;">
+486
+</td>
+<td style="text-align:center;">
+21
+</td>
+<td style="text-align:center;">
+191
+</td>
+<td style="text-align:center;">
+14
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+12
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2015
+</td>
+<td style="text-align:center;">
+600
+</td>
+<td style="text-align:center;">
+19
+</td>
+<td style="text-align:center;">
+241
+</td>
+<td style="text-align:center;">
+24
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2016
+</td>
+<td style="text-align:center;">
+459
+</td>
+<td style="text-align:center;">
+74
+</td>
+<td style="text-align:center;">
+295
+</td>
+<td style="text-align:center;">
+31
+</td>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2017
+</td>
+<td style="text-align:center;">
+448
+</td>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+239
+</td>
+<td style="text-align:center;">
+13
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2018
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+120
+</td>
+<td style="text-align:center;">
+35
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2019
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+158
+</td>
+<td style="text-align:center;">
+15
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2020
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+162
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+<td style="text-align:center;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Table N0:</strong> Sample sizes after filtering by year, origin and source. Source column names refer to three values, separated by spaces: (1) where was the sample originally encountered (hatchery, cougar trap, during a spawning ground survey, or as a precocial male), (2) origin, and (3) for SGS samples only, was the SGS conducted above or below Cougar Dam</p>
 <div id="parents" class="section level2">
 <h2>Parents</h2>
 <div id="counts-and-sex-ratios" class="section level3">
@@ -4613,8 +5017,194 @@ assignment_percentage
 </tr>
 </tbody>
 </table>
-<p><strong>Table N8:</strong> Number of potential offspring that assign to parents above the dam. Potential offspring are defined as any individual sampled (below dam, at Cougar Trap, or above dam), that are NOR.<br />
-_Note: People may be interested in just how many individuals show up at the trap, not ALL potential offspring. We will consider this in the section__ <a href="#recycling">Recycling</a></p>
+<p><strong>Table N8:</strong> Number of potential offspring that assign to parents above the dam. Potential offspring are defined as any individual sampled (below dam, at Cougar Trap, or above dam), that are NOR.</p>
+<p>People may be interested in just how many individuals show up at the trap, not ALL potential offspring, this will also be useful for comparing our assignmetn rates with the previously published ones (which don’t include carcass samples). We will consider this in greater detail in the section <a href="#recycling">Recycling</a>, but let’s make revised table split by source.</p>
+<pre class="r"><code>kable(pedigree_meta %&gt;%
+  group_by(offspring_year) %&gt;%
+    filter(offspring_type == &quot;cougar_trap&quot;) %&gt;%
+  summarise(n = n(), assigned_n = n() - sum(mother == &quot;none&quot; &amp; father == &quot;none&quot;, na.rm = TRUE), assn_rate = (n()-sum(mother == &quot;none&quot; &amp; father == &quot;none&quot;, na.rm = TRUE))/n()) %&gt;%
+  mutate(assignment_percentage = assn_rate*100) %&gt;%
+  select(offspring_year,n_offspring = n, n_assigned = assigned_n, assignment_percentage), digits = 1, caption = &quot;Table N8: Assignment rates per year, Cougar Only&quot;) %&gt;%
+kable_classic(full_width = F, html_font = &quot;Arial&quot; )</code></pre>
+<table class=" lightable-classic" style="font-family: Arial; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+Table N8: Assignment rates per year, Cougar Only
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+offspring_year
+</th>
+<th style="text-align:right;">
+n_offspring
+</th>
+<th style="text-align:right;">
+n_assigned
+</th>
+<th style="text-align:right;">
+assignment_percentage
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+2010
+</td>
+<td style="text-align:right;">
+221
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+6.3
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2011
+</td>
+<td style="text-align:right;">
+356
+</td>
+<td style="text-align:right;">
+138
+</td>
+<td style="text-align:right;">
+38.8
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2012
+</td>
+<td style="text-align:right;">
+500
+</td>
+<td style="text-align:right;">
+326
+</td>
+<td style="text-align:right;">
+65.2
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2013
+</td>
+<td style="text-align:right;">
+223
+</td>
+<td style="text-align:right;">
+153
+</td>
+<td style="text-align:right;">
+68.6
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2014
+</td>
+<td style="text-align:right;">
+191
+</td>
+<td style="text-align:right;">
+117
+</td>
+<td style="text-align:right;">
+61.3
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2015
+</td>
+<td style="text-align:right;">
+241
+</td>
+<td style="text-align:right;">
+176
+</td>
+<td style="text-align:right;">
+73.0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2016
+</td>
+<td style="text-align:right;">
+295
+</td>
+<td style="text-align:right;">
+212
+</td>
+<td style="text-align:right;">
+71.9
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2017
+</td>
+<td style="text-align:right;">
+239
+</td>
+<td style="text-align:right;">
+169
+</td>
+<td style="text-align:right;">
+70.7
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2018
+</td>
+<td style="text-align:right;">
+120
+</td>
+<td style="text-align:right;">
+92
+</td>
+<td style="text-align:right;">
+76.7
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2019
+</td>
+<td style="text-align:right;">
+158
+</td>
+<td style="text-align:right;">
+80
+</td>
+<td style="text-align:right;">
+50.6
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2020
+</td>
+<td style="text-align:right;">
+162
+</td>
+<td style="text-align:right;">
+152
+</td>
+<td style="text-align:right;">
+93.8
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Table N8b:</strong> Number of potential offspring sampled intially at Cougar Trap that assign to parents above the dam. Potential offspring are defined as any individual sampled (below dam, at Cougar Trap, or above dam), that are NOR.</p>
+<p><strong>NOTE BUG</strong> My values are a little different here than when I calculated similar ones in the parentage notebook. I msitakenly included to the precocial males in the parentage notebook. After removing these, the mean absolute difference in assignment rates is even smaller (0.7% vs 1.5%).</p>
 </div>
 <div id="aam-assignments-by-offspring-year-and-parent-year" class="section level2">
 <h2>AAM: Assignments, by Offspring Year and Parent Year</h2>
@@ -7837,8 +8427,6 @@ kable(parents %&gt;%
                        type == &quot;cougar_trap&quot; ~ &quot;cougar trap&quot;)) %&gt;%
     rename(source = type,), align = &quot;c&quot;, caption = &quot;Table N13: Total Lifetime Fitness by Parent Year, Source and Sex&quot;, digits = 2) %&gt;%
   kable_classic(full_width = F, html_font = &quot;Arial&quot;)</code></pre>
-<pre><code>## `summarise()` has grouped output by 'year', 'type'. You can override using the
-## `.groups` argument.</code></pre>
 <table class=" lightable-classic" style="font-family: Arial; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 Table N13: Total Lifetime Fitness by Parent Year, Source and Sex
@@ -8746,6 +9334,2470 @@ M
 </tbody>
 </table>
 <p><strong>Table N13:</strong> TLF per parent year, parent source and sex. Parent source refers to either*** individuals trapped at the Cougar Trap and released above the dam (“Cougar Trap”, NOR and HOR) or individuals trapped at McKEnzie or Leaburg Hatcheries and released above the dam (“Hatchery”, HOR)<br />
+<em>* Note that 2015 estimates do not include potential year 6 offspring. However we expect these offspring to contribute very little to TLF (~2%)</em><br />
+<em>** Note that 2016 and 2017 offspring do not include potential year 5 and 6 offspring, and potential year 4 5 and 6 offspring, which are expected to substantially contribute to TLF for these parents years</em><br />
+<em>*** Note that there are 5 individuals sampled during spawning ground surveys above the dam and 12 precocial males sampled above the dam that were included as candidate parents. None had an offspring assigned to them and they are not presented in this table</em></p>
+<pre class="r"><code># average fitness, by parent year
+kable(parents %&gt;%
+        filter(year &lt; 2018, type %in% c(&quot;cougar_trap&quot;, &quot;hatchery_outplant&quot;)) %&gt;%
+  group_by(year, origin, sex) %&gt;%
+  summarise(N = n(), mean_tlf = mean(tlf), sd_tlf = sd(tlf), range = paste(min(tlf), &quot; -  &quot;, max(tlf))) %&gt;%
+        mutate(year = as.character(year),
+      year = case_when(year == 2015 ~ &quot;2015*&quot;,
+                       year == 2016 ~ &quot;2016**&quot;,
+                       year == 2017 ~ &quot;2017**&quot;,
+                            TRUE ~ year)
+      ) %&gt;%
+    pivot_wider(id_cols = c(year, sex), names_from = origin, values_from = c(N, mean_tlf, sd_tlf, range)), align = &quot;c&quot;, caption = &quot;Table N13c: Total Lifetime Fitness by Parent Year, Origin, and Sex&quot;, digits = 2) %&gt;%
+  kable_classic(full_width = F, html_font = &quot;Arial&quot;)</code></pre>
+<table class=" lightable-classic" style="font-family: Arial; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+Table N13c: Total Lifetime Fitness by Parent Year, Origin, and Sex
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+year
+</th>
+<th style="text-align:center;">
+sex
+</th>
+<th style="text-align:center;">
+N_HOR
+</th>
+<th style="text-align:center;">
+N_NOR
+</th>
+<th style="text-align:center;">
+N_NA
+</th>
+<th style="text-align:center;">
+mean_tlf_HOR
+</th>
+<th style="text-align:center;">
+mean_tlf_NOR
+</th>
+<th style="text-align:center;">
+mean_tlf_NA
+</th>
+<th style="text-align:center;">
+sd_tlf_HOR
+</th>
+<th style="text-align:center;">
+sd_tlf_NOR
+</th>
+<th style="text-align:center;">
+sd_tlf_NA
+</th>
+<th style="text-align:center;">
+range_HOR
+</th>
+<th style="text-align:center;">
+range_NOR
+</th>
+<th style="text-align:center;">
+range_NA
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+2007
+</td>
+<td style="text-align:center;">
+F
+</td>
+<td style="text-align:center;">
+318
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.89
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+1.49
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0 - 11
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2007
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+427
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.72
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+1.56
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0 - 17
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2008
+</td>
+<td style="text-align:center;">
+F
+</td>
+<td style="text-align:center;">
+288
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.80
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+1.46
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0 - 12
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2008
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+585
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.40
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+1.03
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0 - 9
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2009
+</td>
+<td style="text-align:center;">
+F
+</td>
+<td style="text-align:center;">
+603
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.16
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.47
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0 - 4
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2009
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+780
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.13
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.43
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0 - 3
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2010
+</td>
+<td style="text-align:center;">
+F
+</td>
+<td style="text-align:center;">
+206
+</td>
+<td style="text-align:center;">
+57
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.29
+</td>
+<td style="text-align:center;">
+0.25
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.73
+</td>
+<td style="text-align:center;">
+0.63
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0 - 5
+</td>
+<td style="text-align:center;">
+0 - 3
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2010
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+320
+</td>
+<td style="text-align:center;">
+164
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.13
+</td>
+<td style="text-align:center;">
+0.29
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.52
+</td>
+<td style="text-align:center;">
+0.69
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0 - 6
+</td>
+<td style="text-align:center;">
+0 - 4
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2011
+</td>
+<td style="text-align:center;">
+F
+</td>
+<td style="text-align:center;">
+176
+</td>
+<td style="text-align:center;">
+144
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.76
+</td>
+<td style="text-align:center;">
+0.68
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+1.57
+</td>
+<td style="text-align:center;">
+1.33
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0 - 9
+</td>
+<td style="text-align:center;">
+0 - 7
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2011
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+193
+</td>
+<td style="text-align:center;">
+212
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.27
+</td>
+<td style="text-align:center;">
+0.86
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.69
+</td>
+<td style="text-align:center;">
+1.74
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0 - 4
+</td>
+<td style="text-align:center;">
+0 - 9
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2012
+</td>
+<td style="text-align:center;">
+F
+</td>
+<td style="text-align:center;">
+256
+</td>
+<td style="text-align:center;">
+183
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.25
+</td>
+<td style="text-align:center;">
+0.41
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.58
+</td>
+<td style="text-align:center;">
+0.77
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0 - 3
+</td>
+<td style="text-align:center;">
+0 - 5
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2012
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+191
+</td>
+<td style="text-align:center;">
+317
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.18
+</td>
+<td style="text-align:center;">
+0.37
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.46
+</td>
+<td style="text-align:center;">
+0.78
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0 - 2
+</td>
+<td style="text-align:center;">
+0 - 5
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2013
+</td>
+<td style="text-align:center;">
+F
+</td>
+<td style="text-align:center;">
+248
+</td>
+<td style="text-align:center;">
+77
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.28
+</td>
+<td style="text-align:center;">
+0.75
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.70
+</td>
+<td style="text-align:center;">
+1.25
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0 - 5
+</td>
+<td style="text-align:center;">
+0 - 6
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2013
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+207
+</td>
+<td style="text-align:center;">
+95
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.21
+</td>
+<td style="text-align:center;">
+0.85
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.56
+</td>
+<td style="text-align:center;">
+1.41
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0 - 3
+</td>
+<td style="text-align:center;">
+0 - 8
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2014
+</td>
+<td style="text-align:center;">
+F
+</td>
+<td style="text-align:center;">
+334
+</td>
+<td style="text-align:center;">
+52
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.14
+</td>
+<td style="text-align:center;">
+0.27
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.45
+</td>
+<td style="text-align:center;">
+0.79
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0 - 3
+</td>
+<td style="text-align:center;">
+0 - 4
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2014
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+172
+</td>
+<td style="text-align:center;">
+80
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0.23
+</td>
+<td style="text-align:center;">
+0.30
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0.57
+</td>
+<td style="text-align:center;">
+0.72
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0 - 3
+</td>
+<td style="text-align:center;">
+0 - 3
+</td>
+<td style="text-align:center;">
+0 - 0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2015*
+</td>
+<td style="text-align:center;">
+F
+</td>
+<td style="text-align:center;">
+417
+</td>
+<td style="text-align:center;">
+48
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.12
+</td>
+<td style="text-align:center;">
+0.31
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.35
+</td>
+<td style="text-align:center;">
+0.95
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0 - 2
+</td>
+<td style="text-align:center;">
+0 - 6
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2015*
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+202
+</td>
+<td style="text-align:center;">
+87
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.17
+</td>
+<td style="text-align:center;">
+0.31
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.50
+</td>
+<td style="text-align:center;">
+0.58
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0 - 4
+</td>
+<td style="text-align:center;">
+0 - 3
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2016**
+</td>
+<td style="text-align:center;">
+F
+</td>
+<td style="text-align:center;">
+336
+</td>
+<td style="text-align:center;">
+64
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0.30
+</td>
+<td style="text-align:center;">
+0.39
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0.64
+</td>
+<td style="text-align:center;">
+0.63
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0 - 5
+</td>
+<td style="text-align:center;">
+0 - 2
+</td>
+<td style="text-align:center;">
+0 - 0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2016**
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+193
+</td>
+<td style="text-align:center;">
+107
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.35
+</td>
+<td style="text-align:center;">
+0.54
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.84
+</td>
+<td style="text-align:center;">
+1.16
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0 - 6
+</td>
+<td style="text-align:center;">
+0 - 8
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2017**
+</td>
+<td style="text-align:center;">
+F
+</td>
+<td style="text-align:center;">
+328
+</td>
+<td style="text-align:center;">
+42
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.00
+</td>
+<td style="text-align:center;">
+0.00
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.00
+</td>
+<td style="text-align:center;">
+0.00
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0 - 0
+</td>
+<td style="text-align:center;">
+0 - 0
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2017**
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+125
+</td>
+<td style="text-align:center;">
+109
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0.00
+</td>
+<td style="text-align:center;">
+0.00
+</td>
+<td style="text-align:center;">
+0
+</td>
+<td style="text-align:center;">
+0.00
+</td>
+<td style="text-align:center;">
+0.00
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0 - 0
+</td>
+<td style="text-align:center;">
+0 - 0
+</td>
+<td style="text-align:center;">
+0 - 0
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Table N13b:</strong> TLF per parent year, origin and sex. Parent source refers to either*** individuals trapped at the Cougar Trap and released above the dam (“Cougar Trap”, NOR and HOR) or individuals trapped at McKEnzie or Leaburg Hatcheries and released above the dam (“Hatchery”, HOR)<br />
+<em>* Note that 2015 estimates do not include potential year 6 offspring. However we expect these offspring to contribute very little to TLF (~2%)</em><br />
+<em>** Note that 2016 and 2017 offspring do not include potential year 5 and 6 offspring, and potential year 4 5 and 6 offspring, which are expected to substantially contribute to TLF for these parents years</em><br />
+<em>*** Note that there are 5 individuals sampled during spawning ground surveys above the dam and 12 precocial males sampled above the dam that were included as candidate parents. None had an offspring assigned to them and they are not presented in this table</em></p>
+<pre class="r"><code># average fitness, by parent year
+kable(parents %&gt;%
+        filter(year &lt; 2018, type %in% c(&quot;cougar_trap&quot;, &quot;hatchery_outplant&quot;)) %&gt;%
+  group_by(year, type, origin, sex) %&gt;%
+  summarise(N = n(), mean_tlf = mean(tlf), sd_tlf = sd(tlf), range = paste(min(tlf), &quot; -  &quot;, max(tlf))) %&gt;%
+        mutate(year = as.character(year),
+      year = case_when(year == 2015 ~ &quot;2015*&quot;,
+                       year == 2016 ~ &quot;2016**&quot;,
+                       year == 2017 ~ &quot;2017**&quot;,
+                            TRUE ~ year),
+      type = case_when(type == &quot;hatchery_outplant&quot; ~ &quot;hatchery&quot;,
+                       type == &quot;cougar_trap&quot; ~ &quot;cougar trap&quot;)) %&gt;%
+    rename(source = type,), align = &quot;c&quot;, caption = &quot;Table N13c: Total Lifetime Fitness by Parent Year, Source Origin, and Sex&quot;, digits = 2) %&gt;%
+  kable_classic(full_width = F, html_font = &quot;Arial&quot;)</code></pre>
+<table class=" lightable-classic" style="font-family: Arial; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+Table N13c: Total Lifetime Fitness by Parent Year, Source Origin, and Sex
+</caption>
+<thead>
+<tr>
+<th style="text-align:center;">
+year
+</th>
+<th style="text-align:center;">
+source
+</th>
+<th style="text-align:center;">
+origin
+</th>
+<th style="text-align:center;">
+sex
+</th>
+<th style="text-align:center;">
+N
+</th>
+<th style="text-align:center;">
+mean_tlf
+</th>
+<th style="text-align:center;">
+sd_tlf
+</th>
+<th style="text-align:center;">
+range
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+2007
+</td>
+<td style="text-align:center;">
+hatchery
+</td>
+<td style="text-align:center;">
+HOR
+</td>
+<td style="text-align:center;">
+F
+</td>
+<td style="text-align:center;">
+318
+</td>
+<td style="text-align:center;">
+0.89
+</td>
+<td style="text-align:center;">
+1.49
+</td>
+<td style="text-align:center;">
+0 - 11
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2007
+</td>
+<td style="text-align:center;">
+hatchery
+</td>
+<td style="text-align:center;">
+HOR
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+427
+</td>
+<td style="text-align:center;">
+0.72
+</td>
+<td style="text-align:center;">
+1.56
+</td>
+<td style="text-align:center;">
+0 - 17
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2008
+</td>
+<td style="text-align:center;">
+hatchery
+</td>
+<td style="text-align:center;">
+HOR
+</td>
+<td style="text-align:center;">
+F
+</td>
+<td style="text-align:center;">
+288
+</td>
+<td style="text-align:center;">
+0.80
+</td>
+<td style="text-align:center;">
+1.46
+</td>
+<td style="text-align:center;">
+0 - 12
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2008
+</td>
+<td style="text-align:center;">
+hatchery
+</td>
+<td style="text-align:center;">
+HOR
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+585
+</td>
+<td style="text-align:center;">
+0.40
+</td>
+<td style="text-align:center;">
+1.03
+</td>
+<td style="text-align:center;">
+0 - 9
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2009
+</td>
+<td style="text-align:center;">
+hatchery
+</td>
+<td style="text-align:center;">
+HOR
+</td>
+<td style="text-align:center;">
+F
+</td>
+<td style="text-align:center;">
+603
+</td>
+<td style="text-align:center;">
+0.16
+</td>
+<td style="text-align:center;">
+0.47
+</td>
+<td style="text-align:center;">
+0 - 4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2009
+</td>
+<td style="text-align:center;">
+hatchery
+</td>
+<td style="text-align:center;">
+HOR
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+780
+</td>
+<td style="text-align:center;">
+0.13
+</td>
+<td style="text-align:center;">
+0.43
+</td>
+<td style="text-align:center;">
+0 - 3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2010
+</td>
+<td style="text-align:center;">
+cougar trap
+</td>
+<td style="text-align:center;">
+HOR
+</td>
+<td style="text-align:center;">
+F
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+0.00
+</td>
+<td style="text-align:center;">
+0.00
+</td>
+<td style="text-align:center;">
+0 - 0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2010
+</td>
+<td style="text-align:center;">
+cougar trap
+</td>
+<td style="text-align:center;">
+HOR
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+25
+</td>
+<td style="text-align:center;">
+0.16
+</td>
+<td style="text-align:center;">
+0.37
+</td>
+<td style="text-align:center;">
+0 - 1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2010
+</td>
+<td style="text-align:center;">
+cougar trap
+</td>
+<td style="text-align:center;">
+NOR
+</td>
+<td style="text-align:center;">
+F
+</td>
+<td style="text-align:center;">
+57
+</td>
+<td style="text-align:center;">
+0.25
+</td>
+<td style="text-align:center;">
+0.63
+</td>
+<td style="text-align:center;">
+0 - 3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2010
+</td>
+<td style="text-align:center;">
+cougar trap
+</td>
+<td style="text-align:center;">
+NOR
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+164
+</td>
+<td style="text-align:center;">
+0.29
+</td>
+<td style="text-align:center;">
+0.69
+</td>
+<td style="text-align:center;">
+0 - 4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2010
+</td>
+<td style="text-align:center;">
+hatchery
+</td>
+<td style="text-align:center;">
+HOR
+</td>
+<td style="text-align:center;">
+F
+</td>
+<td style="text-align:center;">
+201
+</td>
+<td style="text-align:center;">
+0.29
+</td>
+<td style="text-align:center;">
+0.74
+</td>
+<td style="text-align:center;">
+0 - 5
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2010
+</td>
+<td style="text-align:center;">
+hatchery
+</td>
+<td style="text-align:center;">
+HOR
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+295
+</td>
+<td style="text-align:center;">
+0.13
+</td>
+<td style="text-align:center;">
+0.53
+</td>
+<td style="text-align:center;">
+0 - 6
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2011
+</td>
+<td style="text-align:center;">
+cougar trap
+</td>
+<td style="text-align:center;">
+HOR
+</td>
+<td style="text-align:center;">
+F
+</td>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+0.17
+</td>
+<td style="text-align:center;">
+0.41
+</td>
+<td style="text-align:center;">
+0 - 1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2011
+</td>
+<td style="text-align:center;">
+cougar trap
+</td>
+<td style="text-align:center;">
+HOR
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+23
+</td>
+<td style="text-align:center;">
+0.13
+</td>
+<td style="text-align:center;">
+0.34
+</td>
+<td style="text-align:center;">
+0 - 1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2011
+</td>
+<td style="text-align:center;">
+cougar trap
+</td>
+<td style="text-align:center;">
+NOR
+</td>
+<td style="text-align:center;">
+F
+</td>
+<td style="text-align:center;">
+144
+</td>
+<td style="text-align:center;">
+0.68
+</td>
+<td style="text-align:center;">
+1.33
+</td>
+<td style="text-align:center;">
+0 - 7
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2011
+</td>
+<td style="text-align:center;">
+cougar trap
+</td>
+<td style="text-align:center;">
+NOR
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+212
+</td>
+<td style="text-align:center;">
+0.86
+</td>
+<td style="text-align:center;">
+1.74
+</td>
+<td style="text-align:center;">
+0 - 9
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2011
+</td>
+<td style="text-align:center;">
+hatchery
+</td>
+<td style="text-align:center;">
+HOR
+</td>
+<td style="text-align:center;">
+F
+</td>
+<td style="text-align:center;">
+170
+</td>
+<td style="text-align:center;">
+0.78
+</td>
+<td style="text-align:center;">
+1.59
+</td>
+<td style="text-align:center;">
+0 - 9
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2011
+</td>
+<td style="text-align:center;">
+hatchery
+</td>
+<td style="text-align:center;">
+HOR
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+170
+</td>
+<td style="text-align:center;">
+0.29
+</td>
+<td style="text-align:center;">
+0.73
+</td>
+<td style="text-align:center;">
+0 - 4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2012
+</td>
+<td style="text-align:center;">
+cougar trap
+</td>
+<td style="text-align:center;">
+HOR
+</td>
+<td style="text-align:center;">
+F
+</td>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+0.25
+</td>
+<td style="text-align:center;">
+0.46
+</td>
+<td style="text-align:center;">
+0 - 1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2012
+</td>
+<td style="text-align:center;">
+cougar trap
+</td>
+<td style="text-align:center;">
+HOR
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+9
+</td>
+<td style="text-align:center;">
+0.11
+</td>
+<td style="text-align:center;">
+0.33
+</td>
+<td style="text-align:center;">
+0 - 1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2012
+</td>
+<td style="text-align:center;">
+cougar trap
+</td>
+<td style="text-align:center;">
+NOR
+</td>
+<td style="text-align:center;">
+F
+</td>
+<td style="text-align:center;">
+183
+</td>
+<td style="text-align:center;">
+0.41
+</td>
+<td style="text-align:center;">
+0.77
+</td>
+<td style="text-align:center;">
+0 - 5
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2012
+</td>
+<td style="text-align:center;">
+cougar trap
+</td>
+<td style="text-align:center;">
+NOR
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+317
+</td>
+<td style="text-align:center;">
+0.37
+</td>
+<td style="text-align:center;">
+0.78
+</td>
+<td style="text-align:center;">
+0 - 5
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2012
+</td>
+<td style="text-align:center;">
+hatchery
+</td>
+<td style="text-align:center;">
+HOR
+</td>
+<td style="text-align:center;">
+F
+</td>
+<td style="text-align:center;">
+248
+</td>
+<td style="text-align:center;">
+0.25
+</td>
+<td style="text-align:center;">
+0.58
+</td>
+<td style="text-align:center;">
+0 - 3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2012
+</td>
+<td style="text-align:center;">
+hatchery
+</td>
+<td style="text-align:center;">
+HOR
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+182
+</td>
+<td style="text-align:center;">
+0.18
+</td>
+<td style="text-align:center;">
+0.46
+</td>
+<td style="text-align:center;">
+0 - 2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2013
+</td>
+<td style="text-align:center;">
+cougar trap
+</td>
+<td style="text-align:center;">
+HOR
+</td>
+<td style="text-align:center;">
+F
+</td>
+<td style="text-align:center;">
+9
+</td>
+<td style="text-align:center;">
+0.11
+</td>
+<td style="text-align:center;">
+0.33
+</td>
+<td style="text-align:center;">
+0 - 1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2013
+</td>
+<td style="text-align:center;">
+cougar trap
+</td>
+<td style="text-align:center;">
+HOR
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+0.00
+</td>
+<td style="text-align:center;">
+0.00
+</td>
+<td style="text-align:center;">
+0 - 0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2013
+</td>
+<td style="text-align:center;">
+cougar trap
+</td>
+<td style="text-align:center;">
+NOR
+</td>
+<td style="text-align:center;">
+F
+</td>
+<td style="text-align:center;">
+77
+</td>
+<td style="text-align:center;">
+0.75
+</td>
+<td style="text-align:center;">
+1.25
+</td>
+<td style="text-align:center;">
+0 - 6
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2013
+</td>
+<td style="text-align:center;">
+cougar trap
+</td>
+<td style="text-align:center;">
+NOR
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+95
+</td>
+<td style="text-align:center;">
+0.85
+</td>
+<td style="text-align:center;">
+1.41
+</td>
+<td style="text-align:center;">
+0 - 8
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2013
+</td>
+<td style="text-align:center;">
+hatchery
+</td>
+<td style="text-align:center;">
+HOR
+</td>
+<td style="text-align:center;">
+F
+</td>
+<td style="text-align:center;">
+239
+</td>
+<td style="text-align:center;">
+0.29
+</td>
+<td style="text-align:center;">
+0.71
+</td>
+<td style="text-align:center;">
+0 - 5
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2013
+</td>
+<td style="text-align:center;">
+hatchery
+</td>
+<td style="text-align:center;">
+HOR
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+201
+</td>
+<td style="text-align:center;">
+0.22
+</td>
+<td style="text-align:center;">
+0.57
+</td>
+<td style="text-align:center;">
+0 - 3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2014
+</td>
+<td style="text-align:center;">
+cougar trap
+</td>
+<td style="text-align:center;">
+HOR
+</td>
+<td style="text-align:center;">
+F
+</td>
+<td style="text-align:center;">
+7
+</td>
+<td style="text-align:center;">
+0.00
+</td>
+<td style="text-align:center;">
+0.00
+</td>
+<td style="text-align:center;">
+0 - 0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2014
+</td>
+<td style="text-align:center;">
+cougar trap
+</td>
+<td style="text-align:center;">
+HOR
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+13
+</td>
+<td style="text-align:center;">
+0.31
+</td>
+<td style="text-align:center;">
+0.85
+</td>
+<td style="text-align:center;">
+0 - 3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2014
+</td>
+<td style="text-align:center;">
+cougar trap
+</td>
+<td style="text-align:center;">
+NOR
+</td>
+<td style="text-align:center;">
+F
+</td>
+<td style="text-align:center;">
+52
+</td>
+<td style="text-align:center;">
+0.27
+</td>
+<td style="text-align:center;">
+0.79
+</td>
+<td style="text-align:center;">
+0 - 4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2014
+</td>
+<td style="text-align:center;">
+cougar trap
+</td>
+<td style="text-align:center;">
+NOR
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+80
+</td>
+<td style="text-align:center;">
+0.30
+</td>
+<td style="text-align:center;">
+0.72
+</td>
+<td style="text-align:center;">
+0 - 3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2014
+</td>
+<td style="text-align:center;">
+cougar trap
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0.00
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0 - 0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2014
+</td>
+<td style="text-align:center;">
+hatchery
+</td>
+<td style="text-align:center;">
+HOR
+</td>
+<td style="text-align:center;">
+F
+</td>
+<td style="text-align:center;">
+327
+</td>
+<td style="text-align:center;">
+0.14
+</td>
+<td style="text-align:center;">
+0.45
+</td>
+<td style="text-align:center;">
+0 - 3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2014
+</td>
+<td style="text-align:center;">
+hatchery
+</td>
+<td style="text-align:center;">
+HOR
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+159
+</td>
+<td style="text-align:center;">
+0.23
+</td>
+<td style="text-align:center;">
+0.54
+</td>
+<td style="text-align:center;">
+0 - 3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2015*
+</td>
+<td style="text-align:center;">
+cougar trap
+</td>
+<td style="text-align:center;">
+HOR
+</td>
+<td style="text-align:center;">
+F
+</td>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+0.00
+</td>
+<td style="text-align:center;">
+0.00
+</td>
+<td style="text-align:center;">
+0 - 0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2015*
+</td>
+<td style="text-align:center;">
+cougar trap
+</td>
+<td style="text-align:center;">
+HOR
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+14
+</td>
+<td style="text-align:center;">
+0.14
+</td>
+<td style="text-align:center;">
+0.36
+</td>
+<td style="text-align:center;">
+0 - 1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2015*
+</td>
+<td style="text-align:center;">
+cougar trap
+</td>
+<td style="text-align:center;">
+NOR
+</td>
+<td style="text-align:center;">
+F
+</td>
+<td style="text-align:center;">
+48
+</td>
+<td style="text-align:center;">
+0.31
+</td>
+<td style="text-align:center;">
+0.95
+</td>
+<td style="text-align:center;">
+0 - 6
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2015*
+</td>
+<td style="text-align:center;">
+cougar trap
+</td>
+<td style="text-align:center;">
+NOR
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+87
+</td>
+<td style="text-align:center;">
+0.31
+</td>
+<td style="text-align:center;">
+0.58
+</td>
+<td style="text-align:center;">
+0 - 3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2015*
+</td>
+<td style="text-align:center;">
+hatchery
+</td>
+<td style="text-align:center;">
+HOR
+</td>
+<td style="text-align:center;">
+F
+</td>
+<td style="text-align:center;">
+412
+</td>
+<td style="text-align:center;">
+0.12
+</td>
+<td style="text-align:center;">
+0.35
+</td>
+<td style="text-align:center;">
+0 - 2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2015*
+</td>
+<td style="text-align:center;">
+hatchery
+</td>
+<td style="text-align:center;">
+HOR
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+188
+</td>
+<td style="text-align:center;">
+0.17
+</td>
+<td style="text-align:center;">
+0.51
+</td>
+<td style="text-align:center;">
+0 - 4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2016**
+</td>
+<td style="text-align:center;">
+cougar trap
+</td>
+<td style="text-align:center;">
+HOR
+</td>
+<td style="text-align:center;">
+F
+</td>
+<td style="text-align:center;">
+21
+</td>
+<td style="text-align:center;">
+0.14
+</td>
+<td style="text-align:center;">
+0.36
+</td>
+<td style="text-align:center;">
+0 - 1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2016**
+</td>
+<td style="text-align:center;">
+cougar trap
+</td>
+<td style="text-align:center;">
+HOR
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+49
+</td>
+<td style="text-align:center;">
+0.14
+</td>
+<td style="text-align:center;">
+0.41
+</td>
+<td style="text-align:center;">
+0 - 2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2016**
+</td>
+<td style="text-align:center;">
+cougar trap
+</td>
+<td style="text-align:center;">
+NOR
+</td>
+<td style="text-align:center;">
+F
+</td>
+<td style="text-align:center;">
+64
+</td>
+<td style="text-align:center;">
+0.39
+</td>
+<td style="text-align:center;">
+0.63
+</td>
+<td style="text-align:center;">
+0 - 2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2016**
+</td>
+<td style="text-align:center;">
+cougar trap
+</td>
+<td style="text-align:center;">
+NOR
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+107
+</td>
+<td style="text-align:center;">
+0.54
+</td>
+<td style="text-align:center;">
+1.16
+</td>
+<td style="text-align:center;">
+0 - 8
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2016**
+</td>
+<td style="text-align:center;">
+cougar trap
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+F
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0.00
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0 - 0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2016**
+</td>
+<td style="text-align:center;">
+hatchery
+</td>
+<td style="text-align:center;">
+HOR
+</td>
+<td style="text-align:center;">
+F
+</td>
+<td style="text-align:center;">
+315
+</td>
+<td style="text-align:center;">
+0.31
+</td>
+<td style="text-align:center;">
+0.66
+</td>
+<td style="text-align:center;">
+0 - 5
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2016**
+</td>
+<td style="text-align:center;">
+hatchery
+</td>
+<td style="text-align:center;">
+HOR
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+144
+</td>
+<td style="text-align:center;">
+0.42
+</td>
+<td style="text-align:center;">
+0.93
+</td>
+<td style="text-align:center;">
+0 - 6
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2017**
+</td>
+<td style="text-align:center;">
+cougar trap
+</td>
+<td style="text-align:center;">
+HOR
+</td>
+<td style="text-align:center;">
+F
+</td>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+0.00
+</td>
+<td style="text-align:center;">
+0.00
+</td>
+<td style="text-align:center;">
+0 - 0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2017**
+</td>
+<td style="text-align:center;">
+cougar trap
+</td>
+<td style="text-align:center;">
+HOR
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+0.00
+</td>
+<td style="text-align:center;">
+0.00
+</td>
+<td style="text-align:center;">
+0 - 0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2017**
+</td>
+<td style="text-align:center;">
+cougar trap
+</td>
+<td style="text-align:center;">
+NOR
+</td>
+<td style="text-align:center;">
+F
+</td>
+<td style="text-align:center;">
+42
+</td>
+<td style="text-align:center;">
+0.00
+</td>
+<td style="text-align:center;">
+0.00
+</td>
+<td style="text-align:center;">
+0 - 0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2017**
+</td>
+<td style="text-align:center;">
+cougar trap
+</td>
+<td style="text-align:center;">
+NOR
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+109
+</td>
+<td style="text-align:center;">
+0.00
+</td>
+<td style="text-align:center;">
+0.00
+</td>
+<td style="text-align:center;">
+0 - 0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2017**
+</td>
+<td style="text-align:center;">
+cougar trap
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+0.00
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0 - 0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2017**
+</td>
+<td style="text-align:center;">
+hatchery
+</td>
+<td style="text-align:center;">
+HOR
+</td>
+<td style="text-align:center;">
+F
+</td>
+<td style="text-align:center;">
+325
+</td>
+<td style="text-align:center;">
+0.00
+</td>
+<td style="text-align:center;">
+0.00
+</td>
+<td style="text-align:center;">
+0 - 0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2017**
+</td>
+<td style="text-align:center;">
+hatchery
+</td>
+<td style="text-align:center;">
+HOR
+</td>
+<td style="text-align:center;">
+M
+</td>
+<td style="text-align:center;">
+123
+</td>
+<td style="text-align:center;">
+0.00
+</td>
+<td style="text-align:center;">
+0.00
+</td>
+<td style="text-align:center;">
+0 - 0
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Table N13c:</strong> TLF per parent year, parent source, origin and sex. Parent source refers to either*** individuals trapped at the Cougar Trap and released above the dam (“Cougar Trap”, NOR and HOR) or individuals trapped at McKEnzie or Leaburg Hatcheries and released above the dam (“Hatchery”, HOR)<br />
 <em>* Note that 2015 estimates do not include potential year 6 offspring. However we expect these offspring to contribute very little to TLF (~2%)</em><br />
 <em>** Note that 2016 and 2017 offspring do not include potential year 5 and 6 offspring, and potential year 4 5 and 6 offspring, which are expected to substantially contribute to TLF for these parents years</em><br />
 <em>*** Note that there are 5 individuals sampled during spawning ground surveys above the dam and 12 precocial males sampled above the dam that were included as candidate parents. None had an offspring assigned to them and they are not presented in this table</em></p>
