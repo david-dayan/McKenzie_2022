@@ -52,7 +52,7 @@ Continuing this work, we have since genotyped NOR salmon sampled on the South Fo
 
 Irrevocable updates to software packages used to assign parentage (COLONY) prevent us from exactly reproducing the approach used to infer the pedigrees used in previous reports. We chose to infer all pedigrees from parent years 2007 to 2017 (offspring year 2010 - 2020) from the raw genetic data using a consistent approach rather than simply combining previous pedigrees with those inferred from new data.  
 
-This means that parent year results from 2007-2010 and offspring year results from 2010 - 2015, that have previously been reported on may change. In the parentage assignment notebook we evaluated how much changes to the parentage assignment approach affected assignment rate, cohort replacement rate. The overall assignment rate differed an average of 1.6% across the six years where pedigrees were previously inferred.
+This means that parent year results from 2007-2010 and offspring year results from 2010 - 2015, that have previously been reported on may change. In the parentage assignment notebook we evaluated how much changes to the parentage assignment approach affected assignment rate, cohort replacement rate. The overall assignment rate differed an average of 0.7% across the six years where pedigrees were previously inferred.
 
 This approach has several advantages:  
 (1) Trends - Results based on the pedigrees such as Cohort Replacement Rate and Total Lifetime Fitness suffer from the same biases across all years, allowing more confidence in the identification of year - year trends.   
@@ -462,6 +462,8 @@ In this section we make the assumption that offspring that do not assign to any 
 
 Under this assumption we can evaluate the efficacy of the recycling or LSDR approach at excluding NOR immigrants from being released above the dam. We exclude offspring year 2010 - 2012, since we do not have all of the potential parents from these offspring years included as candidate parents in our parentage analysis.
 
+__note that this section previously used the dedup dataset, which only considers the final encounter with a fish, not the first in the case of fish that return to the trap two times, but is this really the best way to go? arguably, we should use the first. This has been corrected in this version of the notebook__
+
 ### GLM
 
 If we think about this for a while the essential question being asked is:
@@ -475,29 +477,36 @@ We could get a lot more detailed with our modeling here, but let's attempt to mo
 First let's plot make some simple plots.
 
 ```{r, warning=FALSE, message=FALSE}
+dedup_first_encounter <- full_data_1.0 %>%
+  group_by(sample_id) %>%
+  slice_min(date, n = 1, with_ties = FALSE) %>%
+  ungroup() %>%
+  rename(date_first = date)
+
+
 strays <- pedigree_meta %>% 
   filter(offspring_year > 2012, offspring_type == "cougar_trap") %>%
-  left_join(select(dedup, sample_id, sex), by = c("offspring_sample_id" = "sample_id")) %>%
+  left_join(select(dedup_first_encounter, sample_id, sex, date_first), by = c("offspring_sample_id" = "sample_id")) %>%
   mutate(immigrant = case_when(assn_type == "none" ~ "immigrant",
                                TRUE ~ "return"),
          immigrant_i = case_when(assn_type == "none" ~ 1,
                                TRUE ~ 0),
-         jday = yday(ymd(offspring_date)))
+         jday = yday(ymd(date_first)))
 
 ggplot(strays, aes(jday, immigrant_i))+geom_count(alpha = 0.5)+geom_smooth(method = "glm", method.args=list(family="binomial"))+theme_classic()+xlab("Julian Day")+ylab("Immigrant\n1 = immigrant 0 = return")+scale_color_viridis_d()+geom_vline(aes(xintercept = 245), linetype = "dashed", color  = "red")
 ```
 
-__Figure N2:__ Julian day vs immigrant count at Cougar Trap. An offspring with no assigned parentage is considered an immigrant (scored as 1), an offpsring with at least one parent is considered a return (scored as zero). Circle size corresponds to number of individuals that day. Offspring years from 2013-2020 are considered. Smoothing curve is a simple binomial glm on the immigrant variable using only the effect of Julian day. Julian day 245 is on or one day from the September 1st cutoff used for LSDR. It is displayed as vertical dashed red line.
+__Figure N2:__ Julian day vs immigrant count at Cougar Trap, including only individuals collected for the first time. An offspring with no assigned parentage is considered an immigrant (scored as 1), an offpsring with at least one parent is considered a return (scored as zero). Circle size corresponds to number of individuals that day. Offspring years from 2013-2020 are considered. Smoothing curve is a simple binomial glm on the immigrant variable using only the effect of Julian day. Julian day 245 is on or one day from the September 1st cutoff used for LSDR. It is displayed as vertical dashed red line.
 
 Here we see there is a clear relationship between the propensity for an individual to be assigned a parent from above the dam and the day it is sampled at the Cougar Trap. 
 
 We also know that the overall assignemnt rate varies from year to year. Let's see if the relationship between Julian day and the propensity for an immigrant to be sampled at the Cougar trap depends on year.
 
 ```{r, warning=FALSE, message=FALSE}
-ggplot(strays, aes(jday, immigrant_i, color = as.factor(offspring_year)))+geom_count(alpha = 0.5)+geom_smooth(method = "glm", method.args=list(family="binomial"))+theme_classic()+xlab("Julian Day")+ylab("Immigrant?\n1 = immigrant \n 0 = return")+scale_color_viridis_d(name = "Offspring Year")+geom_vline(aes(xintercept = 245), linetype = "dashed", color  = "red")
+ggplot(strays, aes(jday, immigrant_i, color = as.factor(offspring_year)))+geom_count(alpha = 0.5)+geom_smooth(method = "glm", method.args=list(family="binomial"))+theme_classic()+xlab("Julian Day")+ylab("Immigrant?\n1 = immigrant \n 0 = return")+scale_color_muted(name = "Offspring Year")+geom_vline(aes(xintercept = 245), linetype = "dashed", color  = "red")
 ```
 
-__Figure N3:__ Julian day vs immigrant count at Cougar Trap, by offspring year. An offspring with no assigned parentage is considered an immigrant (scored as 1), an offpsring with at least one parent is considered a return (scored as zero). Circle size corresponds to number of individuals that day. Offspring years from 2013-2020 are considered. Smoothing curve is a simple binomial glm on the immigrant variable using only the effect of Julian day. Julian day 245 is on or one day from the September 1st cutoff used for LSDR. It is displayed as vertical dashed red line.
+__Figure N3:__ Julian day vs immigrant count at Cougar Trap, by offspring year. Only first observation of individual is used. An offspring with no assigned parentage is considered an immigrant (scored as 1), an offpsring with at least one parent is considered a return (scored as zero). Circle size corresponds to number of individuals that day. Offspring years from 2013-2020 are considered. Smoothing curve is a simple binomial glm on the immigrant variable using only the effect of Julian day. Julian day 245 is on or one day from the September 1st cutoff used for LSDR. It is displayed as vertical dashed red line.
 
 Yes, while the general trend is the same, there is some variation among year. 2020 saw almost no immigrants. 
 
@@ -515,7 +524,7 @@ summary(stray_glm)
 drop1(stray_glm, test = "Chisq")
 ```
 
-The interaction between the effect of julian day and sex is only marginally significant (p = 0.046, likelihood ratio test). So let's drop it and fit again. We will consider both model fits. 
+The interaction between the effect of julian day and sex is insignificant (p = 0.0545, likelihood ratio test). So let's drop it and fit again. We will consider both model fits. 
 
 ```{r}
 stray_glm2 <- glm( immigrant ~ jday + sex , family = binomial, data = strays)
@@ -523,7 +532,7 @@ summary(stray_glm2)
 drop1(stray_glm2, test = "Chisq")
 ```
 
-When we ignore the interaction, the effect both variables are still strongly significant, both by Wald tests and likelihood ratio tests.
+When we ignore the interaction,we find the effect of day is strongly significant, both by Wald tests and likelihood ratio tests.
 
 ```{r, eval = FALSE}
 stray_glm2 <- glmer( immigrant ~ jday*sex+ (1|offspring_year) , family = binomial, data = strays)
@@ -558,11 +567,168 @@ __Figure N4:__ Predicted probability that an individual arriving at Cougar Trap 
 __Summary__  
 This is somewhat preliminary. We still should do model validation and think about how to incorporate other covariates or whether or not to include random effect of year. 
 
-However, it seems like there is a strong relationship between Julian Day the probability that an NOR individual captured at the Cougar trap is an immigrant (doesn't assign to a parent above the trap). Moreover, there is a sex specific pattern. The same proportion of males and females are likely to be immigrants overall, however later in the season males are more likely to be immigrants. These results fit with our biological expectations. 
+However, it seems like there is a strong relationship between Julian Day the probability that an NOR individual captured at the Cougar trap is an immigrant (doesn't assign to a parent above the trap). Moreover, there is a weak and marginally significant sex specific pattern. The same proportion of males and females are likely to be immigrants overall, however later in the season males are more likely to be immigrants. These results fit with our biological expectations. 
 
-With respect to the broader question, the efficacy of LSDR and or recycling, it seems that relatively few (<20%) of NOR salmon sampled at the trap before around July 1st (Julian day 182, most years) are immigrants. By September 1st, the date previously used as the cutoff for LSDR, about 30% of females and about 40% of males are predicted to be immigrants. However, it should be noted that these results are highly variable among years.
+With respect to the broader question, the efficacy of LSDR and or recycling, it seems that relatively few (<20%) of NOR salmon sampled at the trap before around July 1st (Julian day 182, most years) are immigrants. By September 1st, the date previously used as the cutoff for LSDR, about 45% of females and about 55% of males are predicted to be immigrants. However, it should be noted that these results are highly variable among years.
 
 These model predictions using data from return years 2013-2020 are somewhat different from the results reported in 2013, 2014 and 2015 using either the new pedigrees (figure N2) or the pedigrees used to produce previous reports (Banks 2014 and Sard 2016). In Sard 2016, the authors found that during 2013 ~78% of NOR salmon sampled at the Cougar Trap after September 1st were likely immigrants. In Banks 2016, the authors found similar results for offspring years 2014 and 2015 (74% and 77%, respectively). These values are in close agreement with those from the newly inferred pedigrees. In one new offspring year for this report (2019), we oberved a similarly high immigrant after September 1st, but it was lower in all other years (2016, 2017, 2018 and 2020).
+
+### GLMM
+
+We can see in the annual plots that not only is there differences between years in the overall rate of immigrants but in the rate of immigrants over time. Therefore we may need to incorporate a random slope. Let's compete two random effects models to see best how to incorporate year.
+
+```{r}
+stray_glmm1 <- glmmTMB( immigrant ~ jday + sex +jday*sex + (jday|offspring_year) , family = binomial, data = strays, REML = TRUE)
+
+stray_glmm2 <- glmmTMB( immigrant ~ jday + sex +jday*sex + (1|offspring_year) , family = binomial, data = strays, REML = TRUE)
+
+stray_glmm3 <- glmmTMB( immigrant ~ jday + sex +jday*sex  , family = binomial, data = strays, REML = TRUE)
+
+
+AIC(stray_glmm1 , stray_glmm2, stray_glmm3 )
+anova(stray_glmm1 , stray_glmm2, stray_glmm3)
+
+```
+
+Yes the model fit is WAY better with a random slopes effect. Now let's refit with ML and do model validation and selection
+
+```{r}
+stray_glmm1 <- glmmTMB( immigrant ~ jday + sex +jday*sex + (jday|offspring_year) , family = binomial, data = strays)
+
+drop1(stray_glmm1, test = "Chisq")
+summary(stray_glmm1)
+```
+
+Interaction not significant (marginally), let's fit again.
+
+```{r}
+stray_glmm1 <- glmmTMB( immigrant ~ jday + sex + (jday|offspring_year) , family = binomial, data = strays)
+
+drop1(stray_glmm1, test = "Chisq")
+summary(stray_glmm1)
+```
+
+Hmm, intercepts and slopes are pretty strongly correlated. This makes sense biologically, but it could also be a convergence issue. 
+
+
+```{r}
+require(effects)
+
+#let's not use the effect package plotting tools and just get the effects
+
+#eff1 <- predictorEffect("sex_ratio_y_l", final_model, focal.levels = seq(-0.4,0.7,by = 0.1))
+eff1 <- predictorEffect(c("jday"), stray_glmm1)
+effdf <- as.data.frame(eff1)
+
+
+#ggplot(data = effdf, aes(x = (jday), y = fit))+ 
+#  geom_line()+geom_smooth( aes(ymin = lower, ymax = upper), stat = "identity") +
+#  theme_bw()+ylab("1 - Predicted Probability of Immigrant") +xlab("Julian Day")+geom_vline(aes(xintercept = 245), linetype = "dashed", color  = "red")
+
+strays_plot_data <- strays %>%
+  select(immigrant, jday,  sex , offspring_year) %>%
+  drop_na()
+strays_plot_data$predict <- predict(stray_glmm1, type="response")
+
+#ggplot()+ geom_smooth(data = strays_plot_data, aes(x = jday, y = predict, color = offspring_year), size = 0.5 , se = FALSE) + geom_line(data = effdf, aes(x = (jday), y = fit))+geom_smooth(data = effdf, aes(x = (jday), ymin = lower, ymax = upper, y = fit), stat = "identity", color = "black", size = 2) +
+#  theme_bw()+ylab("1 - Predicted Probability of Immigrant") +xlab("Julian Day")+geom_vline(aes(xintercept = 245), linetype = "dashed", color  = "red")+scale_color_muted(name = "Year")
+  
+
+ggplot()+ geom_smooth(data = strays, aes(x = jday, y = 1-immigrant_i, color = offspring_year, fill = offspring_year),method = "glm", method.args=list(family="binomial"), size = 0.5, alpha = 0.2 ) + geom_line(data = effdf, aes(x = (jday), y = fit))+geom_smooth(data = effdf, aes(x = (jday), ymin = lower, ymax = upper, y = fit), stat = "identity", color = "black", size = 2) +
+  theme_bw()+ylab("Predicted Proportion of NOR Returns\n Produced Above Cougar Dam") +xlab("Julian Day")+geom_vline(aes(xintercept = 245), linetype = "dashed", color  = "red")+scale_color_muted(name = "Year")+scale_fill_muted(name = "Year")
+  
+```
+__Figure Nx:__ Predicted proportion of NOR returns preoduced above the dam per day, by the GLMM_immigrant. Individual years binomial smooths are also provided.
+
+
+### Evaluation
+
+Let's also evaluate the recycling program. First we will ask how many fish produced above Cougar Dam from 2015 - 2020 fail to return after being recycled downstream, and how many do successfully return? Then we will ask the same for NOR immigrants.
+
+```{r}
+#here we need the full data, not the deduplicated data
+recyc <- full_data_1.0 %>%
+  filter(type == "cougar_trap", origin == "NOR", year > 2014) %>%
+  left_join(select(pedigree_meta, offspring_sample_id, assn_type), by = c("sample_id" = "offspring_sample_id")) %>%
+  mutate(immigrant = case_when(assn_type == "none" ~ "immigrant",
+                               TRUE ~ "return"),
+         immigrant_i = case_when(assn_type == "none" ~ 1,
+                               TRUE ~ 0)) %>%
+  group_by(sample_id) %>%
+  mutate(returns = n()) %>%
+  ungroup() %>%
+  filter(returns < 3) %>% # get rid of the 3 or so individuals recorded 3 times at cougar, all have been investigated to be errors
+  mutate(returns_f = as.factor(returns))
+
+#now let's dedup, note that we need to use the first date, note the second here
+recyc_dedup <- recyc %>%
+  group_by(sample_id) %>%
+  slice_max(date) %>%
+  ungroup()
+
+ggplot(data = recyc_dedup, aes(x = immigrant, fill = returns_f))+geom_bar( position = "stack", alpha = 0.8)+geom_text(stat='count', aes(label=..count..),position = position_stack(vjust = 0.5)) + scale_fill_manual(values = c("#228833", "#AA3377"), name = "Captures at\nCougar Trap") +theme_classic() +xlab("NOR Salmon")+scale_x_discrete(labels = c("NOR Immigrant", "Produced above Dam")  )
+
+
+```
+
+Next, can we test for significance.
+
+```{r}
+#let's make the contigency table and make sure it is formatted correctly witha mosaic plot
+#mosaicplot(data.frame("immigrant" = c(252,164),"return" = c(278, 1200)))
+
+#ok looks good, let's run fishers exact
+
+#fisher.test(data.frame("immigrant" = c(252,82),"return" = c(275, 600)), alternative = "g")
+fisher.test(data.frame("2" = c(600,82),"1" = c(275, 252)), alternative = "g")
+
+
+```
+
+__Summary__
+A salmon produced above the dam is 6.7 fold more likely to return a second time after being recycled downstream than an NOR immigrant (Fisher's exact test, p < 1.0e-16). From 2015 to 2020, 875 salmon produced above the dam were collected at the Cougar Trap and recycled downstream, of these 275 (31%) never returned a second time, and 600 (81%) returned a second time and were released above the dam. Therefore the recycling program "costs" about 31% of NOR returns, but what is the benefit?
+
+Recycling prevented the release of 252 (75%) of the 334 NOR immigrants above the dam. 82 (25%) still were released above the dam even with recycling.
+
+__LSDR__
+How does this compare to LSDR? Specifically, during the same time frame, how would LSDR have sorted NOR immigrants and returns above and below the dam? Let's use the same September 1st cutoff used in 2013 and 2014 and check.
+
+```{r}
+# let's only use the first capture and a sept 1 cutoff
+
+#all fish before jday 245 go above dam on first recapture = recyc2
+recyc2 <- recyc %>%
+  group_by(sample_id) %>%
+  arrange(date) %>%
+  slice_head() %>%
+  ungroup() %>%
+  mutate(jday = yday(date)) %>%
+  filter(jday < 245)
+
+# all fish not in recyc2 get lsdr'd = recyc3
+recyc3 <- recyc_dedup %>%
+  filter(!(sample_id %in% recyc2$sample_id))
+
+# how many returns and NOR immigrants would be placed above the dam before september 1st?
+recyc2 %>%
+  count(immigrant)
+
+# and how many after?
+ggplot(data = recyc3, aes(x = immigrant, fill = returns_f))+geom_bar( position = "stack", alpha = 0.8)+geom_text(stat='count', aes(label=..count..),position = position_stack(vjust = 0.5)) + scale_fill_manual(values = c("#228833", "#AA3377"), name = "Captures at\nCougar Trap") +theme_classic() +xlab("Parent(s) Above the Dam")+scale_x_discrete(labels = c("No Parent\nNOR Immigrant", "At least One\nParent above Dam")  )
+
+```
+
+In total, LSDR would have resulted in 234 more NOR salmon produced above the dam being placed above the dam ((51+783 = 834) vs. 600) and would prevented 783 NOR salmon from experiencing the additional handling stress of recycling, but it would come at the cost of substantially more NOR immigrants being placed above the dam ((176+36 = 212) vs 82.
+
+```{r, eval = FALSE}
+# what about release delay? how long is the average interval between first encounter and eventual release of nor salmon causedby recycling?
+recyc %>% filter(returns == 2) %>% group_by(sample_id) %>% mutate(diff_date = date - lag(date)) %>% ungroup() %>% summarise(mean = mean(diff_date, na.rm = TRUE), sd = sd(diff_date, na.rm = TRUE))
+```
+
+
+Yet another consideration when evaluating the recycling program is its effect on release day. Recycling delays the eventual release above the dam by an average of 30.9 days (s.d. = 28.3). Using the effect of release day on TLF estimated by the GLMM, this is expected to reduce fitness by ~12%.
+
+So recycling is working more or less as designed. It limits the release of NOR immigrants above the dam better than LSDR, but comes at the cost of a reduction in the number of NOR returns produced above the dam by about 28% (600 vs 834), an ~12% reduction in fitness by delaying release, and potentially an unquantified further reduction in fitness caused by additional handling.
 
 # Fitness
 
@@ -1779,6 +1945,9 @@ effdf <- as.data.frame(eff1)
 effdf %<>%
   mutate(sex_ratio = exp(sex_ratio_y_l))
 
+effdf %<>%
+  mutate(fit_no_inter = exp((sex_ratio_y_l*1.041603)-(1.342716)))
+
 actual_means <- mm_data %>%
   group_by(year, sex, sex_ratio_y) %>%
   summarise(mean_tlf = mean(tlf))
@@ -1992,7 +2161,7 @@ So we've established larger candidate parents produce more offspring, NOR candid
 
 How much of the variation in fitness is due to origin alone and how much is due to size alone. Let's estimate partial coefficients of determination for origin and size. This is rarely reported in glmms, but to my understanding there is no reason why it is inappropriate (Stoffel et al 2021)
 
-```{r}
+```{r, eval = FALSE}
 # let's rescale some of the variable (fitting with lme4 which has a much harder time converging than glmmtmb)
 #mm_data_size_scaled <- mm_data_size %>%
 #  select(tlf, jday_c, sex, sex_ratio_y_l, origin,length, group, year) %>%
@@ -2010,19 +2179,384 @@ r2b <- rsq::rsq.glmm(lm4fit)
 
 Okay, holding off on this for now because there is no straightforard implementation in R for glmmTMB, or any negbin glmm for that matter. It seems like it can be done according to Nakagawa 2017 (https://royalsocietypublishing.org/doi/10.1098/rsif.2017.0213). We "just" do commonality analysis on our model fit (https://besjournals.onlinelibrary.wiley.com/doi/pdf/10.1111/2041-210X.12166). The challenge is taking the time to parse the model object in R, and fitting conditioned models to calculate the partial R2s.  
 
+__Are these size differences driven by differences in AAM between NOR and HOR fish?__  
+This was specifically proposed in the 2014 report
 
 ### Conclusions
 
 Larger candidate parents produce more offspring. NOR candidate parents are significantly larger. NOR candidate parents have higher fitness. Ultimately, we need to do some variance partitioning through commonality analysis to parse how much of the origin effect is mediated by the difference in size between NOR and HOR candidate parents. 
 
+## Mate Pairs
+
+What is the relative fitness of different mate pair types: HORxHOR, HORxNOR, NORxHOR and NORxNOR (female x male)?
+
+Let's only consider the years where both NOR and HOR salmon are released above the dam (i.e. 2010 and later), and only the years where at least age 5 offspring have returned ( 2015 and earlier).
+
+We will also only examine the subset of the pedigree where both parents are known.
+
+Let's start with the way everyone else seems to ask this: is the fitness of NxH or HxN crosses lower than NxN.
+
+```{r}
+
+# Let's filter the 
+mate_pair <- pedigree_meta %>%
+  filter(assn_type == "pair", parent_year < 2016, parent_year > 2009) %>%
+  left_join(select(parents, sample_id, origin, tlf), by = c("father" = "sample_id")) %>%
+  rename(father_origin = origin, father_tlf = tlf) %>%
+  left_join(select(parents, sample_id, origin, tlf), by = c("mother" = "sample_id")) %>%
+  rename(mother_origin = origin, mother_tlf = tlf) %>%
+  mutate(cross = case_when(mother_origin == "NOR" & father_origin == "HOR" ~ "NxH",
+                           mother_origin == "HOR" & father_origin == "NOR" ~ "HxN",
+                           mother_origin == "NOR" & father_origin == "NOR" ~ "NxN",
+                           mother_origin == "HOR" & father_origin == "HOR" ~ "HxH"))
+
+mate_pair %>%
+  group_by(cross) %>%
+  summarise(mean_father_tlf = mean(father_tlf), mean_mother_tlf = mean(mother_tlf))
+
+```
+
+Yes. The fitness of fathers is much lower in a NxH cross than an NxN cross. But the fitness of females is NOT lower in a HxN cross than a NxN cross!!! But the problem here is that we're not controlling for individual. Mean tlf in the table above includes offspring from other mate pairs.
+
+for each mate_pair we need to calculate its own tlf!
+```{r}
+mp_counts <- mate_pair %>%
+  unite("pair", mother, father, sep = "__", remove = FALSE) %>%
+  count(pair) %>%
+  rename(pair_tlf = n)
+
+mate_pair %<>%
+  unite("pair", mother, father, sep = "__", remove = FALSE) %>%
+  left_join(mp_counts)
+
+mate_pair %>%
+  group_by(parent_year, cross) %>%
+  summarise(n = n(), mean_tlf_pair = mean(pair_tlf), sd_tlf_pair = sd(pair_tlf)) %>%
+  pivot_wider(id_cols = parent_year, names_from = cross, values_from = mean_tlf_pair )
+
+```
+
+Is this significant?
+
+```{r}
+
+mate_pair %<>%
+  mutate(year_f = as.factor(parent_year),
+         cross_f = as.factor(cross)) %>%
+  mutate(cross_f = fct_relevel(cross_f, "NxN",   "HxN", "NxH","HxH"))
+  
+mm_pair <- glmmTMB(pair_tlf ~ cross_f + (1|year_f), data = mate_pair, family = nbinom2)
+
+summary(mm_pair)
+
+emmeans( mm_pair, "cross_f", type = "response")
+plot(emmeans( mm_pair, "cross_f", type = "response"))
+#TukeyHSD(aov(data = filter(parents, year == 2015, type %in% c("outplant", "reintro_above", "reintro")), tlf ~ type))
+
+ggplot(data = as.data.frame(emmeans( mm_pair, "cross_f", type = "response")), aes(x = cross_f, y = response, ymin = response-SE, ymax = response+SE)) + geom_pointrange()+theme_classic()+scale_x_discrete(labels = c("NxN\nn=157","HxN\nn=238", "NxH\nn=68", "HxH\nn=117"), name = "Type")+ylab("Estimated Pair Fitness")
+
+```
 
 
-## F1s
+Can we get more power if we reduce overdispersion by including additional vairable we know are important, such as release date?
+```{r}
+mate_pair %<>%
+  mutate(mother_jday = as.numeric(format(mother_date, "%j")),
+         mother_jday_c = scale(mother_jday, scale = F),
+         father_jday = as.numeric(format(father_date, "%j")),
+        father_jday_c = scale(father_jday, scale = F) )
+
+mm_pair_date <- glmmTMB(pair_tlf ~ cross_f + father_jday_c+ (1|year_f), data = mate_pair, family = nbinom2)
+
+# what about OLRE?
+mate_pair %<>%
+  mutate(mp_f = as.factor(mate_pair))
+mm_pair_OLRE <- glmmTMB(pair_tlf ~ cross_f + (1|year_f) + (1|pair), data = mate_pair, family = nbinom2)
+
+```
+
+
+So the 
+
+The null expectation is that the frequency of the different mate pair types should be predicted from the frequencies of NOR females, NOR males, HOR females and HOR males. 
+
+```{r}
+
+#mate_pair %>%
+#  group_by(cross) %>%
+#  summarise(mean_father_tlf = mean(father_tlf), mean_mother_tlf = mean(mother_tlf))
+
+# counts table
+ncand <- parents %>%
+  count(year, origin, sex) %>%
+  pivot_wider(id_cols = year, values_from = n, names_from = c(origin, sex)) %>%
+  select(-starts_with("NA"))
+mate_pair %>%
+  count( parent_year, cross) %>% pivot_wider(id_cols = parent_year, values_from = n, names_from = cross) %>%
+  left_join(ncand, by = c("parent_year" = "year"))
+
+# frequency table
+fcand <- parents %>%
+  filter(year < 2016, year > 2009) %>%
+  group_by(year, origin, sex) %>%
+  summarise(n = n()) %>%
+  group_by(year) %>%
+  mutate(freq = n / sum(n)) %>%
+  select(-n) %>%
+  pivot_wider(id_cols = year, values_from = freq, names_from = c(origin, sex)) %>%
+  select(-starts_with("NA"))
+  
+mate_pair_freqs <- mate_pair %>%
+  count( parent_year, cross) %>% pivot_wider(id_cols = parent_year, values_from = n, names_from = cross) %>%
+  mutate(f_HxH = HxH/(HxH+HxN+NxH+NxN),
+        f_HxN = HxN/(HxH+HxN+NxH+NxN),
+        f_NxH = NxH/(HxH+HxN+NxH+NxN),
+        f_NxN = NxN/(HxH+HxN+NxH+NxN)) %>%
+  left_join(fcand, by = c("parent_year" = "year")) %>%
+  mutate(e_HxH = HOR_F/(HOR_F+NOR_F) * HOR_M/(HOR_M+NOR_M),
+         e_HxN = HOR_F/(HOR_F+NOR_F) * NOR_M/(HOR_M+NOR_M),
+         e_NxH = NOR_F/(HOR_F+NOR_F) * HOR_M/(HOR_M+NOR_M),
+         e_NxN = NOR_F/(HOR_F+NOR_F) * NOR_M/(HOR_M+NOR_M)) %>%
+  select(parent_year, starts_with("f"), starts_with("e")) #clean up 
+
+
+mate_pair_freqs_long <- mate_pair_freqs %>%
+  pivot_longer(!parent_year, values_to = "freqs", names_to = c("obs_exp", "cross"), names_pattern = "([fe])_(.*)" ) %>%
+  mutate(obs_exp = case_when(obs_exp == "f" ~ "observed",
+                             obs_exp == "e" ~ "expected")) %>%
+  mutate(cross = factor(cross, labels = c("HOR_female x HOR_male", "HOR_female x NOR_male", "NOR_female x HOR_male", "NOR_female x NOR_male")))
+
+ggplot(data = mate_pair_freqs_long, aes(x = parent_year, y = freqs, color = obs_exp))+geom_point()+ facet_grid(~cross)+theme(axis.text.x = element_text(angle = 90))
+
+ggplot(data = mate_pair_freqs_long, aes(x = cross, y = freqs, color = obs_exp))+geom_point()+ theme(axis.text.x = element_text(angle = 90))+facet_grid(cols = vars(parent_year))
+  
+
+chisq.test(x = c(24, 29 , 3 ,11), p = c(0.518, 0.265,  0.143, 0.0734)) #2010, p = 0.0002
+chisq.test(x = c(19, 89 ,19, 56), p = c(0.262,  0.288,0.214,  0.236)) #2011,  p = 3.0e-12
+chisq.test(x = c(7,  52 ,  20 , 41), p = c(0.219, 0.364, 0.157,  0.260)) #2012 p = 0.0002
+
+```
+
+In all years there are fewer HORxHOR, and more HORxNOR and NORxNOR mate pairs than expected given the frequencies of HOR and NOR males and females. The observed number of NORxHOR is not consistently different than random expectation.
+
+So, this tells us that 
+
+
+
+## F1 Fitness
+
+What is the relative fitness of offspring descended from HORxHOR, HORxNOR and NORxNOR crosses
+
+I previously stated this result only has relevance for the manuscript. Essentially, I thought the main inference provided by this analysis was whether or not the effects of hatchery selection/rearing were reversible after a single generation in the “wild”. 
+
+Upon further reflection, I believe this is an important result to present to managers in this report. 
+
+Higher fitness of F1s descended from NORxNOR crosses than from NORxHOR indicates that supplementation with HOR outplants reduces the fitness of NOR reintros. 
+
+If this is the case, future management decisions must weigh the demographic boost provided by hatchery outplants against the deleterious genetic (or otherwise heritable) effects of the spawning between HOR and NOR salmon above the dam.
+
+Clearly, with CRRs well below one, hatchery supplementation is required for the maintenance of the population, but as CRR is expected to improve as downstream passage facilities come online, managers may wish to know if hatchery supplementation has a deleterious effect on the fitness of reintroduced NORs.
+
+This seems particularly important because pHOS above the dam is likely very high barring mcuh stronger pre-spawn mortality among HORs than NORs.
+
+
+
+__Prep__  
+First we need to identify all individuals in the pedigree that are both candidate parents with TLF (i.e. <= 2015 sampling), and are assigned as offspring to both parents.
+```{r}
+
+f1s <- pedigree_meta %>%
+  filter( offspring_sample_id %in% parents$sample_id, assn_type == "pair") %>%
+  left_join(select(dedup, sample_id, origin), by = c("father" = "sample_id")) %>%
+  rename(father_origin = origin) %>%
+  left_join(select(dedup, sample_id, origin), by = c("mother" = "sample_id")) %>%
+  rename(mother_origin = origin) %>%
+  left_join(select(parents, sample_id, tlf), by = c("offspring_sample_id" = "sample_id")) %>%
+  mutate(cross = case_when(father_origin != mother_origin ~ "HxN",
+                           father_origin == "NOR" & mother_origin == "NOR" ~ "NxN",
+                           father_origin == "HOR" & mother_origin == "HOR" ~ "HxH"))
+
+mm_data_for_join <-  mm_data %>%
+  select(year, sex_ratio_y_l) %>%
+  mutate(year = as.numeric(as.character(year))) %>%
+  distinct(year, .keep_all = TRUE)
+  
+
+f1s %<>%
+  left_join(mm_data_for_join, by = c("offspring_year" = "year")) %>%
+  mutate(offspring_year = as.factor(offspring_year),
+         jday_c = scale(yday(offspring_date), scale = F)) %>%
+  mutate(group = as.factor(paste(offspring_date, offspring_type))) %>%
+  select(offspring_sample_id, tlf, jday_c , offspring_sex , cross,  sex_ratio_y_l, group, offspring_year)
+
+f1s %<>%
+  drop_na()
+
+#f1s_2014 <- f1s
+```
+
+
+__EDA__
+Let's do a little EDA, specifically let's look at balance among years.
+
+```{r}
+kable(f1s %>%
+        count(offspring_year, cross) %>%
+        pivot_wider(id_cols = offspring_year, names_from = cross, values_from = n), caption = "F1 sample sizes, by year and parent cross type") %>% kable_classic(full_width = F, html_font = "Arial" )
+```
+
+It's quite clear that only data from two years, 2014 and 2015, is appropriate to use to address our question here. With such a small sample size, my original plan (fit glmm with all signficant predictors from the glmm on fitness for all candidate parents) is not going to work. We don't have the degrees of freedom, nor is it appropriate to fit random effects with just 2 levels (year).
+
+We will fit a relatively simple model to start including the effects of cross type, sex, year and the interaction of cross type and sex. 
+
+Given the sample size and the very high variance in TLF, I expect that we do not have enough power to identify differences. We'll run the code anyway as I don't think the type I error is inflated with these small sample sizes, but I don't expect to include these results in the report or manuscript.
+
+__Assortative mating__
+There's an interesting result hiding just out of sight here. We can use the empirical vs expected proportion of HxN crossses (much like heterozygotes) to evalute if there is assortative mating between salmon of the same origin. 
+
+For 2014, the frequencies of HxH, HxN and NxN cross is (0.62, 0.28 and 0.10, respectively) which results in frequency of H = 0.756 and N = 0.244. The expected HxN cross frequency (under random mating) from these "genotype" frequencies is 0.368. So there are fewer "heterozygotes" than expected by chance, suggesting that there is assortative mating.
+
+For 2015, the frequencies of HxH, HxN and NxN cross is (0.18, 0.554 and 0.265, respectively) which results in frequency H = .458 and frequency N = 0.542. The expected HxN cross frequency (under random mating) is 0.496. So there are slightly more "heterozygotes" than expected by chance, suggesting that there is assortative mating.
+
+Note that in addition to "true" assortative mating driven by mate choice, there's is also the possibility that salmon do not distribute far from their release site, or spawn soon after release and this signal of assortative mating is actually driven by NOR and HOR being more likely to be released together at the same time and place.
+
+Still need to think about how best to estimate the expected number here, should it actually use the frequencies of candidate parents, not successful parents? Won't publish this anyway, sample size is so small given the amount of variance in reproductive success.
+
+__Modeling__
+Next we need a model to remove the other effects (most importantly year).
+
+```{r}
+f1s %<>%
+  filter(offspring_year %in% c(2014, 2015))
+
+glmm_f1 <- glmmTMB(tlf ~  cross + offspring_year +offspring_sex +cross*offspring_sex, data = f1s, family = nbinom2)
+drop1(glmm_f1, test = "Chisq")
+
+#let's get rid of that interaction term (p = 0.43, yay more DF) and try again
+glmm_f1 <- glmmTMB(tlf ~  cross + offspring_year +offspring_sex, data = f1s, family = nbinom2)
+drop1(glmm_f1, test = "Chisq")
+
+
+#let's get rid of the effect of year as well term (p = 0.18, yay more DF) and try again
+glmm_f1 <- glmmTMB(tlf ~  cross + offspring_sex , data = f1s, family = nbinom2)
+drop1(glmm_f1, test = "Chisq")
+
+simulateResiduals(glmm_f1, plot = TRUE)
+
+```
 
 
 
 ```{r}
+summary(glmm_f1)
 
+plot(predictorEffect("cross", glmm_f1))
+```
+
+As expected, no difference detected. 
+
+
+## F1s by parent sex
+
+What is the relative fitness of offspring descended from HORxHOR, HORxNOR and NORxNOR crosses, but this time sex of parent matters
+
+__Prep__  
+First we need to identify all individuals in the pedigree that are both candidate parents with TLF (i.e. <= 2015 sampling), and are assigned as offspring to both parents.
+```{r}
+
+f1s <- pedigree_meta %>%
+  filter( offspring_sample_id %in% parents$sample_id, assn_type == "pair") %>%
+  left_join(select(dedup, sample_id, origin), by = c("father" = "sample_id")) %>%
+  rename(father_origin = origin) %>%
+  left_join(select(dedup, sample_id, origin), by = c("mother" = "sample_id")) %>%
+  rename(mother_origin = origin) %>%
+  left_join(select(parents, sample_id, tlf), by = c("offspring_sample_id" = "sample_id")) %>%
+  mutate(cross = case_when(father_origin == "HOR" & mother_origin == "NOR" ~ "HxN",
+                           father_origin == "NOR" & mother_origin == "HOR" ~ "NxH",
+                           father_origin == "NOR" & mother_origin == "NOR" ~ "NxN",
+                           father_origin == "HOR" & mother_origin == "HOR" ~ "HxH"))
+
+mm_data_for_join <-  mm_data %>%
+  select(year, sex_ratio_y_l) %>%
+  mutate(year = as.numeric(as.character(year))) %>%
+  distinct(year, .keep_all = TRUE)
+  
+
+f1s %<>%
+  left_join(mm_data_for_join, by = c("offspring_year" = "year")) %>%
+  mutate(offspring_year = as.factor(offspring_year),
+         jday_c = scale(yday(offspring_date), scale = F)) %>%
+  mutate(group = as.factor(paste(offspring_date, offspring_type))) %>%
+  select(offspring_sample_id, tlf, jday_c , offspring_sex , cross,  sex_ratio_y_l, group, offspring_year)
+
+f1s %<>%
+  drop_na()
+
+#f1s_2014 <- f1s
+```
+
+
+__EDA__
+Let's do a little EDA, specifically let's look at balance among years.
+
+```{r}
+kable(f1s %>%
+        count(offspring_year, cross) %>%
+        pivot_wider(id_cols = offspring_year, names_from = cross, values_from = n), caption = "F1 sample sizes, by year and parent cross type, origins of parents are labeled Male x Female") %>% kable_classic(full_width = F, html_font = "Arial" )
+```
+
+It's quite clear that only data from two years, 2014 and 2015, is appropriate to use to address our question here. With such a small sample size, my original plan (fit glmm with all signficant predictors from the glmm on fitness for all candidate parents) is not going to work. We don't have the degrees of freedom, nor is it appropriate to fit random effects with just 2 levels (year).
+
+We will fit a relatively simple model to start including the effects of cross type, sex, year and the interaction of cross type and sex
+
+__Assortative mating__
+There's an interesting result hiding just out of sight here. We can use the empirical vs expected proportion of HxN crossses (much like heterozygotes) to evalute if there is assortative mating between salmon of the same origin. 
+
+For 2014, the frequencies of HxH, HxN and NxN cross is (0.62, 0.28 and 0.10, respectively) which results in frequency of H = 0.756 and N = 0.244. The expected HxN cross frequency (under random mating) from these "genotype" frequencies is 0.368. So there are fewer "heterozygotes" than expected by chance, suggesting that there is assortative mating.
+
+For 2015, the frequencies of HxH, HxN and NxN cross is (0.18, 0.554 and 0.265, respectively) which results in frequency H = .458 and frequency N = 0.542. The expected HxN cross frequency (under random mating) is 0.496. So there are slightly more "heterozygotes" than expected by chance, suggesting that there is assortative mating.
+
+Note that in addition to "true" assortative mating driven by mate choice, there's is also the possibility that salmon do not distribute far from their release site, or spawn soon after release and this signal of assortative mating is actually driven by NOR and HOR being more likely to be released together at the same time and place.
+
+Still need to think about how best to estimate the expected number here, should it actually use the frequencies of candidate parents, not successful parents? Won't publish this anyway, sample size is so small given the amount of variance in reproductive success.
+
+
+
+
+
+__Modeling__
+Next we need a model to remove the other effects (most importantly year).
+
+```{r}
+f1s %<>%
+  filter(offspring_year %in% c(2014, 2015))
+
+glmm_f1 <- glm.nb(tlf ~  cross + offspring_year +offspring_sex, data = f1s)
+
+simulateResiduals(glmm_f1, plot = TRUE)
+
+```
+
+```{r}
+rootogram(glmm_f1)
+drop1(glmm_f1, test = "Chisq")
+```
+
+```{r}
+summary(glmm_f1)
+
+plot(predictorEffect("cross", glmm_f1))
+```
+
+```{r, eval = FALSE}
+glmm_f1_2015 <- glmmTMB(tlf ~  cross , data = f1s_2015, family = nbinom2)
+
+simulateResiduals(glmm_f1_2015, plot = TRUE)
+drop1(glmm_f1_2015, test = "Chisq")
+
+summary(glmm_f1_2015)
+
+plot(predictorEffect("cross", glmm_f1_2015))
 ```
 
 
@@ -2129,4 +2663,150 @@ In 2016, we only have years 3 and 4 offspring. F2s were way more fit than F1s, b
 
 __Conclusion__  
 Not enough F2s with TLF to make a comparison.
+
+## Release location
+
+We did not find a significant effect of release location. This can be explained one of two ways, either salmon stay near their release locations and there is little effect of spawning location on fitness, or salmon have time to distribute to preferred habitats after release. We can evaluate this using the pedigree. 
+
+Is there evidence that parents are more likely to spawn with other parents at the same release location than by chance alone?
+
+For now let's look at the rate that parents spwan with a parent from a different relesae location, we can add a statistical analysis later.
+
+```{r}
+pedigree %>%
+  left_join(select(dedup, sample_id, release), by = c("mother" = "sample_id")) %>%
+  rename(mother_release = release) %>%
+  left_join(select(dedup, sample_id, release), by = c("father" = "sample_id")) %>%
+  rename(father_release = release) %>%
+  filter(mother != "none", father != "none") %>%
+  summarise(same_release = sum(mother_release == father_release, na.rm = TRUE), different_release = sum(mother_release != father_release, na.rm = TRUE))
+```
+
+For the 1153 parentages in the pedigree where we assign both parents and know the release location of both parents, 571 are between parents released in the same location and 582 are not. This is similar to previous results (47.2% of mate pairs released in different locations). Given that there are more than two release locations in most years the finding that ~half of mate pairs are from the same location suggests there is some tendency to spawn near the release site, but further analysis will have to wait.
+
+## Diversity by Source
+
+Let's estimate the genetic diversity and the number of private alleles among NORs produced above the dam, NOR immigrants at Cougar Trap and HOR outplants
+```{r}
+#define groups
+
+nor_immigrant_list <- pedigree_meta %>%
+  filter(assn_type == "none") %>%
+  pull(offspring_sample_id)
+
+div_data <- dedup %>%
+  filter(year > 2012) %>% # only look at years where we can assign an offspring to all of their cand parents)
+  mutate(div_group = case_when(origin == "HOR" ~ "hor",
+                               sample_id %in% nor_immigrant_list ~ "immigrant", 
+                               TRUE ~ "F1")) %>%
+  select(div_group, sample_id, starts_with("Ot")) %>%
+  unite(Ot201, starts_with("Ot201"), sep = "_") %>%
+  unite(Ot209, starts_with("Ot209"), sep = "_") %>%
+  unite(Ot249, starts_with("Ot249"), sep = "_") %>%
+  unite(Ot253, starts_with("Ot253"), sep = "_") %>%
+  unite(Ot215, starts_with("Ot215"), sep = "_") %>%
+  unite(Ot311, starts_with("Ot311"), sep = "_") %>%
+  unite(Ot409, starts_with("Ot409"), sep = "_") %>%
+  unite(Ot211, starts_with("Ot211"), sep = "_") %>%
+  unite(Ot208, starts_with("Ot208"), sep = "_") %>%
+  unite(Ot212, starts_with("Ot212"), sep = "_") %>%
+  unite(Ot515, starts_with("Ot515"), sep = "_") %>%
+  column_to_rownames(var = "sample_id")
+  
+
+require(adegenet)
+
+div_genind <- df2genind(select(div_data, starts_with("Ot")), ploidy = 2, sep = "_")
+div_genind@pop <-  as.factor(div_data$div_group)
+
+n.pop <- seppop(div_genind)
+
+# diversity
+hexp <- lapply(n.pop, function(x) (summary(x)$Hexp))
+hexp <- as.data.frame(t(do.call(rbind, hexp)))
+hexp <- hexp %>%
+  rownames_to_column(var="marker") %>%
+  pivot_longer(-marker, names_to = "div_group", values_to = "He")
+
+ggplot(data = hexp)+geom_boxplot(aes(x = div_group , y = He))
+
+#significance testing
+a <- Hs.test(div_genind[pop = "F1"], div_genind[pop = "hor"], n.sim = 100, alter = "less")
+b <- Hs.test(div_genind[pop = "hor"], div_genind[pop = "immigrant"], n.sim = 100, alter = "greater")
+c <- Hs.test(div_genind[pop = "F1"], div_genind[pop = "immigrant"], n.sim = 100, alter = "less")
+
+# private alleles
+require(poppr)
+priv <- private_alleles(div_genind, count.alleles = FALSE)
+as.data.frame(priv) %>%
+  rownames_to_column(var = "group") %>%
+  mutate(sum_private = rowSums(across(where(is.numeric)))) %>%
+  select(group, sum_private)
+
+# private_alleles, subsample to 500 individuals, eventually should make this into a bootstrapping thing, 
+sample_div <- dedup %>%
+  filter(year > 2012) %>% # only look at years where we can assign an offspring to all of their cand parents)
+  mutate(div_group = case_when(origin == "HOR" ~ "hor",
+                               sample_id %in% nor_immigrant_list ~ "immigrant", 
+                               TRUE ~ "F1")) %>%
+  group_by(div_group) %>%
+  slice_sample(n = 500, replace = F) %>%
+  pull(sample_id)
+
+priv_sample <- private_alleles(div_genind[indNames(div_genind) %in% sample_div], count.alleles = FALSE)
+as.data.frame(priv_sample) %>%
+  rownames_to_column(var = "group") %>%
+  mutate(sum_private = rowSums(across(where(is.numeric)))) %>%
+  select(group, sum_private)
+```
+
+__Summary__  
+Offspring assigned to parents above the dam have lower genetic diversity than either NOR immigrants or hatchery outplants, but, importantly, NOR immigrants do not differ from HOR outplants in average genetic diversity. 
+
+Interestingly there are private alleles in each of the following groups, hatchery outplants, offspring assigned to a parent above the dam and NOR immigrants (17, 11, and 14), but this is not a great comparison because the sample size differs by group. When subsampling to 500 individuals from each group, samples of NOR immigrants contain many more "private alleles." This suggests that there are some rare alleles in HOR outplants that occur at higher frequency in NOR immigrants.  
+
+## NSNT sex ratio
+
+The effect of sex ratio is totally different here than in NSNT report, despite similar range of sex ratios above the dams across years. Let's summarise the sex ratio, fitness and pHOS data into a single place to help us think about this
+
+```{r}
+z <- parents %>% filter(year <2016) %>% group_by(year, origin) %>% summarise(n = n()) %>% pivot_wider(id_cols = year, names_from = "origin", values_from = "n") %>% mutate(perc_nor = NOR/(HOR+NOR))
+
+m <- parents %>% filter(sex == "M") %>% count(as.numeric(year)) %>% rename(n_male = n, year = "as.numeric(year)")
+f <- parents %>% filter(sex == "F") %>% count(as.numeric(year)) %>% rename(n_female = n, year = "as.numeric(year)")
+
+fit <- parents %>% group_by(year) %>% summarise(tlf = mean(tlf))
+
+z2 <- z %>% left_join(m) %>%
+  left_join(f) %>%
+  mutate(sex_ratio = n_male/n_female) %>%
+  left_join(fit) %>%
+  replace_na(list(perc_nor = 0)) 
+  
+z2
+```
+
+Let's also examine if there is an pHOS by sex ratio interaction.
+
+```{r, eval = FALSE}
+z3 <- z2 %>%
+  mutate(year = as.factor(year))
+
+mm_data_z <- mm_data %>%
+  left_join(select(z3, year, perc_nor))
+
+mm_z <- glmmTMB(tlf ~ jday_c + sex +  sex_ratio_y_l  + origin + sex*origin + sex*sex_ratio_y_l + origin*perc_nor + (1|group) + (1|year), data = mm_data_z, family = nbinom2)
+
+mm_z2 <- glmmTMB(tlf ~ jday_c + sex +  sex_ratio_y_l  + origin + sex*origin + sex*sex_ratio_y_l + (1|group) + (1|year), data = filter(mm_data, year %in% c( "2010", "2012", "2015", "2011", "2013", "2014")), family = nbinom2)
+
+mm_z3 <- glmmTMB(tlf ~ jday_c + sex +  sex_ratio_y_l   + sex*sex_ratio_y_l + (1|group) + (1|year), data = filter(mm_data, year %in% c( "2007", "2008", "2009")), family = nbinom2)
+
+plot(predictorEffect("sex_ratio_y_l",mm_z2), lines=list(multiline=TRUE), confint=list(style="bars"))
+
+plot(predictorEffect("sex_ratio_y_l",mm_z3), lines=list(multiline=TRUE), confint=list(style="bars"))
+
+
+mm_z <- glmmTMB(tlf ~ jday_c + sex +  sex_ratio_y_l  + origin + sex*origin + sex*sex_ratio_y_l + annual_n*sex_ratio_y_l + (1|group) + (1|year), data = mm_data_z, family = nbinom2)
+```
+
 
