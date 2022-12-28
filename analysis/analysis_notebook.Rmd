@@ -362,7 +362,7 @@ aam_data <- pedigree_meta %>%
 
 
 ggplot(data = aam_data) + 
-  geom_bar(aes(offspring_year, fill = age), position = position_dodge(preserve = 'single'))+scale_fill_viridis_d(name = "Age")+scale_color_viridis_d(name = "Age")+theme_bw()+xlab("Offspring Year")+scale_x_discrete(labels = c("2010*", "2011*", "2012*", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"))
+  geom_bar(aes(offspring_year, fill = age), position = position_dodge(preserve = 'single'))+scale_fill_viridis_d(name = "Age")+scale_color_viridis_d(name = "Age")+theme_bw()+xlab("Offspring Year")+scale_x_discrete(labels = c("2010*", "2011*", "2012*", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"))+ylab("Count")
 ```
   
 __Figure N1__ Number of age 3, 4, 5 and 6 individuals in each offspring year.  
@@ -2010,12 +2010,6 @@ ggplot(data = effdf, aes(x = (jday), y = fit))+
 
 This section of the notebook is dedicated to the numerous small questions and half-formed ideas that pop up during the work. It is much less well documented than the rest and is not intended to be shared widely.
 
-## Double Transport
-
-One dowsnide to the recycling/lsdr program is that NOR salmon descended from above the dam have to migrate through the south fork twice and be transported twice. Despite this NOR fitness is still greater than HOR fitness, but can we look into it in more detail. Is it possible for us to compare fitness of recycled individuals to individuals placed above the dam immediately? 
-
-No, probably not without a lot of thought, whether or not a fish is recycled is confounded with so many other variables. For example we know later release dates reduce fitness. So do later release dates reduce fitness BECAUSE NOR fish are being released later due to LSDR/recycling? 
-
 ## Size effects
 
 We have an estimate of size at maturity for about half (4321/8985) of our candidate parents. Our modeling tools are not compatible with missing data, so this would effectively cut our sample size in half. We chose not to fit it, but are examining it in a post hoc analysis in more detail here. 
@@ -2180,8 +2174,7 @@ r2b <- rsq::rsq.glmm(lm4fit)
 Okay, holding off on this for now because there is no straightforard implementation in R for glmmTMB, or any negbin glmm for that matter. It seems like it can be done according to Nakagawa 2017 (https://royalsocietypublishing.org/doi/10.1098/rsif.2017.0213). We "just" do commonality analysis on our model fit (https://besjournals.onlinelibrary.wiley.com/doi/pdf/10.1111/2041-210X.12166). The challenge is taking the time to parse the model object in R, and fitting conditioned models to calculate the partial R2s.  
 
 __Are these size differences driven by differences in AAM between NOR and HOR fish?__  
-This was specifically proposed in the 2014 report
-
+This was specifically proposed in the 2014 report. 
 ### Conclusions
 
 Larger candidate parents produce more offspring. NOR candidate parents are significantly larger. NOR candidate parents have higher fitness. Ultimately, we need to do some variance partitioning through commonality analysis to parse how much of the origin effect is mediated by the difference in size between NOR and HOR candidate parents. 
@@ -2246,15 +2239,24 @@ mate_pair %<>%
   mutate(cross_f = fct_relevel(cross_f, "NxN",   "HxN", "NxH","HxH"))
   
 mm_pair <- glmmTMB(pair_tlf ~ cross_f + (1|year_f), data = mate_pair, family = nbinom2)
-
+mm_pair_null <- glmmTMB(pair_tlf ~  (1|year_f), data = mate_pair, family = nbinom2)
 summary(mm_pair)
 
 emmeans( mm_pair, "cross_f", type = "response")
 plot(emmeans( mm_pair, "cross_f", type = "response"))
 #TukeyHSD(aov(data = filter(parents, year == 2015, type %in% c("outplant", "reintro_above", "reintro")), tlf ~ type))
 
-ggplot(data = as.data.frame(emmeans( mm_pair, "cross_f", type = "response")), aes(x = cross_f, y = response, ymin = response-SE, ymax = response+SE)) + geom_pointrange()+theme_classic()+scale_x_discrete(labels = c("NxN\nn=157","HxN\nn=238", "NxH\nn=68", "HxH\nn=117"), name = "Type")+ylab("Estimated Pair Fitness")
+ggplot(data = as.data.frame(emmeans( mm_pair, "cross_f", type = "response")), aes(x = cross_f, y = response, ymin = response-SE, ymax = response+SE)) + geom_pointrange()+theme_classic()+scale_x_discrete(labels = c("NxN\nn=157","HxN\nn=238", "NxH\nn=68", "HxH\nn=117"), name = "Cross Type\n(female x male)")+ylab("Estimated Pair Fitness")
 
+#let's put this in terms of RRS
+mm_pair_emmeans <- as.data.frame(emmeans( mm_pair, "cross_f", type = "response"))
+
+
+mm_pair_emmeans %<>%
+  mutate(rrs = response/1.718690,
+         rrs_se = SE/1.718690)
+
+ggplot(data =mm_pair_emmeans, aes(x = cross_f, y = rrs, ymin = rrs-rrs_se, ymax = rrs+rrs_se)) + geom_pointrange()+theme_classic()+scale_x_discrete(labels = c("NxN\nn=157","HxN\nn=238", "NxH\nn=68", "HxH\nn=117"), name = "Cross Type\n(female x male)")+ylab("Relative Reproductive Success")
 ```
 
 
@@ -2266,16 +2268,19 @@ mate_pair %<>%
          father_jday = as.numeric(format(father_date, "%j")),
         father_jday_c = scale(father_jday, scale = F) )
 
-mm_pair_date <- glmmTMB(pair_tlf ~ cross_f + father_jday_c+ (1|year_f), data = mate_pair, family = nbinom2)
+mm_pair_date <- glmmTMB(pair_tlf ~ cross_f + father_jday_c+ mother_jday_c+ (1|year_f), data = mate_pair, family = nbinom2)
+#nope won't converge
 
-# what about OLRE?
-mate_pair %<>%
-  mutate(mp_f = as.factor(mate_pair))
-mm_pair_OLRE <- glmmTMB(pair_tlf ~ cross_f + (1|year_f) + (1|pair), data = mate_pair, family = nbinom2)
 
+# what about getting rid of random effect to deal with convergence problems.
+mm_pair <- glm.nb(pair_tlf ~ cross_f + year_f, data = mate_pair)
+
+# this also doesnt converge
 ```
 
+Couldn't converge. 
 
+### Chi Squared test of Mate Pair Type Frequencies
 So the 
 
 The null expectation is that the frequency of the different mate pair types should be predicted from the frequencies of NOR females, NOR males, HOR females and HOR males. 
@@ -2323,27 +2328,386 @@ mate_pair_freqs <- mate_pair %>%
 mate_pair_freqs_long <- mate_pair_freqs %>%
   pivot_longer(!parent_year, values_to = "freqs", names_to = c("obs_exp", "cross"), names_pattern = "([fe])_(.*)" ) %>%
   mutate(obs_exp = case_when(obs_exp == "f" ~ "observed",
-                             obs_exp == "e" ~ "expected")) %>%
-  mutate(cross = factor(cross, labels = c("HOR_female x HOR_male", "HOR_female x NOR_male", "NOR_female x HOR_male", "NOR_female x NOR_male")))
+                             obs_exp == "e" ~ "expected"))# %>%
+#  mutate(cross = factor(cross, labels = c("HOR_female x HOR_male", "HOR_female x NOR_male", "NOR_female x HOR_male", "NOR_female x NOR_male")))
 
-ggplot(data = mate_pair_freqs_long, aes(x = parent_year, y = freqs, color = obs_exp))+geom_point()+ facet_grid(~cross)+theme(axis.text.x = element_text(angle = 90))
+ggplot(data = mate_pair_freqs_long, aes(x = parent_year, y = freqs, color = obs_exp))+geom_point()+ facet_grid(~cross)+theme(axis.text.x = element_text(angle = 90))+ylab("Frequency")+xlab("Parent Year")
 
 ggplot(data = mate_pair_freqs_long, aes(x = cross, y = freqs, color = obs_exp))+geom_point()+ theme(axis.text.x = element_text(angle = 90))+facet_grid(cols = vars(parent_year))
   
 
-chisq.test(x = c(24, 29 , 3 ,11), p = c(0.518, 0.265,  0.143, 0.0734)) #2010, p = 0.0002
-chisq.test(x = c(19, 89 ,19, 56), p = c(0.262,  0.288,0.214,  0.236)) #2011,  p = 3.0e-12
-chisq.test(x = c(7,  52 ,  20 , 41), p = c(0.219, 0.364, 0.157,  0.260)) #2012 p = 0.0002
+#chisq.test(x = c(24, 29 , 3 ,11), p = c(0.518, 0.265,  0.143, 0.0734)) #2010, p = 0.0002
+#chisq.test(x = c(19, 89 ,19, 56), p = c(0.262,  0.288,0.214,  0.236)) #2011,  p = 3.0e-12
+#chisq.test(x = c(7,  52 ,  20 , 41), p = c(0.219, 0.364, 0.157,  0.260)) #2012 p = 0.0002
 
 ```
 
 In all years there are fewer HORxHOR, and more HORxNOR and NORxNOR mate pairs than expected given the frequencies of HOR and NOR males and females. The observed number of NORxHOR is not consistently different than random expectation.
 
-So, this tells us that 
+As for hypothesis testing, the overall Chi-squared goodness of fit test isn't telling us much. If we know NORs are more fit than HORs then the divergence between observed and expected for HORxHOR and/or NORxNOR could be driving the overall significant values for any given year. For any particular cross type and year, we would need something like a Fisher's exact test. We should also adjust the p-values given that there are many tests (up to 24). 
+
+Need to think about this more, perhaps it is best to figure out how best to run simulations and get p-values that way. For now doing a Chi-Square Test
+
+```{r}
+# get the raw counts back for hyp testing
+mate_pair_freqs <- mate_pair %>%
+  count( parent_year, cross) %>% pivot_wider(id_cols = parent_year, values_from = n, names_from = cross) %>%
+  mutate(f_HxH = HxH/(HxH+HxN+NxH+NxN),
+        f_HxN = HxN/(HxH+HxN+NxH+NxN),
+        f_NxH = NxH/(HxH+HxN+NxH+NxN),
+        f_NxN = NxN/(HxH+HxN+NxH+NxN)) %>%
+  left_join(fcand, by = c("parent_year" = "year")) %>%
+  mutate(e_HxH = HOR_F/(HOR_F+NOR_F) * HOR_M/(HOR_M+NOR_M),
+         e_HxN = HOR_F/(HOR_F+NOR_F) * NOR_M/(HOR_M+NOR_M),
+         e_NxH = NOR_F/(HOR_F+NOR_F) * HOR_M/(HOR_M+NOR_M),
+         e_NxN = NOR_F/(HOR_F+NOR_F) * NOR_M/(HOR_M+NOR_M))
+
+# then add a column for HxN and NxH specific Chi-Squared Test
+mate_pair_freqs %>%
+  rowwise() %>%
+  mutate(HxN_test = chisq.test(x = c(HxN, HxH+NxH+NxN), p = c(e_HxN, (e_HxH+e_NxH+e_NxN)))$p.value<0.00208,
+         NxH_test = chisq.test(x = c(NxH, HxH+HxN+NxN), p = c(e_NxH, (e_HxH+e_HxN+e_NxN)))$p.value<0.00208,
+         NxN_test = chisq.test(x = c(NxN, HxH+HxN+NxH), p = c(e_NxN, (e_HxH+e_HxN+e_NxH)))$p.value<0.00208,
+         HxH_test = chisq.test(x = c(HxH, NxH+HxN+NxN), p = c(e_HxH, (e_NxH+e_HxN+e_NxN)))$p.value<0.00208,
+         overall_chi_test = chisq.test(x = c(HxH, NxH,HxN,NxN), p = c(e_HxH, e_NxH,e_HxN,e_NxN))$p.value)
+
+#lets also add these all up
+
+```
 
 
+
+Is this the right way to think about it though?
+Right now we include the same mate pair multiple times if they produced multiple offspring. If we're trying to get at sexual selection shouldn't we only consider UNIQUE mate pairs?
+
+Let's try again. 
+```{r}
+
+#mate_pair %>%
+#  group_by(cross) %>%
+#  summarise(mean_father_tlf = mean(father_tlf), mean_mother_tlf = mean(mother_tlf))
+
+# counts table
+ncand <- parents %>%
+  count(year, origin, sex) %>%
+  pivot_wider(id_cols = year, values_from = n, names_from = c(origin, sex)) %>%
+  select(-starts_with("NA"))
+
+mate_pair %>%
+  count( parent_year, cross) %>% pivot_wider(id_cols = parent_year, values_from = n, names_from = cross) %>%
+  left_join(ncand, by = c("parent_year" = "year"))
+
+# frequency table
+fcand <- parents %>%
+  filter(year < 2016, year > 2009) %>%
+  group_by(year, origin, sex) %>%
+  summarise(n = n()) %>%
+  group_by(year) %>%
+  mutate(freq = n / sum(n)) %>%
+  select(-n) %>%
+  pivot_wider(id_cols = year, values_from = freq, names_from = c(origin, sex)) %>%
+  select(-starts_with("NA"))
+  
+mate_pair_freqs <- mate_pair %>%
+  distinct(pair, .keep_all = TRUE) %>%
+  count( parent_year, cross) %>% pivot_wider(id_cols = parent_year, values_from = n, names_from = cross) %>%
+  mutate(f_HxH = HxH/(HxH+HxN+NxH+NxN),
+        f_HxN = HxN/(HxH+HxN+NxH+NxN),
+        f_NxH = NxH/(HxH+HxN+NxH+NxN),
+        f_NxN = NxN/(HxH+HxN+NxH+NxN)) %>%
+  left_join(fcand, by = c("parent_year" = "year")) %>%
+  mutate(e_HxH = HOR_F/(HOR_F+NOR_F) * HOR_M/(HOR_M+NOR_M),
+         e_HxN = HOR_F/(HOR_F+NOR_F) * NOR_M/(HOR_M+NOR_M),
+         e_NxH = NOR_F/(HOR_F+NOR_F) * HOR_M/(HOR_M+NOR_M),
+         e_NxN = NOR_F/(HOR_F+NOR_F) * NOR_M/(HOR_M+NOR_M)) %>%
+  select(parent_year, starts_with("f"), starts_with("e")) #clean up 
+
+
+mate_pair_freqs_long <- mate_pair_freqs %>%
+  pivot_longer(!parent_year, values_to = "freqs", names_to = c("obs_exp", "cross"), names_pattern = "([fe])_(.*)" ) %>%
+  mutate(obs_exp = case_when(obs_exp == "f" ~ "observed",
+                             obs_exp == "e" ~ "expected"))# %>%
+#  mutate(cross = factor(cross, labels = c("HOR_female x HOR_male", "HOR_female x NOR_male", "NOR_female x HOR_male", "NOR_female x NOR_male")))
+
+ggplot(data = mate_pair_freqs_long, aes(x = parent_year, y = freqs, color = obs_exp))+geom_point()+ facet_grid(~cross)+theme(axis.text.x = element_text(angle = 90))+xlab("Parent Year")+ylab("Frequency")
+
+ggplot(data = mate_pair_freqs_long, aes(x = cross, y = freqs, color = obs_exp))+geom_point()+ theme(axis.text.x = element_text(angle = 90))+facet_grid(cols = vars(parent_year))
+  
+# let's do the chi square tests
+## 2010
+mate_pair %>%
+  filter(parent_year == 2010) %>%
+  count(cross_f)
+
+mate_pair_freqs_long %>%
+  filter(parent_year == 2010, obs_exp == "expected") 
+
+# NxH
+#(order reminder: NxN + HxH + HxN, vs NxH)
+chisq.test(x = c(11+29+24,3), p = c(0.07343745+0.26540552+0.51786444,  0.14329259 )) #2010, p = 0.021
+
+
+chisq.test(x = c(19, 89 ,19, 56), p = c(0.262,  0.288,0.214,  0.236)) #2011,  p = 3.0e-12
+chisq.test(x = c(7,  52 ,  20 , 41), p = c(0.219, 0.364, 0.157,  0.260)) #2012 p = 0.0002
+
+```
+
+## F1 vs F2 vs NORImmigrant Fitness
+
+I still don't think the approach is correct/ideal in the sections looking at F1 vs F2 fitness above. Let's try again.
+
+First some definitions:
+
+HOR: HOR candidate parents, includes both hatchery outplants and HORs from Cougar 
+F1s: NOR descendants of HOR parents  
+F2s: Descendants of F1s  
+NOR immigrants: NOR individuals sampled 2013 or later with no assigned parents.
+
+Let's also define our data:   
+2015 and earlier: since we are interested in TLF must limit ourselves to 2015 and earlier.
+2013 and later: all possible parents must have been sampled  
+Candidate parent: since we are interested in TLF, the individual must have been evaluated as a candidate parent. 
+
+Okay now let's create the dataset.
+```{r}
+#first, filter to match the rules above and create variable defining F1, F2, HOR outplant, and NOR immigrant
+
+# note 1 since there hasn't been enough time for F3s by 2015, we can make coding easier and define any samples with two NOR parents as a F2)
+# we will need a pedigree with origin attached
+pedigree_origin <- pedigree %>%
+  left_join(select(dedup, sample_id, origin), by = c("mother" = "sample_id")) %>%
+  rename(mother_origin = origin) %>%
+  left_join(select(dedup, sample_id, origin), by = c("father" = "sample_id")) %>%
+  rename(father_origin = origin)
+
+F12_mmdata <- dedup %>%
+  filter(year> 2011 , year < 2016, cand_parent == TRUE) %>%
+  left_join(pedigree_origin, by = c("sample_id" = "offspring_sample_id")) %>%  # attach parents and their origin 
+  mutate(generation = case_when(origin == "HOR" ~ "HOR",
+                                mother_origin == "HOR" & father_origin == "HOR" ~"F1",
+                                mother_origin == "NOR" & father_origin == "NOR" ~"F2", #see note 1 above for why this makes sense
+                                mother == "none" & father == "none" ~ "NORimmigrant",
+                                mother == "none" | father == "none" ~ "single_parentage",
+                                mother_origin == "HOR" & father_origin == "NOR" ~"HORxNOR",
+                                mother_origin == "NOR" & father_origin == "HOR" ~"NORxHOR")) %>%
+  left_join(select(parents, sample_id, tlf) ) %>%
+  mutate(jday = as.numeric(format(date, "%j"))) %>% #julian day in this case: days since the first day of the year
+  mutate(jday_c = scale(jday, scale = F), #center the julian day to help with convergence
+         sex = as.factor(sex),
+         release= as.factor(release),
+         year = as.factor(year),
+         group = as.factor(paste(date, release, type))) %>%
+  filter(length != 0, !(is.na(length))) %>%
+  filter(generation %in% c("HOR", "F1", "NORimmigrant")) %>%
+  mutate(generation  = fct_relevel(generation, c("HOR", "F1", "NORimmigrant")))
+
+F12_mmdata %>%
+  count(year, generation) %>%
+  pivot_wider(id_cols = year, names_from = generation, values_from = n)
+```
+
+Sample sizes look great in 2012, but 2013 and later may present some challenges. We should explore how sensitive the results are to year carefully. Note that the table above also excludes a handful of individuals with no length measurement, so it may differ from sample sizes in other tables.
+
+We will not do a full model exploration for the distribution and link function, it is quite clear that a log link neg bin model works quite well for these data and other TLF data in the UWR, but we should explore some covariates with model selection. Given the smaller df for this dataset comapred to the full GLMM of TLF, we'll start with a smaller pool of covariate that we deem to be the most potnetially important: sex, release day, and length.
+
+We will also need to include year as fixed effect because there are only four years. This means any fixed effects tat nest within year (like annual sex ratio and annual n) are captured the by the year fixed effect and will not be explicitly modeled.
+
+```{r}
+mm_f12 <- glm.nb(tlf ~ generation + length + sex+ jday_c+ year, data = F12_mmdata)
+```
+
+LEt's look for multicollinearity using the GVIF.
+
+```{r}
+kable(vif(mm_f12), caption = "Variance Inflation Factors") %>% kable_classic(full_width = F, html_font = "Cambria" ) 
+```
+
+GVIFs are low, suggesting parameter estimate standard errors won't be severely inflated due to multicollinearity. Let's move on to model selection. We'll use LRTs.
+
+```{r}
+drop1(mm_f12, test = "Chisq")
+drop1(update(mm_f12, . ~ . - sex), test = "Chisq")
+drop1(update(mm_f12, . ~ . - sex - jday_c), test = "Chisq")
+```
+
+Final model includes generation, length and year. Now let's do model validation.
+
+```{r}
+mm_f12 <- glm.nb(tlf ~ generation + length + year, data = F12_mmdata)
+
+DHARMa::simulateResiduals(mm_f12, plot =TRUE)
+```
+
+Model fit looks excellent. Generation (F0, F1, F2 and NORimmigrant) and year (fixed effect factor four years) and length significantly improve the fit to the data according to LRT and AIC.
+
+```{r}
+summary(mm_f12)
+```
+
+
+Let's look at the predicted effects
+
+```{r}
+
+eff1 <- predictorEffect("generation", mm_f12)
+effdf <- as.data.frame(eff1)
+effdf$generation <- factor(effdf$generation, levels=c("HOR", "F1", "NORimmigrant")) # relevel the genertions for a nicer plot
+
+
+ggplot(data = effdf, aes(x = (generation), y = fit))+ 
+  geom_point(position=position_dodge(width=0.3)) + 
+  geom_errorbar(aes(ymin = lower, ymax = upper), position=position_dodge(width=0.3), width = 0.1)+ylab("TLF")+xlab("Generation")+theme_bw()
+```
+
+Let's do some post hoc testing
+
+```{r}
+# we'll use emmeans for this
+em <- emmeans(mm_f12, "generation")
+contrast(em, "pairwise", adjust = "Tukey", type = "response")
+```
+
+The novel finding here is that both NORimmigrants and F1s have greater fitness than HORs, but do not differ from one another.
+
+
+### Size 
+
+We already know that there are size differences between NOR and HOR salmon in the dataset, and in this subset of data (2012 - 2015) almost every sample has a size measurement.  Let's look at the differences between groups.
+
+```{r}
+ggplot(F12_mmdata)+geom_boxplot(aes(generation, length))+theme_bw()
+size_aov <- aov(length~ generation, data = F12_mmdata)
+summary(size_aov)
+TukeyHSD(size_aov)
+```
+
+Contrasts between F1s and NOR immigrants are the most interesting. (we already know HORs are smaller than NORs). NOR immigrants were ~ 1.2cm larger than F1s, but this difference was not signficant (TUKEY HSD, p value = 0.1). Both F1s and NOR immigrants were signficantly larger than HORs (3.8 and 5 cms respectively).
+
+deprecated:Given the number of years in the dataset, we expected most F2s to be either lower AAM or the descendants of low AAM parents and accordingly have smaller size. This appears to be the case, and is a good reminder of why we we should not include them in the analysis.
+
+
+### By year glm
+
+Is the pattern consistent across years? How much is our result influenced by the small samples sizes in years that are not 2012? Let's look first at means, then we might want to do some modeling.
+
+```{r}
+F12_mmdata %>% 
+  group_by(year_f, generation) %>%
+  summarise(mean_tlf = mean(tlf), sd_tlf = sd(tlf)) %>%
+  ggplot(data = .) + geom_pointrange(aes(x = generation, y = mean_tlf, ymax = mean_tlf+sd_tlf, ymin = mean_tlf-sd_tlf, color = year), position = position_dodge2(width = 0.2) )
+
+ggplot(data = F12_mmdata)+geom_pointrange(aes(x = generation, y = log(tlf), color = year_f))
+```
+
+Similar patterns across all years, but if we focus on 2012 alone, we can see that F1 fitness is lower than NOR immigrant. We also see that, sd within a year is quite large. Let's fit a model at this year alone.
+
+```{r}
+
+mm_f12_2012 <- glm.nb(tlf ~ generation + length, data = filter(F12_mmdata, year_f == "2012"))
+DHARMa::simulateResiduals(mm_f12_2012, plot =TRUE)
+# marginal significance for outliers when including 2012, consider not including 2012
+drop1(mm_f12_2012, test = "Chisq") 
+```
+
+Okay model fit looks good, and generation is signifcant by AIC and lrt. Let's look at the results. 
+
+```{r}
+summary(mm_f12_2012)
+
+
+eff1 <- predictorEffect("generation", mm_f12_2012)
+effdf <- as.data.frame(eff1)
+
+
+ggplot(data = effdf, aes(x = (generation), y = fit))+ 
+  geom_point(position=position_dodge(width=0.3)) + 
+  geom_errorbar(aes(ymin = lower, ymax = upper), position=position_dodge(width=0.3), width = 0.1)+ylab("TLF")+xlab("Generation")+theme_bw()
+```
+
+```{r}
+# we'll use emmeans for this
+em <- emmeans(mm_f12_2012, "generation")
+contrast(em, "pairwise", adjust = "Tukey", type = "response")
+```
+
+F1 vs NOR immigrant fitness is still not significant, but thedifference is much larger in 2012 than in the 2012-2015 model. One interpreation of this result is that the smaller sample size in 2013-2015 increases the standard error of the estimated effect of generation, but this is not the case. The SEs are actually LOWER when more data from additional years is included in the model. Instead it would seem that the either the difference in fitness between F1s and NOR immigrnts varies from year to year, or that this pattern (lower F1 than NOR immigrant fitness) is not signficant. This seems to be the case (p value = 0.1). 
+
+Another important result here is that using only 2012 data, we do not observe a signficant difference in F1 vs HOR fitness. 
+
+## Genetic Diversity
+
+How does the level of genetic diversity vary between HORs, F1s, F2s and NOR immigrants?
+
+We will use He as our metric. 
+
+```{r}
+# first let's define our groups
+div_data <- dedup %>%
+  filter(year> 2011 , cand_parent == TRUE) %>%
+  left_join(pedigree_origin, by = c("sample_id" = "offspring_sample_id")) %>%  # attach parents and their origin 
+  mutate(generation = case_when(origin == "HOR" ~ "F0",
+                                mother_origin == "HOR" & father_origin == "HOR" ~"F1",
+                                mother_origin == "NOR" & father_origin == "NOR" ~"F2", #see note 1 above for why this makes sense
+                                mother == "none" & father == "none" ~ "NORimmigrant",
+                                mother == "none" | father == "none" ~ "single_parentage",
+                                mother_origin == "HOR" & father_origin == "NOR" ~"HORxNOR",
+                                mother_origin == "NOR" & father_origin == "HOR" ~"NORxHOR")) %>%
+  left_join(select(parents, sample_id, tlf) ) %>%
+  select(generation, sample_id, starts_with("Ot")) %>%
+  unite(Ot201, starts_with("Ot201"), sep = "_") %>%
+  unite(Ot209, starts_with("Ot209"), sep = "_") %>%
+  unite(Ot249, starts_with("Ot249"), sep = "_") %>%
+  unite(Ot253, starts_with("Ot253"), sep = "_") %>%
+  unite(Ot215, starts_with("Ot215"), sep = "_") %>%
+  unite(Ot311, starts_with("Ot311"), sep = "_") %>%
+  unite(Ot409, starts_with("Ot409"), sep = "_") %>%
+  unite(Ot211, starts_with("Ot211"), sep = "_") %>%
+  unite(Ot208, starts_with("Ot208"), sep = "_") %>%
+  unite(Ot212, starts_with("Ot212"), sep = "_") %>%
+  unite(Ot515, starts_with("Ot515"), sep = "_") %>%
+  column_to_rownames(var = "sample_id") %>%
+  filter(generation %in% c("F0", "F1", "NORimmigrant"))
+
+require(adegenet)
+
+div_genind <- df2genind(select(div_data, starts_with("Ot")), ploidy = 2, sep = "_")
+div_genind@pop <-  as.factor(div_data$generation)
+
+n.pop <- seppop(div_genind)
+
+# diversity
+hexp <- lapply(n.pop, function(x) (summary(x)$Hexp))
+hexp <- as.data.frame(t(do.call(rbind, hexp)))
+hexp <- hexp %>%
+  rownames_to_column(var="marker") %>%
+  pivot_longer(-marker, names_to = "generation", values_to = "He")
+
+ggplot(data = hexp)+geom_boxplot(aes(x = generation , y = He))
+
+hexp %>% 
+  group_by(generation) %>%
+  summarise(mean_he = mean(He))
+
+#significance testing
+#a <- Hs.test(div_genind[pop = "F1"], div_genind[pop = "F0"], n.sim = 1000, alter = "less")
+#sig
+
+#b <- Hs.test(div_genind[pop = "F0"], div_genind[pop = "NORimmigrant"], n.sim = 1000, alter = "greater")
+# marginal si
+
+#c <- Hs.test(div_genind[pop = "F1"], div_genind[pop = "NORimmigrant"], n.sim = 1000, alter = "less")
+# marginal sig
+
+```
+
+
+# Deprecated analyses
+
+Analyses/code that either has minor issues (like insufficient power), is messy, deals with a very minor question or poorly conceived. The most important questions addressed in this section have been addressed in the [Other Analyses](#other-analyses) section above
 
 ## F1 Fitness
+
+Deprecated, now see [Mate Pairs](#mate-pairs)
 
 What is the relative fitness of offspring descended from HORxHOR, HORxNOR and NORxNOR crosses
 
@@ -2402,7 +2766,7 @@ Let's do a little EDA, specifically let's look at balance among years.
 ```{r}
 kable(f1s %>%
         count(offspring_year, cross) %>%
-        pivot_wider(id_cols = offspring_year, names_from = cross, values_from = n), caption = "F1 sample sizes, by year and parent cross type") %>% kable_classic(full_width = F, html_font = "Arial" )
+        pivot_wider(id_cols = offspring_year, names_from = cross, values_from = n), caption = "Individuals with both known parents, by year and parent cross type") %>% kable_classic(full_width = F, html_font = "Arial" )
 ```
 
 It's quite clear that only data from two years, 2014 and 2015, is appropriate to use to address our question here. With such a small sample size, my original plan (fit glmm with all signficant predictors from the glmm on fitness for all candidate parents) is not going to work. We don't have the degrees of freedom, nor is it appropriate to fit random effects with just 2 levels (year).
@@ -2457,6 +2821,7 @@ As expected, no difference detected.
 
 
 ## F1s by parent sex
+Deprecated, now see [Mate Pairs](#mate-pairs)
 
 What is the relative fitness of offspring descended from HORxHOR, HORxNOR and NORxNOR crosses, but this time sex of parent matters
 
@@ -2562,6 +2927,8 @@ plot(predictorEffect("cross", glmm_f1_2015))
 
 ## Great-Grandparentage
 
+Deprecated, now see [Mate Pairs](#mate-pairs)
+
 This section is still mostly a dumping ground for code, needs to be documented and organized into something easily read by others.
 
 
@@ -2664,6 +3031,9 @@ In 2016, we only have years 3 and 4 offspring. F2s were way more fit than F1s, b
 __Conclusion__  
 Not enough F2s with TLF to make a comparison.
 
+
+
+
 ## Release location
 
 We did not find a significant effect of release location. This can be explained one of two ways, either salmon stay near their release locations and there is little effect of spawning location on fitness, or salmon have time to distribute to preferred habitats after release. We can evaluate this using the pedigree. 
@@ -2685,6 +3055,10 @@ pedigree %>%
 For the 1153 parentages in the pedigree where we assign both parents and know the release location of both parents, 571 are between parents released in the same location and 582 are not. This is similar to previous results (47.2% of mate pairs released in different locations). Given that there are more than two release locations in most years the finding that ~half of mate pairs are from the same location suggests there is some tendency to spawn near the release site, but further analysis will have to wait.
 
 ## Diversity by Source
+
+Deprecated, now see [Genetic Diversity](#genetic-diversity)
+
+This is deprecated, use the "genetic diversity" section instead
 
 Let's estimate the genetic diversity and the number of private alleles among NORs produced above the dam, NOR immigrants at Cougar Trap and HOR outplants
 ```{r}
@@ -2736,28 +3110,28 @@ b <- Hs.test(div_genind[pop = "hor"], div_genind[pop = "immigrant"], n.sim = 100
 c <- Hs.test(div_genind[pop = "F1"], div_genind[pop = "immigrant"], n.sim = 100, alter = "less")
 
 # private alleles
-require(poppr)
-priv <- private_alleles(div_genind, count.alleles = FALSE)
-as.data.frame(priv) %>%
-  rownames_to_column(var = "group") %>%
-  mutate(sum_private = rowSums(across(where(is.numeric)))) %>%
-  select(group, sum_private)
+#require(poppr)
+#priv <- private_alleles(div_genind, count.alleles = FALSE)
+#as.data.frame(priv) %>%
+#  rownames_to_column(var = "group") %>%
+#  mutate(sum_private = rowSums(across(where(is.numeric)))) %>%
+#  select(group, sum_private)
 
 # private_alleles, subsample to 500 individuals, eventually should make this into a bootstrapping thing, 
-sample_div <- dedup %>%
-  filter(year > 2012) %>% # only look at years where we can assign an offspring to all of their cand parents)
-  mutate(div_group = case_when(origin == "HOR" ~ "hor",
-                               sample_id %in% nor_immigrant_list ~ "immigrant", 
-                               TRUE ~ "F1")) %>%
-  group_by(div_group) %>%
-  slice_sample(n = 500, replace = F) %>%
-  pull(sample_id)
+#sample_div <- dedup %>%
+#  filter(year > 2012) %>% # only look at years where we can assign an offspring to all of their cand parents)
+#  mutate(div_group = case_when(origin == "HOR" ~ "hor",
+#                               sample_id %in% nor_immigrant_list ~ "immigrant", 
+#                               TRUE ~ "F1")) %>%
+#  group_by(div_group) %>%
+#  slice_sample(n = 500, replace = F) %>%
+#  pull(sample_id)
 
-priv_sample <- private_alleles(div_genind[indNames(div_genind) %in% sample_div], count.alleles = FALSE)
-as.data.frame(priv_sample) %>%
-  rownames_to_column(var = "group") %>%
-  mutate(sum_private = rowSums(across(where(is.numeric)))) %>%
-  select(group, sum_private)
+#priv_sample <- private_alleles(div_genind[indNames(div_genind) %in% sample_div], count.alleles = FALSE)
+#as.data.frame(priv_sample) %>%
+#  rownames_to_column(var = "group") %>%
+#  mutate(sum_private = rowSums(across(where(is.numeric)))) %>%
+#  select(group, sum_private)
 ```
 
 __Summary__  
@@ -2809,4 +3183,143 @@ plot(predictorEffect("sex_ratio_y_l",mm_z3), lines=list(multiline=TRUE), confint
 mm_z <- glmmTMB(tlf ~ jday_c + sex +  sex_ratio_y_l  + origin + sex*origin + sex*sex_ratio_y_l + annual_n*sex_ratio_y_l + (1|group) + (1|year), data = mm_data_z, family = nbinom2)
 ```
 
+## succesful spawners counts
+
+Nothing wrong with this code, in deprecated just to keep track of code. 
+
+```{r}
+kable(parents %>% filter(tlf > 0) %>% count(year, origin) %>% pivot_wider(id_cols = year, names_from = "origin", values_from = "n"), caption = "successful spawners (tlf >0), by origin and year") %>%
+  kableExtra::kable_classic(full_width = FALSE)
+```
+
+## Genotypic vs Phenotypic Sex 
+
+Nothing wrong with this code, in deprecated section because not major question.
+
+How well do phenotypic and genotypic sex agree?
+
+Some notes:  
+(1) We have phenotypic and genotypic sex for all hatchery outplants except 2017.  
+(2) Phenotypic males are divided into males and jacks. I consider both males for the calculations below.  
+
+
+```{r}
+# overall agreement
+dedup %>% 
+  filter(type == "hatchery_outplant") %>%
+  mutate(pheno_sex_2 = case_when(pheno_sex == "J" ~ "M",
+                                 TRUE ~ pheno_sex)) %>%
+  summarise(geno_pheno_agree = mean(geno_sex == pheno_sex_2, na.rm=TRUE))
+
+#agreement per year
+dedup %>% 
+  filter(type == "hatchery_outplant") %>%
+  group_by(year) %>%
+  mutate(pheno_sex_2 = case_when(pheno_sex == "J" ~ "M",
+                                 TRUE ~ pheno_sex)) %>%
+  summarise(geno_pheno_agree = mean(geno_sex == pheno_sex_2, na.rm=TRUE))
+```
+
+Also, the goal for hatchery outplants is a roughly 2:1 female to male sex ratio. How well is this accomplished?
+
+```{r}
+geno_sex_table <- dedup %>% 
+  filter(type == "hatchery_outplant") %>% 
+  count(year, geno_sex) %>%
+  pivot_wider(id_cols = year, names_from = "geno_sex", values_from = n) %>%
+  rename(geno_F = F, geno_M = M) %>%
+  mutate(geno_sex_ratio = geno_F/geno_M)
+
+
+pheno_sex_table <- dedup %>% 
+  filter(type == "hatchery_outplant") %>% 
+  mutate(pheno_sex_2 = case_when(pheno_sex == "J" ~ "M",
+                                 TRUE ~ pheno_sex)) %>%
+  count(year, pheno_sex_2) %>%
+  pivot_wider(id_cols = year, names_from = "pheno_sex_2", values_from = n) %>%
+  rename(pheno_F = F, pheno_M = M) %>%
+  mutate(pheno_sex_ratio = pheno_F/(pheno_M))
+
+left_join(pheno_sex_table, geno_sex_table, by = c("year" = "year")) %>%
+  relocate(year, pheno_sex_ratio, geno_sex_ratio)
+
+dedup %>% 
+  filter(type == "hatchery_outplant") %>% 
+  mutate(pheno_sex_2 = case_when(pheno_sex == "J" ~ "M",
+                                 TRUE ~ pheno_sex)) %>%
+  count(year, pheno_sex) %>%
+  pivot_wider(id_cols = year, names_from = "pheno_sex", values_from = n)
+```
+
+How well do they correspond at the individual level?
+
+```{r}
+dedup %>% 
+  filter(type == "hatchery_outplant") %>%
+  group_by(year) %>%
+  summarise(geno_pheno_agree = mean(geno_sex == pheno_sex, na.rm=TRUE))
+```
+
+What about jacks?
+
+```{r}
+dedup %>% 
+  filter(type == "hatchery_outplant", pheno_sex == "J") %>%
+  group_by(year) %>%
+  summarise(geno_pheno_agree = mean(geno_sex == "M", na.rm=TRUE))
+
+dedup %>% 
+  filter(type == "hatchery_outplant", pheno_sex == "J") %>%
+  summarise(geno_pheno_agree = mean(geno_sex == "M", na.rm=TRUE))
+```
+
+This last result (98% of jacks are genotypically male), because it is extremely unlikely to misidentify a jack for a juvenile female in Chinook salmon. Therefore we can assume all fish identified as jacks are true genetic males and the mismatch provides an estimate of genotyping error.
+
+## downstream 875
+
+How many of the 875 NORs recycled downstream from 2015 - 2020 are offspring of HOR or NOR
+
+```{r}
+# let's modify the f1 dataset
+F12_875 <- dedup %>%
+  filter(sample_id %in% id875) %>%
+  left_join(pedigree_origin, by = c("sample_id" = "offspring_sample_id")) %>%  # attach parents and their origin 
+  mutate(generation = case_when(origin == "HOR" ~ "HOR",
+                                mother_origin == "HOR" & father_origin == "HOR" ~"F1",
+                                mother_origin == "NOR" & father_origin == "NOR" ~"F2", #see note 1 above for why this makes sense
+                                mother == "none" & father == "none" ~ "NORimmigrant",
+                                mother == "none" | father == "none" ~ "single_parentage",
+                                mother_origin == "HOR" & father_origin == "NOR" ~"HORxNOR",
+                                mother_origin == "NOR" & father_origin == "HOR" ~"NORxHOR")) %>%
+  left_join(select(parents, sample_id, tlf) ) %>%
+  mutate(jday = as.numeric(format(date, "%j"))) %>% #julian day in this case: days since the first day of the year
+  mutate(jday_c = scale(jday, scale = F), #center the julian day to help with convergence
+         sex = as.factor(sex),
+         release= as.factor(release),
+         year = as.factor(year),
+         group = as.factor(paste(date, release, type))) 
+
+F12_875 %<>% mutate(generation2 = case_when(generation == "single_parentage" ~ paste( coalesce(mother_origin, father_origin), "single_parent"),
+                                           TRUE ~ generation)) %>%
+  left_join(select(recyc_dedup, sample_id, returns))
+  
+
+F12_875 %>%
+  count(returns, generation) %>%
+  pivot_wider(values_from = n, names_from = returns)
+
+# let's make this into a figure
+ggplot(data = F12_875 %>% count(returns, generation2) ) +geom_bar(aes(x = generation2, color = as.factor(returns), fill = as.factor(returns),  y = n), stat = "identity", position = position_dodge())
+
+
+# let's also normalize
+plot_data <- F12_875 %>%
+  count(returns, generation2) %>%
+  pivot_wider(values_from = n, names_from = returns) %>%
+  mutate(return_1_portion = `1`/275,
+         return_2_portion = `2`/600) %>%
+  pivot_longer(cols = c(return_1_portion, return_2_portion), values_to = "portion", names_to = "returns")
+
+ggplot(data = plot_data ) +geom_bar(aes(x = generation2, fill = as.factor(returns),  y = portion), stat = "identity", position = position_dodge())+ scale_fill_manual(labels = c("1", "2"), name = "Returns", values = c("darkred", "dodgerblue"))+scale_x_discrete(labels = c("HORxHOR", "F1xF1", "HOR_single", "HORxNOR", "NOR Single", "NORxHOR"), name = "parentage")
+```
 
