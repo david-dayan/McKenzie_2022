@@ -2592,18 +2592,17 @@ Is the pattern consistent across years? How much is our result influenced by the
 
 ```{r}
 F12_mmdata %>% 
-  group_by(year_f, generation) %>%
+  group_by(year, generation) %>%
   summarise(mean_tlf = mean(tlf), sd_tlf = sd(tlf)) %>%
   ggplot(data = .) + geom_pointrange(aes(x = generation, y = mean_tlf, ymax = mean_tlf+sd_tlf, ymin = mean_tlf-sd_tlf, color = year), position = position_dodge2(width = 0.2) )
 
-ggplot(data = F12_mmdata)+geom_pointrange(aes(x = generation, y = log(tlf), color = year_f))
 ```
 
 Similar patterns across all years, but if we focus on 2012 alone, we can see that F1 fitness is lower than NOR immigrant. We also see that, sd within a year is quite large. Let's fit a model at this year alone.
 
 ```{r}
 
-mm_f12_2012 <- glm.nb(tlf ~ generation + length, data = filter(F12_mmdata, year_f == "2012"))
+mm_f12_2012 <- glm.nb(tlf ~ generation + length, data = filter(F12_mmdata, year == "2012"))
 DHARMa::simulateResiduals(mm_f12_2012, plot =TRUE)
 # marginal significance for outliers when including 2012, consider not including 2012
 drop1(mm_f12_2012, test = "Chisq") 
