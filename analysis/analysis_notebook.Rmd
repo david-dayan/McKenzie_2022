@@ -377,6 +377,8 @@ kable(aam_data %>%
   count(age) %>%
   summarise(age = age, n = n, proportion = n / sum(n)), caption = "Table N10: Mean Age Structure", align = "c", digits = 3,) %>%
 kable_classic(full_width = F, html_font = "Arial" )
+
+
 ```
 __Table N10:__ Mean age structure of returning NOR offspring from 2013-2020. This includes all years we have the data to assign to parents in 3, 4, 5, and 6 years prior.  
 
@@ -606,6 +608,8 @@ stray_glmm1 <- glmmTMB( immigrant ~ jday + sex + (jday|offspring_year) , family 
 
 drop1(stray_glmm1, test = "Chisq")
 summary(stray_glmm1)
+
+DHARMa::simulateResiduals( stray_glmm1, plot = TRUE)
 ```
 
 Hmm, intercepts and slopes are pretty strongly correlated. This makes sense biologically, but it could also be a convergence issue. 
@@ -2239,6 +2243,7 @@ mate_pair %<>%
   mutate(cross_f = fct_relevel(cross_f, "NxN",   "HxN", "NxH","HxH"))
   
 mm_pair <- glmmTMB(pair_tlf ~ cross_f + (1|year_f), data = mate_pair, family = nbinom2)
+mm_pair_trunc <- glmmTMB(pair_tlf ~ cross_f + (1|year_f), data = mate_pair, family = truncated_nbinom2(link = "log"))
 mm_pair_null <- glmmTMB(pair_tlf ~  (1|year_f), data = mate_pair, family = nbinom2)
 summary(mm_pair)
 
@@ -2246,15 +2251,15 @@ emmeans( mm_pair, "cross_f", type = "response")
 plot(emmeans( mm_pair, "cross_f", type = "response"))
 #TukeyHSD(aov(data = filter(parents, year == 2015, type %in% c("outplant", "reintro_above", "reintro")), tlf ~ type))
 
-ggplot(data = as.data.frame(emmeans( mm_pair, "cross_f", type = "response")), aes(x = cross_f, y = response, ymin = response-SE, ymax = response+SE)) + geom_pointrange()+theme_classic()+scale_x_discrete(labels = c("NxN\nn=157","HxN\nn=238", "NxH\nn=68", "HxH\nn=117"), name = "Cross Type\n(female x male)")+ylab("Estimated Pair Fitness")
+ggplot(data = as.data.frame(emmeans( mm_pair_trunc, "cross_f", type = "response")), aes(x = cross_f, y = response, ymin = response-SE, ymax = response+SE)) + geom_pointrange()+theme_classic()+scale_x_discrete(labels = c("NxN\nn=157","HxN\nn=238", "NxH\nn=68", "HxH\nn=117"), name = "Cross Type\n(female x male)")+ylab("Estimated Pair Fitness")
 
 #let's put this in terms of RRS
-mm_pair_emmeans <- as.data.frame(emmeans( mm_pair, "cross_f", type = "response"))
+mm_pair_emmeans <- as.data.frame(emmeans( mm_pair_trunc, "cross_f", type = "response"))
 
 
 mm_pair_emmeans %<>%
-  mutate(rrs = response/1.718690,
-         rrs_se = SE/1.718690)
+  mutate(rrs = response/0.5720391,
+         rrs_se = SE/0.5720391)
 
 ggplot(data =mm_pair_emmeans, aes(x = cross_f, y = rrs, ymin = rrs-rrs_se, ymax = rrs+rrs_se)) + geom_pointrange()+theme_classic()+scale_x_discrete(labels = c("NxN\nn=157","HxN\nn=238", "NxH\nn=68", "HxH\nn=117"), name = "Cross Type\n(female x male)")+ylab("Relative Reproductive Success")
 ```
@@ -2516,13 +2521,25 @@ We will also need to include year as fixed effect because there are only four ye
 mm_f12 <- glm.nb(tlf ~ generation + length + sex+ jday_c+ year, data = F12_mmdata)
 ```
 
-LEt's look for multicollinearity using the GVIF.
+Let's look for multicollinearity using the GVIF.
 
 ```{r}
 kable(vif(mm_f12), caption = "Variance Inflation Factors") %>% kable_classic(full_width = F, html_font = "Cambria" ) 
 ```
 
-GVIFs are low, suggesting parameter estimate standard errors won't be severely inflated due to multicollinearity. Let's move on to model selection. We'll use LRTs.
+GVIFs are low, suggesting parameter estimate standard errors won't be severely inflated due to multicollinearity.
+
+Let's look a little closer before moving on. 
+
+```{r}
+ggplot(data = F12_mmdata)+geom_density(aes(x = jday_c, color = generation))
+
+```
+
+Yes, release day and generation are somewhat correlated. Most NOR immigrants are released later in the season and most F1s are released earlier. However, the very low VIFs suggest that the degree of correlation is not sufficient to cause unstable parameter estimates. 
+
+
+Let's move on to model selection. We'll use LRTs.
 
 ```{r}
 drop1(mm_f12, test = "Chisq")
@@ -2530,10 +2547,15 @@ drop1(update(mm_f12, . ~ . - sex), test = "Chisq")
 drop1(update(mm_f12, . ~ . - sex - jday_c), test = "Chisq")
 ```
 
+Sex definitely does not improve the model. 
+
+Release day is marginal. The AIC is only 1.7 and the LRT is 0.057. My inclination is to include it as a supplement in any results, since we already know that earlier release day is associated with an increase in fitness from the previous modeling work and NOR immigrants arrive later. 
+
 Final model includes generation, length and year. Now let's do model validation.
 
 ```{r}
 mm_f12 <- glm.nb(tlf ~ generation + length + year, data = F12_mmdata)
+mm_f12_w_jday <- glm.nb(tlf ~ generation + length + year + jday_c, data = F12_mmdata)
 
 DHARMa::simulateResiduals(mm_f12, plot =TRUE)
 ```
@@ -2569,6 +2591,26 @@ contrast(em, "pairwise", adjust = "Tukey", type = "response")
 
 The novel finding here is that both NORimmigrants and F1s have greater fitness than HORs, but do not differ from one another.
 
+Let's also collect the model with release day.
+```{r}
+
+eff1 <- predictorEffect("generation", mm_f12_w_jday)
+effdf <- as.data.frame(eff1)
+effdf$generation <- factor(effdf$generation, levels=c("HOR", "F1", "NORimmigrant")) # relevel the genertions for a nicer plot
+
+
+ggplot(data = effdf, aes(x = (generation), y = fit))+ 
+  geom_point(position=position_dodge(width=0.3)) + 
+  geom_errorbar(aes(ymin = lower, ymax = upper), position=position_dodge(width=0.3), width = 0.1)+ylab("TLF")+xlab("Generation")+theme_bw()
+
+# we'll use emmeans for this
+em <- emmeans(mm_f12_w_jday, "generation")
+contrast(em, "pairwise", adjust = "Tukey", type = "response")
+```
+
+Qualitatively no difference in the models. The NOR immigant vs F1 contrast is still not significant, though we can see that the difference is bigger. 
+
+
 
 ### Size 
 
@@ -2582,6 +2624,41 @@ TukeyHSD(size_aov)
 ```
 
 Contrasts between F1s and NOR immigrants are the most interesting. (we already know HORs are smaller than NORs). NOR immigrants were ~ 1.2cm larger than F1s, but this difference was not signficant (TUKEY HSD, p value = 0.1). Both F1s and NOR immigrants were signficantly larger than HORs (3.8 and 5 cms respectively).
+
+But what about the other NORs in the system. We have access to a LOT of SGS data that is not incorporated into study so far. Let's get this data. 
+
+```{r}
+sgs_meta <- readxl::read_xlsx("../metadata/prev_metadata/McKenzie DNA missing_data_BoxUnableToSave_FinalDraft.xlsx", sheet = 1)
+
+#now lets do some cleanup
+sgs_meta %<>%
+  mutate(length = case_when(`FL (cm)` > 111 ~ `FL (cm)`/10,
+                            TRUE ~`FL (cm)` )) %>% #some lengths are in mm and some in cm, the largest cm is 111, we'll use this as a cutoff and convert 
+  mutate(generation = "sgs_below_main") %>% # add a label
+  mutate(year = lubridate::year(Date)) %>% #get years
+  filter(year != 2011) %>% # filter years to match input data
+  filter(River == "South Fork McKenzie") %>%
+  mutate(year = as.factor(year)) %>%
+  drop_na(length)
+
+# now combine a with the dataset from the modeling
+
+size_data <- F12_mmdata %>%
+  select(generation, length, year) %>%
+  bind_rows(select(sgs_meta, generation, length, year))
+```
+
+There are 139 SF McKenzie NOR carcass samples from 2012 to 2015 that have a length measurement. But it looks like there is internannual variation in length and sample size. So let's fit an ANCOVA to remove the effect of year, then check if the NORs below the dam are bigger than the NOR immigrants.
+
+```{r}
+ggplot(size_data)+geom_boxplot(aes(generation, length))+theme_bw()
+
+size_aov <- aov(length~ generation, data = size_data)
+summary(size_aov)
+TukeyHSD(size_aov)  
+```
+
+
 
 deprecated:Given the number of years in the dataset, we expected most F2s to be either lower AAM or the descendants of low AAM parents and accordingly have smaller size. This appears to be the case, and is a good reminder of why we we should not include them in the analysis.
 
