@@ -2776,6 +2776,81 @@ hexp %>%
 
 ```
 
+## Age Variance
+
+Both Nick and Kathleen were interested in the relationship between cohort productivty and the resulting age structure. I'm still not sure of the best way to tackle this question, but one place to start is to examine how if there is any difference is the age structure of offspring from each cohort, and if there is a shift when the pHOS goes from 100% (2007 - 2009), to around 70%.
+
+First let's visualize the pHOS pattern
+
+```{r}
+
+
+# first let's visualize the pHOS pattern
+ggplot(data = filter(parents, year < 2016)) + geom_bar(aes(x = year, fill = origin), position = "fill")+ylab("Proportion")+ggtitle("pHOS per parental cohort")+scale_fill_bright()
+
+```
+
+Now heres the original plot
+```{r}
+# here's the original plot
+
+ggplot(data = aam_data) + 
+  geom_bar(aes(offspring_year, fill = age), position = position_dodge(preserve = 'single'))+scale_fill_viridis_d(name = "Age")+scale_color_viridis_d(name = "Age")+theme_bw()+xlab("Offspring Year")+scale_x_discrete(labels = c("2010*", "2011*", "2012*", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"))+ylab("Count")
+```
+
+We can see the problem here (why folks are getting hung up on this plot), it's hard to tell if the age structure in a given year is driven by parental productivity or if the actual age structure changes. Let's change the perspective, what is the age structure for a given parent cohorts set of offspring?
+
+```{r}
+# this one is best for indiciating that age structure of offspring is very similar across parent years
+ggplot(data = filter(aam_data, parent_year < 2016))+geom_bar(aes(fill = age, x = parent_year), position = "fill")+ylab("Proportion")+ggtitle("age structure of offspring per parental cohort")+scale_fill_viridis_d()+theme_bw()
+```
+
+Here it is easy to see that after controlling for productivity, the age structure of offspring doesn't change much across parent years. But these 100% stacked bar charts (while being easy to compare changes in age structure across years) create other problems. 
+Let's use a more traditional stacked bar.
+
+
+```{r}
+# went with this one
+ggplot(data = aam_data)+geom_bar(aes(fill = age, x = as.factor(parent_year)))+ylab("Number of Offspring")+ xlab("Year Parent Released") + scale_fill_viridis_d(name = "Age of\nOffspring")+theme_bw()+scale_x_discrete(labels = c("2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015*", "2016**", "2017**"))
+
+#but others convey different information
+
+
+# this one is not so great
+#ggplot(data = filter(aam_data, parent_year < 2016))+geom_bar(aes(fill = age, x = as.factor(parent_year)), position = "dodge")+ylab("Number of Offspring")+ggtitle("age structure of offspring per parental cohort")+scale_fill_viridis_d()+theme_bw()
+```
+
+Not any obvious/strong patterns in age structure of offspring from year to year. Perhaps a trend towards younger over time? Let's see if it's significant
+
+```{r}
+
+aam_data %<>%
+  mutate(age_n = as.numeric(as.character(age)))
+
+aam_data %>%
+  filter(parent_year < 2016) %>%
+  group_by(parent_year) %>%
+  summarise(mean_age = mean(age_n))
+
+summary(aov(age_n ~ parent_year, data = filter(aam_data, parent_year < 2016)))
+
+ggplot(data = filter(aam_data, parent_year < 2016))+geom_violin(aes(x = parent_year, y = age_n, group = parent_year))+geom_smooth(aes(x = parent_year, y = age_n), method = "lm")+theme_bw()
+
+
+```
+
+Yes, a small but significant pattern. The age distribution of the offspring gets 0.014 years younger with each parent year (p = 0.015).
+
+Let's also reframe the entire AAM results this way. LEt's recalculate averages according to parent year when we know all offspring are assigned (2007 - 2014).
+```{r}
+aam_data %>%
+  filter(parent_year < 2015) %>%
+  count(age) %>%
+  mutate(proportion = n / sum(n))
+
+```
+
+
 
 # Deprecated analyses
 
