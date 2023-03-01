@@ -1,0 +1,193 @@
+---
+title: "RS vs TLF Data Sharing"
+output:
+  html_document:
+    df_print: paged
+    code_folding: hide
+    toc: true
+    toc_float: true
+    toc_collapsed: false
+---
+
+```{r, message = FALSE, warning=FALSE}
+require(kableExtra)
+require(tidyverse)
+require(magrittr)
+```
+
+
+# Summary
+
+This notebook functions as a readme for the RS vs TLF directory.
+
+The goal is to provide any information Nick might need to examine the relationship between reproductive success (number age-0 offspring assigned to candidate parents) and TLF (number of adult returns assigned to candidate parents).
+
+This is an R notebook. The .html version of this file is a fully rendered and interactive log. To view it, save the html and open in a browse. The .rmd version can be opened within R studio. To reproduce results or edit the analysis: clone the full repository onto tyour local machine and open the r project in rstudio. This will provide all needed data and objects. 
+
+# Data Summary
+
+This notebook relies on a pedigree of all Chinook Salmon released above Cougar Dam on the South Fork McKenzie River from 2007 - 2017 using potential offspring sampled from 2010 to 2020.
+
+## Summary of Cohort Years Adults
+
+Previous reports and manuscripts evaluating the reintroduction of Chinook salmon above Cougar Dam on the South Fork McKenzie river have considered NOR salmon sampled from 2010 to 2015 as potential offspring of salmon released above Cougar Dam from 2007 - 2012. 
+
+Most Chinook salmon on the South Fork McKenzie express an age at maturity of 3 - 6 years. Therefore, previous reports (relying on 2010 - 2015 NOR returns) have inferred a pedigree for salmon released above the dam from 2007 - 2009. Results based on the pedigree of salmon released above Cougar Dam in 2010 were also provided along with the caveat that age 6 offspring were not yet evaluated and some results such as Total Lifetime Fitness and Cohort Replacement Rate were likely underestimates.
+
+Continuing this work, we have since genotyped NOR salmon sampled on the South Fork McKenzie from 2016 to 2020, as well as salmon released above Cougar dam from 2013 to 2017. These new data allow us to complete the pedigree of salmon released above Cougar Dam in 2010, infer full pedigrees TLF  for salmon released above Cougar Dam from 2011 - 2014, and partial pedigrees for salmon released above the dam from 2015 - 2017.
+
+Irrevocable updates to software packages used to assign parentage (COLONY) prevent us from exactly reproducing the approach used to infer the pedigrees used in previous reports. We chose to infer all pedigrees from parent years 2007 to 2017 (offspring year 2010 - 2020) from the raw genetic data using a consistent approach rather than simply combining previous pedigrees with those inferred from new data.  
+
+## Summary of Cohort Years Juveniles
+
+_Nick should check this to make sure I got everything right_  
+Age-0 Juveniles were assigned to candidate parents released above the dam the previous years. The parental cohorts with RS estimates include 2008 - 2013. Therefore, age-0 potential offspring were collected in 2009 - 2014.
+
+## File Naming Convention
+
+Files that begin with "dayan" are generated from the new pedigree inferred in 2022. 
+
+Files that begin with "sard" are taken from Nick's shared directories and are David's best guess of the appropriate files from which to collect RS data. Nick should confirm these. 
+
+Files with the "combo" prefix use data from both sources.
+
+# File and Directories
+
+
+
+* __combo_rs_vs_tlf.txt__ : a dataset that should contain everything needed (TLF, RS, and metadata), based on my best guess of Nick's files. In case I'm wrong, I've also provided a set of additional files. More detail below.  
+* __dayan_data__: directory of data from the 2022 analysis including both formatted files for sharing (.txt and .xlsx), as well as internal files for running this notebook (.Rdata)  
+    * __dayan_pedigree.txt__ : final consensus pedigree from Dayan 2022  
+    * __dayan_full_unfiltered_dataset__ : genotype data before genotype quality filtering, variable names match readme in the metadata spreadsheet and below  
+    * __dayan_full_filtered_dataset__ : genotype data after genotype quality filtering, variable names match readme in the metadata spreadsheet and below   
+    * __metadata.xlsx__ : Excel spreadsheet of metadata from 2022
+    * __Nov9_2022.Rdata__: internal file for running this notebook, Nick shouldn't need this  
+
+* __Sard_Data__ : directory of raw RS data taken from Nick's shared google drive. The top level location is Genetic Pedigrees/Adults to Juveniles/Juvenile Pedigrees and can be found [here](https://drive.google.com/drive/folders/1f1yudf1obBsz_tD3GRXa9wxTDQxT2r91?usp=share_link). The path to an individual year's file is Genetic Pedigrees/Adults to Juveniles/Juvenile Pedigrees/2013A_2014J/Reproductive Success/Output/A13.glmm.data.txt and can be found [here]() 
+    * __sard_A13.glmm.data.txt__ RS data for glmm from Nick. A13 refers to parent year, therefore RS corresponds to the number of age-0 fish collcted in 2014 that assign to each row (parent)
+    * __sard_A12.glmm.data.txt__ RS data for glmm from Nick.  
+    * __sard_A11.glmm.data.txt__ RS data for glmm from Nick.  
+    * __sard_A10.glmm.data.txt__ RS data for glmm from Nick. 
+    * __sard_A09.glmm.data.txt__ RS data for glmm from Nick.  
+    * __sard_A08.glmm.data.txt__ RS data for glmm from Nick.  
+
+__More Details on combo_rs_vs_tlf.txt__  
+Each row represents a candidate parent released above the dam from 2007 - 2013.  
+The genotype quality filtering approach used by David may differ from Nick's, therefore David used an intersecting join to ensure only parents with both an RS and TLF estimate are included in this dataset. The underlying TLF and RS datasets may include more information  
+
+_Variable Names_  
+
+* __sample_id__:	ID used in code for the Dayan 2022 analysis and in progeny.   
+* __old_id__ :  ID used in Sard datasets   
+* __rs__ : number of age-0 offspring assigned to this parent  
+* __tlf__ : number of returning adult offspring assigned to this parent  
+* __type__: where did this individual come from? "Hatchery outplants" are fish that volitionally enter a hatchery (mostly McKenzie hatchery, but also others including Leaburg) and were outplanted above Cougar Dam. "Cougar" refers to fish that are sampled at the cougar trap, including both HOR and NOR and both reintroduced/outplanted above the dam individuals as well as individuals released into the tailrace or downstream. SGS refers to carcass samples taken during spawning ground surveys in habitats above or below the dam. Below dam SGS samples are restricted to the portion of south fork Mckenzie from the confluence with the mainstem to Cougar Dam. Finally "precocial male" refers to individuals sampled live on the spawning grounds in 2014.											
+* __date__:	date of the observation of the sample, this can mean different things in different contexts. for hatchery outplant and cougar trap sample this is the day of release (not when they entered the trap), for sgs it is the day of the survey. Note that in some datasets, some individuals are included twice and have different release locations because they were first released downstream, then outplanted/reintroduced above the dam. in deduplicated datasets (including combo_rs_vs_tlf.txt), only the final location is used    	
+* __origin__ :	NOR = natural origin | HOR = hatchery origin  
+* __release__ : 	For reintroduced or outplanted individuals where were they released? Note that in some datasets, some individuals are included twice and have different release locations because they were first released downstream, then outplanted/reintroduced above the dam. in deduplicated datasets (including combo_rs_vs_tlf.txt), only the final location is used  											
+* __length__:  length in cm										
+* __rkm__:	River kilometer of release site, the release sites were given many names (e.g homestead/bridge 430), they were consolidated using rkm, also retained as a potential continuous predictor of fitness instead of the factor release site  											
+* __pheno_sex__:	sex as determined in the field from gross morphology  
+* __geno_sex__:	sex as determined by the OtY3 marker	
+* __sex__: final sex used to determine if included as dam or sire in pedigree analysis, defers to geno_sex, but used pheno_sex if OtY3 genotyping failed  
+* __recapture__: 	For cougar trap samples, is this the first time the fish was observed (NEW), or had it been observed before (RECAPTURE)											
+* __floy1__:	floy tag used to track recapture at Cougar Trap											
+* __floy2__:	floy tag used to track recapture at Cougar Trap											
+* __year__: year sampled  
+* __sgs_reach__	:smallest scale location from spawning ground survey metadata	 
+* __section__: 	for SGS samples, is this reach above or below the dam? for parent level datasets, all will be above  
+* __cand_parent__:	could this individual have potentially spawned above the dam? note that some individuals will not be evaluated as candidate parent in this report because their offpsring have not returned (e.g. 2019 cougar trap NOR placed reintroduced above dam), but they are still tagged as candidate parents. note also that for 3 individuals we were not sure where they were released, but chose to include them as candidate parents given the high variance in TLF											
+	
+	
+	
+# Workbook
+
+This section is just a log of the work needed to generate these files. If the eval flag in the header is set to false, leave it that way or things could get over-written. No need to use these unless you're trying to generate the files again.
+
+## Generate Dataset
+```{r, message = FALSE, warning=FALSE}
+# load project R environment
+load("dayan_data/Nov9_2022.RData")
+
+# import sard RS datasets
+sard_A13 <- read_tsv("sard_data/sard_A13.glmm.data.txt")
+sard_A12 <- read_tsv("sard_data/sard_A12.glmm.data.txt")
+sard_A11 <- read_tsv("sard_data/sard_A11.glmm.data.txt")
+sard_A10 <- read_tsv("sard_data/sard_A10.glmm.data.txt")
+sard_A09 <- read_tsv("sard_data/sard_A09.glmm.data.txt")
+sard_A08 <- read_tsv("sard_data/sard_A08.glmm.data.txt")
+
+# concatenate sard RS datasets
+sard_rs <- bind_rows(sard_A13, sard_A12, sard_A11, sard_A10, sard_A09, sard_A08)
+
+```
+
+```{r, eval = FALSE}
+# collect some summary stats for QC
+parents %>% 
+  count(year) %>%
+  rename(n_dayan = n) %>%
+  left_join(sard_rs %>% count(year))
+
+# hmm substantiall more individuals in Sards 2013 parents than Dayans
+# let's examine whats going on here in more detail
+
+parents %>% 
+  filter(year == 2013) %>%
+  filter(!(old_id %in% sard_rs$Sample.Name))# %>%
+  #View(.)
+# none here which means they only difference is individuals in Sards's dataset that are not in Dayan's
+
+sard_rs %>%
+  filter(year == 2013) %>%
+  filter(!(Sample.Name %in% parents$old_id)) #%>% View(.)
+
+# okay, figured it out, this is a minor difference in how we did assignments. These individuals were LSDR fish that never returned to be released above the dam . I didn't include these as candidate parents, but Nick did. We're ready to do the intersect join
+```
+
+```{r}
+rs_tlf <- parents %>%
+  ungroup() %>%
+  inner_join(dplyr::select(sard_rs, Sample.Name, rs), by = c("old_id" = "Sample.Name"),na_matches = "never" )
+
+# let's do a little cleanup 
+rs_tlf %<>%
+  relocate(sample_id, old_id, tlf, rs) %>% # put most importnat variables first 
+  dplyr::select(-c(starts_with("Ot"), same_sex_offspring) ) %>%# get rid of the genetic data to declutter the final file
+  mutate(year = as.factor(year))# set year as a factor
+
+
+```
+
+## QC
+
+The final dataset has 5302 observations, the difference in individuals between the TLF and RS datasets is mostly small differences due to genotype quality filtering, and whether or not LSDR salmon from 2013 that were never released above the dam are included as parents in the pedigree analysis. 
+
+Let's make a couple plots to make sure everything matches expectations otherwise.
+
+Nick's work found that RS explained ~20% of the variation in TLF in a linear model. Is this what we see?
+
+First, we'll make a little plot
+```{r, message = FALSE}
+require(khroma)
+ggplot(data = rs_tlf, aes(rs, tlf, color = year)) + geom_jitter(alpha = 0.5)+scale_color_bright()+theme_bw()+geom_smooth(method = "lm")
+  
+```
+
+Then we'll fit a model and pull the R-squared. 
+```{r}
+lm_rs_tlf <- lm(tlf ~ rs , data = rs_tlf)
+summary(lm_rs_tlf)$r.squared
+```
+
+Yes, everything looks good. R-squared is 21%. 
+
+## Write Files
+
+Now that QC is done, let's write the final file.
+```{r, eval = FALSE}
+write_tsv(rs_tlf, file = "combo_rs_vs_tlf.txt")
+```
+
+
+
