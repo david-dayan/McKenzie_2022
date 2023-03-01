@@ -36,6 +36,14 @@ This notebook contains a log of all analyses for the 2022 South Fork McKenzie Ri
 
 This is an R notebook. The .html version of this file is a fully rendered and interactive log. To view it, save the html and open in a browse. The .rmd version can be opened within R studio. To reproduce results or edit the analysis: clone the full repository onto your local machine and open the r project in rstudio. This will provide all needed data and objects.
 
+# How to Run this Notebook
+
+If you're looking to reproduce results, run the code on new data, pull some figures, or get into the weeds and play with the code here are some tips to make this easy. 
+
+(1) Open the .rmd file in R studio using R version 3.6.0 (others may work too, but guaranteed to run using 3.6.0). Install the packages (and any dependencies) in the first code chunk.   
+(2) Analysis sections are not indepedent. Code chunks rely on object created in the code chunks above. Therefore you must run each chunk IN ORDER. Also, several code chunks have their evaluation flags set to false (e.g. "EVAL = FALSE" in header). Changing these flags may alter the objects in the environmental and lead to non-reproducibility of the analysis. Do not change unless you know what you are doing.
+(3)  If you're just looking to run a section and are feeling confident, the finalized environment is available Feb17_2023.Rdata. You can load this file and use the resulting objects, but keep in mind that some objects change throughout the notebook, so running a code chunk using the final environment may produce different results than originally or throw some errors. Use caution.   
+
 # Pedigrees and Cohort Rationale
 
 This notebook relies on a pedigree of all Chinook Salmon released above Cougar Dam on the South Fork McKenzie River from 2007 - 2017 using potential offspring sampled from 2010 to 2020.
@@ -127,22 +135,22 @@ Let's summarise the complete dataset, by source and origin, without respect to w
 kable(dedup %>% count(year, type, origin, section) %>% 
   pivot_wider(id_cols = year, names_from = c(type, origin, section), values_from = n, names_sep = "\n"), caption = "Table N0: sample sizes by source", align = "c") %>%
   kable_classic(full_width = T, html_font = "Arial" )
-  
-  
+
 ```
 __Table N0:__ Sample sizes after filtering by year, origin and source. Source column names refer to three values, separated by spaces: (1) where was the sample originally encountered (hatchery, cougar trap, during a spawning ground survey, or as a precocial male), (2) origin, and (3) for SGS samples only, was the SGS conducted above or below Cougar Dam
 
-## Parents
-
-### Counts and Sex Ratios
-
-Throughout this report (and previous reports), it has been useful to split the dataset up and present results by offspring and candidate parents. Let's keep with this approach and present the numbers of potential parents (__table N1__) and the numbers of potential offspring __table N7__ .
+Throughout this report (and previous reports), it has been useful to split the dataset up and present results by potential offspring and candidate parents. Let's keep with this approach and present the numbers of potential parents ( __table N1__ ) and the numbers of potential offspring __table N7__ .
 
 Here we only present the numbers for final filtered dataset for two reasons:  
 
 (1) In later analyses where we calculate demographic parameters such as CRR, we define the number of candidate parents as the number of potential parents passed to Colony or Cervus, to which we assign potential offspring. Keeping this consistent will make these tables less confusing down the road.   
 (2) Duplicates: There are many individuals filtered from the raw dataset because they have identical genotypes to another sample. This is potentially due to tissue samples being stored in a shared container (one fin clip gets split into multiple pieces), or spawning ground surveys sampling the same individual that was already sampled at the Cougar Trap. Including these individuals in the number of parents is misleading.  
 
+## Parents
+
+Candidate parents are defined as any salmon released, or otherwise sampled, above the dam.
+
+### Counts and Sex Ratios
 
 ```{r}
 #unfilt_parent_summary <- dedup_unfilt %>%
@@ -206,10 +214,10 @@ Finally, let's summarise the approaches used for releasing individuals from the 
 
 Some terms to define:  
 (1) __Late-season downstream release (LSDR):__ Individuals that arrive at the Cougar Trap on and after September 1st are double floy tagged and released downstream at Forest Glen. If they return to the trap a second time, they are released above the dam.  
-(2) __Recycling__: All individuals at the Cougar Trap, regardless of date, are first released downstream of the dam (either in Forest Glen, or just the dam tailrace). If they return a secodn time they are released above the dam.
+(2) __DownstreamRecycling__: All individuals at the Cougar Trap, regardless of date, are first released downstream of the dam (either in Forest Glen, or just the dam tailrace). If they return a secodn time they are released above the dam.
 
-__LDSR / Recycling Summary__
-During 2010, 2011 and 2012, neither LSDR or recycling was used. All fish that were trapped and survived were released above the dam.   
+__LDSR / Downstream Recycling Summary__
+During 2010, 2011 and 2012, neither LSDR or downstream recycling was used. All fish that were trapped and survived were released above the dam.   
 During 2013 and 2014, the LSDR approach was applied to NOR fish after September 1st. Some HORs on and after September 1st were also LSDR but not all.   
 From 2015 onwards all NOR are recycled. Some HOR are also recycled, but most are not.
 
@@ -234,8 +242,8 @@ _note: Banks 2016 tech report states that 74 (not 75 as presented here) NOR fish
 
 kable(full_data_1.0 %>%
   filter(type == "cougar_trap", origin == "NOR", year > 2014) %>%
-    group_by(sample_id) %>% # a couple individuals are recorded three times, this will break these counts, just get the first two instances
-    slice_max(date, n = 2, with_ties = FALSE) %>%
+    group_by(sample_id) %>% 
+    slice_max(date, n = 2, with_ties = FALSE) %>% # a couple individuals are recorded three times, this will break these counts, just get the first two instances
     ungroup() %>%
   count(year, recapture) %>%
   pivot_wider(id_cols = year, names_from = recapture, values_from = n) %>%
@@ -250,7 +258,11 @@ __Table N6__: Recycling Summary: Number of NOR fish sampled at Cougar trap, and 
 
 ## Offspring
 
-Now let's summarise the potential offspring. Once again we present the counts from the final filtered dataset, because these are the values we use to calculate demographic results such as CRR, and there may be duplicates in the unfiltered dataset due to batch sampling or carcass sampling.
+Now let's summarise the potential offspring. We define potential offspring as any salmon sampled that could have been produced above the dam. Therefore, EVERY NOR salmon that is sampled is considered a potential offspring.
+
+__An important definition__: NOR salmon collected at the trap or during SGSs may be produced above the dam. Alternatively they may be produced below the dam or elsewhere. We define __NOR immigrants__ as NORs that do not assign to at least one parent above the dam, and infer that NOR immigrants are produced below the dam or elsewhere. 
+
+Once again we present the counts from the final filtered dataset, because these are the values we use to calculate demographic results such as CRR, and there may be duplicates in the unfiltered dataset due to batch sampling or carcass sampling.
 
 ```{r}
 kable(dedup %>%
@@ -263,7 +275,7 @@ __Table N7:__ Number of potential offspring (NOR individuals after filtering), s
 
 # Assignments
 
-Here we summarise assignment of offspring to parents, infer age structure and evaluate the efficacy of LSDR and recycling programs at excluding NOR immigrants from above the dam. 
+Here we summarise assignment of offspring to parents, infer age structure, evaluate the efficacy of LSDR and recycling programs at excluding NOR immigrants from above the dam, and conduct some modeling to understand the relationship between time, sex and the proportion of NOR immigrants vs NORs produced above the dam at the trap. 
 
 For summarizing assignments we'll start simply, then get more complex.
 
@@ -307,7 +319,7 @@ kable_classic(full_width = F, html_font = "Arial" )
 ```
 __Table N8:__ Number of potential offspring that assign to parents above the dam. Potential offspring are defined as any individual sampled (below dam, at Cougar Trap, or above dam), that are NOR.  
 
-People may be interested in just how many individuals show up at the trap, not ALL potential offspring, this will also be useful for comparing our assignmetn rates with the previously published ones (which don't include carcass samples). We will consider this in greater detail in the section [Recycling], but let's make revised table split by source.
+People may be interested in just how many individuals show up at the trap, not ALL potential offspring, this will also be useful for comparing our assignment rates with the previously published ones (which don't include carcass samples). We will consider this in greater detail in the section [Recycling], but let's make revised table split by source.
 
 
 ```{r}
@@ -383,6 +395,9 @@ kable_classic(full_width = F, html_font = "Arial" )
 __Table N10:__ Mean age structure of returning NOR offspring from 2013-2020. This includes all years we have the data to assign to parents in 3, 4, 5, and 6 years prior.  
 
 Age 6 offspring compose just ~2% of TLF, but age 5 offspring compose 42%. So we can probably comfortably use our dataset to describe TLF for 2007 - 2015 parent years. Fitness of parents in our pedigree (up to 2020 offspring year) is likely to strongly underestimate 2016 and 2017 TLF.
+
+__Big Change__  
+The offspring year perspective was causing some mis-interpretation among readers. So I also conducted a AAM analysis from the perspective of offspring of each parental cohort. This can be found [here]{#AAM_link}. 
 
 ## Assignments, by Offspring Year and Parent Type/Year
 
@@ -1746,6 +1761,12 @@ Since we are interested in evaluating the significance of predictors primarily, 
 
 We will include random effects for year and release group.
 
+An additional note here: given previous findings that release day effects vary across years (e.g. temporally variable selection), I tried to fit a random slopes model allowing the relationship between jday and TLF to vary across years, but this had convergence challenges when using fully saturated fixed effects structure. When I used what wound up as the final model's fixed effects structure and then refit by reml two models (the final and the final with random slope for jday|year), I found the LRT andAIC did not support the more complex random effect structure but BIC did. 
+
+```{r}
+ggplot(data = mm_data)+geom_smooth(aes(x = jday_c, y = tlf, color = year), method = "glm.nb")
+```
+
 
 
 ### Fixed Effects
@@ -2610,6 +2631,8 @@ contrast(em, "pairwise", adjust = "Tukey", type = "response")
 
 Qualitatively no difference in the models. The NOR immigant vs F1 contrast is still not significant, though we can see that the difference is bigger. 
 
+Another option here is to resample the NOR immigrants to match the timing distribution of the F1s. this would be a good supplemental analysis.  
+
 
 
 ### Size 
@@ -2710,6 +2733,36 @@ F1 vs NOR immigrant fitness is still not significant, but thedifference is much 
 
 Another important result here is that using only 2012 data, we do not observe a signficant difference in F1 vs HOR fitness. 
 
+### Date Resampling
+
+One issue with this analysis is that NOR immigrants are known to differ from NOR descendants by arrival timing. Arrival time itsef might directly affect TLF. In this case, including arrival/release date as a covariate allows us to control for this effect. However, what if there is a relationship between fitness and the tendency to arrive later as an NOR immigrant. For example, immigrants disperse farther when they face lower reproductive success in the face of competition. 
+
+We can control for this problem (somewhat) by resampling the NOR immgrants to match the ditribution of arrival times in the F1s. Let's try.
+
+```{r}
+F12_mmdata %>%
+  ggplot()+geom_density(aes(x = jday_c, color = generation))
+```
+
+```{r}
+# get density of release dates
+dens.obs = density(filter(F12_mmdata, generation == "F1")$jday_c, adjust=0.8)
+
+predict_density = approxfun(dens.obs) #function that approximates dens.obs
+#sample points from Model with probability distr. of dens.obs
+sample(filter(F12_mmdata, generation == "NORimmigrant")$jday_c, 100, replace=FALSE, prob=predict_density(filter(F12_mmdata, generation == "NORimmigrant")$jday_c))
+
+
+resample.obs = sample(filter(F12_mmdata, generation == "NORimmigrant")$jday_c, 100, replace=TRUE, prob=dens.obs$y)
+
+
+
+F12_mmdata_date_normalized <- F12_mmdata %>%
+  
+```
+
+
+
 ## Genetic Diversity
 
 How does the level of genetic diversity vary between HORs, F1s, F2s and NOR immigrants?
@@ -2776,9 +2829,11 @@ hexp %>%
 
 ```
 
-## Age Variance
+## Age Variance {#AAM_link}
 
 Both Nick and Kathleen were interested in the relationship between cohort productivty and the resulting age structure. I'm still not sure of the best way to tackle this question, but one place to start is to examine how if there is any difference is the age structure of offspring from each cohort, and if there is a shift when the pHOS goes from 100% (2007 - 2009), to around 70%.
+
+
 
 First let's visualize the pHOS pattern
 
@@ -2854,7 +2909,9 @@ aam_data %>%
 
 # Deprecated analyses
 
-Analyses/code that either has minor issues (like insufficient power), is messy, deals with a very minor question or poorly conceived. The most important questions addressed in this section have been addressed in the [Other Analyses](#other-analyses) section above
+Analyses and code in this section has minor issues (like insufficient power), is messy, deals with a very minor question or poorly conceived. The most important questions addressed in this section have been addressed in the [Other Analyses](#other-analyses) section above.
+
+The goal is to keep a log of process here, not to apply this code. Do not set code chunks to evaluate unless you know what you are doing!
 
 ## F1 Fitness
 
@@ -2878,7 +2935,7 @@ This seems particularly important because pHOS above the dam is likely very high
 
 __Prep__  
 First we need to identify all individuals in the pedigree that are both candidate parents with TLF (i.e. <= 2015 sampling), and are assigned as offspring to both parents.
-```{r}
+```{r, eval = FALSE}
 
 f1s <- pedigree_meta %>%
   filter( offspring_sample_id %in% parents$sample_id, assn_type == "pair") %>%
@@ -2914,7 +2971,7 @@ f1s %<>%
 __EDA__
 Let's do a little EDA, specifically let's look at balance among years.
 
-```{r}
+```{r, eval = FALSE}
 kable(f1s %>%
         count(offspring_year, cross) %>%
         pivot_wider(id_cols = offspring_year, names_from = cross, values_from = n), caption = "Individuals with both known parents, by year and parent cross type") %>% kable_classic(full_width = F, html_font = "Arial" )
@@ -2940,7 +2997,7 @@ Still need to think about how best to estimate the expected number here, should 
 __Modeling__
 Next we need a model to remove the other effects (most importantly year).
 
-```{r}
+```{r, eval = FALSE}
 f1s %<>%
   filter(offspring_year %in% c(2014, 2015))
 
@@ -2962,7 +3019,7 @@ simulateResiduals(glmm_f1, plot = TRUE)
 
 
 
-```{r}
+```{r, eval = FALSE}
 summary(glmm_f1)
 
 plot(predictorEffect("cross", glmm_f1))
@@ -2978,7 +3035,7 @@ What is the relative fitness of offspring descended from HORxHOR, HORxNOR and NO
 
 __Prep__  
 First we need to identify all individuals in the pedigree that are both candidate parents with TLF (i.e. <= 2015 sampling), and are assigned as offspring to both parents.
-```{r}
+```{r, eval = FALSE}
 
 f1s <- pedigree_meta %>%
   filter( offspring_sample_id %in% parents$sample_id, assn_type == "pair") %>%
@@ -3015,7 +3072,7 @@ f1s %<>%
 __EDA__
 Let's do a little EDA, specifically let's look at balance among years.
 
-```{r}
+```{r, eval = FALSE}
 kable(f1s %>%
         count(offspring_year, cross) %>%
         pivot_wider(id_cols = offspring_year, names_from = cross, values_from = n), caption = "F1 sample sizes, by year and parent cross type, origins of parents are labeled Male x Female") %>% kable_classic(full_width = F, html_font = "Arial" )
@@ -3043,7 +3100,7 @@ Still need to think about how best to estimate the expected number here, should 
 __Modeling__
 Next we need a model to remove the other effects (most importantly year).
 
-```{r}
+```{r, eval = FALSE}
 f1s %<>%
   filter(offspring_year %in% c(2014, 2015))
 
@@ -3053,12 +3110,12 @@ simulateResiduals(glmm_f1, plot = TRUE)
 
 ```
 
-```{r}
+```{r, eval = FALSE}
 rootogram(glmm_f1)
 drop1(glmm_f1, test = "Chisq")
 ```
 
-```{r}
+```{r, eval = FALSE}
 summary(glmm_f1)
 
 plot(predictorEffect("cross", glmm_f1))
@@ -3085,7 +3142,7 @@ This section is still mostly a dumping ground for code, needs to be documented a
 
 __Comparing F2 to F1 Fitness__
 note: take code chunk below and revise it to use the pedigree_meta, to keep track of parent and grandparent origin, also note that starting from pedigree means only offsping are included. probably best o use the code below to id f1s and f2s, the append these labels to the dedup dataset, along with fitness, after filtering to remove individuals that are not candidate parents
-```{r}
+```{r, eval = FALSE}
 grandparents <- pedigree %>%
   mutate(offspring_also_parent = case_when(offspring_sample_id %in% c(mother, father) ~ TRUE,
                                            TRUE ~ FALSE)) %>%
@@ -3193,7 +3250,7 @@ Is there evidence that parents are more likely to spawn with other parents at th
 
 For now let's look at the rate that parents spwan with a parent from a different relesae location, we can add a statistical analysis later.
 
-```{r}
+```{r, eval = FALSE}
 pedigree %>%
   left_join(select(dedup, sample_id, release), by = c("mother" = "sample_id")) %>%
   rename(mother_release = release) %>%
@@ -3212,7 +3269,7 @@ Deprecated, now see [Genetic Diversity](#genetic-diversity)
 This is deprecated, use the "genetic diversity" section instead
 
 Let's estimate the genetic diversity and the number of private alleles among NORs produced above the dam, NOR immigrants at Cougar Trap and HOR outplants
-```{r}
+```{r, eval = FALSE}
 #define groups
 
 nor_immigrant_list <- pedigree_meta %>%
@@ -3294,7 +3351,7 @@ Interestingly there are private alleles in each of the following groups, hatcher
 
 The effect of sex ratio is totally different here than in NSNT report, despite similar range of sex ratios above the dams across years. Let's summarise the sex ratio, fitness and pHOS data into a single place to help us think about this
 
-```{r}
+```{r, eval = FALSE}
 z <- parents %>% filter(year <2016) %>% group_by(year, origin) %>% summarise(n = n()) %>% pivot_wider(id_cols = year, names_from = "origin", values_from = "n") %>% mutate(perc_nor = NOR/(HOR+NOR))
 
 m <- parents %>% filter(sex == "M") %>% count(as.numeric(year)) %>% rename(n_male = n, year = "as.numeric(year)")
@@ -3338,7 +3395,7 @@ mm_z <- glmmTMB(tlf ~ jday_c + sex +  sex_ratio_y_l  + origin + sex*origin + sex
 
 Nothing wrong with this code, in deprecated just to keep track of code. 
 
-```{r}
+```{r, eval = FALSE}
 kable(parents %>% filter(tlf > 0) %>% count(year, origin) %>% pivot_wider(id_cols = year, names_from = "origin", values_from = "n"), caption = "successful spawners (tlf >0), by origin and year") %>%
   kableExtra::kable_classic(full_width = FALSE)
 ```
@@ -3354,7 +3411,7 @@ Some notes:
 (2) Phenotypic males are divided into males and jacks. I consider both males for the calculations below.  
 
 
-```{r}
+```{r, eval = FALSE}
 # overall agreement
 dedup %>% 
   filter(type == "hatchery_outplant") %>%
@@ -3373,7 +3430,7 @@ dedup %>%
 
 Also, the goal for hatchery outplants is a roughly 2:1 female to male sex ratio. How well is this accomplished?
 
-```{r}
+```{r, eval = FALSE}
 geno_sex_table <- dedup %>% 
   filter(type == "hatchery_outplant") %>% 
   count(year, geno_sex) %>%
@@ -3404,7 +3461,7 @@ dedup %>%
 
 How well do they correspond at the individual level?
 
-```{r}
+```{r, eval = FALSE}
 dedup %>% 
   filter(type == "hatchery_outplant") %>%
   group_by(year) %>%
@@ -3413,7 +3470,7 @@ dedup %>%
 
 What about jacks?
 
-```{r}
+```{r, eval = FALSE}
 dedup %>% 
   filter(type == "hatchery_outplant", pheno_sex == "J") %>%
   group_by(year) %>%
@@ -3430,7 +3487,7 @@ This last result (98% of jacks are genotypically male), because it is extremely 
 
 How many of the 875 NORs recycled downstream from 2015 - 2020 are offspring of HOR or NOR
 
-```{r}
+```{r, eval = FALSE}
 # let's modify the f1 dataset
 F12_875 <- dedup %>%
   filter(sample_id %in% id875) %>%
