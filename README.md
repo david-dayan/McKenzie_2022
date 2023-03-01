@@ -39,6 +39,8 @@ I chose to break up the analyses into multiple notebooks rather than a single, g
 (7) __QGIS__: NOT BACKED UP TO GITHUB. Files for making a pretty map.  
 (8) __Report Drafts__: All drafts and of the USACE report.   
 (9) __Main Manuscript__: Drafts, revisions, and information needed to submit the main evaluation manuscript.  
+(10) __RS_vs_TLF__: Reorganized (and redundant) files for sharing RS and TLF data with collaborator    
+
 
 
 
